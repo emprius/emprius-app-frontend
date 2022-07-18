@@ -1,3 +1,4 @@
+import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -67,18 +68,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                         ),
                         onPressed: () {
-                          //Navigator.popAndPushNamed(context, ROUTE_HOME);
+                          Navigator.popAndPushNamed(context, homeScreenRoute);
                         },
                         child: const Text("Entra a l'app!")
                     )
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Align(
                         alignment: Alignment.center,
                         child: RichText(
                             text: const TextSpan(
                                 text: "¿No estas registrada? ",
+                                style: TextStyle(
+                                  color: Colors.black26,
+                                ),
                                 children: [
                                   TextSpan(
                                       text: "Registra't",

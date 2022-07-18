@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                         ),
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, homeScreenRoute);
+                          Navigator.pushNamed(context, homeScreenRoute);
                         },
                         child: const Text("Entra a l'app!")
                     )

@@ -1,4 +1,5 @@
 import 'package:empriusapp/routes/routes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -78,22 +79,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Align(
                         alignment: Alignment.center,
                         child: RichText(
-                            text: const TextSpan(
+                            text: TextSpan(
                                 text: "¿No estas registrada? ",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black26,
                                 ),
                                 children: [
                                   TextSpan(
                                       text: "Registra't",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           decoration:
-                                          TextDecoration.underline)
-                                  )
-                                ])
-                        )
-                    )
+                                          TextDecoration.underline
+                                      ),
+                                      recognizer: TapGestureRecognizer()..onTap = () {
+                                        Navigator.pushNamed(context, registerScreenRoute);
+                                      }
+                                  ),
+                                ],
+                            ),
+                        ),
+                    ),
                 ),
               ],
             ),

@@ -23,11 +23,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Flexible(
+                    Expanded(
                       child: TextFormField(
-                        decoration:
-                            const InputDecoration(labelText: "Nom d'usuari"),
+                        decoration: const InputDecoration(
+                          labelText: "Nom d'usuari",
+                        ),
                         validator: (value) {
                           if (value?.length == 0) {
                             return "Aquest camp es requerit";
@@ -36,7 +38,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                     ),
-                    Icon(Icons.person_add_alt_1_rounded),
+                    const Expanded(
+                      child: Icon(
+                          Icons.person_add_alt_1_rounded,
+                        size: 50.0,
+                      ),
+
+                    ),
                   ],
                 ),
                 TextFormField(

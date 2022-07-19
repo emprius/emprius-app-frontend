@@ -8,6 +8,7 @@ class UserModel{
   final bool isActive;
   final String avatar;
   final int rating;
+  final int emps;
 
   const UserModel({
     required this.id,
@@ -19,6 +20,7 @@ class UserModel{
     this.isActive = true,
     this.avatar = "",
     this.rating = 0,
+    this.emps = 0,
 });
 
 }

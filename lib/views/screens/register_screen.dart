@@ -1,3 +1,4 @@
+import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
                 TextFormField(
+                  //controller: emailControler,
                   decoration:
                       const InputDecoration(labelText: "Correu electronic"),
                   validator: (value) {
@@ -112,8 +114,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ElevatedButton(
                     child: Text('Finalitza registre'),
                     onPressed: () {
-                      Navigator.pushNamed(context, homeScreenRoute);
-                    })
+                      // form validation
+                      // Instancies un user
+                      //var user = UserModel(id: id, email: emailControle.value, password: password, invitation: invitation, location: location)
+
+                      // todo(aruru): implement service call
+                      // service.signup(user).then(() {
+                      // todo: implement provider
+                      // Si es ok, guardes el user al provider i fas:
+                      Navigator.pushReplacementNamed(context, homeScreenRoute);
+                    }),
               ],
             ),
           ),

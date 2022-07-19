@@ -1,3 +1,4 @@
+import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserDrawer extends StatefulWidget {
@@ -12,8 +13,8 @@ class _UserDrawerState extends State<UserDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: const [
-          UserAccountsDrawerHeader(
+        children: [
+          const UserAccountsDrawerHeader(
               currentAccountPicture:
               CircleAvatar(
                 backgroundImage: AssetImage("assets/images/sharing.png"),
@@ -22,7 +23,10 @@ class _UserDrawerState extends State<UserDrawer> {
               accountEmail: Text("croto@mail.com")),
           ListTile(
             leading: Icon(Icons.person),
-            title: Text("Editar perfil"),
+            title: Text("El meu perfil"),
+            onTap: (){
+              Navigator.pushNamed(context, userProfileScreenRoute);
+            },
           ),
           ListTile(
             leading: Icon(Icons.workspaces_sharp),

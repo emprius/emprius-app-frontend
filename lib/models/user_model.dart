@@ -16,9 +16,9 @@ class UserModel{
     required this.password,
     required this.invitation,
     required this.location,
+    this.isActive = true,
     this.avatar = "",
     this.rating = 0,
-    this.isActive = true,
 });
 
 }

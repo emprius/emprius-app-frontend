@@ -1,4 +1,5 @@
-import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/widgets/user_appbar.dart';
+import 'package:empriusapp/views/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,21 +12,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Future widget navbar'),
-        centerTitle: true,
-        elevation: 0,
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.person),
-          tooltip: 'El meu perfil',
-          onPressed: (){
-                Navigator.pushNamed(context, userProfileScreenRoute);
-          },
-          )],
-      ),
-      body: const Text("Home Screen"),
+    return const Scaffold(
+      appBar: UserAppbar(),
+      drawer: UserDrawer(),
+      body: Text("Home Screen"),
     );
   }
 }

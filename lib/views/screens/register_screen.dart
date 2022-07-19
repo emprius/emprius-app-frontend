@@ -1,5 +1,6 @@
-import 'package:empriusapp/models/user_model.dart';
+//import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -88,16 +89,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                TextFormField(
-                  decoration:
-                      const InputDecoration(labelText: "Localitza't al mapa"),
-                  validator: (value) {
-                    if (value?.length == 0) {
-                      return "Aquest camp es requerit";
-                    }
-                    return null;
-                  },
+                const SizedBox(
+                  height: 20.0,
                 ),
+                const Text("Localitza't al mapa:"),
+                const SizedBox(
+                  height: 250,
+                    child: UserMap()),
                 const SizedBox(
                   height: 20.0,
                 ),

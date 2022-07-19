@@ -10,16 +10,30 @@ class UserMap extends StatefulWidget {
 }
 
 class _UserMapState extends State<UserMap> {
+  List<Marker> markers = [];
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
         center: LatLng(41.695384, 2.492793),
         zoom: 9.2,
+        onLongPress: (tapPos, LatLng latLng) {
+          markers = [];
+          markers.add(
+            Marker(
+              point: latLng,
+              builder: (ctx) => const Icon(Icons.location_pin),
+            ),
+          );
+        }
       ),
       layers: [
         TileLayerOptions(
           urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        ),
+        MarkerLayerOptions(
+          markers: markers,
         ),
       ],
       nonRotatedChildren: [

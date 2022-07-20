@@ -1,26 +1,37 @@
 import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserDrawer extends StatefulWidget {
+import '../../providers/user_provider.dart';
+
+class UserDrawer extends ConsumerStatefulWidget {
   const UserDrawer({Key? key}) : super(key: key);
 
   @override
-  State<UserDrawer> createState() => _UserDrawerState();
+  createState() => _UserDrawerState();
 }
 
-class _UserDrawerState extends State<UserDrawer> {
+class _UserDrawerState extends ConsumerState<UserDrawer> {
+
   @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
+
     return Drawer(
       child: ListView(
         children: [
-          const UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
               currentAccountPicture:
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage("assets/images/sharing.png"),
               ),
-              accountName: Text("Kone Jo"),
-              accountEmail: Text("croto@mail.com")),
+              accountName: Text(user.name,
+                style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),),
+              accountEmail: Text(user.email),
+          ),
           ListTile(
             leading: Icon(Icons.person),
             title: Text("El meu perfil"),

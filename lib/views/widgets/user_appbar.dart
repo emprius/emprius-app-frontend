@@ -1,3 +1,4 @@
+import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -12,7 +13,13 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       //toolbarHeight: 100,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
       actions: [
-        const Icon(Icons.search, color: Colors.white, size: 15),
+        IconButton(
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pushNamed(context, homeScreenRoute);
+          },
+          icon: const Icon(Icons.house),
+        ),
         const Icon(Icons.edit, color: Colors.white, size: 15),
         PopupMenuButton(
             elevation: 30,

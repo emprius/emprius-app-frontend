@@ -1,4 +1,5 @@
 import 'package:empriusapp/providers/user_provider.dart';
+import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,10 +21,10 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProvider);
+    var user = ref.watch(userProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("El meu perfil")),
+      appBar: const UserAppbar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(14.0),

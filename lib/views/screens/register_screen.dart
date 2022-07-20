@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late bool isActive = true;
 
   @override
-  void dispose(){
+  void dispose() {
     _nameCtrl.dispose();
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
@@ -78,24 +78,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextFormField(
                     controller: _passwordCtrl,
+                    obscureText: true,
                     decoration: const InputDecoration(labelText: "Mot de pas"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
-                      }else if(value.length <8){
+                      } else if (value.length < 8) {
                         return "El mot de pas ha de tenir minim 8 caracters";
                       }
                       return null;
                     },
                   ),
                   TextFormField(
-                    controller: _passwordCtrl,
+                    obscureText: true,
                     decoration:
                         const InputDecoration(labelText: "Repetir mot de pas"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
-                      }else if(value != _passwordCtrl.text){
+                      } else if (value != _passwordCtrl.text) {
                         return "El mot de pas no coincideix";
                       }
                       return null;
@@ -131,39 +132,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         });
                       }),
                   ElevatedButton(
-                      child: const Text('Finalitza registre'),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Creant usuari')),
-                          );
-                        }else{
-                          print("No valid");
-                        }
-                        // todo(aruru): implement service call
-                        // service.signup(user).then(() {
-                        // todo: implement provider
-                        // Si es ok, guardes el user al provider i fas:
-    //                     Navigator.pushNamed(context, userProfileScreenRoute,
-    //                       arguments: UserModel(
-    // id: 1,
-    // email: _emailCtrl.text,
-    // password: _passwordCtrl.text,
-    // invitation: _invitationCtrl.text,
-    // location: "latlang",
-    // )
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => UserProfileScreen(UserModel(
-                      //       id: 1,
-                      //             email: _emailCtrl.text,
-                      //       password: _passwordCtrl.text,
-                      //       invitation: _invitationCtrl.text,
-                      //       location: "latlang",
-                      //   )),
-                      //    ));
-                      }),
+                    child: const Text('Finalitza registre'),
+                    onPressed: () {
+                      if (!_formKey.currentState!.validate()) return;
+                      Navigator.pushNamed(context, homeScreenRoute);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Usuari creat')),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -173,3 +150,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+
+// instanciar user?
+// todo(aruru): implement service call
+// service.signup(user).then(() {
+// todo: implement provider
+// Si es ok, guardes el user al provider i fas:
+//                     Navigator.pushNamed(context, userProfileScreenRoute,
+//                       arguments: UserModel(
+// id: 1,
+// email: _emailCtrl.text,
+// password: _passwordCtrl.text,
+// invitation: _invitationCtrl.text,
+// location: "latlang",
+// )
+//   Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//           builder: (context) => UserProfileScreen(UserModel(
+//       id: 1,
+//             email: _emailCtrl.text,
+//       password: _passwordCtrl.text,
+//       invitation: _invitationCtrl.text,
+//       location: "latlang",
+//   )),
+//    ));

@@ -11,7 +11,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late final registerFormKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final _nameCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  final _invitationCtrl = TextEditingController();
   late bool isActive = true;
 
   @override
@@ -22,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(30),
             child: Form(
-              key: registerFormKey,
+              key: _formKey,
               child: Column(
                 children: [
                   Row(
@@ -30,11 +34,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          controller: _nameCtrl,
                           decoration: const InputDecoration(
                             labelText: "Nom d'usuari",
                           ),
                           validator: (value) {
-                            if (value?.length == 0) {
+                            if (value == null || value.isEmpty) {
                               return "Aquest camp es requerit";
                             }
                             return null;
@@ -43,48 +48,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const Expanded(
                         child: Icon(
-                            Icons.person_add_alt_1_rounded,
+                          Icons.person_add_alt_1_rounded,
                           size: 50.0,
                         ),
-
                       ),
                     ],
                   ),
                   TextFormField(
-                    //controller: emailControler,
+                    controller: _emailCtrl,
                     decoration:
                         const InputDecoration(labelText: "Correu electronic"),
                     validator: (value) {
-                      if (value?.length == 0) {
+                      if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
                       }
                       return null;
                     },
                   ),
                   TextFormField(
+                    controller: _passwordCtrl,
                     decoration: const InputDecoration(labelText: "Mot de pas"),
                     validator: (value) {
-                      if (value?.length == 0) {
+                      if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
+                      }else if(value.length <8){
+                        return "El mot de pas ha de tenir minim 8 caracters";
                       }
                       return null;
                     },
                   ),
                   TextFormField(
+                    controller: _passwordCtrl,
                     decoration:
                         const InputDecoration(labelText: "Repetir mot de pas"),
                     validator: (value) {
-                      if (value?.length == 0) {
+                      if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
+                      }else if(value != _passwordCtrl.text){
+                        return "El mot de pas no coincideix";
                       }
                       return null;
                     },
                   ),
                   TextFormField(
+                    controller: _invitationCtrl,
                     decoration: const InputDecoration(
                         labelText: "Introdueix clau d'invitacio"),
                     validator: (value) {
-                      if (value?.length == 0) {
+                      if (value == null || value.isEmpty) {
                         return "Aquest camp es requerit";
                       }
                       return null;
@@ -94,9 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 20.0,
                   ),
                   const Text("Localitza't al mapa:"),
-                  const SizedBox(
-                    height: 250,
-                      child: UserMap()),
+                  const SizedBox(height: 250, child: UserMap()),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -111,17 +120,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         });
                       }),
                   ElevatedButton(
-                      child: Text('Finalitza registre'),
+                      child: const Text('Finalitza registre'),
                       onPressed: () {
-                        // form validation
-                        // Instancies un user
-                        //var user = UserModel(id: id, email: emailControle.value, password: password, invitation: invitation, location: location)
-
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Creant usuari')),
+                            // Instancies un user
+                            //var user = UserModel(id: id, email: emailControle.value, password: password, invitation: invitation, location: location)
+                          );
+                        }
                         // todo(aruru): implement service call
                         // service.signup(user).then(() {
                         // todo: implement provider
                         // Si es ok, guardes el user al provider i fas:
-                        Navigator.pushReplacementNamed(context, homeScreenRoute);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => homeScreenRoute);
                       }),
                 ],
               ),

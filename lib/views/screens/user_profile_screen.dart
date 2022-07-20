@@ -25,8 +25,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
     return Scaffold(
       appBar: const UserAppbar(),
-      body: Center(
-        child: Padding(
+      body: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Column(
             children: [
@@ -55,6 +54,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                 style: const TextStyle(fontSize: 25),
               ),
              Text(user.email),
+              const SizedBox(height: 20.0),
               Container(
                 width: 200,
                 height: 180,
@@ -75,7 +75,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 

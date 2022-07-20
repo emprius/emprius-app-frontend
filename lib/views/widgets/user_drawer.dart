@@ -21,16 +21,17 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-              currentAccountPicture:
-              const CircleAvatar(
-                backgroundImage: AssetImage("assets/images/sharing.png"),
-              ),
-              accountName: Text(user.name,
+              accountName: Text(
+                user.name,
                 style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),),
               accountEmail: Text(user.email),
+            currentAccountPicture:
+            const CircleAvatar(
+              backgroundImage: AssetImage("assets/images/sharing.png"),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.person),

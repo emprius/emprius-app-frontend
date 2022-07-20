@@ -146,6 +146,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                       ref.watch(userProvider.notifier).updateUser(UserModel(
                             id: 1,
+                            name: _nameCtrl.text,
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,

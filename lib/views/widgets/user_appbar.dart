@@ -10,7 +10,7 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text("Emprius app"),
       centerTitle: true,
       elevation: 20,
-      //toolbarHeight: 100,
+      toolbarHeight: 100,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
       actions: [
         IconButton(
@@ -20,7 +20,6 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: const Icon(Icons.house),
         ),
-        const Icon(Icons.edit, color: Colors.white, size: 15),
         PopupMenuButton(
             elevation: 30,
             //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
@@ -30,7 +29,6 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
               const PopupMenuItem(value: 2, child: Text("get link")),
             ])
       ],
-      toolbarHeight: 100,
     );
   }
 

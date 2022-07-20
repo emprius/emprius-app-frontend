@@ -1,3 +1,4 @@
+import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/views/screens/home_screen.dart';
 import 'package:empriusapp/views/screens/login_screen.dart';
 import 'package:empriusapp/views/screens/register_screen.dart';
@@ -12,14 +13,14 @@ const String userProfileScreenRoute = "/user-profile";
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case "/login":
+      case loginScreenRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case "/home":
+      case homeScreenRoute:
         return MaterialPageRoute(builder: (_)=> HomeScreen());
-      case "/register":
+      case registerScreenRoute:
         return MaterialPageRoute(builder: (_)=> RegisterScreen());
-      case "/user-profile":
-        return MaterialPageRoute(builder: (_)=> UserProfileScreen());
+      case userProfileScreenRoute:
+          return MaterialPageRoute(builder: (_)=> UserProfileScreen());
     }
   }
 }

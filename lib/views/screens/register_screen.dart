@@ -1,5 +1,7 @@
 //import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/screens/user_profile_screen.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
   late bool isActive = true;
+
+  @override
+  void dispose(){
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    _invitationCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,18 +136,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Creant usuari')),
-                            // Instancies un user
-                            //var user = UserModel(id: id, email: emailControle.value, password: password, invitation: invitation, location: location)
                           );
+                        }else{
+                          print("No valid");
                         }
                         // todo(aruru): implement service call
                         // service.signup(user).then(() {
                         // todo: implement provider
                         // Si es ok, guardes el user al provider i fas:
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => homeScreenRoute);
+    //                     Navigator.pushNamed(context, userProfileScreenRoute,
+    //                       arguments: UserModel(
+    // id: 1,
+    // email: _emailCtrl.text,
+    // password: _passwordCtrl.text,
+    // invitation: _invitationCtrl.text,
+    // location: "latlang",
+    // )
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => UserProfileScreen(UserModel(
+                      //       id: 1,
+                      //             email: _emailCtrl.text,
+                      //       password: _passwordCtrl.text,
+                      //       invitation: _invitationCtrl.text,
+                      //       location: "latlang",
+                      //   )),
+                      //    ));
                       }),
                 ],
               ),

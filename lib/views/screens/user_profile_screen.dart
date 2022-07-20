@@ -1,3 +1,4 @@
+import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,15 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfileScreen> {
+
+  late UserModel _user;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,18 +48,18 @@ class _UserProfileState extends State<UserProfileScreen> {
                   )
                 ],
               ),
-              const Text(
-                "Mayu",
-                style: TextStyle(fontSize: 25),
+              Text(
+                _user.name,
+                style: const TextStyle(fontSize: 25),
               ),
-              const Text("mail@mai.com"),
+             Text(_user.email),
               Container(
                 width: 200,
                 height: 180,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blue),
-                child: const Text("Localitzacio"),
+                child: Text(_user.location),
               ),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(

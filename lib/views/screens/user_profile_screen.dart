@@ -1,26 +1,27 @@
-import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserProfileScreen extends StatefulWidget {
+class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserProfileScreen> createState() => _UserProfileState();
+  createState() => _UserProfileState();
 }
 
-class _UserProfileState extends State<UserProfileScreen> {
-
-  late UserModel _user;
-
+class _UserProfileState extends ConsumerState<UserProfileScreen> {
+/*
   @override
   void initState() {
     super.initState();
   }
-
+*/
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.watch(userProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text("El meu perfil")),
       body: Center(
@@ -49,17 +50,17 @@ class _UserProfileState extends State<UserProfileScreen> {
                 ],
               ),
               Text(
-                _user.name,
+                user.name,
                 style: const TextStyle(fontSize: 25),
               ),
-             Text(_user.email),
+             Text(user.email),
               Container(
                 width: 200,
                 height: 180,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.blue),
-                child: Text(_user.location),
+                child: Text(user.location),
               ),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(

@@ -1,18 +1,20 @@
 //import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/screens/user_profile_screen.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
@@ -135,10 +137,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: const Text('Finalitza registre'),
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
-                      Navigator.pushNamed(context, homeScreenRoute);
+
+                      // todo: Call al service de la api x la creacio del usuari
+                      // Si retorna ok, el usuari s'haura creat, per tant:
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Usuari creat')),
                       );
+
+                      ref.watch(userProvider.notifier).updateUser(UserModel(
+                            id: 1,
+                            email: _emailCtrl.text,
+                            password: _passwordCtrl.text,
+                            invitation: _invitationCtrl.text,
+                            location: "latlang",
+                          ));
+                      Navigator.pushReplacementNamed(
+                          context, userProfileScreenRoute);
                     },
                   ),
                 ],
@@ -150,28 +164,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
-
-// instanciar user?
-// todo(aruru): implement service call
-// service.signup(user).then(() {
-// todo: implement provider
-// Si es ok, guardes el user al provider i fas:
-//                     Navigator.pushNamed(context, userProfileScreenRoute,
-//                       arguments: UserModel(
-// id: 1,
-// email: _emailCtrl.text,
-// password: _passwordCtrl.text,
-// invitation: _invitationCtrl.text,
-// location: "latlang",
-// )
-//   Navigator.push(
-//       context,
-//       MaterialPageRoute(
-//           builder: (context) => UserProfileScreen(UserModel(
-//       id: 1,
-//             email: _emailCtrl.text,
-//       password: _passwordCtrl.text,
-//       invitation: _invitationCtrl.text,
-//       location: "latlang",
-//   )),
-//    ));

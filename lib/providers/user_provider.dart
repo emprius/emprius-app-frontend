@@ -13,4 +13,8 @@ class UserNotifier extends StateNotifier<UserModel> {
           password: "password",
           invitation: "invitation",
           location: "location"));
+
+  void updateUser(UserModel user) {
+    state = user;
+  }
 }

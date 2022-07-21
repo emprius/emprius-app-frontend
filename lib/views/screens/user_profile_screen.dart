@@ -40,7 +40,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
-                        builder: ((builder) => bottomSheet()),
+                        builder: ((builder) => const UserImagePicker()),
                       );
                     },
                     child: const Icon(
@@ -75,18 +75,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
             ],
           ),
         ),
-    );
-  }
-
-  bottomSheet() {
-    return Container(
-      height: 100.0,
-      width: 100.0,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
-      ),
-      child: const UserImagePicker()
     );
   }
 }

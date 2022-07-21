@@ -37,29 +37,37 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text("Tria el teu avatar"),
-        SizedBox( height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
+    return Container(
+      height: 100.0,
+      width: 100.0,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      child: Column(
+        children: [
+          const Text("Tria el teu avatar"),
+          SizedBox( height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    pickImageCamera();
+                    }, icon: const Icon(Icons.camera),
+                tooltip: "Feste una foto",
+              ),
+              IconButton(
                 onPressed: () {
-                  pickImageCamera();
-                  }, icon: const Icon(Icons.camera),
-              tooltip: "Feste una foto",
-            ),
-            IconButton(
-              onPressed: () {
-                pickImageGallery();
-              }, icon: const Icon(Icons.image),
-              tooltip: "Puja de la galeria",
-            )
-          ],
-        ),
-        image != null ? Image.file(image!) : const Text("Cap imatge seleccionada"),
-      ],
+                  pickImageGallery();
+                }, icon: const Icon(Icons.image),
+                tooltip: "Puja de la galeria",
+              )
+            ],
+          ),
+          image != null ? Image.file(image!) : const Text("Cap imatge seleccionada"),
+        ],
+      ),
     );
   }
 }

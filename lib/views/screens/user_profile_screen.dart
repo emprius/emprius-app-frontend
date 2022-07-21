@@ -33,8 +33,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/sharing.png"),
                     radius: 40,
+                    backgroundColor: Colors.black26,
                   ),
                   InkWell(
                     onTap: () {

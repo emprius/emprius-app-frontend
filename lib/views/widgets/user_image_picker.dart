@@ -11,62 +11,64 @@ class UserImagePicker extends StatefulWidget {
 }
 
 class _UserImagePickerState extends State<UserImagePicker> {
-  File? image;
+  File? _image;
 
-  Future pickImageGallery() async {
+  Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
+      //todo change next file for set state imageProfile:
       final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
+      //final imageProfile = await saveFile(image.path);
+      setState(() => _image = imageTemp);
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
 
-  Future pickImageCamera() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
+/*
+// dependency path provider + path:
+Future<File> saveFile(String imagePath) async{
+    final directory = await getApplicationDocumentDirectory();
+    final name = basename(imagePath);
+    final image = File('${directory.path}/$name');
+    return File(imagePath).copy(image.path);
+}*/
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
+      height: 200.0,
       width: 100.0,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 10,
       ),
-      child: Column(
-        children: [
-          const Text("Tria el teu avatar"),
-          SizedBox( height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Text("Tria el teu avatar"),
+            const SizedBox( height: 10.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      pickImage(ImageSource.camera);
+                      }, icon: const Icon(Icons.camera),
+                  tooltip: "Feste una foto",
+                ),
+                IconButton(
                   onPressed: () {
-                    pickImageCamera();
-                    }, icon: const Icon(Icons.camera),
-                tooltip: "Feste una foto",
-              ),
-              IconButton(
-                onPressed: () {
-                  pickImageGallery();
-                }, icon: const Icon(Icons.image),
-                tooltip: "Puja de la galeria",
-              )
-            ],
-          ),
-          image != null ? Image.file(image!) : const Text("Cap imatge seleccionada"),
-        ],
+                    pickImage(ImageSource.gallery);
+                  }, icon: const Icon(Icons.image),
+                  tooltip: "Puja de la galeria",
+                )
+              ],
+            ),
+            _image != null ? Image.file(_image!) : const Text("Cap imatge seleccionada"),
+          ],
+        ),
       ),
     );
   }

@@ -61,7 +61,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         ),
                       ),
                       const Icon(
-                        Icons.person_add_alt_1_rounded,
+                        Icons.person,
                         size: 50.0,
                       ),
                       InkWell(
@@ -69,6 +69,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           showModalBottomSheet(
                             context: context,
                             builder: ((builder) => const UserImagePicker()),
+                            //todo Pop and pass image from widget
                           );
                         },
                         child: const Icon(

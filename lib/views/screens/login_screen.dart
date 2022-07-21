@@ -1,4 +1,5 @@
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/utils/form_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -29,41 +32,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: TextFormField(
                       controller: _emailCtrl,
+                      validator: FormValidator.emailValidator,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         icon: Icon(Icons.mail),
                         border: OutlineInputBorder(),
                         hintText: "E-mail",
                       ),
-                      validator: (value) {
-                        String pattern =
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-                        RegExp regExp = RegExp(pattern);
-                        if (value == null || value.isEmpty) {
-                          return "Introdueix e-mail!";
-                        } else if (value.length < 8 ||
-                            !regExp.hasMatch(value.toString())) {
-                          return "E-mail incorrecte!";
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                    )),
+                    ),
+                ),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: TextFormField(
                       controller: _passwordCtrl,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.lock),
-                        border: OutlineInputBorder(),
+                      validator: FormValidator.passwordValidator,
+                      obscureText: _isHidden,
+                      decoration: InputDecoration(
+                        icon: const Icon(Icons.lock),
+                        border: const OutlineInputBorder(),
                         hintText: "Mot de pas",
+                        suffixIcon: IconButton(
+                          icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                             setState(() {
+                               _isHidden = !_isHidden;
+                             });
+                             },
+                        ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Introdueix mot de pas";
-                        }
-                        return null;
-                      },
                     )),
                 SizedBox(
                     height: 40,

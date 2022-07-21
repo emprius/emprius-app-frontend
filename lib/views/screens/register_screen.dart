@@ -33,6 +33,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     super.dispose();
   }
 
+  bool _isHidden = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +52,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: TextFormField(
                           controller: _nameCtrl,
                           decoration: const InputDecoration(
-                            labelText: "Nom d'usuari",
+                            border: OutlineInputBorder(),
+                            hintText: "Nom d'usuari",
                           ),
                           validator: FormValidator.nameValidator,
                         ),
@@ -66,36 +68,57 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                   TextFormField(
                     controller: _emailCtrl,
-                    decoration:
-                        const InputDecoration(labelText: "Correu electronic"),
                     validator: FormValidator.emailValidator,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: "E-mail",
+                    ),
                   ),
                   TextFormField(
                     controller: _passwordCtrl,
-                    obscureText: true,
-                    decoration: const InputDecoration(labelText: "Mot de pas"),
                     validator: FormValidator.passwordValidator,
+                    obscureText: _isHidden,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: "Mot de pas",
+                      suffixIcon: IconButton(
+                        icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                   TextFormField(
                     controller: _cPasswordCtrl,
+                    validator: (value) => FormValidator.confirmPasswordValidator(
+                      value,
+                      _passwordCtrl.text,
+                    ),
                     obscureText: true,
                     decoration:
-                        const InputDecoration(labelText: "Confirmar mot de pas"),
-                    validator: (value) => FormValidator.confirmPasswordValidator(
-                        value,
-                        _passwordCtrl.text,
+                    InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: "Confirmar mot de pas",
+                      suffixIcon: IconButton(
+                        icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   TextFormField(
                     controller: _invitationCtrl,
+                    validator: FormValidator.invitationValidator,
                     decoration: const InputDecoration(
-                        labelText: "Introdueix clau d'invitacio"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Aquest camp es requerit";
-                      }
-                      return null;
-                    },
+                        border: OutlineInputBorder(),
+                        hintText: "Nom d'usuari",
+                    ),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -108,7 +131,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   SwitchListTile(
                       title: Text(isActive ? "Perfil actiu" : "Perfil inactiu"),
                       value: isActive,
-                      activeTrackColor: Colors.teal,
+                      activeTrackColor: Colors.white10,
                       activeColor: Colors.blue,
                       onChanged: (value) {
                         setState(() {
@@ -119,9 +142,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     child: const Text('Finalitza registre'),
                     onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
-
-                      // todo: Call al service de la api x la creacio del usuari
-                      // Si retorna ok, el usuari s'haura creat, per tant:
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Usuari creat')),
                       );

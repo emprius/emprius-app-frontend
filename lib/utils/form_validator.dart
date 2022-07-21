@@ -10,7 +10,7 @@ class FormValidator{
   }
 
   static String? emailValidator(String? value){
-    if(value == null || value.isEmpty) {
+    if(value == null || value.isEmpty)  {
       return Constants.emptyEmailInputError;
     } else if (!Constants.emailRegex.hasMatch(value)) {
       return Constants.invalidEmailError;
@@ -19,7 +19,7 @@ class FormValidator{
   }
 
   static String? passwordValidator(String? value) {
-    if (value == null || value!.isEmpty) {
+    if (value == null || value.isEmpty) {
       return Constants.emptyPasswordInputError;
     } else if (value.length < 8) {
       return Constants.shortPasswordInputError;

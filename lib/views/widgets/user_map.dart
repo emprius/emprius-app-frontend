@@ -10,19 +10,29 @@ class UserMap extends StatefulWidget {
 }
 
 class _UserMapState extends State<UserMap> {
-  List<Marker> markers = [];
+  var marker = <Marker>[];
 
-  @override
+  //late final MapController mapController;
+/*  @override
+  void initState(){
+    super.initState();
+    mapController = MapController();
+  }*/
+
   Widget build(BuildContext context) {
     return FlutterMap(
+      //mapController: mapController,
       options: MapOptions(
         center: LatLng(41.695384, 2.492793),
         zoom: 9.2,
-        onLongPress: (tapPos, LatLng latLng) {
-          markers = [];
-          markers.add(
+        interactiveFlags:  InteractiveFlag.all,
+          enableScrollWheel: true,
+        // todo: CHECK ON LONG PRESS PASS NEW LOCATION
+        onLongPress: (tapPos, LatLng location) {
+          marker = [];
+          marker.add(
             Marker(
-              point: latLng,
+              point: location,
               builder: (ctx) => const Icon(Icons.location_pin),
             ),
           );
@@ -33,7 +43,7 @@ class _UserMapState extends State<UserMap> {
           urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         ),
         MarkerLayerOptions(
-          markers: markers,
+          markers: marker,
         ),
       ],
       nonRotatedChildren: [

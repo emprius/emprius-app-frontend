@@ -117,7 +117,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     validator: FormValidator.invitationValidator,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: "Nom d'usuari",
+                        hintText: "Introdueix clau d'invitacio",
                     ),
                   ),
                   const SizedBox(

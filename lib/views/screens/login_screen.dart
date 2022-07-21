@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(30)))),
                         onPressed: () {
                           if (!_formKey.currentState!.validate()) return;
-                          Navigator.pushNamed(context, homeScreenRoute);
+                          Navigator.pushReplacementNamed(context, homeScreenRoute);
                         },
                         child: const Text("Entra a l'app!"))),
                 Padding(

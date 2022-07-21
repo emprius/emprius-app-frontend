@@ -2,10 +2,10 @@
 import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/screens/user_profile_screen.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:empriusapp/utils/form_validator.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
+  final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
   late bool isActive = true;
 
@@ -27,6 +28,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _nameCtrl.dispose();
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
+    _cPasswordCtrl.dispose();
     _invitationCtrl.dispose();
     super.dispose();
   }
@@ -51,12 +53,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           decoration: const InputDecoration(
                             labelText: "Nom d'usuari",
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Aquest camp es requerit";
-                            }
-                            return null;
-                          },
+                          validator: FormValidator.nameValidator,
                         ),
                       ),
                       const Expanded(
@@ -71,38 +68,23 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     controller: _emailCtrl,
                     decoration:
                         const InputDecoration(labelText: "Correu electronic"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Aquest camp es requerit";
-                      }
-                      return null;
-                    },
+                    validator: FormValidator.emailValidator,
                   ),
                   TextFormField(
                     controller: _passwordCtrl,
                     obscureText: true,
                     decoration: const InputDecoration(labelText: "Mot de pas"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Aquest camp es requerit";
-                      } else if (value.length < 8) {
-                        return "El mot de pas ha de tenir minim 8 caracters";
-                      }
-                      return null;
-                    },
+                    validator: FormValidator.passwordValidator,
                   ),
                   TextFormField(
+                    controller: _cPasswordCtrl,
                     obscureText: true,
                     decoration:
-                        const InputDecoration(labelText: "Repetir mot de pas"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Aquest camp es requerit";
-                      } else if (value != _passwordCtrl.text) {
-                        return "El mot de pas no coincideix";
-                      }
-                      return null;
-                    },
+                        const InputDecoration(labelText: "Confirmar mot de pas"),
+                    validator: (value) => FormValidator.confirmPasswordValidator(
+                        value,
+                        _passwordCtrl.text,
+                    ),
                   ),
                   TextFormField(
                     controller: _invitationCtrl,

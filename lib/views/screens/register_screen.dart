@@ -136,6 +136,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     height: 20.0,
                   ),
                   const Text("Localitza't al mapa:"),
+                  //todo get latlng from widget map and pass it to profile screen:
                   const SizedBox(height: 250, child: UserMap()),
                   const SizedBox(
                     height: 20.0,

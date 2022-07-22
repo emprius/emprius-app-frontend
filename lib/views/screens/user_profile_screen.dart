@@ -1,8 +1,13 @@
 import 'package:empriusapp/providers/user_provider.dart';
+import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
+import 'package:empriusapp/views/widgets/user_map.dart';
+import 'package:empriusapp/views/widgets/user_profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../models/user_model.dart';
 
 class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -12,12 +17,6 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
-/*
-  @override
-  void initState() {
-    super.initState();
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
@@ -25,56 +24,53 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
     return Scaffold(
       appBar: const UserAppbar(),
-      body: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.black26,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: ((builder) => const UserImagePicker()),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.camera_alt_rounded,
-                    ),
-                  )
-                ],
-              ),
-              Text(
-                user.name,
-                style: const TextStyle(fontSize: 25),
-              ),
-             Text(user.email),
-              const SizedBox(height: 20.0),
-              Container(
-                width: 200,
-                height: 180,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue),
-                child: Text(user.location),
-              ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.blueGrey, width: 1),
-                    primary: Colors.black26,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                onPressed: () {},
-                child: const Text("Editar Perfil"),
-              ),
-            ],
-          ),
-        ),
+     body: ListView(
+       physics: const BouncingScrollPhysics(),
+       children: [
+         ProfileImage(
+             avatar: user.avatar,
+             //isEdit: true,
+             onClicked: () {
+               Navigator.pushNamed(context, editProfileScreenRoute);
+             },
+         ),
+         const SizedBox(height: 20.0),
+         buildName(user),
+         const SizedBox(height: 20.0),
+         buildLocation(user)
+       ],
+     ),
     );
   }
+
+  Widget buildName(UserModel user)=>Column(
+    children: [
+      Text(
+        user.name,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        user.email,
+        style: const TextStyle(color: Colors.grey),
+      )
+    ],
+  );
+
+  Widget buildLocation(UserModel user)=>Column(
+    children: [
+      const Text('Localitzacio actual:'),
+      Container(
+        width: 250,
+        height: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const UserMap(),
+      ),
+    ],
+  );
 }
+
+
+

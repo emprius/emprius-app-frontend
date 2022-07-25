@@ -46,12 +46,12 @@ class _UserMapState extends State<UserMap> {
           markers: marker,
         ),
       ],
-      nonRotatedChildren: [
+      /*nonRotatedChildren: [
         AttributionWidget.defaultWidget(
           source: 'OpenStreetMap contributors',
           onSourceTapped: null,
         ),
-      ],
+      ],*/
     );
   }
 }

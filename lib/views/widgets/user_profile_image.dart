@@ -31,7 +31,8 @@ class ProfileImage extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = NetworkImage(avatar);
+    //final image = NetworkImage(avatar);
+    final image = AssetImage("assets/images/sharing.png");
 
     return ClipOval(
       child: Material(

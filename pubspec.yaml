@@ -29,9 +29,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image_picker: ^0.8.3
   flutter_map: ^2.0.0
   flutter_riverpod: ^2.0.0-dev.9
+
+  # persist data locally
+  shared_preferences: ^2.0.15
+
+  # pick image
+  image_picker: ^0.8.3
+
+  # store image
+  path_provider: ^2.0.1
 
 
   # The following adds the Cupertino Icons font to your application.

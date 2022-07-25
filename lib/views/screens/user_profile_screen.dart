@@ -1,5 +1,6 @@
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/utils/user_preferences.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
@@ -20,18 +21,20 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var user = ref.watch(userProvider);
+    //var user = ref.watch(userProvider);
+    final user = UserPreferences.getUser();
 
     return Scaffold(
       appBar: const UserAppbar(),
-     body: ListView(
+      body: ListView(
        physics: const BouncingScrollPhysics(),
        children: [
+         Text("user profile"),
          ProfileImage(
              avatar: user.avatar,
-             //isEdit: true,
-             onClicked: () {
-               Navigator.pushNamed(context, editProfileScreenRoute);
+             onClicked: () async {
+               await Navigator.pushNamed(context, editProfileScreenRoute);
+               setState(() {});
              },
          ),
          const SizedBox(height: 20.0),
@@ -57,7 +60,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     ],
   );
 
-  Widget buildLocation(UserModel user)=>Column(
+  Widget buildLocation(UserModel user)=>Wrap(
     children: [
       const Text('Localitzacio actual:'),
       Container(

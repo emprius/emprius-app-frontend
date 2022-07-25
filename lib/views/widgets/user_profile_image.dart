@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class ProfileImage extends StatelessWidget {
   final String avatar;
@@ -31,14 +32,15 @@ class ProfileImage extends StatelessWidget {
   }
 
   Widget buildImage() {
-    //final image = NetworkImage(avatar);
-    final image = AssetImage("assets/images/sharing.png");
+    final image = avatar.contains('https://')
+    ? NetworkImage(avatar)
+        : FileImage(File(avatar));
 
     return ClipOval(
       child: Material(
         color: Colors.transparent,
         child: Ink.image(
-          image: image,
+          image: image as ImageProvider,
           fit: BoxFit.cover,
           width: 128,
           height: 128,

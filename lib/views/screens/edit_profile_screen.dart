@@ -1,8 +1,10 @@
 import 'package:empriusapp/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../providers/user_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 import '../../utils/user_preferences.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/textfield_widget.dart';
@@ -31,6 +33,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   Widget build(BuildContext context) {
     //var user = ref.watch(userProvider);
 
+/*    showModalBottomSheet(
+      context: context,
+      builder: ((builder) => const UserImagePicker()),
+    );*/
+
     return Scaffold(
       appBar: const UserAppbar(),
       body: ListView(
@@ -41,11 +48,19 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           ProfileImage(
             avatar: user.avatar,
             isEdit: true,
-            onClicked: () {
-              showModalBottomSheet(
-                context: context,
-                builder: ((builder) => const UserImagePicker()),
-              );
+            onClicked:  () async {
+              final image = await ImagePicker()
+                  .pickImage(source: ImageSource.gallery);
+
+              if (image == null) return;
+
+              final directory = await getApplicationDocumentsDirectory();
+              final name = basename(image.path);
+              final imageFile = File('${directory.path}/$name');
+              final newImage =
+              await File(image.path).copy(imageFile.path);
+
+              setState(() => user = user.copy(avatar: newImage.path));
             },
           ),
           const SizedBox(height: 20.0),

@@ -25,7 +25,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     final user = UserPreferences.getUser();
 
     return Scaffold(
-      appBar: const UserAppbar(),
+      appBar: UserAppbar(),
       body: ListView(
        physics: const BouncingScrollPhysics(),
        children: [

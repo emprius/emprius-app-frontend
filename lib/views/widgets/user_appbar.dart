@@ -2,13 +2,14 @@ import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const UserAppbar({Key? key}) : super(key: key);
+  //const UserAppbar({Key? key}) : super(key: key);
+  //late String title;
 
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text("Emprius app"),
+      title: Text("user appbar"),
       centerTitle: true,
       elevation: 20,
       toolbarHeight: 100,

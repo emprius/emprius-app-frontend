@@ -39,7 +39,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );*/
 
     return Scaffold(
-      appBar: const UserAppbar(),
+      appBar: UserAppbar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         physics: const BouncingScrollPhysics(),
@@ -48,6 +48,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           ProfileImage(
             avatar: user.avatar,
             isEdit: true,
+
+            // todo: extract logic to widget
             onClicked:  () async {
               final image = await ImagePicker()
                   .pickImage(source: ImageSource.gallery);

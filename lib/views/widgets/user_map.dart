@@ -24,18 +24,20 @@ class _UserMapState extends State<UserMap> {
       //mapController: mapController,
       options: MapOptions(
         center: LatLng(41.695384, 2.492793),
-        zoom: 9.2,
+        zoom: 15.0,
         interactiveFlags:  InteractiveFlag.all,
           enableScrollWheel: true,
         // todo: CHECK ON LONG PRESS PASS NEW LOCATION
-        onLongPress: (tapPos, LatLng location) {
+
+          onTap: (tapPos, LatLng tapLocation) {
           marker = [];
           marker.add(
             Marker(
-              point: location,
+              point: tapLocation,
               builder: (ctx) => const Icon(Icons.location_pin),
             ),
           );
+          print(tapLocation.toString());
         }
       ),
       layers: [

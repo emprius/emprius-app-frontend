@@ -29,7 +29,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # map
   flutter_map: ^2.0.0
+
+  # provider
   flutter_riverpod: ^2.0.0-dev.9
 
   # persist data locally

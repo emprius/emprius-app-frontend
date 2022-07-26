@@ -10,15 +10,26 @@ class UserMap extends StatefulWidget {
 }
 
 class _UserMapState extends State<UserMap> {
-  var marker = <Marker>[];
+  //var marker = <Marker>[];
+  List<Marker> markers = [];
 
   //late final MapController mapController;
+
 /*  @override
   void initState(){
     super.initState();
     mapController = MapController();
   }*/
 
+/*
+  @override
+  void dispose() {
+    mapController.dispose();
+    super.dispose();
+  }
+*/
+
+  @override
   Widget build(BuildContext context) {
     return FlutterMap(
       //mapController: mapController,
@@ -30,14 +41,23 @@ class _UserMapState extends State<UserMap> {
         // todo: CHECK ON LONG PRESS PASS NEW LOCATION
 
           onTap: (tapPos, LatLng tapLocation) {
-          marker = [];
-          marker.add(
+          markers = [];
+         /* markers.add(
             Marker(
               point: tapLocation,
               builder: (ctx) => const Icon(Icons.location_pin),
             ),
-          );
-          print(tapLocation.toString());
+          );*/
+          //print(tapLocation.toString());
+          setState((){
+            markers.clear();
+            markers.add(
+              Marker(
+                point: tapLocation,
+                builder: (ctx) => const Icon(Icons.location_pin),
+              ),
+            );
+          });
         }
       ),
       layers: [
@@ -45,7 +65,7 @@ class _UserMapState extends State<UserMap> {
           urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         ),
         MarkerLayerOptions(
-          markers: marker,
+          markers: markers,
         ),
       ],
       /*nonRotatedChildren: [

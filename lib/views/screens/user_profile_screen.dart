@@ -21,6 +21,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //todo: check which method
     //var user = ref.watch(userProvider);
     final user = UserPreferences.getUser();
 

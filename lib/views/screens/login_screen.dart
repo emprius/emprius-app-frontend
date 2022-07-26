@@ -1,5 +1,6 @@
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/utils/form_validator.dart';
+import 'package:empriusapp/views/widgets/button_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -63,17 +64,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                 SizedBox(
                     height: 40,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            elevation: 4,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)))),
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) return;
-                          Navigator.pushReplacementNamed(context, homeScreenRoute);
-                        },
-                        child: const Text("Entra a l'app!"))),
+                    child: ButtonWidget(
+                      text: "Entra a l'app!",
+                      onClicked: () {
+                        if (!_formKey.currentState!.validate()) return;
+                        Navigator.pushReplacementNamed(context, homeScreenRoute);
+                      },
+                    ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Align(

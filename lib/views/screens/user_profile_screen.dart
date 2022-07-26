@@ -1,6 +1,7 @@
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/utils/user_preferences.dart';
+import 'package:empriusapp/views/widgets/button_widget.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
@@ -40,7 +41,13 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
          const SizedBox(height: 20.0),
          buildName(user),
          const SizedBox(height: 20.0),
-         buildLocation(user)
+         buildLocation(user),
+         const SizedBox(height: 20.0),
+         ButtonWidget(
+             text: "Les meves eiens",
+             onClicked: () {
+               Navigator.pushNamed(context, userToolsScreenRoute);
+             }),
        ],
      ),
     );

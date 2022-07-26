@@ -39,13 +39,8 @@ class ProfileImage extends StatelessWidget {
     return CircleAvatar(
       radius: 40,
       backgroundColor: Colors.transparent,
-      child: Ink.image(
-        image: image as ImageProvider,
-        fit: BoxFit.cover,
-        width: 128,
-        height: 128,
-        child: InkWell(onTap: onClicked),
-      ),
+      backgroundImage: image as ImageProvider,
+      child: InkWell(onTap: onClicked),
     );
   }
 

@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
   //const UserAppbar({Key? key}) : super(key: key);
-  //late String title;
+  String title;
+  UserAppbar(this.title);
 
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text("user appbar"),
+      title: Text(title),
       centerTitle: true,
       elevation: 20,
       toolbarHeight: 100,

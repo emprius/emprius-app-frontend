@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
         title: 'Emprius app',
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Routes.generateRoute,
-        initialRoute: loginScreenRoute,
+        initialRoute: userProfileScreenRoute,
         //initialRoute: loginScreenRoute,
     );
   }

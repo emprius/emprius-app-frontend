@@ -43,10 +43,16 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
           ListTile(
             leading: Icon(Icons.workspaces_sharp),
             title: Text("La meva activitat"),
+            onTap: (){
+              Navigator.pushNamed(context, userActivityScreenRoute);
+            },
           ),
           ListTile(
             leading: Icon(Icons.mail),
             title: Text("Missatges"),
+            onTap: (){
+              Navigator.pushNamed(context, userInboxScreenRoute);
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),

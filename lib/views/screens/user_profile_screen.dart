@@ -26,11 +26,10 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     final user = UserPreferences.getUser();
 
     return Scaffold(
-      appBar: UserAppbar(),
+      appBar: UserAppbar("El meu perfil"),
       body: ListView(
        physics: const BouncingScrollPhysics(),
        children: [
-         Text("user profile"),
          ProfileImage(
              avatar: user.avatar,
              onClicked: () async {

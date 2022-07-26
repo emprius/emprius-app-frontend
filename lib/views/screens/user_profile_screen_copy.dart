@@ -19,7 +19,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     var user = ref.watch(userProvider);
 
     return Scaffold(
-      appBar: UserAppbar(),
+      appBar: UserAppbar("Perfil antic"),
       body: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Column(

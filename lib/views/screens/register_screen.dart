@@ -3,6 +3,7 @@ import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/widgets/button_widget.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,6 +38,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   bool _isHidden = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,6 +63,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           validator: FormValidator.nameValidator,
                         ),
                       ),
+                      //todo: change image picker from widget logic
                       const Icon(
                         Icons.person,
                         size: 50.0,
@@ -70,7 +73,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           showModalBottomSheet(
                             context: context,
                             builder: ((builder) => const UserImagePicker()),
-                            //todo Pop and pass image from widget
                           );
                         },
                         child: const Icon(
@@ -95,7 +97,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       border: const OutlineInputBorder(),
                       hintText: "Mot de pas",
                       suffixIcon: IconButton(
-                        icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
+                        icon: Icon(_isHidden
+                            ? Icons.visibility
+                            : Icons.visibility_off),
                         onPressed: () {
                           setState(() {
                             _isHidden = !_isHidden;
@@ -106,17 +110,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                   TextFormField(
                     controller: _cPasswordCtrl,
-                    validator: (value) => FormValidator.confirmPasswordValidator(
+                    validator: (value) =>
+                        FormValidator.confirmPasswordValidator(
                       value,
                       _passwordCtrl.text,
                     ),
                     obscureText: true,
-                    decoration:
-                    InputDecoration(
+                    decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: "Confirmar mot de pas",
                       suffixIcon: IconButton(
-                        icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
+                        icon: Icon(_isHidden
+                            ? Icons.visibility
+                            : Icons.visibility_off),
                         onPressed: () {
                           setState(() {
                             _isHidden = !_isHidden;
@@ -129,8 +135,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     controller: _invitationCtrl,
                     validator: FormValidator.invitationValidator,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Introdueix clau d'invitacio",
+                      border: OutlineInputBorder(),
+                      hintText: "Introdueix clau d'invitacio",
                     ),
                   ),
                   const SizedBox(
@@ -152,9 +158,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           isActive = value;
                         });
                       }),
-                  ElevatedButton(
-                    child: const Text('Finalitza registre'),
-                    onPressed: () {
+                  ButtonWidget(
+                    text: 'Finalitza registre',
+                    onClicked: () {
                       if (!_formKey.currentState!.validate()) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Usuari creat')),
@@ -166,7 +172,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,
-                            location: (ref.read(userMapProvider)).first.toString(),
+                            location:
+                                (ref.read(userMapProvider)).first.toString(),
                           ));
 
                       Navigator.pushReplacementNamed(

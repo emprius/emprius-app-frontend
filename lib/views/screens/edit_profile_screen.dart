@@ -39,12 +39,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );*/
 
     return Scaffold(
-      appBar: UserAppbar(),
+      appBar: UserAppbar("Editar perfil"),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         physics: const BouncingScrollPhysics(),
         children: [
-          Text("edit profile"),
           ProfileImage(
             avatar: user.avatar,
             isEdit: true,

@@ -56,7 +56,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                 ),
-                child: const UserMap(),
+                child: UserMap(),
               ),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(

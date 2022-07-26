@@ -1,36 +1,30 @@
+import 'package:empriusapp/providers/map_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
-class UserMap extends StatefulWidget {
+
+class UserMap extends ConsumerStatefulWidget {
   const UserMap({Key? key}) : super(key: key);
 
   @override
-  State<UserMap> createState() => _UserMapState();
+  createState() => _UserMapState();
 }
 
-class _UserMapState extends State<UserMap> {
-  //var marker = <Marker>[];
-  List<Marker> markers = [];
-
-  //late final MapController mapController;
-
-/*  @override
-  void initState(){
-    super.initState();
-    mapController = MapController();
-  }*/
-
-/*
-  @override
-  void dispose() {
-    mapController.dispose();
-    super.dispose();
-  }
-*/
+class _UserMapState extends ConsumerState<UserMap> {
+  //List<Marker> markers = [];
+  late final MapController mapController;
 
   @override
   Widget build(BuildContext context) {
+    var markers = ref.watch(userMapProvider).map((e) => Marker(
+      point: e,
+      builder: (ctx) => const Icon(Icons.location_pin),
+    ),
+    ).toList();
+
+
     return FlutterMap(
       //mapController: mapController,
       options: MapOptions(
@@ -38,17 +32,9 @@ class _UserMapState extends State<UserMap> {
         zoom: 15.0,
         interactiveFlags:  InteractiveFlag.all,
           enableScrollWheel: true,
-        // todo: CHECK ON LONG PRESS PASS NEW LOCATION
-
           onTap: (tapPos, LatLng tapLocation) {
-          markers = [];
-         /* markers.add(
-            Marker(
-              point: tapLocation,
-              builder: (ctx) => const Icon(Icons.location_pin),
-            ),
-          );*/
-          //print(tapLocation.toString());
+          ref.watch(userMapProvider.notifier).update([tapLocation]);
+          /*//markers = [];
           setState((){
             markers.clear();
             markers.add(
@@ -56,8 +42,9 @@ class _UserMapState extends State<UserMap> {
                 point: tapLocation,
                 builder: (ctx) => const Icon(Icons.location_pin),
               ),
-            );
-          });
+            );*/
+        /*  }
+          )*/
         }
       ),
       layers: [

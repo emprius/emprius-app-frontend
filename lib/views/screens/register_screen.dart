@@ -1,5 +1,6 @@
 //import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
@@ -137,7 +138,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                   const Text("Localitza't al mapa:"),
                   //todo get latlng from widget map and pass it to profile screen:
-                  const SizedBox(height: 250, child: UserMap()),
+                  SizedBox(height: 250, child: UserMap()),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -165,8 +166,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,
-                            location: "latlang",
+                            location: (ref.read(userMapProvider)).first.toString(),
                           ));
+
                       Navigator.pushReplacementNamed(
                           context, userProfileScreenRoute);
                     },

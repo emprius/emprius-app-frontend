@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
 
-import '../widgets/user_image_picker.dart';
+import '../widgets/bottom_image_selector.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -68,17 +68,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         Icons.person,
                         size: 50.0,
                       ),
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: ((builder) => const UserImagePicker()),
-                          );
-                        },
-                        child: const Icon(
-                          Icons.camera_alt_rounded,
-                        ),
-                      )
+                      // InkWell(
+                      //   onTap: () {
+                      //     showModalBottomSheet(
+                      //       context: context,
+                      //       builder: ((builder) => const UserImagePicker()),
+                      //     );
+                      //   },
+                      //   child: const Icon(
+                      //     Icons.camera_alt_rounded,
+                      //   ),
+                      // )
                     ],
                   ),
                   TextFormField(

@@ -1,16 +1,15 @@
+import 'package:empriusapp/views/widgets/bottom_image_selector.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
 class ProfileImage extends StatelessWidget {
   final String avatar;
-  final bool isEdit;
-  final VoidCallback onClicked;
+  final bool showBadge;
 
   const ProfileImage({
     Key? key,
     required this.avatar,
-    this.isEdit = false,
-    required this.onClicked,
+    this.showBadge = false,
   }) : super(key: key);
 
   @override
@@ -21,7 +20,7 @@ class ProfileImage extends StatelessWidget {
       child: Stack(
         children: [
           buildImage(),
-          Positioned(
+          if(showBadge != null) Positioned(
             bottom: 0,
             right: 4,
             child: buildEditIcon(color),
@@ -40,18 +39,17 @@ class ProfileImage extends StatelessWidget {
       radius: 40,
       backgroundColor: Colors.transparent,
       backgroundImage: image as ImageProvider,
-      child: InkWell(onTap: onClicked),
     );
   }
 
-  Widget buildEditIcon(Color color) => buildCircle(
-    color: Colors.white,
+  Widget buildEditIcon(color) => buildCircle(
     all: 3,
+   color: Colors.white,
     child: buildCircle(
       color: color,
       all: 8,
       child: Icon(
-        isEdit ? Icons.add_a_photo : Icons.edit,
+        showBadge ? Icons.edit : Icons.add_a_photo,
         color: Colors.white,
         size: 20,
       ),
@@ -61,12 +59,12 @@ class ProfileImage extends StatelessWidget {
   Widget buildCircle({
     required Widget child,
     required double all,
-    required Color color,
+    required color,
   }) =>
       ClipOval(
         child: Container(
-          padding: EdgeInsets.all(all),
           color: color,
+          padding: EdgeInsets.all(all),
           child: child,
         ),
       );

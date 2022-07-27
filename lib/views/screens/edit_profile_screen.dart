@@ -12,13 +12,13 @@ import '../../utils/local_storage.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/textfield_widget.dart';
 import '../widgets/user_appbar.dart';
-import '../widgets/user_image_picker.dart';
+import '../widgets/bottom_image_selector.dart';
 import '../widgets/user_map.dart';
-import '../widgets/user_profile_image.dart';
-
+import '../widgets/profile_image_widget.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   final EditProfileArguments args;
+
   const EditProfileScreen(this.args, {Key? key}) : super(key: key);
 
   @override
@@ -49,12 +49,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-/*    showModalBottomSheet(
-      context: context,
-      builder: ((builder) => const UserImagePicker()),
-    );*/
-
     return SafeArea(
       child: Scaffold(
         appBar: UserAppbar("Editar perfil"),
@@ -65,25 +59,43 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 32),
               physics: const BouncingScrollPhysics(),
               children: [
-                ProfileImage(
-                  avatar: user.avatar,
-                  isEdit: true,
-
-                  // todo: extract logic to widget
-                  onClicked:  () async {
-                    final image = await ImagePicker()
-                        .pickImage(source: ImageSource.gallery);
-
-                    if (image == null) return;
-
-                    final directory = await getApplicationDocumentsDirectory();
-                    final name = basename(image.path);
-                    final imageFile = File('${directory.path}/$name');
-                    final newImage =
-                    await File(image.path).copy(imageFile.path);
-
-                    setState(() => user = user.copy(avatar: newImage.path));
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: ((builder) => BottomImageSelector((image) {
+                              if (image != null) {
+                                user = user.copy(avatar: image.path);
+                                setState(() {});
+                              }
+                              Navigator.pop(context);
+                            })));
                   },
+                  child: ProfileImage(
+                    avatar: user.avatar,
+                    showBadge: true,
+
+                    // onSelected: (file) {
+                    //   if(file!=null) {
+                    //     user = user.copy(avatar: file.path);
+                    //     setState((){});
+                    //   }
+                    //},
+                    // onClicked:  () async {
+                    //   final image = await ImagePicker()
+                    //       .pickImage(source: ImageSource.gallery);
+                    //
+                    //   if (image == null) return;
+                    //
+                    //   final directory = await getApplicationDocumentsDirectory();
+                    //   final name = basename(image.path);
+                    //   final imageFile = File('${directory.path}/$name');
+                    //   final newImage =
+                    //   await File(image.path).copy(imageFile.path);
+                    //
+                    //   setState(() => user = user.copy(avatar: newImage.path));
+                    // },
+                  ),
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
@@ -130,8 +142,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       const SnackBar(content: Text('Canvis desats')),
                     );
 
-                    ref.watch(userProvider.notifier).updateUser(
-                        user.copy(
+                    ref.watch(userProvider.notifier).updateUser(user.copy(
                           name: _nameCtrl.text,
                           email: _emailCtrl.text,
                         ));

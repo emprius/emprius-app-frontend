@@ -4,10 +4,11 @@ import '../models/user_model.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserPreferences {
+class LocalStorage {
   static late SharedPreferences _preferences;
   static const _keyUser = 'user';
 
+  //TODO (Mayu): delete mock
   static const myUser = UserModel(
     name: "Nesa",
     id: 1,
@@ -30,10 +31,12 @@ class UserPreferences {
     await _preferences.setString(_keyUser, json);
   }
 
-  static UserModel getUser() {
+  static UserModel? getUser() {
     final json = _preferences.getString(_keyUser);
+    // return json == null ? null : UserModel.fromJson(jsonDecode(json));
 
     return json == null ? myUser : UserModel.fromJson(jsonDecode(json));
   }
+
 
 }

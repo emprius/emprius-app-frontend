@@ -1,3 +1,4 @@
+import 'package:empriusapp/views/screens/splash_screen.dart';
 import 'package:empriusapp/views/screens/tool_card_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:empriusapp/views/screens/home_screen.dart';
@@ -20,10 +21,13 @@ const String userInboxScreenRoute = "/user-inbox";
 const String userToolsScreenRoute = "/user-toollist";
 const String toolCardScreenRoute = "/tool-card";
 const String toolAddFormScreenRoute = "/tool-form";
+const String splashScreenRoute = "/";
 
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case splashScreenRoute:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case loginScreenRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case homeScreenRoute:
@@ -32,8 +36,8 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> RegisterScreen());
       case userProfileScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserProfileScreen());
-        case editProfileScreenRoute:
-          return MaterialPageRoute(builder: (_)=> EditProfileScreen());
+      case editProfileScreenRoute:
+        return MaterialPageRoute(builder: (_)=> EditProfileScreen());
       case userActivityScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserActivityScreen());
       case userInboxScreenRoute:
@@ -42,7 +46,7 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> UserToolList());
       case toolCardScreenRoute:
         return MaterialPageRoute(builder: (_)=> ToolCardScreen());
-      case  toolAddFormScreenRoute:
+      case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
     }
   }

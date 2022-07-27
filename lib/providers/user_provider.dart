@@ -1,4 +1,5 @@
 import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/utils/local_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userProvider = StateNotifierProvider<UserNotifier, UserModel>(
@@ -15,6 +16,14 @@ class UserNotifier extends StateNotifier<UserModel> {
           location: "location"));
 
   void updateUser(UserModel user) {
+
+    // 1. Actualizar en el servidor usando el service
+    // put emprius/user -> Ok 200
+
+    // Actualitzas lestate de la app
     state = user;
+    // Actualitzes la persistencia per tenir les dades guardades
+    LocalStorage.setUser(user);
+
   }
 }

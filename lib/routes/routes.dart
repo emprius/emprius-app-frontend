@@ -5,6 +5,7 @@ import 'package:empriusapp/views/screens/home_screen.dart';
 import 'package:empriusapp/views/screens/login_screen.dart';
 import 'package:empriusapp/views/screens/register_screen.dart';
 import 'package:empriusapp/views/screens/user_profile_screen.dart';
+import '../models/user_model.dart';
 import '../views/screens/add_tool_screen.dart';
 import '../views/screens/edit_profile_screen.dart';
 import '../views/screens/user_activity_screen.dart';
@@ -37,7 +38,8 @@ class Routes {
       case userProfileScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserProfileScreen());
       case editProfileScreenRoute:
-        return MaterialPageRoute(builder: (_)=> EditProfileScreen());
+        return MaterialPageRoute(
+            builder: (_)=> EditProfileScreen(settings.arguments as EditProfileArguments));
       case userActivityScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserActivityScreen());
       case userInboxScreenRoute:
@@ -50,4 +52,9 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
     }
   }
+}
+
+class EditProfileArguments{
+  UserModel user;
+  EditProfileArguments(this.user);
 }

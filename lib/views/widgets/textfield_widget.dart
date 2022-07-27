@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class TextFieldWidget extends StatefulWidget {
   final String label;
   final String text;
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
 
   const TextFieldWidget({
     Key? key,
     required this.label,
     required this.text,
-    required this.onChanged,
+    this.onChanged,
+    this.controller
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   void initState() {
     super.initState();
 
-    controller = TextEditingController(text: widget.text);
+    controller = widget.controller ?? TextEditingController(text: widget.text);
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/utils/user_preferences.dart';
+import 'package:empriusapp/utils/local_storage.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_image_picker.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';

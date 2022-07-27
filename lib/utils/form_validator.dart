@@ -5,8 +5,10 @@ class FormValidator{
   const FormValidator._();
 
   static String? nameValidator(String? value) {
-    if (value != null) return null;
-    return Constants.invalidNameError;
+    if (value == null || value.isEmpty) {
+      return Constants.invalidNameError;
+    }
+    return null;
   }
 
   static String? emailValidator(String? value){

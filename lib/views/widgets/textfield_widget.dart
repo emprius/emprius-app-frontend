@@ -6,13 +6,16 @@ class TextFieldWidget extends StatefulWidget {
   final String text;
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
+
 
   const TextFieldWidget({
     Key? key,
     required this.label,
     required this.text,
     this.onChanged,
-    this.controller
+    this.controller,
+    this.validator
   }) : super(key: key);
 
   @override

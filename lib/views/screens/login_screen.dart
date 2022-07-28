@@ -1,6 +1,6 @@
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/utils/form_validator.dart';
-import 'package:empriusapp/views/widgets/button_widget.dart';
+import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                 SizedBox(
                     height: 40,
-                    child: ButtonWidget(
+                    child: CustomTextButton(
                       text: "Entra a l'app!",
                       onClicked: () {
                         if (!_formKey.currentState!.validate()) return;

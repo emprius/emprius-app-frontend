@@ -8,11 +8,11 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import '../../utils/form_validator.dart';
-import '../../utils/local_storage.dart';
-import '../widgets/button_widget.dart';
-import '../widgets/textfield_widget.dart';
+import '../../services/local_storage.dart';
+import '../widgets/common/custom_text_button.dart';
+import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
-import '../widgets/bottom_image_selector.dart';
+import '../widgets/common/bottom_image_selector.dart';
 import '../widgets/user_map.dart';
 import '../widgets/profile_image_widget.dart';
 
@@ -133,7 +133,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       });
                     }),
                 const SizedBox(height: 24),
-                ButtonWidget(
+                CustomTextButton(
                   text: 'Guardar',
                   onClicked: () {
                     if (!_formKey.currentState!.validate()) return;

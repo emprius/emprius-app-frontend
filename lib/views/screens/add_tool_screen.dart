@@ -1,4 +1,4 @@
-import 'package:empriusapp/views/widgets/button_widget.dart';
+import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:flutter/material.dart';
 
 class AddToolScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _AddToolScreenState extends State<AddToolScreen> {
                   }),
             ]),*/
                 const SizedBox(height: 20.0),
-                ButtonWidget(text: 'Guarda', onClicked: () {}),
+                CustomTextButton(text: 'Guarda', onClicked: () {}),
               ],
             )),
       ),

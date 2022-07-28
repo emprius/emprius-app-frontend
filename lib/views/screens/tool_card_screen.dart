@@ -1,4 +1,4 @@
-import 'package:empriusapp/views/widgets/button_widget.dart';
+import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +41,7 @@ class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
               TextButton.icon(
                 icon: const Icon(Icons.star),
                 onPressed: (){}, label: Text('Rating'),),
-              ButtonWidget(onClicked: () {  }, text: 'Demana',),
+              CustomTextButton(onClicked: () {  }, text: 'Demana',),
             ],
           ),
         ),

@@ -3,13 +3,13 @@ import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/widgets/button_widget.dart';
+import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
 
-import '../widgets/bottom_image_selector.dart';
+import '../widgets/common/bottom_image_selector.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -158,7 +158,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           isActive = value;
                         });
                       }),
-                  ButtonWidget(
+                  CustomTextButton(
                     text: 'Finalitza registre',
                     onClicked: () {
                       if (!_formKey.currentState!.validate()) return;

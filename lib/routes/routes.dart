@@ -10,7 +10,7 @@ import '../views/screens/add_tool_screen.dart';
 import '../views/screens/edit_profile_screen.dart';
 import '../views/screens/user_activity_screen.dart';
 import '../views/screens/user_inbox_screen.dart';
-import '../views/screens/user_tool_list.dart';
+import '../views/screens/user_tool_list_screen.dart';
 
 const String loginScreenRoute = "/login";
 const String homeScreenRoute = "/home";

@@ -1,5 +1,5 @@
 import 'package:empriusapp/models/user_model.dart';
-import 'package:empriusapp/utils/local_storage.dart';
+import 'package:empriusapp/services/local_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userProvider = StateNotifierProvider<UserNotifier, UserModel>(

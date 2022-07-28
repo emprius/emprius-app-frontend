@@ -2,6 +2,7 @@ import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/services/local_storage.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
+import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/common/bottom_image_selector.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
@@ -31,38 +32,73 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),
-      body: ListView(
-       physics: const BouncingScrollPhysics(),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Editar perfil",
+        child: const Icon(Icons.edit),
+        onPressed: ()  async {
+          await Navigator.pushNamed(context, editProfileScreenRoute, arguments: EditProfileArguments(user));
+        },
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
        children: [
-         ProfileImage(
-             avatar: user.avatar,
-         ),
-         const SizedBox(height: 20.0),
-         buildName(user),
+         Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           children: [
+             SizedBox(
+               height: 100,
+                 width: 100,
+                 child: ProfileImage(avatar: user.avatar),
+             ),
+             Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+               buildName(user),
+               const SizedBox(height: 6.0),
+               RatingStars(rating: user.rating),
+                   const SizedBox(height: 6.0),
+                   Text('EMPS: ${user.emps}'),
+             ]),
+             Column(
+               children:[
+                 Switch(
+                     value: user.isActive,
+                     activeTrackColor: Colors.white10,
+                     activeColor: Colors.blue,
+                     onChanged: (value) {
+                       setState(() {
+                          // user!.isActive = value;
+                         });
+                       }),
+                 const SizedBox(height: 6.0),
+                 Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
+               ]),
+             ]),
          const SizedBox(height: 20.0),
          buildLocation(user),
          const SizedBox(height: 20.0),
          CustomTextButton(
-             text: "Les meves eiens",
+             text: "Les meves eines",
              onClicked: () {
                Navigator.pushNamed(context, userToolsScreenRoute);
              }),
-         CustomTextButton(
-           text: "Editar perfil",
-           onClicked: ()  async {
-           await Navigator.pushNamed(context, editProfileScreenRoute, arguments: EditProfileArguments(user));
-         },
-         ),
+         const SizedBox(height: 20.0),
+         buildStatistics(user),
        ],
      ),
     );
   }
 
   Widget buildName(UserModel user)=>Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         user.name,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+        ),
       ),
       const SizedBox(height: 4),
       Text(
@@ -72,16 +108,35 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     ],
   );
 
-  Widget buildLocation(UserModel user)=>Wrap(
+  Widget buildLocation(UserModel user)=>Column(
     children: [
       const Text('Localitzacio actual:'),
+      const SizedBox(height: 6.0),
       Container(
-        width: 250,
-        height: 200,
+        width: 300,
+        height: 150,
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(10),
         ),
         child: UserMap(),
+      ),
+    ],
+  );
+
+  Widget buildStatistics(UserModel user)=>Column(
+    children: [
+      const Text('La meva activitat:'),
+      const SizedBox(height: 6.0),
+      Container(
+        width: 300,
+        height: 150,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     ],
   );

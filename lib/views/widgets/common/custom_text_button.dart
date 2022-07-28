@@ -3,21 +3,35 @@ import 'package:flutter/material.dart';
 class CustomTextButton extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
+  final Color? color;
+  final EdgeInsetsGeometry padding;
+  final double borderRadius;
 
   const CustomTextButton({
     Key? key,
     required this.text,
     required this.onClicked,
+    this.color,
+    this.borderRadius = 6,
+    this.padding  = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      shape: StadiumBorder(),
-      onPrimary: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-    ),
-    child: Text(text),
-    onPressed: onClicked,
-  );
+  Widget build(BuildContext context) {
+    ThemeData currentTheme = Theme.of(context);
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: padding,
+          primary: color ?? currentTheme.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
+        onPressed: onClicked,
+        child: Text(text),
+      ),
+    );
+  }
 }

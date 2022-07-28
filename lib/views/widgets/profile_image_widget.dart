@@ -16,17 +16,16 @@ class ProfileImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
 
-    return Center(
-      child: Stack(
-        children: [
-          buildImage(),
-          if(showBadge != null) Positioned(
-            bottom: 0,
-            right: 4,
-            child: buildEditIcon(color),
-          ),
-        ],
-      ),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        buildImage(),
+        if(showBadge != null) Positioned(
+          bottom: 0,
+          right: 4,
+          child: buildEditIcon(color),
+        ),
+      ],
     );
   }
 

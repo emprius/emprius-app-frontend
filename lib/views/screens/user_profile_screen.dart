@@ -39,54 +39,59 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
           await Navigator.pushNamed(context, editProfileScreenRoute, arguments: EditProfileArguments(user));
         },
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-       children: [
-         Row(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-             SizedBox(
-               height: 100,
-                 width: 100,
-                 child: ProfileImage(avatar: user.avatar),
-             ),
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-               buildName(user),
-               const SizedBox(height: 6.0),
-               RatingStars(rating: user.rating),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               children: [
+                 SizedBox(
+                   height: 100,
+                     width: 100,
+                     child: ProfileImage(avatar: user.avatar),
+                 ),
+                 Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                   buildName(user),
                    const SizedBox(height: 6.0),
-                   Text('EMPS: ${user.emps}'),
-             ]),
-             Column(
-               children:[
-                 Switch(
-                     value: user.isActive,
-                     activeTrackColor: Colors.white10,
-                     activeColor: Colors.blue,
-                     onChanged: (value) {
-                       setState(() {
-                          // user!.isActive = value;
-                         });
-                       }),
-                 const SizedBox(height: 6.0),
-                 Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
-               ]),
-             ]),
-         const SizedBox(height: 20.0),
-         buildLocation(user),
-         const SizedBox(height: 20.0),
-         CustomTextButton(
-             text: "Les meves eines",
-             onClicked: () {
-               Navigator.pushNamed(context, userToolsScreenRoute);
-             }),
-         const SizedBox(height: 20.0),
-         buildStatistics(user),
-       ],
+                   RatingStars(rating: user.rating),
+                       const SizedBox(height: 6.0),
+                       Text('EMPS: ${user.emps}'),
+                 ]),
+                 Column(
+                   children:[
+                     Switch(
+                         value: user.isActive,
+                         activeTrackColor: Colors.white10,
+                         activeColor: Colors.blue,
+                         onChanged: (value) {
+                           setState(() {
+                              // user!.isActive = value;
+                             });
+                           }),
+                     const SizedBox(height: 6.0),
+                     Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
+                   ]),
+                 ]),
+             const SizedBox(height: 20.0),
+             buildLocation(user),
+             const SizedBox(height: 10.0),
+             CustomTextButton(
+                 text: "Les meves eines",
+                 onClicked: () {
+                   Navigator.pushNamed(context, userToolsScreenRoute);
+                 }),
+             const SizedBox(height: 10.0),
+             buildStatistics(user),
+           ],
      ),
+        ),
+      ),
     );
   }
 

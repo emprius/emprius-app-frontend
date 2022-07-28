@@ -99,22 +99,14 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                TextFormField(
+                CustomTextField(
                   controller: _nameCtrl,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "Nom d'usuari",
-                  ),
-                  validator: FormValidator.nameValidator,
+                  validator: FormValidator.nameValidator, labelText: "Nom d'usuari",
                 ),
                 const SizedBox(height: 24),
-                TextFormField(
+                CustomTextField(
                   controller: _emailCtrl,
-                  validator: FormValidator.emailValidator,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "E-mail",
-                  ),
+                  validator: FormValidator.emailValidator, labelText: "E-mail",
                 ),
                 const SizedBox(height: 24),
                 buildLocation(user),

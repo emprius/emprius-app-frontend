@@ -34,12 +34,18 @@ class _UserToolListState extends ConsumerState<UserToolList> {
           return ListTile(
             title: Text(tool.title),
             subtitle: Text(tool.description),
-            trailing: Icon(Icons.delete),
+            leading: Switch(value: tool.isAvailable, onChanged: (bool value) {  },),
+            trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const <Widget>[
+                  Icon(Icons.edit),
+                  Icon(Icons.delete)
+                ]),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context)=> ToolCardScreen(
-                      tool: Tool(
+                      tool: ToolModel(
                         id: tool.id,
                         title: tool.title,
                         description: tool.description,

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/tool_model.dart';
 
 class ToolCardScreen extends ConsumerStatefulWidget {
-  final Tool? tool;
+  final ToolModel? tool;
   const ToolCardScreen({Key? key, this.tool}) : super(key: key);
 
   @override

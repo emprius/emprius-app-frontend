@@ -10,6 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
 
 import '../widgets/common/bottom_image_selector.dart';
+import '../widgets/common/custom_textfield.dart';
+import '../widgets/profile_image_widget.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class RegisterScreen extends ConsumerStatefulWidget {
 }
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
+  late UserModel user;
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
@@ -54,97 +57,78 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
-                        child: TextFormField(
+                        child: CustomTextField(
                           controller: _nameCtrl,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: "Nom d'usuari",
-                          ),
                           validator: FormValidator.nameValidator,
+                          labelText: "Nom d'usuari",
                         ),
                       ),
-                      //todo: change image picker from widget logic
-                      const Icon(
-                        Icons.person,
-                        size: 50.0,
-                      ),
-                      // InkWell(
+                      // GestureDetector(
                       //   onTap: () {
                       //     showModalBottomSheet(
-                      //       context: context,
-                      //       builder: ((builder) => const UserImagePicker()),
-                      //     );
+                      //         context: context,
+                      //         builder: ((builder) => BottomImageSelector((image) {
+                      //           if (image != null) {
+                      //             user = user.copy(avatar: image.path);
+                      //             setState(() {});
+                      //           }
+                      //           Navigator.pop(context);
+                      //         })));
                       //   },
-                      //   child: const Icon(
-                      //     Icons.camera_alt_rounded,
+                      //   child: SizedBox(
+                      //     height: 100,
+                      //     width: 100,
+                      //     child: ProfileImage(avatar: user.avatar),
                       //   ),
-                      // )
+                      // ),
                     ],
                   ),
-                  TextFormField(
+                  CustomTextField(
                     controller: _emailCtrl,
                     validator: FormValidator.emailValidator,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "E-mail",
-                    ),
+                    labelText: "E-mail",
                   ),
-                  TextFormField(
+                  CustomTextField(
                     controller: _passwordCtrl,
                     validator: FormValidator.passwordValidator,
-                    obscureText: _isHidden,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: "Mot de pas",
-                      suffixIcon: IconButton(
-                        icon: Icon(_isHidden
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isHidden = !_isHidden;
-                          });
-                        },
-                      ),
+                    labelText: 'Mot de pas',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isHidden ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isHidden = !_isHidden;
+                        });
+                      },
                     ),
                   ),
-                  TextFormField(
+                  CustomTextField(
                     controller: _cPasswordCtrl,
                     validator: (value) =>
                         FormValidator.confirmPasswordValidator(
                       value,
                       _passwordCtrl.text,
                     ),
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: "Confirmar mot de pas",
-                      suffixIcon: IconButton(
-                        icon: Icon(_isHidden
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isHidden = !_isHidden;
-                          });
-                        },
-                      ),
+                    labelText: 'Confirmar mot de pas',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isHidden ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isHidden = !_isHidden;
+                        });
+                      },
                     ),
                   ),
-                  TextFormField(
+                  CustomTextField(
                     controller: _invitationCtrl,
                     validator: FormValidator.invitationValidator,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Introdueix clau d'invitacio",
-                    ),
+                    labelText: 'Introduexi clau invitacio',
                   ),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text("Localitza't al mapa:"),
-                  //todo get latlng from widget map and pass it to profile screen:
-                  SizedBox(height: 250, child: UserMap()),
+                  buildLocation(user),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -188,4 +172,22 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       ),
     );
   }
+
+  Widget buildLocation(UserModel user)=>Column(
+    children: [
+      const Text('Localitzacio actual:'),
+      const SizedBox(height: 6.0),
+      Container(
+        width: 300,
+        height: 150,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: UserMap(),
+      ),
+    ],
+  );
+
 }

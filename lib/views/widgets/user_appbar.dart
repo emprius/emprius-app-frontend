@@ -28,8 +28,7 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
             //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
             icon: Icon(Icons.more_vert),
             itemBuilder: (context) => [
-              const PopupMenuItem(value: 1, child: Text("share")),
-              const PopupMenuItem(value: 2, child: Text("get link")),
+              const PopupMenuItem(value: 1, child: Text("les meves eines")),
             ])
       ],
     );

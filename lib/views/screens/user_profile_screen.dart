@@ -5,6 +5,7 @@ import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/common/bottom_image_selector.dart';
+import 'package:empriusapp/views/widgets/user_drawer.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),
+      drawer: UserDrawer(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Editar perfil",
         child: const Icon(Icons.edit),

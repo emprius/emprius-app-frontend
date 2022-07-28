@@ -1,4 +1,4 @@
-class Tool {
+class ToolModel {
   final String id; //int?
   final String title;
   final String image;
@@ -7,7 +7,7 @@ class Tool {
   final int rating; //num?
   //final List < int > categoryIds ?
 
-  const Tool({
+  const ToolModel({
     required this.id,
     required this.title,
     required this.description,

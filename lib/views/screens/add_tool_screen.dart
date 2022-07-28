@@ -1,5 +1,10 @@
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
+import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/tool_model.dart';
+import '../../utils/form_validator.dart';
+import '../widgets/common/custom_textfield.dart';
 
 class AddToolScreen extends StatefulWidget {
   const AddToolScreen({Key? key}) : super(key: key);
@@ -14,6 +19,20 @@ class _AddToolScreenState extends State<AddToolScreen> {
   List<String> price = ["Gratuita", "Amb fiansa"];
   List<bool> isChecked = [];
 
+  late ToolModel tool;
+  final _formKey = GlobalKey<FormState>();
+  final _titleCtrl = TextEditingController();
+  final _descriptionCtrl = TextEditingController();
+  late bool isAvailable = true;
+
+  @override
+  void dispose() {
+    _titleCtrl.dispose();
+    _descriptionCtrl.dispose();
+    super.dispose();
+  }
+
+
   @override
   void initState() {
     currentValue = categories[0];
@@ -23,68 +42,93 @@ class _AddToolScreenState extends State<AddToolScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Afegir eines'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0.0),
+      appBar: UserAppbar('Afegir eines'),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+        physics: const BouncingScrollPhysics(),
         child: Form(
+          key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Afegeix nova eina:'),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: "Nom de l'eina"),
-                  validator: (value) {
-                    if (value?.length == 0) {
-                      return "Siusplau afegeix el nom de l'eina";
-                    }
-                    return null;
-                  },
+                SizedBox(height: 20.0),
+                CustomTextField(
+                  controller: _titleCtrl,
+                  validator: FormValidator.nameValidator,
+                  labelText: "Nom de la eina",
                 ),
-                TextFormField(
-                  decoration:
-                  const InputDecoration(labelText: "Afegeix descripcio"),
-                  validator: (value) {
-                    if (value?.length == 0) {
-                      return "Siusplau afegeix la descripcio l'eina";
-                    }
-                    return null;
-                  },
+                SizedBox(height: 20.0),
+                CustomTextField(
+                  controller: _descriptionCtrl,
+                  validator: FormValidator.nameValidator,
+                  labelText: "Descripcio de la eina",
+                  maxLines: 5,
                 ),
-                DropdownButton(
-                  value: currentValue,
-                  items: categories
-                      .map((String category) => DropdownMenuItem<String>(
-                      value: category, child: Text(category)))
-                      .toList(),
-                  onChanged: (String? value) {
-                    if (value != null && currentValue != value) {
-                      setState(() {
-                        currentValue = value;
-                      });
-                    }
-                  },
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black26),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("Puja fotos"),
+                    ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black26),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("Puja fotos"),
+                    ),
+                  ],
                 ),
-                /*Column(children: [
-              Text(isChecked.toString()),
-              ListView.builder(
-                  itemCount: price.length,
-                  itemBuilder: (context, index) {
-                    return CheckboxListTile(
-                        title: Text(price[index]),
-                        value: isChecked[index],
-                        onChanged: (value) {
-                          setState(() {
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                  Text("Tria categoria:"),
+                  DropdownButton(
+                    value: currentValue,
+                    items: categories
+                        .map((String category) => DropdownMenuItem<String>(
+                        value: category, child: Text(category)))
+                        .toList(),
+                    onChanged: (String? value) {
+                      if (value != null && currentValue != value) {
+                        setState(() {
+                          currentValue = value;
+                        });
+                      }
+                    },
+                  ),
+                ]),
+                      ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                        itemCount: price.length,
+                        itemBuilder: (context, index) {
+                          return CheckboxListTile(
+                            title: Text(price[index]),
+                            value: isChecked[index],
+                            onChanged: (value) {
+                            setState(() {
                             isChecked[index] = value as bool;
                           });
                         });
                   }),
-            ]),*/
                 const SizedBox(height: 20.0),
                 CustomTextButton(text: 'Guarda', onClicked: () {}),
               ],
-            )),
+            ),
+        ),
       ),
     );
   }

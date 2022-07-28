@@ -4,7 +4,7 @@ class Constants{
   const Constants._();
 
   /// The error message for invalid name input.
-  static const invalidNameError = "Siusplau introdueix nom d'usuari";
+  static const invalidNameError = "Aquest camp es requerit";
 
   /// The regular expression for validating emails.
   static RegExp emailRegex = RegExp(

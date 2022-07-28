@@ -30,14 +30,20 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  final _cPasswordCtrl = TextEditingController();
   late bool isActive = true;
 
   @override
   void dispose() {
     _nameCtrl.dispose();
     _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    _cPasswordCtrl.dispose();
     super.dispose();
   }
+
+  bool _isHidden = true;
 
   @override
   void initState() {
@@ -107,6 +113,40 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 CustomTextField(
                   controller: _emailCtrl,
                   validator: FormValidator.emailValidator, labelText: "E-mail",
+                ),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                  controller: _passwordCtrl,
+                  validator: FormValidator.passwordValidator,
+                  labelText: 'Mot de pas',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isHidden ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isHidden = !_isHidden;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                  controller: _cPasswordCtrl,
+                  validator: (value) =>
+                      FormValidator.confirmPasswordValidator(
+                        value,
+                        _passwordCtrl.text,
+                      ),
+                  labelText: 'Confirmar mot de pas',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isHidden ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isHidden = !_isHidden;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 24),
                 buildLocation(user),

@@ -1,3 +1,4 @@
+import 'package:empriusapp/views/widgets/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/common/custom_textfield.dart';
@@ -11,6 +12,8 @@ class AskToolFormScreen extends StatefulWidget {
 }
 
 class _AskToolFormScreenState extends State<AskToolFormScreen> {
+  DateTime date = DateTime(2022, 8, 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +34,11 @@ class _AskToolFormScreenState extends State<AskToolFormScreen> {
                 labelText: "Explica breument per a que la vols",
                 maxLines: 5,
               ),
+              SizedBox(height: 20.0),
+              DatePickerWidget("Selecciona dia d'inici"),
+              //todo: pass data from widget
+              Text('${date.year}/${date.month}/${date.day}'),
+              DatePickerWidget("Selecciona data de tornada"),
             ],
           ),
         ),

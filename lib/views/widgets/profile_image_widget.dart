@@ -6,24 +6,30 @@ class ProfileImage extends StatelessWidget {
   final String avatar;
   final bool showBadge;
 
-  const ProfileImage({
+  Color? innerCircleColor;
+
+  final  IconData badgeIcon;
+
+  ProfileImage({
     Key? key,
     required this.avatar,
     this.showBadge = false,
+    this.badgeIcon = Icons.edit
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
+    innerCircleColor = Theme.of(context).colorScheme.primary;
 
     return Stack(
       fit: StackFit.expand,
       children: [
         buildImage(),
-        if(showBadge != null) Positioned(
-          bottom: 0,
-          right: 4,
-          child: buildEditIcon(color),
+        if(showBadge)
+          Positioned(
+            bottom: 0,
+            right: 4,
+            child: buildEditIcon(),
         ),
       ],
     );
@@ -41,14 +47,14 @@ class ProfileImage extends StatelessWidget {
     );
   }
 
-  Widget buildEditIcon(color) => buildCircle(
+  Widget buildEditIcon() => buildCircle( // External circle
     all: 3,
    color: Colors.white,
-    child: buildCircle(
-      color: color,
+    child: buildCircle( // Internal circle
+      color: innerCircleColor,
       all: 8,
       child: Icon(
-        showBadge ? Icons.edit : Icons.add_a_photo,
+        badgeIcon,
         color: Colors.white,
         size: 20,
       ),
@@ -58,7 +64,7 @@ class ProfileImage extends StatelessWidget {
   Widget buildCircle({
     required Widget child,
     required double all,
-    required color,
+    required color ,
   }) =>
       ClipOval(
         child: Container(

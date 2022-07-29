@@ -4,6 +4,7 @@ import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
+import 'package:empriusapp/views/widgets/test_widget.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,13 +22,16 @@ class RegisterScreen extends ConsumerStatefulWidget {
 }
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
-  late UserModel user;
+
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
+
+  final _mapController =  UserMapController();
+
   late bool isActive = true;
 
   @override
@@ -130,7 +134,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  buildLocation(user),
+                  buildLocation(),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -147,10 +151,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   CustomTextButton(
                     text: 'Finalitza registre',
                     onClicked: () {
-                      if (!_formKey.currentState!.validate()) return;
+                      if (!_formKey.currentState!.validate() && !_mapController.selectedPositionValidator()) {
+                        return;
+                      };
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Usuari creat')),
                       );
+
 
                       ref.watch(userProvider.notifier).updateUser(UserModel(
                             id: 1,
@@ -158,8 +165,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,
-                            location:
-                                (ref.read(userMapProvider)).first.toString(),
+                            location: _mapController.selectedLocation!.toString(),
                           ));
 
                       Navigator.pushReplacementNamed(
@@ -175,7 +181,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 
-  Widget buildLocation(UserModel user)=>Column(
+  Widget buildLocation( )=>Column(
     children: [
       const Text('Localitzacio actual:'),
       const SizedBox(height: 6.0),
@@ -187,7 +193,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: UserMap(),
+        child: UserMap(controller:,),
       ),
     ],
   );

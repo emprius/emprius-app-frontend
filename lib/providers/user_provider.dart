@@ -15,7 +15,7 @@ class UserNotifier extends StateNotifier<UserModel> {
           invitation: "invitation",
           location: "location"));
 
-  void updateUser(UserModel user) {
+  Future<void> updateUser(UserModel user) async {
 
     // 1. Actualizar en el servidor usando el service
     // put emprius/user -> Ok 200
@@ -23,7 +23,7 @@ class UserNotifier extends StateNotifier<UserModel> {
     // Actualitzas lestate de la app
     state = user;
     // Actualitzes la persistencia per tenir les dades guardades
-    LocalStorage.setUser(user);
+    await LocalStorage.setUser(user);
 
   }
 }

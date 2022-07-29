@@ -155,7 +155,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 const SizedBox(height: 24),
                 CustomTextButton(
                   text: 'Desar',
-                  onClicked: () {
+                  onClicked: () async {
                     if (!_formKey.currentState!.validate()) return;
 
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -165,9 +165,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ref.watch(userProvider.notifier).updateUser(user.copy(
                           name: _nameCtrl.text,
                           email: _emailCtrl.text,
-                        ));
+                        )).whenComplete(() => Navigator.of(context).pop());
 
-                    Navigator.of(context).pop();
                   },
                 ),
               ],

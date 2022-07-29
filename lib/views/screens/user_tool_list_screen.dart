@@ -23,39 +23,45 @@ class _UserToolListState extends ConsumerState<UserToolList> {
 
     return Scaffold(
       appBar: UserAppbar("Les meves eines"),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
         onPressed: () { Navigator.pushNamed(context, toolAddFormScreenRoute); },
+        label: Text('Afegir eina'),
       ),
-      body: ListView.builder(
-        itemCount: tools.length,
-        itemBuilder: (context, index) {
-          final tool = tools[index];
-          return ListTile(
-            title: Text(tool.title),
-            subtitle: Text(tool.description),
-            leading: Switch(value: tool.isAvailable, onChanged: (bool value) {  },),
-            trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const <Widget>[
-                  Icon(Icons.edit),
-                  Icon(Icons.delete)
-                ]),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context)=> ToolCardScreen(
-                      tool: ToolModel(
-                        id: tool.id,
-                        title: tool.title,
-                        description: tool.description,
-                      )
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: tools.length,
+          itemBuilder: (context, index) {
+            final tool = tools[index];
+            return ListTile(
+              title: Text(tool.title),
+              subtitle: Text(tool.description),
+              leading: Switch(value: tool.isAvailable, onChanged: (value) {  },),
+              trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const <Widget>[
+                    Icon(Icons.edit),
+                    Icon(Icons.delete)
+                  ]),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context)=> ToolCardScreen(
+                        tool: ToolModel(
+                          id: tool.id,
+                          title: tool.title,
+                          description: tool.description,
+                        )
+                    ),
                   ),
-                ),
-              );
-            },
-          );
-        },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

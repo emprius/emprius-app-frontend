@@ -92,6 +92,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     controller: _passwordCtrl,
                     validator: FormValidator.passwordValidator,
                     labelText: 'Mot de pas',
+                    obscureText: _isHidden,
                     suffixIcon: IconButton(
                       icon: Icon(
                           _isHidden ? Icons.visibility : Icons.visibility_off),
@@ -110,6 +111,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       _passwordCtrl.text,
                     ),
                     labelText: 'Confirmar mot de pas',
+                    obscureText: _isHidden,
                     suffixIcon: IconButton(
                       icon: Icon(
                           _isHidden ? Icons.visibility : Icons.visibility_off),

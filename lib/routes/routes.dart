@@ -7,6 +7,7 @@ import 'package:empriusapp/views/screens/register_screen.dart';
 import 'package:empriusapp/views/screens/user_profile_screen.dart';
 import '../models/user_model.dart';
 import '../views/screens/add_tool_screen.dart';
+import '../views/screens/ask_tool_form_screen.dart';
 import '../views/screens/edit_profile_screen.dart';
 import '../views/screens/user_activity_screen.dart';
 import '../views/screens/user_inbox_screen.dart';
@@ -22,6 +23,7 @@ const String userInboxScreenRoute = "/user-inbox";
 const String userToolsScreenRoute = "/user-toollist";
 const String toolCardScreenRoute = "/tool-card";
 const String toolAddFormScreenRoute = "/tool-form";
+const String toolAskFormScreenRoute = "/ask-tool-form";
 const String splashScreenRoute = "/";
 
 class Routes {
@@ -50,6 +52,8 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> ToolCardScreen());
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
+      case toolAskFormScreenRoute:
+        return MaterialPageRoute(builder: (_)=> AskToolFormScreen());
     }
   }
 }

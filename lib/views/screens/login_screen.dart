@@ -4,6 +4,8 @@ import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/common/custom_textfield.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -16,6 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   bool _isHidden = true;
+
+  @override
+  void dispose() {
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,37 +40,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Text('Benvinguda a Emprius app'),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: TextFormField(
+                    child: CustomTextField(
                       controller: _emailCtrl,
                       validator: FormValidator.emailValidator,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.mail),
-                        border: OutlineInputBorder(),
-                        hintText: "E-mail",
-                      ),
+                      labelText: "E-mail",
                     ),
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: TextFormField(
+                    child: CustomTextField(
                       controller: _passwordCtrl,
                       validator: FormValidator.passwordValidator,
+                      labelText: 'Mot de pas',
                       obscureText: _isHidden,
-                      decoration: InputDecoration(
-                        icon: const Icon(Icons.lock),
-                        border: const OutlineInputBorder(),
-                        hintText: "Mot de pas",
-                        suffixIcon: IconButton(
-                          icon: Icon( _isHidden ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () {
-                             setState(() {
-                               _isHidden = !_isHidden;
-                             });
-                             },
-                        ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            _isHidden ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
                       ),
-                    )),
+                    ),
+                ),
                 SizedBox(
                     height: 40,
                     child: CustomTextButton(

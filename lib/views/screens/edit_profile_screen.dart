@@ -119,6 +119,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   controller: _passwordCtrl,
                   validator: FormValidator.passwordValidator,
                   labelText: 'Mot de pas',
+                  obscureText: _isHidden,
                   suffixIcon: IconButton(
                     icon: Icon(
                         _isHidden ? Icons.visibility : Icons.visibility_off),
@@ -138,6 +139,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         _passwordCtrl.text,
                       ),
                   labelText: 'Confirmar mot de pas',
+                  obscureText: _isHidden,
                   suffixIcon: IconButton(
                     icon: Icon(
                         _isHidden ? Icons.visibility : Icons.visibility_off),

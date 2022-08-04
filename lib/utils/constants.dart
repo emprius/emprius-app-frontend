@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
+
+var defaultMapCenter = LatLng(41.695384, 2.492793);
 
 class Constants{
   const Constants._();
@@ -26,8 +28,10 @@ class Constants{
   /// The error message for invalid confirm password input.
   static const invalidConfirmPwError = "El mot de pas no coincideix";
 
-  /// The error message for invalid name input.
+  /// The error message for invalid invitation input.
   static const emptyInvitationError = "AQUEST CAMP ES REQUERIT";
 
+  /// The error message for invalid invitation input.
+  static const emptyLocationError = "Introdueix una localitzacio";
 
 }

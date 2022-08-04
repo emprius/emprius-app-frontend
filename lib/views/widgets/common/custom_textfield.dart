@@ -38,7 +38,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     super.initState();
-
     controller = widget.controller ?? TextEditingController(text: widget.labelText);
   }
 
@@ -50,7 +49,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: widget.validator,
       controller: controller,
       onChanged: widget.onChanged,
       keyboardType: widget.keyboardType,

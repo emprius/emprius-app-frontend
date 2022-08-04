@@ -1,6 +1,9 @@
 import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/services/local_storage.dart';
+import 'package:empriusapp/utils/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
+
 
 final userProvider = StateNotifierProvider<UserNotifier, UserModel>(
 (ref) => UserNotifier());
@@ -13,7 +16,7 @@ class UserNotifier extends StateNotifier<UserModel> {
           email: "email",
           password: "password",
           invitation: "invitation",
-          location: "location"));
+          location: defaultMapCenter));
 
   Future<void> updateUser(UserModel user) async {
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 
 class UserModel {
   final int id;
@@ -6,7 +7,7 @@ class UserModel {
   final String email;
   final String password;
   final String invitation;
-  final String location;
+  final LatLng? location;
   final bool isActive;
   final String avatar;
   final int rating;
@@ -18,7 +19,7 @@ class UserModel {
     required this.email,
     required this.password,
     required this.invitation,
-    required this.location,
+    this.location,
     this.isActive = true,
     this.avatar = "",
     this.rating = 0,
@@ -31,7 +32,7 @@ class UserModel {
     String? email,
     String? password,
     String? invitation,
-    String? location,
+    LatLng? location,
     bool? isActive,
     String? avatar,
     int? rating,
@@ -56,7 +57,7 @@ class UserModel {
         email: json['email'],
         password: json['password'],
         invitation: json['invitation'],
-        location: json['location'],
+        location: LatLng.fromJson(json['location']),
         avatar: json['avatar'],
         rating: json['rating'],
         isActive: json['isActive'],
@@ -69,7 +70,7 @@ class UserModel {
         'email': email,
         'password': password,
         'invitation': invitation,
-        'location': location,
+        'location': location?.toJson(),
         'avatar': avatar,
         'rating': rating,
         'isActive': isActive,

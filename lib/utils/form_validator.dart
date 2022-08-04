@@ -39,8 +39,10 @@ class FormValidator{
   }
 
   static String? invitationValidator(String? value) {
-    if (value != null || value!.isEmpty) return null;
-    return Constants.emptyInvitationError;
+    if (value == null || value.isEmpty) {
+      return Constants.emptyInvitationError;
+    }
+    return null;
   }
 
   static String? locationNullValidator(LatLng? value) {

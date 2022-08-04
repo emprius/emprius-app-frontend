@@ -4,7 +4,7 @@ import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/test_widget.dart';
+//import 'package:empriusapp/views/widgets/test_widget.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,8 +29,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
-
-  final _mapController =  UserMapController();
+  final _mapController =  UserMapController(
+      validator: FormValidator.locationNullValidator);
 
   late bool isActive = true;
 
@@ -87,11 +87,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       // ),
                     ],
                   ),
+                  const SizedBox(height: 20.0),
                   CustomTextField(
                     controller: _emailCtrl,
                     validator: FormValidator.emailValidator,
                     labelText: "E-mail",
+                    keyboardType: TextInputType.emailAddress,
                   ),
+                  const SizedBox(height: 20.0),
                   CustomTextField(
                     controller: _passwordCtrl,
                     validator: FormValidator.passwordValidator,
@@ -107,6 +110,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       },
                     ),
                   ),
+                  const SizedBox(height: 20.0),
                   CustomTextField(
                     controller: _cPasswordCtrl,
                     validator: (value) =>
@@ -126,6 +130,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       },
                     ),
                   ),
+                  const SizedBox(height: 20.0),
                   CustomTextField(
                     controller: _invitationCtrl,
                     validator: FormValidator.invitationValidator,
@@ -134,7 +139,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  buildLocation(),
+                  selectLocationMap(),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -151,13 +156,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   CustomTextButton(
                     text: 'Finalitza registre',
                     onClicked: () {
-                      if (!_formKey.currentState!.validate() && !_mapController.selectedPositionValidator()) {
+                      if (!_formKey.currentState!.validate() && !_mapController.validate()) {
                         return;
-                      };
+                      }
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Usuari creat')),
                       );
-
 
                       ref.watch(userProvider.notifier).updateUser(UserModel(
                             id: 1,
@@ -165,7 +169,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,
-                            location: _mapController.selectedLocation!.toString(),
+                            location: _mapController.selectedLocation!,
                           ));
 
                       Navigator.pushReplacementNamed(
@@ -181,7 +185,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 
-  Widget buildLocation( )=>Column(
+
+  Widget selectLocationMap( ) => Column(
     children: [
       const Text('Localitzacio actual:'),
       const SizedBox(height: 6.0),
@@ -193,7 +198,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: UserMap(controller:,),
+        child: UserMap(controller: _mapController,),
       ),
     ],
   );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'constants.dart';
 
 class FormValidator{
-  const FormValidator._();
 
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -41,6 +41,11 @@ class FormValidator{
   static String? invitationValidator(String? value) {
     if (value != null || value!.isEmpty) return null;
     return Constants.emptyInvitationError;
+  }
+
+  static String? locationNullValidator(LatLng? value) {
+    if (value != null) return null;
+    return Constants.emptyLocationError;
   }
 
 }

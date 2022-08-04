@@ -3,6 +3,7 @@ import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/map_providers.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/utils/constants.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 //import 'package:empriusapp/views/widgets/test_widget.dart';
 import 'package:empriusapp/views/widgets/user_map.dart';
@@ -67,24 +68,28 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           labelText: "Nom d'usuari",
                         ),
                       ),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     showModalBottomSheet(
-                      //         context: context,
-                      //         builder: ((builder) => BottomImageSelector((image) {
-                      //           if (image != null) {
-                      //             user = user.copy(avatar: image.path);
-                      //             setState(() {});
-                      //           }
-                      //           Navigator.pop(context);
-                      //         })));
-                      //   },
-                      //   child: SizedBox(
-                      //     height: 100,
-                      //     width: 100,
-                      //     child: ProfileImage(avatar: user.avatar),
-                      //   ),
-                      // ),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => BottomImageSelector((image) {
+                              //TODO IMPLEMENT CONTROLLER?
+                              // if (image != null) {
+                              //   user = user.copy(avatar: image.path);
+                              //   setState(() {});
+                              // }
+                              Navigator.pop(context);
+                            }
+                            )
+                            ),
+                          );
+                        },
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: ProfileImage(showBadge: true, badgeIcon: Icons.camera_alt, avatar: defaultAvatar,),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20.0),

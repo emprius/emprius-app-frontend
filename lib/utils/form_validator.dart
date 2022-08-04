@@ -39,7 +39,7 @@ class FormValidator{
   }
 
   static String? invitationValidator(String? value) {
-    if (value != null) return null;
+    if (value != null || value!.isEmpty) return null;
     return Constants.emptyInvitationError;
   }
 

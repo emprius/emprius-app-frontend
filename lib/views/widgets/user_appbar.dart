@@ -13,7 +13,7 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       centerTitle: true,
       elevation: 20,
-      toolbarHeight: 100,
+      // toolbarHeight: 70,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
       actions: [
         IconButton(
@@ -35,5 +35,5 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(60);
 }

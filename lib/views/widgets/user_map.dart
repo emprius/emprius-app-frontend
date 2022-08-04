@@ -35,8 +35,9 @@ class UserMapController {
 
 class UserMap extends StatefulWidget {
   final UserMapController? controller;
+  final bool isViewOnly;
 
-  const UserMap({Key? key, this.controller}) : super(key: key);
+  const UserMap({Key? key, this.controller, this.isViewOnly = false}) : super(key: key);
 
   @override
   _UserMapState createState() => _UserMapState();
@@ -75,6 +76,9 @@ class _UserMapState extends State<UserMap> {
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
+                  if (widget.isViewOnly) {
+                    return;
+                  }
                   // ref.watch(userMapProvider.notifier).update([tapLocation]);
                   //markers = [];
                   setState((){

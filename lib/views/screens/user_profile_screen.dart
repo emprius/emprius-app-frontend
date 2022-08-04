@@ -21,6 +21,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
+  final _mapController =  UserMapController();
 
   @override
   void initState() {
@@ -127,7 +128,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
           border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: UserMap(),
+        child: UserMap(controller: _mapController, isViewOnly: true),
       ),
     ],
   );

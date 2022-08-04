@@ -85,7 +85,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       child: SizedBox(
                         height: 100,
                         width: 100,
-                        child: ProfileImage(avatar: user.avatar),
+                        child: ProfileImage(
+                            avatar: user.avatar,
+                        showBadge: true,
+                        ),
                       ),
                     ),
                     Column(

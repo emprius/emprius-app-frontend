@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../utils/constants.dart';
+import 'common/custom_marker.dart';
 
 class CustomMapController {
   LatLng? selectedLocation;
@@ -89,10 +90,11 @@ class _CustomMapState extends State<CustomMap> {
                   markers = [
                     Marker(
                       point: tapLocation,
-                      builder: (ctx) => const Icon(Icons.location_pin),
+                      builder: (ctx) => UserMarker(
+                        const Icon(Icons.pin_drop_sharp)
+                      )
                     ),
                   ];
-
                   widget.controller?.markers = markers;
                   widget.controller?.selectedLocation = tapLocation;
 

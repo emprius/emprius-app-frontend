@@ -1,8 +1,10 @@
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/user_provider.dart';
+import '../../utils/constants.dart';
 
 class UserDrawer extends ConsumerStatefulWidget {
   const UserDrawer({Key? key}) : super(key: key);
@@ -28,10 +30,13 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
                 fontWeight: FontWeight.bold,
               ),),
               accountEmail: Text(user.email),
-            currentAccountPicture:
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/images/sharing.png"),
+            currentAccountPicture: ProfileImage(
+              avatar: user.avatar.isEmpty ? defaultAvatar : user.avatar,
             ),
+
+            // const CircleAvatar(
+            //   backgroundImage: AssetImage("assets/images/sharing.png"),
+            // ),
           ),
           ListTile(
             leading: Icon(Icons.person),

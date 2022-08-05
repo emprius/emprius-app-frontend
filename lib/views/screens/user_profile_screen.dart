@@ -73,7 +73,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                   height: 100,
                   width: 100,
                   child: ProfileImage(
-                    showBadge: false,
                     avatar: user.avatar.isEmpty ? defaultAvatar : user.avatar,
                   ),
                 ),

@@ -4,7 +4,7 @@ import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/utils/constants.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/user_map.dart';
+import 'package:empriusapp/views/widgets/custom_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
@@ -26,8 +26,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
-  final _mapController =
-      UserMapController(validator: FormValidator.locationNullValidator);
+  final _customMapCtrl =
+      CustomMapController(validator: FormValidator.locationNullValidator);
 
   late bool isActive = true;
   File? _avatar;
@@ -158,7 +158,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     text: 'Finalitza registre',
                     onClicked: () {
                       if (!_formKey.currentState!.validate() &&
-                          !_mapController.validate()) {
+                          !_customMapCtrl.validate()) {
                         return;
                       }
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -171,7 +171,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             email: _emailCtrl.text,
                             password: _passwordCtrl.text,
                             invitation: _invitationCtrl.text,
-                            location: _mapController.selectedLocation!,
+                            location: _customMapCtrl.selectedLocation!,
                             avatar: _avatar?.path ?? "",
                             isActive: isActive,
                           ));
@@ -201,8 +201,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: UserMap(
-              controller: _mapController,
+            child: CustomMap(
+              controller: _customMapCtrl,
             ),
           ),
         ],

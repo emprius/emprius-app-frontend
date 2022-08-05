@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../../utils/constants.dart';
 
-class UserMapController {
+class CustomMapController {
   LatLng? selectedLocation;
   List<Marker>? markers;
 
@@ -16,7 +16,7 @@ class UserMapController {
   String? Function(LatLng? value)? validator;
   String? errorMsg;
 
-  UserMapController(
+  CustomMapController(
       {this.selectedLocation,
         this.validator,
         this.markers});
@@ -33,17 +33,17 @@ class UserMapController {
   }
 }
 
-class UserMap extends StatefulWidget {
-  final UserMapController? controller;
+class CustomMap extends StatefulWidget {
+  final CustomMapController? controller;
   final bool isViewOnly;
 
-  const UserMap({Key? key, this.controller, this.isViewOnly = false}) : super(key: key);
+  const CustomMap({Key? key, this.controller, this.isViewOnly = false}) : super(key: key);
 
   @override
-  _UserMapState createState() => _UserMapState();
+  _CustomMapState createState() => _CustomMapState();
 }
 
-class _UserMapState extends State<UserMap> {
+class _CustomMapState extends State<CustomMap> {
   late List<Marker> markers = [];
   MapController mapController = MapController();
 
@@ -79,7 +79,7 @@ class _UserMapState extends State<UserMap> {
                   if (widget.isViewOnly) {
                     return;
                   }
-                  // ref.watch(userMapProvider.notifier).update([tapLocation]);
+                  // ref.watch(CustomMapProvider.notifier).update([tapLocation]);
                   //markers = [];
                   setState((){
                     markers.clear();

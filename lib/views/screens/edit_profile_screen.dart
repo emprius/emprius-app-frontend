@@ -13,7 +13,7 @@ import '../widgets/common/custom_text_button.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
 import '../widgets/common/bottom_image_selector.dart';
-import '../widgets/user_map.dart';
+import '../widgets/custom_map.dart';
 import '../widgets/profile_image_widget.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -192,7 +192,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           border: Border.all(color: Colors.black26),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: UserMap(),
+        child: CustomMap(),
       ),
     ],
   );

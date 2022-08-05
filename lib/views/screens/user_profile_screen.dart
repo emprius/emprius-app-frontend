@@ -4,7 +4,7 @@ import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_drawer.dart';
-import 'package:empriusapp/views/widgets/user_map.dart';
+import 'package:empriusapp/views/widgets/custom_map.dart';
 import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +19,8 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
-  final _mapController = UserMapController();
+  final _customMapCtrl = CustomMapController(
+  );
 
   @override
   void initState() {
@@ -125,7 +126,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: UserMap(controller: _mapController, isViewOnly: true),
+            child: CustomMap(controller: _customMapCtrl, isViewOnly: true),
           ),
         ],
       );

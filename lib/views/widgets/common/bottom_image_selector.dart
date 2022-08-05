@@ -25,27 +25,32 @@ class BottomImageSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200.0,
+      height: 100.0,
       width: 100.0,
       margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
+        //horizontal: 50,
+        vertical: 20,
       ),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Text("Tria el teu avatar"),
+            const Text("Tria el teu avatar:"),
             const SizedBox( height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
+                  iconSize: 40.0,
+                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.camera);
                   }, icon: const Icon(Icons.camera),
                   tooltip: "Feste una foto",
                 ),
+                SizedBox(width: 10.0),
                 IconButton(
+                  iconSize: 40.0,
+                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.gallery);
                   }, icon: const Icon(Icons.image),

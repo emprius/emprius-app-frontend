@@ -101,7 +101,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           activeColor: Colors.blue,
                           onChanged: (value) {
                             setState(() {
-                              // user!.isActive = value;
+                              //user.isActive = value;
                             });
                           }),
                       const SizedBox(height: 6.0),

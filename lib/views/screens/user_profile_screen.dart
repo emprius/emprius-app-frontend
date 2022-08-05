@@ -1,5 +1,6 @@
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/views/widgets/common/custom_marker.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
@@ -28,7 +29,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     _customMapCtrl.markers = [
       Marker(
         point: newLatLng,
-        builder: (ctx) => const Icon(Icons.location_pin),
+        builder: (ctx) => UserMarker(const Icon(Icons.location_pin)),
       ),];
   }
 
@@ -42,7 +43,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
 
-    //TODO DRY:
+    //TODO STUDY:
     ref.listen<LatLng>(userProvider.select(
             (user) => user.location), (LatLng? previous, LatLng next) {
       _setMarkers(next);

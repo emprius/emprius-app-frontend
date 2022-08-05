@@ -2,6 +2,7 @@ import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -9,12 +10,15 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import '../../utils/form_validator.dart';
 import '../../services/local_storage.dart';
+import '../widgets/common/custom_marker.dart';
 import '../widgets/common/custom_text_button.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
 import '../widgets/common/bottom_image_selector.dart';
 import '../widgets/custom_map.dart';
 import '../widgets/profile_image_widget.dart';
+import 'package:latlong2/latlong.dart';
+
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   final EditProfileArguments args;
@@ -32,10 +36,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
+  late bool isActive = true;
   final _customMapCtrl =
       CustomMapController(validator: FormValidator.locationNullValidator);
-
-  late bool isActive = true;
 
   @override
   void dispose() {
@@ -48,9 +51,20 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   bool _isHidden = true;
 
+
+  void _setMarkers(LatLng newLatLng){
+    _customMapCtrl.markers = [
+      Marker(
+        point: newLatLng,
+        builder: (ctx) => UserMarker(const Icon(Icons.location_pin)),
+      ),];
+  }
+
+
   @override
   void initState() {
     user = widget.args.user;
+    _setMarkers( ref.read(userProvider.notifier).state.location);
     _nameCtrl.text = user.name;
     _emailCtrl.text = user.email;
     super.initState();
@@ -101,7 +115,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           activeColor: Colors.blue,
                           onChanged: (value) {
                             setState(() {
-                              //user.isActive = value;
+                              ref.watch(userProvider.notifier).updateUser(user.copy(isActive: value));
                             });
                           }),
                       const SizedBox(height: 6.0),
@@ -178,6 +192,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           email: _emailCtrl.text,
                           location: _customMapCtrl.selectedLocation!,
                         ));
+
+                    //TODO CHECK MSITAKE HERE:
                     Navigator.of(context).pop();
                   },
                 ),

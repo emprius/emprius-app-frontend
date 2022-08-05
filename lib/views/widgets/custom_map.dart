@@ -9,7 +9,6 @@ import '../../utils/constants.dart';
 class CustomMapController {
   LatLng? selectedLocation;
   List<Marker>? markers;
-
   Function()? refresh;
 
   /// Function to run when use validate function.
@@ -52,46 +51,44 @@ class _CustomMapState extends State<CustomMap> {
   @override
   initState() {
     if(widget.controller != null) {
-      markers = widget.controller?.markers ?? [];// widget.controller!.markers! = markers;
       widget.controller!.refresh = _refresh;
     }
-    //mapController = widget.controller;
   }
 
   @override
   Widget build(BuildContext context) {
-
+    if(widget.controller?.markers != null ) markers = widget.controller!.markers!;
     return Column(
       children: [
         if(widget.controller?.errorMsg?.isNotEmpty ?? false)
-          Text(widget.controller!.errorMsg!, style: TextStyle(color: Colors.red),),
+          Text(
+            widget.controller!.errorMsg!,
+            style: const TextStyle(color: Colors.red),
+          ),
         Flexible(
           child: FlutterMap(
             mapController: mapController,
 
             options: MapOptions(
-
-                center: LatLng(41.695384, 2.492793),
+              //TODO: ADD DYNAMIC CENTER
+                center: widget.controller?.markers?.first.point ?? LatLng(41.695384, 2.492793),
                 zoom: 15.0,
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
-                  if (widget.isViewOnly) {
-                    return;
-                  }
-                  // ref.watch(CustomMapProvider.notifier).update([tapLocation]);
-                  //markers = [];
-                  setState((){
-                    markers.clear();
-                    markers.add(
-                      Marker(
-                        point: tapLocation,
-                        builder: (ctx) => const Icon(Icons.location_pin),
-                      ),
-                    );
-                  });
+                  if (widget.isViewOnly) return;
 
+                  markers = [
+                    Marker(
+                      point: tapLocation,
+                      builder: (ctx) => const Icon(Icons.location_pin),
+                    ),
+                  ];
+
+                  widget.controller?.markers = markers;
                   widget.controller?.selectedLocation = tapLocation;
+
+                  setState((){});
                 }
             ),
             layers: [

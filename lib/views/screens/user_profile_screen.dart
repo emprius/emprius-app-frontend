@@ -7,6 +7,7 @@ import 'package:empriusapp/views/widgets/user_drawer.dart';
 import 'package:empriusapp/views/widgets/custom_map.dart';
 import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/user_model.dart';
 import '../../utils/constants.dart';
@@ -19,8 +20,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
-  final _customMapCtrl = CustomMapController(
-  );
+  final _customMapCtrl = CustomMapController();
 
   @override
   void initState() {
@@ -30,6 +30,11 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
+    _customMapCtrl.markers = [
+      Marker(
+        point: user.location,
+        builder: (ctx) => const Icon(Icons.location_pin),
+      ),];
 
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),
@@ -66,7 +71,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                   const SizedBox(height: 6.0),
                   Text('EMPS: ${user.emps}'),
                 ]),
-                SizedBox(width: 6.0),
+                const SizedBox(width: 6.0),
                 Column(children: [
                   Switch(
                       value: user.isActive,
@@ -120,7 +125,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
           const SizedBox(height: 6.0),
           Container(
             width: 300,
-            height: 150,
+            height: 300,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black26),

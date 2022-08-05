@@ -32,6 +32,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
+  final _customMapCtrl =
+      CustomMapController(validator: FormValidator.locationNullValidator);
+
   late bool isActive = true;
 
   @override
@@ -59,7 +62,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       child: Scaffold(
         appBar: UserAppbar("Editar perfil"),
         body: SingleChildScrollView(
-          padding:  const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           physics: const BouncingScrollPhysics(),
           child: Form(
             key: _formKey,
@@ -75,47 +78,48 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         showModalBottomSheet(
                             context: context,
                             builder: ((builder) => BottomImageSelector((image) {
-                              if (image != null) {
-                                user = user.copy(avatar: image.path);
-                                setState(() {});
-                              }
-                              Navigator.pop(context);
-                            })));
+                                  if (image != null) {
+                                    user = user.copy(avatar: image.path);
+                                    setState(() {});
+                                  }
+                                  Navigator.pop(context);
+                                })));
                       },
                       child: SizedBox(
                         height: 100,
                         width: 100,
                         child: ProfileImage(
-                            avatar: user.avatar,
-                        showBadge: true,
+                          avatar: user.avatar,
+                          showBadge: true,
                         ),
                       ),
                     ),
-                    Column(
-                        children:[
-                          Switch(
-                              value: user.isActive,
-                              activeTrackColor: Colors.white10,
-                              activeColor: Colors.blue,
-                              onChanged: (value) {
-                                setState(() {
-                                  // user!.isActive = value;
-                                });
-                              }),
-                          const SizedBox(height: 6.0),
-                          Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
-                        ]),
+                    Column(children: [
+                      Switch(
+                          value: user.isActive,
+                          activeTrackColor: Colors.white10,
+                          activeColor: Colors.blue,
+                          onChanged: (value) {
+                            setState(() {
+                              // user!.isActive = value;
+                            });
+                          }),
+                      const SizedBox(height: 6.0),
+                      Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
+                    ]),
                   ],
                 ),
                 const SizedBox(height: 20.0),
                 CustomTextField(
                   controller: _nameCtrl,
-                  validator: FormValidator.nameValidator, labelText: "Nom d'usuari",
+                  validator: FormValidator.nameValidator,
+                  labelText: "Nom d'usuari",
                 ),
                 const SizedBox(height: 24),
                 CustomTextField(
                   controller: _emailCtrl,
-                  validator: FormValidator.emailValidator, labelText: "E-mail",
+                  validator: FormValidator.emailValidator,
+                  labelText: "E-mail",
                 ),
                 const SizedBox(height: 20.0),
                 CustomTextField(
@@ -136,11 +140,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 const SizedBox(height: 20.0),
                 CustomTextField(
                   controller: _cPasswordCtrl,
-                  validator: (value) =>
-                      FormValidator.confirmPasswordValidator(
-                        value,
-                        _passwordCtrl.text,
-                      ),
+                  validator: (value) => FormValidator.confirmPasswordValidator(
+                    value,
+                    _passwordCtrl.text,
+                  ),
                   labelText: 'Confirmar mot de pas',
                   obscureText: _isHidden,
                   suffixIcon: IconButton(
@@ -154,22 +157,28 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                buildLocation(user),
+                selectLocationMap(user),
                 const SizedBox(height: 24),
                 CustomTextButton(
                   text: 'Desar',
                   onClicked: () async {
-                    if (!_formKey.currentState!.validate()) return;
+                    if (!_formKey.currentState!.validate() &&
+                        !_customMapCtrl.validate()) {
+                      return;
+                    }
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Canvis desats')),
                     );
 
-                    ref.watch(userProvider.notifier).updateUser(user.copy(
+                    ref
+                        .watch(userProvider.notifier)
+                        .updateUser(user.copy(
                           name: _nameCtrl.text,
                           email: _emailCtrl.text,
-                        )).whenComplete(() => Navigator.of(context).pop());
-
+                          location: _customMapCtrl.selectedLocation!,
+                        ))
+                        .whenComplete(() => Navigator.of(context).pop());
                   },
                 ),
               ],
@@ -180,20 +189,22 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );
   }
 
-  Widget buildLocation(UserModel user)=>Column(
-    children: [
-      const Text('Localitzacio actual:'),
-      const SizedBox(height: 6.0),
-      Container(
-        width: 300,
-        height: 150,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black26),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: CustomMap(),
-      ),
-    ],
-  );
+  Widget selectLocationMap(UserModel user) => Column(
+        children: [
+          const Text('Cambiar localitzacio:'),
+          const SizedBox(height: 6.0),
+          Container(
+            width: 300,
+            height: 300,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black26),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: CustomMap(
+                controller: _customMapCtrl
+            ),
+          ),
+        ],
+      );
 }

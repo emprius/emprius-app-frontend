@@ -11,6 +11,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/user_model.dart';
 import '../../utils/constants.dart';
+import 'package:latlong2/latlong.dart';
+
 
 class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -22,19 +24,30 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
   final _customMapCtrl = CustomMapController();
 
+  void _setMarkers(LatLng newLatLng){
+    _customMapCtrl.markers = [
+      Marker(
+        point: newLatLng,
+        builder: (ctx) => const Icon(Icons.location_pin),
+      ),];
+  }
+
   @override
   void initState() {
+    _setMarkers( ref.read(userProvider.notifier).state.location);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
-    _customMapCtrl.markers = [
-      Marker(
-        point: user.location,
-        builder: (ctx) => const Icon(Icons.location_pin),
-      ),];
+
+    //TODO DRY:
+    ref.listen<LatLng>(userProvider.select(
+            (user) => user.location), (LatLng? previous, LatLng next) {
+      _setMarkers(next);
+      _customMapCtrl.flutterMapController?.move(next, 15.0);
+    });
 
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),

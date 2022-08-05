@@ -10,6 +10,7 @@ class CustomMapController {
   LatLng? selectedLocation;
   List<Marker>? markers;
   Function()? refresh;
+  MapController? flutterMapController;
 
   /// Function to run when use validate function.
   String? Function(LatLng? value)? validator;
@@ -44,20 +45,28 @@ class CustomMap extends StatefulWidget {
 
 class _CustomMapState extends State<CustomMap> {
   late List<Marker> markers = [];
-  MapController mapController = MapController();
+  MapController _mapController = MapController();
 
   void _refresh() => setState((){});
+
+  double _defaultZoom = 15.0;
 
   @override
   initState() {
     if(widget.controller != null) {
       widget.controller!.refresh = _refresh;
+      widget.controller!.flutterMapController = _mapController;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.controller?.markers != null ) markers = widget.controller!.markers!;
+
+    if(widget.controller?.markers != null ) {
+      markers = widget.controller!.markers!;
+      // mapController.move(widget.controller!.markers!.first.point, _defaultZoom);
+    }
+
     return Column(
       children: [
         if(widget.controller?.errorMsg?.isNotEmpty ?? false)
@@ -67,12 +76,11 @@ class _CustomMapState extends State<CustomMap> {
           ),
         Flexible(
           child: FlutterMap(
-            mapController: mapController,
-
+            mapController: _mapController,
             options: MapOptions(
               //TODO: ADD DYNAMIC CENTER
                 center: widget.controller?.markers?.first.point ?? LatLng(41.695384, 2.492793),
-                zoom: 15.0,
+                zoom: _defaultZoom,
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {

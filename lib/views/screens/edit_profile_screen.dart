@@ -171,14 +171,14 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       const SnackBar(content: Text('Canvis desats')),
                     );
 
-                    ref
+                    await ref
                         .watch(userProvider.notifier)
                         .updateUser(user.copy(
                           name: _nameCtrl.text,
                           email: _emailCtrl.text,
                           location: _customMapCtrl.selectedLocation!,
-                        ))
-                        .whenComplete(() => Navigator.of(context).pop());
+                        ));
+                    Navigator.of(context).pop();
                   },
                 ),
               ],

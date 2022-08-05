@@ -13,7 +13,7 @@ class UserModel {
   final int rating;
   final int emps;
 
-  const UserModel({
+  UserModel({
     required this.id,
     this.name = "",
     required this.email,

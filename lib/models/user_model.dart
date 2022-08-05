@@ -7,7 +7,7 @@ class UserModel {
   final String email;
   final String password;
   final String invitation;
-  final LatLng? location;
+  final LatLng location;
   final bool isActive;
   final String avatar;
   final int rating;
@@ -19,7 +19,7 @@ class UserModel {
     required this.email,
     required this.password,
     required this.invitation,
-    this.location,
+    required this.location,
     this.isActive = true,
     this.avatar = "",
     this.rating = 0,
@@ -70,7 +70,7 @@ class UserModel {
         'email': email,
         'password': password,
         'invitation': invitation,
-        'location': location?.toJson(),
+        'location': location.toJson(),
         'avatar': avatar,
         'rating': rating,
         'isActive': isActive,

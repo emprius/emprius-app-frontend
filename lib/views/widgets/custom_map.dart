@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../utils/constants.dart';
-import 'common/custom_marker.dart';
+import 'common/user_marker.dart';
 
 class CustomMapController {
   LatLng? selectedLocation;

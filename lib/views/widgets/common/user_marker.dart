@@ -7,6 +7,6 @@ class UserMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(Icons.pin_drop_rounded, color: Colors.orangeAccent, size: 60,);
+    return const Icon(Icons.location_on_sharp, color: Colors.purple, size: 45.0 );
   }
 }

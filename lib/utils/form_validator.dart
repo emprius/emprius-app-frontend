@@ -20,6 +20,24 @@ class FormValidator{
     return null;
   }
 
+  static String? emptyPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return Constants.emptyPasswordInputError;
+    }
+    return null;
+  }
+
+  static String? optionalPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    } else {
+      if (value.length < 8) {
+        return Constants.shortPasswordInputError;
+      }
+      return null;
+    }
+  }
+
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return Constants.emptyPasswordInputError;
@@ -30,12 +48,10 @@ class FormValidator{
   }
 
   static String? confirmPasswordValidator(String? value, String inputPw) {
-    if (value == null || value.isEmpty) {
-      return Constants.emptyPasswordInputError;
-    } else if (value == inputPw.trim()) {
+    if (value == inputPw.trim()) {
       return null;
     }
-      return Constants.invalidConfirmPwError;
+    return Constants.invalidConfirmPwError;
   }
 
   static String? invitationValidator(String? value) {

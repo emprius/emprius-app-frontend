@@ -53,7 +53,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                         tool: ToolModel(
                           id: tool.id,
                           title: tool.title,
-                          description: tool.description,
+                          description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport,
                         )
                     ),
                   ),

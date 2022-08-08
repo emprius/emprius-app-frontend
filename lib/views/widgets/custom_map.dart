@@ -7,46 +7,86 @@ import 'package:latlong2/latlong.dart';
 import '../../utils/constants.dart';
 import 'common/user_marker.dart';
 
-class CustomMapController {
+
+/// Controller for [EmpriusMap] widget
+class EmpriusMapController {
+
+  /// Selected location on the map onTap.
+  ///
+  /// Disabled if empriusMap [isViewOnly] is true.
   LatLng? selectedLocation;
+
+  /// List of Markers to paint or already painted on the map
   List<Marker>? markers;
+
+  /// Function that basically run setState on the widget
   Function()? refresh;
+
+  /// Controller used to control the inner flutter_map widget.
+  ///
+  /// It has functions like, move, rotate, zoom, etc..
   MapController? flutterMapController;
 
-  /// Function to run when use validate function.
+  /// Function to run when [validate] function is called.
+  ///
+  /// Should return null if no error or a error message string
+  /// if error.
+  ///
+  /// It pass selected position when onTap
   String? Function(LatLng? value)? validator;
-  String? errorMsg;
 
-  CustomMapController(
-      {this.selectedLocation,
-        this.validator,
-        this.markers});
+  /// Error mesage to show when validate function fails
+  String? _errorMsg;
+
+  get errorMsg => _errorMsg;
+
+  EmpriusMapController({
+    this.selectedLocation,
+    this.validator,
+    this.markers
+  });
 
   /// Run the validator and return true if validator is not null
   bool validate() {
-    var res = validator!(selectedLocation);
-    errorMsg = res;
-    if (refresh != null) refresh!();
-    if (res == null) {
+    if(validator != null) {
+      var res = validator!(selectedLocation);
+      _errorMsg = res;
+      if (refresh != null) refresh!();
+      if (res == null) {
+        return true;
+      }
+      return false;
+    } else {
       return true;
     }
-    return false;
   }
 }
 
-class CustomMap extends StatefulWidget {
-  final CustomMapController? controller;
+/// Widget that show a flutter_map.
+///
+/// It can get a [controller] used for validation purposes or to extract/modify
+/// selected points on the map.
+class EmpriusMap extends StatefulWidget {
+  final EmpriusMapController? controller;
   final bool isViewOnly;
 
-  const CustomMap({Key? key, this.controller, this.isViewOnly = false}) : super(key: key);
+
+  final LatLng? initialCenter;
+
+  EmpriusMap({
+    Key? key,
+    this.controller,
+    this.isViewOnly = false,
+    this.initialCenter
+  }) : super(key: key);
 
   @override
-  _CustomMapState createState() => _CustomMapState();
+  _EmpriusMapState createState() => _EmpriusMapState();
 }
 
-class _CustomMapState extends State<CustomMap> {
+class _EmpriusMapState extends State<EmpriusMap> {
   late List<Marker> markers = [];
-  MapController _mapController = MapController();
+  MapController _flutterMapController = MapController();
 
   void _refresh() => setState((){});
 
@@ -56,7 +96,7 @@ class _CustomMapState extends State<CustomMap> {
   initState() {
     if(widget.controller != null) {
       widget.controller!.refresh = _refresh;
-      widget.controller!.flutterMapController = _mapController;
+      widget.controller!.flutterMapController = _flutterMapController;
     }
   }
 
@@ -77,22 +117,21 @@ class _CustomMapState extends State<CustomMap> {
           ),
         Flexible(
           child: FlutterMap(
-            mapController: _mapController,
+            mapController: _flutterMapController,
             options: MapOptions(
               //TODO: ADD DYNAMIC CENTER
-                center: widget.controller?.markers?.first.point ?? LatLng(41.695384, 2.492793),
+                center: widget.initialCenter ?? LatLng(41.695384, 2.492793),
                 zoom: _defaultZoom,
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
                   if (widget.isViewOnly) return;
-
                   markers = [
                     Marker(
-                      point: tapLocation,
-                      builder: (ctx) => UserMarker(
-                        const Icon(Icons.pin_drop_sharp)
-                      )
+                        point: tapLocation,
+                        builder: (ctx) => UserMarker(
+                            const Icon(Icons.pin_drop_sharp)
+                        )
                     ),
                   ];
                   widget.controller?.markers = markers;

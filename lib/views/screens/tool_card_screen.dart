@@ -9,7 +9,6 @@ import '../widgets/common/rating_stars.dart';
 
 class ToolCardScreen extends ConsumerStatefulWidget {
   final ToolModel? tool;
-
   const ToolCardScreen({Key? key, this.tool}) : super(key: key);
 
   @override
@@ -32,8 +31,8 @@ class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
     return Scaffold(
       appBar: UserAppbar("Eina"),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: (){
-            Navigator.pushNamed(context, toolAskFormScreenRoute);
+          onPressed: () async{
+            await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(widget.tool!));
           },
           label: Text("Demana"),
       ),

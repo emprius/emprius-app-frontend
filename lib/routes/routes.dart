@@ -5,6 +5,7 @@ import 'package:empriusapp/views/screens/home_screen.dart';
 import 'package:empriusapp/views/screens/login_screen.dart';
 import 'package:empriusapp/views/screens/register_screen.dart';
 import 'package:empriusapp/views/screens/user_profile_screen.dart';
+import '../models/tool_model.dart';
 import '../models/user_model.dart';
 import '../views/screens/add_tool_screen.dart';
 import '../views/screens/ask_tool_form_screen.dart';
@@ -53,7 +54,8 @@ class Routes {
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
       case toolAskFormScreenRoute:
-        return MaterialPageRoute(builder: (_)=> AskToolFormScreen());
+        return MaterialPageRoute(
+            builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
     }
   }
 }
@@ -61,4 +63,9 @@ class Routes {
 class EditProfileArguments{
   UserModel user;
   EditProfileArguments(this.user);
+}
+
+class ToolDetailArguments{
+  ToolModel tool;
+  ToolDetailArguments(this.tool);
 }

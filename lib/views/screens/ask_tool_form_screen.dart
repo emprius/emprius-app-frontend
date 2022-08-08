@@ -1,18 +1,29 @@
+import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/views/widgets/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../models/tool_model.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
 
-class AskToolFormScreen extends StatefulWidget {
-  const AskToolFormScreen({Key? key}) : super(key: key);
+class AskToolFormScreen extends ConsumerStatefulWidget {
+  final ToolDetailArguments args;
+  const AskToolFormScreen(this.args, {Key? key}) : super(key: key);
 
   @override
-  State<AskToolFormScreen> createState() => _AskToolFormScreenState();
+  createState() => _AskToolFormScreenState();
 }
 
-class _AskToolFormScreenState extends State<AskToolFormScreen> {
+class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   DateTime date = DateTime(2022, 8, 1);
+  late ToolModel tool;
+
+  @override
+  void initState() {
+    tool = widget.args.tool;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +38,7 @@ class _AskToolFormScreenState extends State<AskToolFormScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Demana la eina XXXXX:'),
+              Text('Demana la eina ${tool.title}'),
               SizedBox(height: 20.0),
               CustomTextField(
                 //controller: _petitionCtrl,

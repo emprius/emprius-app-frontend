@@ -27,7 +27,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
   final _customMapCtrl =
-      CustomMapController(validator: FormValidator.locationNullValidator);
+      EmpriusMapController(validator: FormValidator.locationNullValidator);
 
   late bool isActive = true;
   File? _avatar;
@@ -201,7 +201,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: CustomMap(
+            child: EmpriusMap(
               controller: _customMapCtrl,
             ),
           ),

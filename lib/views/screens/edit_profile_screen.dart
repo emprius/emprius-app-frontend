@@ -38,7 +38,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
   final _customMapCtrl =
-      CustomMapController(validator: FormValidator.locationNullValidator);
+      EmpriusMapController(validator: FormValidator.locationNullValidator);
 
   @override
   void dispose() {
@@ -237,7 +237,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: CustomMap(
+            child: EmpriusMap(
                 controller: _customMapCtrl
             ),
           ),

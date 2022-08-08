@@ -70,7 +70,6 @@ class EmpriusMap extends StatefulWidget {
   final EmpriusMapController? controller;
   final bool isViewOnly;
 
-
   final LatLng? initialCenter;
 
   EmpriusMap({

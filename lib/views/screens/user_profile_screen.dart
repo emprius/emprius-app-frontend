@@ -23,7 +23,7 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
-  final _customMapCtrl = CustomMapController();
+  final _customMapCtrl = EmpriusMapController();
 
   void _setMarkers(LatLng newLatLng){
     _customMapCtrl.markers = [
@@ -145,7 +145,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: CustomMap(controller: _customMapCtrl, isViewOnly: true),
+            child: EmpriusMap(controller: _customMapCtrl, isViewOnly: true, initialCenter: user.location,),
           ),
         ],
       );

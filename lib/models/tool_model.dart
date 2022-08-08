@@ -9,12 +9,14 @@ class ToolModel {
   final int rating;
   final int cost;
 
+  //final bool askWithFee;
   //final int startDate;
   //final int endDate;
   //final int estimatedValue;
   //final int height;
   //final int width;
   //final int length;
+  //fina int maxDays;
   //List <int> categoryIds ?
   //List<CategoryModel>categories;
   //List<TransportNeeded>transport; ?

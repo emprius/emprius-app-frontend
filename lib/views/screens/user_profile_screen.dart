@@ -10,6 +10,7 @@ import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../controllers/emprius_map_controller.dart';
 import '../../models/user_model.dart';
 import '../../utils/constants.dart';
 import 'package:latlong2/latlong.dart';

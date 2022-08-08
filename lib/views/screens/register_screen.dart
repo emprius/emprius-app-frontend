@@ -8,6 +8,7 @@ import 'package:empriusapp/views/widgets/custom_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
+import '../../controllers/emprius_map_controller.dart';
 import '../widgets/common/bottom_image_selector.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/profile_image_widget.dart';

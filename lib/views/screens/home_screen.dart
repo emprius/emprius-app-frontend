@@ -2,24 +2,30 @@ import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_drawer.dart';
 import 'package:empriusapp/views/widgets/emprius_map.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/user_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
+
     return Scaffold(
       appBar: UserAppbar("Home"),
       drawer: UserDrawer(),
       body: Column(
           children: [
             Text("Home Screen"),
-            Expanded(child: EmpriusMap()),
+            Expanded(child: EmpriusMap(
+              initialCenter: user.location,
+            )),
         ],
       ),
     );

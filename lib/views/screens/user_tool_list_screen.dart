@@ -17,9 +17,13 @@ class UserToolList extends ConsumerStatefulWidget {
 }
 
 class _UserToolListState extends ConsumerState<UserToolList> {
+
   @override
   Widget build(BuildContext context) {
     final tools = ref.watch(toolListProvider);
+    _onSelected(dynamic val){
+      setState(()=> tools.removeWhere((tool)=>tool == val));
+    }
 
     return Scaffold(
       appBar: UserAppbar("Les meves eines"),
@@ -42,9 +46,18 @@ class _UserToolListState extends ConsumerState<UserToolList> {
               leading: Switch(value: tool.isAvailable, onChanged: (value) {  },),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
+                  children: [
                     Icon(Icons.edit),
-                    Icon(Icons.delete)
+                    PopupMenuButton(
+                      onSelected: _onSelected,
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: tool,
+                            child: Text("Borrar"),
+                          ),
+                        ],
+                        icon: Icon(Icons.delete),
+                    ),
                   ]),
               onTap: () {
                 Navigator.of(context).push(

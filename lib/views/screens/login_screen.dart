@@ -1,6 +1,10 @@
 import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/utils/form_validator.dart';
+import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/common/custom_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,96 +14,91 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  GlobalKey<FormState> loginFormKey = GlobalKey();
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  bool _isHidden = true;
+
+  @override
+  void dispose() {
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(30),
           child: Form(
-            key: loginFormKey,
+            key: _formKey,
             child: Column(
               children: [
                 const Text('Benvinguda a Emprius app'),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: TextFormField(
-                      controller: emailCtrl,
-                      decoration: const InputDecoration(
-                        labelText: "e-mail",
-                      ),
-                      validator: (value) {
-                        String pattern =
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-                        RegExp regExp = RegExp(pattern);
-                        if (value?.length == 0) {
-                          return "E-mail is needed!";
-                        } else if (!regExp.hasMatch(value.toString())) {
-                          return "Incorrect e-mail!";
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                    )
+                    child: CustomTextField(
+                      controller: _emailCtrl,
+                      validator: FormValidator.emailValidator,
+                      labelText: "E-mail",
+                    ),
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: TextFormField(
-                      controller: passwordCtrl,
-                      decoration:
-                      const InputDecoration(
-                        labelText: "password",
+                    child: CustomTextField(
+                      controller: _passwordCtrl,
+                      validator: FormValidator.passwordValidator,
+                      labelText: 'Mot de pas',
+                      obscureText: _isHidden,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            _isHidden ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isHidden = !_isHidden;
+                          });
+                        },
                       ),
-                      obscureText: true,
-                    )
+                    ),
                 ),
                 SizedBox(
                     height: 40,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            elevation: 4,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(30)
-                                )
-                            )
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, homeScreenRoute);
-                        },
-                        child: const Text("Entra a l'app!")
-                    )
+                    child: CustomTextButton(
+                      text: "Entra a l'app!",
+                      onClicked: () {
+                        if (!_formKey.currentState!.validate()) return;
+                        Navigator.pushReplacementNamed(context, homeScreenRoute);
+                      },
+                    ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: RichText(
-                            text: TextSpan(
-                                text: "¿No estas registrada? ",
-                                style: const TextStyle(
-                                  color: Colors.black26,
-                                ),
-                                children: [
-                                  TextSpan(
-                                      text: "Registra't",
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          decoration:
-                                          TextDecoration.underline
-                                      ),
-                                      recognizer: TapGestureRecognizer()..onTap = () {
-                                        Navigator.pushNamed(context, registerScreenRoute);
-                                      }
-                                  ),
-                                ],
-                            ),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: RichText(
+                      text: TextSpan(
+                        text: "¿No estas registrada? ",
+                        style: const TextStyle(
+                          color: Colors.black26,
                         ),
+                        children: [
+                          TextSpan(
+                              text: "Registra't",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(
+                                      context, registerScreenRoute);
+                                }),
+                        ],
+                      ),
                     ),
+                  ),
                 ),
               ],
             ),

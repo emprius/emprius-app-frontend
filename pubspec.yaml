@@ -29,7 +29,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # map
+  flutter_map: ^2.0.0
+
+  # provider
+  flutter_riverpod: ^2.0.0-dev.9
+
+  # persist data locally
+  shared_preferences: ^2.0.15
+
+  # pick image
   image_picker: ^0.8.3
+
+  # store image
+  path_provider: ^2.0.1
+
+  # loading image
+  flutter_spinkit: ^5.1.0
+
+  # carousel slider
+  carousel_slider: ^4.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

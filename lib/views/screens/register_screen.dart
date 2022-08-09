@@ -3,8 +3,9 @@ import 'package:empriusapp/models/user_model.dart';
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
 import 'package:empriusapp/utils/constants.dart';
+import 'package:empriusapp/utils/map_validator.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/custom_map.dart';
+import 'package:empriusapp/views/widgets/emprius_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';
@@ -21,14 +22,14 @@ class RegisterScreen extends ConsumerStatefulWidget {
 }
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
+  final _mapValidator = MapValidator(validator: FormValidator.locationNullValidator);
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
   final _invitationCtrl = TextEditingController();
-  final _customMapCtrl =
-      EmpriusMapController(validator: FormValidator.locationNullValidator);
+  final _customMapCtrl =  EmpriusMapController();
 
   late bool isActive = true;
   File? _avatar;
@@ -159,7 +160,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     text: 'Finalitza registre',
                     onClicked: () {
                       if (!_formKey.currentState!.validate() &&
-                          !_customMapCtrl.validate()) {
+                          !_mapValidator.validate()) {
                         return;
                       }
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -203,7 +204,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: EmpriusMap(
-              controller: _customMapCtrl,
+              empriusMapController: _customMapCtrl,
             ),
           ),
         ],

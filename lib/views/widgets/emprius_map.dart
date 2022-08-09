@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../controllers/emprius_map_controller.dart';
+import '../../utils/map_validator.dart';
 import 'common/user_marker.dart';
 
 
@@ -10,13 +11,15 @@ import 'common/user_marker.dart';
 /// It can get a [controller] used for validation purposes or to extract/modify
 /// selected points on the map.
 class EmpriusMap extends StatefulWidget {
-  final EmpriusMapController? controller;
+  final EmpriusMapController? empriusMapController;
+  final MapValidator? mapValidator;
   final bool isViewOnly;
   final LatLng? initialCenter;
 
   EmpriusMap({
     Key? key,
-    this.controller,
+    this.empriusMapController,
+    this.mapValidator,
     this.isViewOnly = false,
     this.initialCenter
   }) : super(key: key);
@@ -35,25 +38,27 @@ class _EmpriusMapState extends State<EmpriusMap> {
 
   @override
   initState() {
-    if(widget.controller != null) {
-      widget.controller!.refresh = _refresh;
-      widget.controller!.flutterMapController = _flutterMapController;
+    if(widget.empriusMapController != null) {
+      widget.empriusMapController!.flutterMapController = _flutterMapController;
+    }
+
+    if(widget.mapValidator !=null){
+      widget.mapValidator!.refresh = _refresh;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-    if(widget.controller?.markers != null ) {
-      markers = widget.controller!.markers!;
+    if(widget.empriusMapController?.markers != null ) {
+      markers = widget.empriusMapController!.markers!;
       // mapController.move(widget.controller!.markers!.first.point, _defaultZoom);
     }
 
     return Column(
       children: [
-        if(widget.controller?.errorMsg?.isNotEmpty ?? false)
+        if(widget.mapValidator?.errorMsg?.isNotEmpty ?? false)
           Text(
-            widget.controller!.errorMsg!,
+            widget.mapValidator!.errorMsg!,
             style: const TextStyle(color: Colors.red),
           ),
         Flexible(
@@ -75,8 +80,9 @@ class _EmpriusMapState extends State<EmpriusMap> {
                         )
                     ),
                   ];
-                  widget.controller?.markers = markers;
-                  widget.controller?.selectedLocation = tapLocation;
+                  widget.empriusMapController?.markers = markers;
+                  widget.empriusMapController?.selectedLocation = tapLocation;
+                  widget.mapValidator?.selectedLocation = tapLocation;
 
                   setState((){});
                 }

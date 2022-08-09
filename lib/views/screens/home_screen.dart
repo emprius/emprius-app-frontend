@@ -1,6 +1,6 @@
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_drawer.dart';
-import 'package:empriusapp/views/widgets/custom_map.dart';
+import 'package:empriusapp/views/widgets/emprius_map.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

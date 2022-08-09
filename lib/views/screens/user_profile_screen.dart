@@ -5,7 +5,7 @@ import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:empriusapp/views/widgets/user_drawer.dart';
-import 'package:empriusapp/views/widgets/custom_map.dart';
+import 'package:empriusapp/views/widgets/emprius_map.dart';
 import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -146,7 +146,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: EmpriusMap(controller: _customMapCtrl, isViewOnly: true, initialCenter: user.location,),
+            child: EmpriusMap(empriusMapController: _customMapCtrl, isViewOnly: true, initialCenter: user.location,),
           ),
         ],
       );

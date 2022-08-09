@@ -7,12 +7,13 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/emprius_map_controller.dart';
 import '../../utils/form_validator.dart';
+import '../../utils/map_validator.dart';
 import '../widgets/common/user_marker.dart';
 import '../widgets/common/custom_text_button.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
 import '../widgets/common/bottom_image_selector.dart';
-import '../widgets/custom_map.dart';
+import '../widgets/emprius_map.dart';
 import '../widgets/profile_image_widget.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -28,13 +29,13 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   late UserModel user;
+  final _mapValidator = MapValidator(validator: FormValidator.locationNullValidator);
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _cPasswordCtrl = TextEditingController();
-  final _customMapCtrl =
-      EmpriusMapController(validator: FormValidator.locationNullValidator);
+  final _customMapCtrl = EmpriusMapController();
 
   @override
   void dispose() {
@@ -234,7 +235,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: EmpriusMap(
-                controller: _customMapCtrl
+                empriusMapController: _customMapCtrl
             ),
           ),
         ],

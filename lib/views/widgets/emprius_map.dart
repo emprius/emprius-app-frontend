@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../controllers/emprius_map_controller.dart';
 import '../../utils/map_validator.dart';
-import 'common/user_marker.dart';
+import 'user_marker.dart';
 
 
 /// Widget that show a flutter_map.
@@ -75,10 +75,10 @@ class _EmpriusMapState extends State<EmpriusMap> {
                   markers = [
                     Marker(
                         point: tapLocation,
-                        builder: (ctx) => UserMarker(
-                            const Icon(Icons.pin_drop_sharp)
-                        )
-                    ),
+                        builder: (ctx) => Container(
+                          child: UserMarker()
+                          ),
+                        ),
                   ];
                   widget.empriusMapController?.markers = markers;
                   widget.empriusMapController?.selectedLocation = tapLocation;

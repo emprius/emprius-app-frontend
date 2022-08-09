@@ -1,6 +1,6 @@
 import 'package:empriusapp/providers/user_provider.dart';
 import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/widgets/common/user_marker.dart';
+import 'package:empriusapp/views/widgets/user_marker.dart';
 import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/views/widgets/common/rating_stars.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
@@ -30,10 +30,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     _customMapCtrl.markers = [
       Marker(
         point: newLatLng,
-        builder: (ctx) => UserMarker(
-          Icon(Icons.location_on_sharp),
-        ),
-      ),];
+        builder: (ctx) => UserMarker(),
+        ),];
   }
 
   @override

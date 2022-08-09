@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UserMarker extends StatelessWidget {
-  Icon icon;
-  UserMarker(this.icon);
+  //Icon icon;
+  //UserMarker(this.icon);
 
   @override
   Widget build(BuildContext context) {

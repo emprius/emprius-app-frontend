@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/emprius_map_controller.dart';
 import '../../utils/form_validator.dart';
 import '../../utils/map_validator.dart';
-import '../widgets/common/user_marker.dart';
+import '../widgets/user_marker.dart';
 import '../widgets/common/custom_text_button.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
@@ -53,9 +53,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _customMapCtrl.markers = [
       Marker(
         point: newLatLng,
-        builder: (ctx) => UserMarker(
-          Icon(Icons.location_on_sharp),
-        ),
+        builder: (ctx) => UserMarker(),
       ),];
   }
 

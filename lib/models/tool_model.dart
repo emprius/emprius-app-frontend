@@ -4,24 +4,20 @@ class ToolModel {
   final String image;
   final String description;
   final bool isAvailable;
-  final bool needsTransport;
+  final bool needsTransport;    //List<TransportNeeded>transport; ?
   final bool maybeFree;
   final int rating;
   final int cost;
-
+  //final Latlng? location;
   //final bool askWithFee;
-  //final int startDate;
-  //final int endDate;
   //final int estimatedValue;
   //final int height;
   //final int width;
   //final int length;
-  //fina int maxDays;
+  //WeightRange weightRange;
+
   //List <int> categoryIds ?
   //List<CategoryModel>categories;
-  //List<TransportNeeded>transport; ?
-  //WeightRange weightRange;
-  //DistanceRange distanceRange;
 
   const ToolModel({
     required this.needsTransport,

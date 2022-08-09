@@ -1,7 +1,4 @@
 import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/services/local_storage.dart';
-import 'package:empriusapp/views/screens/register_screen.dart';
-import 'package:empriusapp/views/widgets/user_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

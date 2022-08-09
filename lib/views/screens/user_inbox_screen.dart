@@ -1,14 +1,7 @@
-import 'package:empriusapp/providers/user_provider.dart';
-import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/services/local_storage.dart';
 import 'package:empriusapp/views/widgets/user_appbar.dart';
-import 'package:empriusapp/views/widgets/common/bottom_image_selector.dart';
-import 'package:empriusapp/views/widgets/custom_map.dart';
-import 'package:empriusapp/views/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/user_model.dart';
 import '../widgets/inbox_navbar_widget.dart';
 
 class UserInboxScreen extends ConsumerStatefulWidget {

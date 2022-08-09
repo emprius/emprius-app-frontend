@@ -36,9 +36,7 @@ class LocalStorage {
 
   static UserModel? getUser() {
     final json = _preferences.getString(_keyUser);
-    // return json == null ? null : UserModel.fromJson(jsonDecode(json));
-
-    return json == null ? myUser : UserModel.fromJson(jsonDecode(json));
+    return json == null ? null : UserModel.fromJson(jsonDecode(json));
   }
 
 

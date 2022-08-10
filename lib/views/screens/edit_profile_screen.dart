@@ -61,10 +61,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   @override
   void initState() {
     user = widget.args.user;
-    _setMarkers( ref.read(userProvider.notifier).state.location);
-    _nameCtrl.text = user.name;
+    _setMarkers( ref.read(userProvider.notifier).state.location!);
+    _nameCtrl.text = user.name!;
     _emailCtrl.text = user.email;
-    isActive = user.isActive;
+    isActive = user.isActive!;
     _customMapCtrl.selectedLocation = user.location;
     super.initState();
   }
@@ -102,7 +102,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                                 context: context,
                                 builder: ((builder) => BottomImageSelector((image) {
                                       if (image != null) {
-                                        user = user.copy(avatar: image.path);
+                                        //user = user.copy(avatar: image.path);
                                         setState(() {});
                                       }
                                       Navigator.pop(context);
@@ -112,7 +112,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                             height: 100,
                             width: 100,
                             child: ProfileImage(
-                              avatar: user.avatar,
+                              avatar: user.avatar!,
                               showBadge: true,
                             ),
                           ),
@@ -128,7 +128,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                                 });
                               }),
                           const SizedBox(height: 6.0),
-                          Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
+                          Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
                         ]),
                       ],
                     ),
@@ -198,7 +198,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
                         await ref
                             .watch(userProvider.notifier)
-                            .updateUser(user.copy(
+                            .updateUser(user.copyWith(
                               name: _nameCtrl.text,
                               email: _emailCtrl.text,
                               password: _passwordCtrl.text,

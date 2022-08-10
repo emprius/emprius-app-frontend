@@ -24,14 +24,14 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
         children: [
           UserAccountsDrawerHeader(
               accountName: Text(
-                user.name,
+                user.name!,
                 style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),),
               accountEmail: Text(user.email),
             currentAccountPicture: ProfileImage(
-              avatar: user.avatar.isEmpty ? defaultAvatar : user.avatar,
+              avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
             ),
 
             // const CircleAvatar(

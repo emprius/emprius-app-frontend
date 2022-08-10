@@ -36,7 +36,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   void initState() {
-    _setMarkers( ref.read(userProvider.notifier).state.location);
+    _setMarkers( ref.read(userProvider.notifier).state.location!);
     super.initState();
   }
 
@@ -46,7 +46,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
     //TODO STUDY:
     ref.listen<LatLng>(userProvider.select(
-            (user) => user.location), (LatLng? previous, LatLng next) {
+            (user) => user.location!), (LatLng? previous, LatLng next) {
       _setMarkers(next);
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });
@@ -74,27 +74,27 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                   height: 100,
                   width: 100,
                   child: ProfileImage(
-                    avatar: user.avatar.isEmpty ? defaultAvatar : user.avatar,
+                    avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
                   ),
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   buildName(user),
                   const SizedBox(height: 6.0),
-                  RatingStars(rating: user.rating),
+                  RatingStars(rating: user.rating!),
                   const SizedBox(height: 6.0),
                   Text('EMPS: ${user.emps}'),
                 ]),
                 const SizedBox(width: 6.0),
                 Column(children: [
                   Switch(
-                      value: user.isActive,
+                      value: user.isActive!,
                       activeTrackColor: Colors.white10,
                       activeColor: Colors.blue,
                       onChanged: (value) {
-                        ref.watch(userProvider.notifier).updateUser(user.copy(isActive: value));
+                        ref.watch(userProvider.notifier).updateUser(user.copyWith(isActive: value));
                       }),
                   const SizedBox(height: 6.0),
-                  Text(user.isActive ? "Perfil actiu" : "Perfil inactiu"),
+                  Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
                 ]),
               ]),
               const SizedBox(height: 20.0),
@@ -118,7 +118,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            user.name,
+            user.name!,
             style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

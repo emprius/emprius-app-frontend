@@ -219,8 +219,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       required this.location,
       this.isActive,
       this.avatar,
-      this.rating,
-      this.emps});
+      this.rating = 3,
+      this.emps = 10});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -242,8 +242,10 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @override
   final String? avatar;
   @override
+  @JsonKey()
   final int? rating;
   @override
+  @JsonKey()
   final int? emps;
 
   @override

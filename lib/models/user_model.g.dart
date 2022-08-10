@@ -17,8 +17,8 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
           : LatLng.fromJson(json['location'] as Map<String, dynamic>),
       isActive: json['isActive'] as bool?,
       avatar: json['avatar'] as String?,
-      rating: json['rating'] as int?,
-      emps: json['emps'] as int?,
+      rating: json['rating'] as int? ?? 3,
+      emps: json['emps'] as int? ?? 10,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>

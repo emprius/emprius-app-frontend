@@ -25,6 +25,8 @@ class ToolModel with _$ToolModel {
    double? weight,
   }) = _ToolModel;
 
+  factory ToolModel.fromJson(Map<String, dynamic> json) => _$ToolModelFromJson(json);
+
 }
 
 

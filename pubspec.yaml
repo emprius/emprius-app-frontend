@@ -80,7 +80,7 @@ dev_dependencies:
   build_runner: ^2.2.0
   freezed: ^2.1.0+1
 
-  # To generate from/to Json in our model
+  # To generate serialization from/to Json in our model
   json_serializable: ^6.3.1
 
 # For information on the generic Dart part of this file, see the

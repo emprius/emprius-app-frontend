@@ -182,34 +182,34 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     const SizedBox(height: 24),
                     selectLocationMap(user),
                     const SizedBox(height: 24),
-                    // CustomTextButton(
-                    //   text: 'Desar',
-                    //   //Unhandled Exception: Null check operator used on a null value
-                    //   onClicked: () async {
-                    //     if (!_formKey.currentState!.validate())
-                    //         //&& !_customMapCtrl.validate())
-                    //     {
-                    //       return;
-                    //     }
-                    //
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       const SnackBar(content: Text('Canvis desats')),
-                    //     );
-                    //
-                    //     await ref
-                    //         .watch(userProvider.notifier)
-                    //         .updateUser(user.copy(
-                    //           name: _nameCtrl.text,
-                    //           email: _emailCtrl.text,
-                    //           password: _passwordCtrl.text,
-                    //           isActive: user.isActive,
-                    //           location: _customMapCtrl.selectedLocation!,
-                    //         ));
-                    //
-                    //     //TODO if not selectedlocation doesnt navigate:
-                    //     Navigator.of(context).pop();
-                    //   },
-                    // ),
+                    CustomTextButton(
+                      text: 'Desar',
+                      //Unhandled Exception: Null check operator used on a null value
+                      onClicked: () async {
+                        if (!_formKey.currentState!.validate())
+                            //&& !_customMapCtrl.validate())
+                        {
+                          return;
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Canvis desats')),
+                        );
+
+                        await ref
+                            .watch(userProvider.notifier)
+                            .updateUser(user.copyWith(
+                              name: _nameCtrl.text,
+                              email: _emailCtrl.text,
+                              password: _passwordCtrl.text,
+                              isActive: user.isActive,
+                              location: _customMapCtrl.selectedLocation!,
+                            ));
+
+                        //TODO if not selectedlocation doesnt navigate:
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ],
                 ),
               ),

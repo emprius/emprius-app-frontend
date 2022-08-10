@@ -51,10 +51,16 @@ dependencies:
   # carousel slider
   carousel_slider: ^4.1.1
 
+  # @freezed decorator to tell the build_runner to run the freezed tasks
+  freezed_annotation: ^2.1.0
+
+  # To generate from/to Json in our model
+  json_annotation: ^4.6.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +72,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+
+  # Build_runner is the tool to run the freezed code-generator.
+  # It is used by freezed to generate the model files
+  # so its able to watch for any changes and rebuild.
+  build_runner: ^2.2.0
+  freezed: ^2.1.0+1
+
+  # To generate from/to Json in our model
+  json_serializable: ^6.3.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

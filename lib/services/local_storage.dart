@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:empriusapp/models/tool_model.dart';
 import 'package:empriusapp/utils/constants.dart';
 
 import '../models/user_model.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorage {
   static late SharedPreferences _preferences;
   static const _keyUser = 'user';
+  static const _keyTool = 'tool';
 
   //TODO (Mayu): delete mock
   static var myUser = UserModel(
@@ -37,6 +39,17 @@ class LocalStorage {
   static UserModel? getUser() {
     final json = _preferences.getString(_keyUser);
     return json == null ? null : UserModel.fromJson(jsonDecode(json));
+  }
+
+  static Future setTool(ToolModel tool) async {
+    final json = jsonEncode(tool.toJson());
+
+    await _preferences.setString(_keyTool, json);
+  }
+
+  static ToolModel? getTool() {
+    final json = _preferences.getString(_keyTool);
+    return json == null ? null : ToolModel.fromJson(jsonDecode(json));
   }
 
 

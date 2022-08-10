@@ -187,7 +187,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       //Unhandled Exception: Null check operator used on a null value
                       onClicked: () async {
                         if (!_formKey.currentState!.validate())
-                            //&& !_customMapCtrl.validate())
+                          //TODO if not selectedlocation doesnt navigate:
+                          //&& !_customMapCtrl.validate())
                         {
                           return;
                         }
@@ -206,7 +207,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                               location: _customMapCtrl.selectedLocation!,
                             ));
 
-                        //TODO if not selectedlocation doesnt navigate:
                         Navigator.of(context).pop();
                       },
                     ),

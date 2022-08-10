@@ -43,7 +43,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
             return ListTile(
               title: Text(tool.title),
               subtitle: Text(tool.description),
-              leading: Switch(value: tool.isAvailable, onChanged: (value) {  },),
+              leading: Switch(value: tool.isAvailable!, onChanged: (value) {  },),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -66,7 +66,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                         tool: ToolModel(
                           id: tool.id,
                           title: tool.title,
-                          description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport,
+                          description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
                         )
                     ),
                   ),

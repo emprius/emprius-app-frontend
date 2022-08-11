@@ -2,7 +2,7 @@ import 'package:empriusapp/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/user_provider.dart';
-import '../../utils/constants.dart';
+import '../../helper/utils/constants.dart';
 import '../../presentation/widgets/profile_image_widget.dart';
 
 class UserDrawer extends ConsumerStatefulWidget {

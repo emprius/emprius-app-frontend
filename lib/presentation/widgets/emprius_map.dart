@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../controllers/emprius_map_controller.dart';
-import '../../utils/map_validator.dart';
+import '../../helper/utils/map_validator.dart';
 import 'user_marker.dart';
 
 

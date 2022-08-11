@@ -12,7 +12,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../controllers/emprius_map_controller.dart';
 import '../../domain/user_model.dart';
-import '../../utils/constants.dart';
+import '../../helper/utils/constants.dart';
 import 'package:latlong2/latlong.dart';
 
 

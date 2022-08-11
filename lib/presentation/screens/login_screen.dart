@@ -1,5 +1,5 @@
 import 'package:empriusapp/presentation/routes/routes.dart';
-import 'package:empriusapp/utils/form_validator.dart';
+import 'package:empriusapp/helper/utils/form_validator.dart';
 import 'package:empriusapp/presentation/widgets/common/custom_text_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

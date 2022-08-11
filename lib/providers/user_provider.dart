@@ -1,5 +1,5 @@
 import 'package:empriusapp/domain/user_model.dart';
-import 'package:empriusapp/utils/constants.dart';
+import 'package:empriusapp/helper/utils/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 

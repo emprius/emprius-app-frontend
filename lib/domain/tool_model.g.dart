@@ -7,7 +7,7 @@ part of 'tool_model.dart';
 // **************************************************************************
 
 _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
-      id: json['id'] as int,
+      toolId: json['toolId'] as int,
       title: json['title'] as String,
       description: json['description'] as String,
       location: json['location'] == null
@@ -29,7 +29,7 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
 
 Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'toolId': instance.toolId,
       'title': instance.title,
       'description': instance.description,
       'location': instance.location,

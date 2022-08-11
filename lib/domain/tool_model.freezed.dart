@@ -20,7 +20,7 @@ ToolModel _$ToolModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ToolModel {
-  int get id => throw _privateConstructorUsedError;
+  int get toolId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $ToolModelCopyWith<$Res> {
   factory $ToolModelCopyWith(ToolModel value, $Res Function(ToolModel) then) =
       _$ToolModelCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {int toolId,
       String title,
       String description,
       LatLng? location,
@@ -77,7 +77,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? toolId = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? location = freezed,
@@ -95,9 +95,9 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
     Object? weight = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      toolId: toolId == freezed
+          ? _value.toolId
+          : toolId // ignore: cast_nullable_to_non_nullable
               as int,
       title: title == freezed
           ? _value.title
@@ -170,7 +170,7 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       __$$_ToolModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {int toolId,
       String title,
       String description,
       LatLng? location,
@@ -200,7 +200,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? toolId = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? location = freezed,
@@ -218,9 +218,9 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
     Object? weight = freezed,
   }) {
     return _then(_$_ToolModel(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      toolId: toolId == freezed
+          ? _value.toolId
+          : toolId // ignore: cast_nullable_to_non_nullable
               as int,
       title: title == freezed
           ? _value.title
@@ -290,7 +290,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
   const _$_ToolModel(
-      {required this.id,
+      {required this.toolId,
       required this.title,
       required this.description,
       this.location,
@@ -311,7 +311,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
       _$$_ToolModelFromJson(json);
 
   @override
-  final int id;
+  final int toolId;
   @override
   final String title;
   @override
@@ -347,7 +347,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ToolModel(id: $id, title: $title, description: $description, location: $location, isAvailable: $isAvailable, image: $image, needsTransport: $needsTransport, maybeFree: $maybeFree, rating: $rating, cost: $cost, askWithFee: $askWithFee, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
+    return 'ToolModel(toolId: $toolId, title: $title, description: $description, location: $location, isAvailable: $isAvailable, image: $image, needsTransport: $needsTransport, maybeFree: $maybeFree, rating: $rating, cost: $cost, askWithFee: $askWithFee, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
   }
 
   @override
@@ -355,7 +355,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ToolModel'))
-      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('toolId', toolId))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('location', location))
@@ -378,7 +378,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ToolModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.toolId, toolId) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
@@ -405,7 +405,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(toolId),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(location),
@@ -437,7 +437,7 @@ class _$_ToolModel with DiagnosticableTreeMixin implements _ToolModel {
 
 abstract class _ToolModel implements ToolModel {
   const factory _ToolModel(
-      {required final int id,
+      {required final int toolId,
       required final String title,
       required final String description,
       final LatLng? location,
@@ -458,7 +458,7 @@ abstract class _ToolModel implements ToolModel {
       _$_ToolModel.fromJson;
 
   @override
-  int get id;
+  int get toolId;
   @override
   String get title;
   @override

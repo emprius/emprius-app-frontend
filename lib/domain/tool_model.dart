@@ -7,7 +7,7 @@ part 'tool_model.g.dart';
 @freezed
 class ToolModel with _$ToolModel {
   const factory ToolModel({
-   required int id,
+   required int toolId,
    required String title,
    required String description,
    LatLng? location,

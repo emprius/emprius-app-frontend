@@ -64,7 +64,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                   MaterialPageRoute(
                     builder: (context)=> ToolCardScreen(
                         tool: ToolModel(
-                          id: tool.id,
+                          toolId: tool.toolId,
                           title: tool.title,
                           description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
                         )

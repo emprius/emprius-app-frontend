@@ -7,7 +7,7 @@ import '../infrastructure/local_storage/local_storage.dart';
 
 final _sampleTools = [
   ToolModel(
-      id: 1,
+      toolId: 1,
       title: "Bici de paseig",
       description: "¿Qué le dice la foca a su madre? I love you, mother foca.",
       needsTransport: true,
@@ -16,7 +16,7 @@ final _sampleTools = [
       //location: LatLng(41.695384, 2.492793)
 ),
   ToolModel(
-      id: 2,
+    toolId: 2,
       title: "Burra autonoma",
       description: "Sha fet servir per raves pero encara te molta potencia.",
       needsTransport: true,
@@ -25,7 +25,7 @@ final _sampleTools = [
       //location: LatLng(41.695386, 2.492793)
 ),
   ToolModel(
-      id: 3,
+    toolId: 3,
       title: "Tractor",
       description: "Es de color groc com a la canso",
       needsTransport: true,

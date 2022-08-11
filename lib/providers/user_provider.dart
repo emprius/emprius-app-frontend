@@ -1,8 +1,9 @@
-import 'package:empriusapp/models/user_model.dart';
-import 'package:empriusapp/services/local_storage.dart';
+import 'package:empriusapp/domain/user_model.dart';
 import 'package:empriusapp/utils/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+
+import '../infrastructure/local_storage/local_storage.dart';
 
 
 final userProvider = StateNotifierProvider<UserNotifier, UserModel>(

@@ -1,12 +1,11 @@
-import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../models/tool_model.dart';
+import '../../domain/tool_model.dart';
 import '../../providers/tool_provider.dart';
 import '../../utils/form_validator.dart';
+import '../../presentation/widgets/common/custom_text_button.dart';
 import '../widgets/common/custom_textfield.dart';
+import '../widgets/user_appbar.dart';
 
 class AddToolScreen extends ConsumerStatefulWidget {
   const AddToolScreen({Key? key}) : super(key: key);
@@ -39,7 +38,8 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   void initState() {
     currentValue = categories[0];
     isChecked = List<bool>.filled(price.length, false);
-    tool = ref.read(toolListProvider.notifier).state;
+    //TODO CHECK PROVIDER
+//    tool = ref.read(toolListProvider.notifier).state;
   }
 
   @override

@@ -1,6 +1,6 @@
-import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/domain/user_model.dart';
 import 'package:empriusapp/providers/user_provider.dart';
-import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';

@@ -1,6 +1,6 @@
-import 'package:empriusapp/views/widgets/user_appbar.dart';
-import 'package:empriusapp/views/widgets/user_drawer.dart';
-import 'package:empriusapp/views/widgets/emprius_map.dart';
+import 'package:empriusapp/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/presentation/widgets/user_drawer.dart';
+import 'package:empriusapp/presentation/widgets/emprius_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/user_provider.dart';

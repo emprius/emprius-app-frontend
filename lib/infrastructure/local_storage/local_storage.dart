@@ -1,12 +1,8 @@
 import 'dart:convert';
-
-import 'package:empriusapp/models/tool_model.dart';
 import 'package:empriusapp/utils/constants.dart';
-
-import '../models/user_model.dart';
-import 'package:latlong2/latlong.dart';
-
+import '../../domain/tool_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../domain/user_model.dart';
 
 class LocalStorage {
   static late SharedPreferences _preferences;

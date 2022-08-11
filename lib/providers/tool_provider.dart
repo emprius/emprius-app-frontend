@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import '../models/tool_model.dart';
-import '../services/local_storage.dart';
+import '../domain/tool_model.dart';
+import '../infrastructure/local_storage/local_storage.dart';
 
 //Mocking Future provider from network request:
 
@@ -53,9 +53,9 @@ class ToolNotifier extends StateNotifier<List<ToolModel>> {
     await LocalStorage.setTool(tool);
   }
 
-  void add(ToolModel tool) {
-    state = [...state, ToolModel()];
-  }
+  // void add(ToolModel tool) {
+  //   state = [...state, ToolModel()];
+  // }
 
 }
 

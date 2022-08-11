@@ -1,9 +1,10 @@
 import 'package:empriusapp/providers/user_provider.dart';
-import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/services/local_storage.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../infrastructure/local_storage/local_storage.dart';
 
 
 class SplashScreen extends ConsumerStatefulWidget {

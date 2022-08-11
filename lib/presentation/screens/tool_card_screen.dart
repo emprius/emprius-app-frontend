@@ -1,10 +1,10 @@
-import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/widgets/carousel_widget.dart';
-import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/user_appbar.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
+import 'package:empriusapp/presentation/widgets/carousel_widget.dart';
+import 'package:empriusapp/presentation/widgets/common/custom_text_button.dart';
+import 'package:empriusapp/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../models/tool_model.dart';
+import '../../domain/tool_model.dart';
 import '../widgets/common/rating_stars.dart';
 
 class ToolCardScreen extends ConsumerStatefulWidget {

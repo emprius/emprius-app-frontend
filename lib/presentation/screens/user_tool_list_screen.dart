@@ -1,10 +1,10 @@
-import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/screens/tool_card_screen.dart';
-import 'package:empriusapp/views/widgets/user_appbar.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
+import 'package:empriusapp/presentation/screens/tool_card_screen.dart';
+import 'package:empriusapp/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/tool_model.dart';
+import '../../domain/tool_model.dart';
 import '../../providers/tool_provider.dart';
 
 class UserToolList extends ConsumerStatefulWidget {

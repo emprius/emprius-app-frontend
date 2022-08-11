@@ -1,4 +1,4 @@
-import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/domain/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 

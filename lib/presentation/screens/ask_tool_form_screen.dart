@@ -1,9 +1,9 @@
-import 'package:empriusapp/routes/routes.dart';
-import 'package:empriusapp/views/widgets/date_picker_widget.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
+import 'package:empriusapp/presentation/widgets/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/tool_model.dart';
+import '../../domain/tool_model.dart';
 import '../widgets/common/custom_textfield.dart';
 import '../widgets/user_appbar.dart';
 

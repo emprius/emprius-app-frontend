@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:empriusapp/models/user_model.dart';
+import 'package:empriusapp/domain/user_model.dart';
 import 'package:empriusapp/providers/user_provider.dart';
-import 'package:empriusapp/routes/routes.dart';
+import 'package:empriusapp/presentation/routes/routes.dart';
 import 'package:empriusapp/utils/constants.dart';
 import 'package:empriusapp/utils/map_validator.dart';
-import 'package:empriusapp/views/widgets/common/custom_text_button.dart';
-import 'package:empriusapp/views/widgets/emprius_map.dart';
+import 'package:empriusapp/presentation/widgets/common/custom_text_button.dart';
+import 'package:empriusapp/presentation/widgets/emprius_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/utils/form_validator.dart';

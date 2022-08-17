@@ -20,8 +20,8 @@ class UserStorageRepository {
     await _storageServiceProvider.set(_storageUserKey, user.toJson());
   }
 
-  UserModel? getUser() {
-    final rawUser = _storageServiceProvider.get(_storageUserKey);
+  Future<UserModel?> getUser() async {
+    final rawUser = await _storageServiceProvider.get(_storageUserKey);
     return rawUser == null ? null : UserModel.fromJson(
       json.decode(json.encode(rawUser)),
     );

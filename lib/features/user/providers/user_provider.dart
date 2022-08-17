@@ -23,7 +23,7 @@ class UserNotifier extends StateNotifier<UserModel> {
   }
 
   void init() async {
-    final user = _userStorageRepository.getUser();
+    final user = await _userStorageRepository.getUser();
     if(user != null) state = user;
   }
 

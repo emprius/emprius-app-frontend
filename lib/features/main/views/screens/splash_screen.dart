@@ -1,5 +1,4 @@
 import 'package:empriusapp/features/user/models/auth_state.dart';
-import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/providers/user_provider.dart';
 import 'package:empriusapp/core/routes.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> checkAuthState() async {
-    final authState = ref.watch(authStateProvider);
+    final authState = ref.watch(userProvider.notifier).authState;
     authState.maybeWhen(
       authenticated: (fullName) => Navigator.pushReplacementNamed(context, userProfileScreenRoute, ),
       unauthenticated: ( ) => Navigator.pushReplacementNamed(context, loginScreenRoute),
@@ -32,11 +31,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
-
-    final authState = ref.watch(authStateProvider);
-    final userProvid = ref.watch(userProvider.notifier);
-
-    print("AuthState");
 
     return const Scaffold(
       backgroundColor: Colors.blue,

@@ -1,7 +1,6 @@
 import 'package:empriusapp/core/services/storage/storage_service_provider.dart';
 import 'package:empriusapp/features/user/models/auth_state.dart';
 import 'package:empriusapp/features/user/models/user_model.dart';
-import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/repository/user_http_repository.dart';
 import 'package:empriusapp/features/user/repository/user_storage_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

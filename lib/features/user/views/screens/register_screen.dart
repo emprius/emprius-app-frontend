@@ -8,8 +8,6 @@ import 'package:empriusapp/core/widgets/common/custom_textfield.dart';
 import 'package:empriusapp/core/widgets/common/profile_image_widget.dart';
 import 'package:empriusapp/core/widgets/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/features/user/models/auth_state.dart';
-import 'package:empriusapp/features/user/models/user_model.dart';
-import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/providers/user_provider.dart';
 import 'package:empriusapp/core/routes.dart';
 import 'package:empriusapp/core/widgets/common/emprius_map.dart';
@@ -179,7 +177,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           avatar:  _avatar?.path ?? ""
                       );
 
-                      if (ref.watch(authStateProvider) is FAILED) {
+                      if (ref.watch(userProvider.notifier).authState is FAILED) {
                         // todo(kon): implement error show
                         return;
                       }

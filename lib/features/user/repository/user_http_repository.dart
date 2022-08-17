@@ -1,5 +1,7 @@
 
 
+import 'dart:convert';
+
 import 'package:empriusapp/features/user/models/user_model.dart';
 
 class UserHttpRepository {
@@ -25,6 +27,36 @@ class UserHttpRepository {
     //     return UserModel.fromJson(data);
     //   },
     // );
+
+    // How to create the dto object
+    // option 1
+    // var userDto = {
+    //   userData: userData,
+    //   password: password,
+    //   invite: invite
+    // };
+    // final responseData = await httpService.post(
+    //   '$path/',
+    //   body: jsonEncode(userDto)
+    // );
+
+    // option 2
+    // Implement something like
+    // @freezed
+    // class UserRegisterDto {
+    //  UserModel userData,
+    //  String password,
+    //  String invite
+    // }
+
     return userData.copyWith(id: 1);
   }
+
+  // todo: implement
+  Future<UserModel> login({required String email, required String password}) =>
+      throw UnimplementedError();
+
+  // todo: implement
+  Future<UserModel> userUpdate({required UserModel user}) =>
+      throw UnimplementedError();
 }

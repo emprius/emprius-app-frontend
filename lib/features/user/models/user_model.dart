@@ -1,3 +1,4 @@
+import 'package:empriusapp/core/helper/utils/constants.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -18,6 +19,15 @@ class UserModel with _$UserModel{
     @Default(3) int? rating,
     @Default(10) int? emps,
   }) = _UserModel;
+
+  /// Dummy factory to initialize a UserModel with default data. 
+  factory UserModel.initial() =>
+    UserModel(
+        id: -1,
+        email: "email",
+        password: "password",
+        invitation: "invitation",
+        location: defaultMapCenter);
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

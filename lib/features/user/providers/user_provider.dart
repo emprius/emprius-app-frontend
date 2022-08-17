@@ -1,32 +1,41 @@
-import 'package:empriusapp/core/helper/utils/constants.dart';
-import 'package:empriusapp/core/services/storage/local_storage.dart';
+import 'package:empriusapp/core/services/storage/storage_service_provider.dart';
 import 'package:empriusapp/features/user/models/user_model.dart';
+import 'package:empriusapp/features/user/repository/user_storage_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:latlong2/latlong.dart';
 
 
-final userProvider = StateNotifierProvider<UserNotifier, UserModel>(
-(ref) => UserNotifier());
+final userProvider = StateNotifierProvider<UserNotifier, UserModel>((ref) {
+  final _userStorageRepository = UserStorageRepository(
+      storageServiceProvider: ref.watch(storageServiceProvider)
+  );
+  return UserNotifier(userStorageRepository: _userStorageRepository);
+});
 
 // The public methods on this class will be what allow the UI to modify the state.
 class UserNotifier extends StateNotifier<UserModel> {
-  UserNotifier() : super(
-      UserModel(
-          id: 0,
-          email: "email",
-          password: "password",
-          invitation: "invitation",
-          location: defaultMapCenter));
+
+  final UserStorageRepository _userStorageRepository;
+  UserNotifier({
+      required UserStorageRepository userStorageRepository,
+  }) : _userStorageRepository = userStorageRepository,
+  super(UserModel.initial()) {
+    init();
+  }
+
+  void init() async {
+    final user = _userStorageRepository.getUser();
+    if(user != null) state = user;
+  }
 
   Future<void> updateUser(UserModel user) async {
 
-    // 1. Actualizar en el servidor usando el service
+    // todo: implement dio user repository
     // put emprius/user -> Ok 200
 
     // Actualitzas lestate de la app
     state = user;
-    // Actualitzes la persistencia per tenir les dades guardades
-    await LocalStorage.setUser(user);
+    // Persist the user data
+    await _userStorageRepository.setUser(user);
 
   }
 }

@@ -7,6 +7,9 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel{
+
+  const UserModel._();
+
   const factory UserModel({
     String? name,
     required int id,
@@ -28,6 +31,8 @@ class UserModel with _$UserModel{
         password: "password",
         invitation: "invitation",
         location: defaultMapCenter);
+
+  bool get isDummyUser => id == -1;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

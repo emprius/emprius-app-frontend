@@ -1,4 +1,5 @@
-import 'package:empriusapp/core/services/storage/local_storage.dart';
+import 'package:empriusapp/features/user/models/auth_state.dart';
+import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/providers/user_provider.dart';
 import 'package:empriusapp/core/routes.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,22 @@ class SplashScreen extends ConsumerStatefulWidget {
 class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
-    loadUserPreferences();
     super.initState();
   }
 
-  Future<void> loadUserPreferences() async {
-    await LocalStorage.init();
-    var user = LocalStorage.getUser();
-    if (user == null) {
-      Navigator.pushReplacementNamed(context, loginScreenRoute);
-    } else {
-      ref.watch(userProvider.notifier).updateUser(user);
-      Navigator.pushReplacementNamed(context, userProfileScreenRoute, );
-    }
+  Future<void> checkAuthState() async {
+    final authState = ref.watch(authStateProvider);
+    authState.maybeWhen(
+      authenticated: (fullName) => Navigator.pushReplacementNamed(context, userProfileScreenRoute, ),
+      unauthenticated: ( ) => Navigator.pushReplacementNamed(context, loginScreenRoute),
+      orElse: () {  },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
+
     return const Scaffold(
       backgroundColor: Colors.blue,
       body: Center(

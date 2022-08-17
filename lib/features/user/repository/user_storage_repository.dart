@@ -11,7 +11,7 @@ class UserStorageRepository {
 
   static const _storageUserKey = 'own_user';
 
-  StorageService _storageServiceProvider;
+  final StorageService _storageServiceProvider;
 
   UserStorageRepository({required StorageService storageServiceProvider,})
       : _storageServiceProvider = storageServiceProvider;

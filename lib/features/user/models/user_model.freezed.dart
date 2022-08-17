@@ -209,7 +209,7 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
+class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   const _$_UserModel(
       {this.name,
       required this.id,
@@ -220,7 +220,8 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       this.isActive,
       this.avatar,
       this.rating = 3,
-      this.emps = 10});
+      this.emps = 10})
+      : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -316,7 +317,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   }
 }
 
-abstract class _UserModel implements UserModel {
+abstract class _UserModel extends UserModel {
   const factory _UserModel(
       {final String? name,
       required final int id,
@@ -328,6 +329,7 @@ abstract class _UserModel implements UserModel {
       final String? avatar,
       final int? rating,
       final int? emps}) = _$_UserModel;
+  const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;

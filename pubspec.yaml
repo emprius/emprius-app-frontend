@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,9 +35,6 @@ dependencies:
 
   # provider
   flutter_riverpod: ^2.0.0-dev.9
-
-  # persist data locally
-  shared_preferences: ^2.0.15
 
   # pick image
   image_picker: ^0.8.3
@@ -57,13 +54,17 @@ dependencies:
   # To generate from/to Json in our model
   json_annotation: ^4.6.0
 
-  # A library for creating network requests
   http: ^0.13.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # persist data locally
+  hive_flutter: ^1.1.0
+
+  # A library for creating network requests
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

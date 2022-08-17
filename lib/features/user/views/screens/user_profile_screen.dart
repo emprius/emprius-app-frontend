@@ -90,9 +90,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                       value: user.isActive!,
                       activeTrackColor: Colors.white10,
                       activeColor: Colors.blue,
-                      onChanged: (value) {
-                        ref.watch(userProvider.notifier).updateUser(user.copyWith(isActive: value));
-                      }),
+                      onChanged: null,  // Deactivate the switch
+                  ),
                   const SizedBox(height: 6.0),
                   Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
                 ]),

@@ -7,7 +7,9 @@ import 'package:empriusapp/core/widgets/common/custom_text_button.dart';
 import 'package:empriusapp/core/widgets/common/custom_textfield.dart';
 import 'package:empriusapp/core/widgets/common/profile_image_widget.dart';
 import 'package:empriusapp/core/widgets/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/features/user/models/auth_state.dart';
 import 'package:empriusapp/features/user/models/user_model.dart';
+import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/providers/user_provider.dart';
 import 'package:empriusapp/core/routes.dart';
 import 'package:empriusapp/core/widgets/common/emprius_map.dart';
@@ -158,7 +160,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       }),
                   CustomTextButton(
                     text: 'Finalitza registre',
-                    onClicked: () {
+                    onClicked: () async {
                       if (!_formKey.currentState!.validate() &&
                           !_mapValidator.validate()) {
                         return;
@@ -167,16 +169,20 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         const SnackBar(content: Text('Usuari creat')),
                       );
 
-                      ref.watch(userProvider.notifier).updateUser(UserModel(
-                            id: 1,
-                            name: _nameCtrl.text,
-                            email: _emailCtrl.text,
-                            password: _passwordCtrl.text,
-                            invitation: _invitationCtrl.text,
-                            location: _customMapCtrl.selectedLocation!,
-                            avatar: _avatar?.path ?? "",
-                            isActive: isActive,
-                          ));
+                      await ref.watch(userProvider.notifier).register(
+                          name: _nameCtrl.text,
+                          email: _emailCtrl.text,
+                          location: _customMapCtrl.selectedLocation!,
+                          isActive: isActive,
+                          password: _passwordCtrl.text,
+                          invite: _invitationCtrl.text,
+                          avatar:  _avatar?.path ?? ""
+                      );
+
+                      if (ref.watch(authStateProvider) is FAILED) {
+                        // todo(kon): implement error show
+                        return;
+                      }
 
                       Navigator.pushReplacementNamed(
                           context, userProfileScreenRoute);

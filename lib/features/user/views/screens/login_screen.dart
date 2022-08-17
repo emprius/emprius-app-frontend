@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                 ),
                 SizedBox(
-                    height: 40,
+                    // height: 40,
                     child: CustomTextButton(
                       text: "Entra a l'app!",
                       onClicked: () {

@@ -1,6 +1,5 @@
 import 'package:empriusapp/core/services/storage/storage_service_provider.dart';
 import 'package:empriusapp/features/user/models/auth_state.dart';
-import 'package:empriusapp/features/user/models/enums/user_auth_state.dart';
 import 'package:empriusapp/features/user/models/user_model.dart';
 import 'package:empriusapp/features/user/providers/auth_state_provider.dart';
 import 'package:empriusapp/features/user/repository/user_http_repository.dart';
@@ -53,19 +52,18 @@ class UserNotifier extends StateNotifier<UserModel> {
       state = user;
     } else {
       authState = const AuthState.unauthenticated();
+      state = UserModel.initial();
     }
   }
 
-  Future<void> updateUser(UserModel user) async {
+  Future<void> updateUser(UserModel user, String password) async {
 
-    // todo: implement dio user repository
+    // todo(kon): implement dio user repository
     // put emprius/user -> Ok 200
 
-    // Actualitzas lestate de la app
     state = user;
     // Persist the user data
     await _userStorageRepository.setUser(user);
-
   }
 
   Future<void> register({

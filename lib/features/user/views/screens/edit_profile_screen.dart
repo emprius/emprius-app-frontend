@@ -199,13 +199,15 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
                         await ref
                             .watch(userProvider.notifier)
-                            .updateUser(user.copyWith(
-                              name: _nameCtrl.text,
-                              email: _emailCtrl.text,
-                              password: _passwordCtrl.text,
-                              isActive: user.isActive,
-                              location: _customMapCtrl.selectedLocation!,
-                            ));
+                            .updateUser(
+                          user.copyWith(
+                            name: _nameCtrl.text,
+                            email: _emailCtrl.text,
+                            isActive: user.isActive,
+                            location: _customMapCtrl.selectedLocation!,
+                          ),
+                          _passwordCtrl.text,
+                        );
 
                         Navigator.of(context).pop();
                       },

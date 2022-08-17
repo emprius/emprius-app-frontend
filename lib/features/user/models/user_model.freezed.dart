@@ -22,11 +22,9 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 mixin _$UserModel {
   String? get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  String get invitation => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
   bool? get isActive => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
   int? get rating => throw _privateConstructorUsedError;
   int? get emps => throw _privateConstructorUsedError;
@@ -44,11 +42,9 @@ abstract class $UserModelCopyWith<$Res> {
   $Res call(
       {String? name,
       int id,
-      String email,
-      String password,
-      String invitation,
       LatLng? location,
       bool? isActive,
+      String email,
       String? avatar,
       int? rating,
       int? emps});
@@ -66,11 +62,9 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
-    Object? invitation = freezed,
     Object? location = freezed,
     Object? isActive = freezed,
+    Object? email = freezed,
     Object? avatar = freezed,
     Object? rating = freezed,
     Object? emps = freezed,
@@ -84,18 +78,6 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      invitation: invitation == freezed
-          ? _value.invitation
-          : invitation // ignore: cast_nullable_to_non_nullable
-              as String,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -104,6 +86,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       avatar: avatar == freezed
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -129,11 +115,9 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   $Res call(
       {String? name,
       int id,
-      String email,
-      String password,
-      String invitation,
       LatLng? location,
       bool? isActive,
+      String email,
       String? avatar,
       int? rating,
       int? emps});
@@ -153,11 +137,9 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
-    Object? invitation = freezed,
     Object? location = freezed,
     Object? isActive = freezed,
+    Object? email = freezed,
     Object? avatar = freezed,
     Object? rating = freezed,
     Object? emps = freezed,
@@ -171,18 +153,6 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      invitation: invitation == freezed
-          ? _value.invitation
-          : invitation // ignore: cast_nullable_to_non_nullable
-              as String,
       location: location == freezed
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -191,6 +161,10 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
       avatar: avatar == freezed
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -209,19 +183,16 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
+class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   const _$_UserModel(
-      {this.name,
-      required this.id,
+      {required this.name,
+      this.id = -1,
+      this.location,
+      required this.isActive,
       required this.email,
-      required this.password,
-      required this.invitation,
-      required this.location,
-      this.isActive,
       this.avatar,
       this.rating = 3,
-      this.emps = 10})
-      : super._();
+      this.emps = 10});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -229,17 +200,14 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   @override
   final String? name;
   @override
+  @JsonKey()
   final int id;
-  @override
-  final String email;
-  @override
-  final String password;
-  @override
-  final String invitation;
   @override
   final LatLng? location;
   @override
   final bool? isActive;
+  @override
+  final String email;
   @override
   final String? avatar;
   @override
@@ -251,7 +219,7 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(name: $name, id: $id, email: $email, password: $password, invitation: $invitation, location: $location, isActive: $isActive, avatar: $avatar, rating: $rating, emps: $emps)';
+    return 'UserModel(name: $name, id: $id, location: $location, isActive: $isActive, email: $email, avatar: $avatar, rating: $rating, emps: $emps)';
   }
 
   @override
@@ -261,11 +229,9 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'UserModel'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('password', password))
-      ..add(DiagnosticsProperty('invitation', invitation))
       ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('isActive', isActive))
+      ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('avatar', avatar))
       ..add(DiagnosticsProperty('rating', rating))
       ..add(DiagnosticsProperty('emps', emps));
@@ -278,12 +244,9 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
             other is _$_UserModel &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.invitation, invitation) &&
             const DeepCollectionEquality().equals(other.location, location) &&
             const DeepCollectionEquality().equals(other.isActive, isActive) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.avatar, avatar) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality().equals(other.emps, emps));
@@ -295,11 +258,9 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(invitation),
       const DeepCollectionEquality().hash(location),
       const DeepCollectionEquality().hash(isActive),
+      const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(avatar),
       const DeepCollectionEquality().hash(rating),
       const DeepCollectionEquality().hash(emps));
@@ -317,19 +278,16 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   }
 }
 
-abstract class _UserModel extends UserModel {
+abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {final String? name,
-      required final int id,
+      {required final String? name,
+      final int id,
+      final LatLng? location,
+      required final bool? isActive,
       required final String email,
-      required final String password,
-      required final String invitation,
-      required final LatLng? location,
-      final bool? isActive,
       final String? avatar,
       final int? rating,
       final int? emps}) = _$_UserModel;
-  const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -339,15 +297,11 @@ abstract class _UserModel extends UserModel {
   @override
   int get id;
   @override
-  String get email;
-  @override
-  String get password;
-  @override
-  String get invitation;
-  @override
   LatLng? get location;
   @override
   bool? get isActive;
+  @override
+  String get email;
   @override
   String? get avatar;
   @override

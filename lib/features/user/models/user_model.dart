@@ -8,16 +8,12 @@ part 'user_model.g.dart';
 @freezed
 class UserModel with _$UserModel{
 
-  const UserModel._();
-
   const factory UserModel({
-    String? name,
-    required int id,
+    required String? name,
+    @Default(-1) int id,
+    LatLng? location,
+    required bool? isActive,
     required String email,
-    required String password,
-    required String invitation,
-    required LatLng? location,
-    bool? isActive,
     String? avatar,
     @Default(3) int? rating,
     @Default(10) int? emps,
@@ -25,14 +21,9 @@ class UserModel with _$UserModel{
 
   /// Dummy factory to initialize a UserModel with default data. 
   factory UserModel.initial() =>
-    UserModel(
-        id: -1,
-        email: "email",
-        password: "password",
-        invitation: "invitation",
-        location: defaultMapCenter);
-
-  bool get isDummyUser => id == -1;
+    const UserModel(
+        email: "email", name: 'name', isActive: false,
+    );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

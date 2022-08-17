@@ -1,4 +1,3 @@
-import 'package:empriusapp/core/services/storage/local_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import '../models/tool_model.dart';
@@ -50,7 +49,7 @@ class ToolNotifier extends StateNotifier<List<ToolModel>> {
   Future<void> updateTool(ToolModel tool) async {
     //state = tool;
     // Actualitzes la persistencia per tenir les dades guardades
-    await LocalStorage.setTool(tool);
+    // await LocalStorage.setTool(tool);
   }
 
   // void add(ToolModel tool) {

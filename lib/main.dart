@@ -1,10 +1,30 @@
-import 'package:empriusapp/presentation/routes/routes.dart';
+import 'dart:async';
+
+import 'package:empriusapp/core/routes.dart';
+import 'package:empriusapp/core/services/storage/hive_storage_service.dart';
+import 'package:empriusapp/core/services/storage/storage_service.dart';
+import 'package:empriusapp/core/services/storage/storage_service_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(ProviderScope(child: MyApp()));
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    // Hive-specific initialization
+    await Hive.initFlutter();
+    final StorageService initializedStorageService = HiveStorageService();
+    await initializedStorageService.init();
+    runApp(
+        ProviderScope(
+            overrides: [
+              storageServiceProvider.overrideWithValue(initializedStorageService),
+            ],
+            child: MyApp()
+        )
+    );
+
+  }, (e, _) => throw e);
 }
 
 class MyApp extends ConsumerWidget {

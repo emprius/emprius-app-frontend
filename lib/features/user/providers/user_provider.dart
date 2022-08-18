@@ -51,7 +51,7 @@ class UserNotifier extends StateNotifier<UserModel> {
       state = user;
     } else {
       authState = const AuthState.unauthenticated();
-      state = UserModel.initial();
+      state = UserModel.initial().copyWith(id: 0);  // Perform a state update to update authState also
     }
   }
 

@@ -17,19 +17,23 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
   }
 
-  Future<void> checkAuthState() async {
-    final authState = ref.watch(userProvider.notifier).authState;
-    authState.maybeWhen(
-      authenticated: (fullName) => Navigator.pushReplacementNamed(context, userProfileScreenRoute, ),
-      unauthenticated: ( ) => Navigator.pushReplacementNamed(context, loginScreenRoute),
-      orElse: () {  },
-    );
+  void checkAuthState() {
+    var authState = ref.watch(userProvider.notifier).authState;
+    if (authState is UNAUTHENTICATED) {
+      Navigator.pushReplacementNamed(context, loginScreenRoute);
+    } else if (authState is AUTHENTICATED) {
+      Navigator.pushReplacementNamed(context, userProfileScreenRoute, );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // This is needed to rebuild when the state user is updated and run
+    // checkAuthState again
+    var user = ref.watch(userProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
 
     return const Scaffold(

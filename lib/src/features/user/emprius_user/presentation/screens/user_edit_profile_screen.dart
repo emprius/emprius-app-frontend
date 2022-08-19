@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/bottom_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/core/helper/utils/constants.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
 import 'package:empriusapp/src/features/main/presentation/controllers/emprius_map_controller.dart';
@@ -102,7 +103,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                                 context: context,
                                 builder: ((builder) => BottomImageSelector((image) {
                                       if (image != null) {
-                                        //user = user.copy(avatar: image.path);
+                                        user = user.copyWith(avatar: image.path);
                                         setState(() {});
                                       }
                                       Navigator.pop(context);
@@ -112,7 +113,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                             height: 100,
                             width: 100,
                             child: UserProfileAvatar(
-                              avatar: user.avatar!,
+                              avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
                               showBadge: true,
                             ),
                           ),
@@ -235,7 +236,9 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: EmpriusMap(
+              initialCenter: user.location,
                 empriusMapController: _customMapCtrl
+
             ),
           ),
         ],

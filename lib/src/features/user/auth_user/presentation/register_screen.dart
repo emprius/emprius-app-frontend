@@ -84,7 +84,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           child: UserProfileAvatar(
                             showBadge: true,
                             badgeIcon: Icons.camera_alt,
-                            avatar: _avatar == null ? defaultAvatar : _avatar!.path,
+                            avatar: defaultAvatar,
+                            //avatar: _avatar == null ? defaultAvatar : _avatar!.path,
                           ),
                         ),
                       ),

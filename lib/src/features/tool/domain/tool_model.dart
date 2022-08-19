@@ -1,6 +1,7 @@
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tool_model.freezed.dart';
+part 'tool_model.g.dart';
 
 @freezed
 class ToolModel with _$ToolModel {

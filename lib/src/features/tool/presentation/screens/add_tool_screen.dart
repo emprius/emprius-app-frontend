@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/features/tool/application/providers/deprecated_tool_provider.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -137,11 +138,11 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   );
 
                   await ref
-                      .watch(toolListProvider.notifier)
-                      .updateTool(tool.copyWith(
-                        title: _titleCtrl.text,
-                        description: _descriptionCtrl.text,
-                       ));
+                      .watch(ownToolsProvider.notifier);
+                      // .updateTool(tool.copyWith(
+                      //   title: _titleCtrl.text,
+                      //   description: _descriptionCtrl.text,
+                      //  ));
 
                   Navigator.of(context).pop();
                 },

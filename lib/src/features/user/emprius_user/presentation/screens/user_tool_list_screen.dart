@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/tool/application/providers/deprecated_tool_provider.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_card_screen.dart';
@@ -19,8 +20,14 @@ class UserToolList extends ConsumerStatefulWidget {
 class _UserToolListState extends ConsumerState<UserToolList> {
 
   @override
+  void initState() {
+    ref.read(ownToolsProvider.notifier).getOwnTools();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final tools = ref.watch(toolListProvider);
+    final tools = ref.watch(ownToolsProvider);
     _onSelected(dynamic val){
       setState(()=> tools.removeWhere((tool)=>tool == val));
     }
@@ -64,7 +71,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                   MaterialPageRoute(
                     builder: (context)=> ToolCardScreen(
                         tool: ToolModel(
-                          toolId: tool.toolId,
+                          id: tool.id,
                           title: tool.title,
                           description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
                         )

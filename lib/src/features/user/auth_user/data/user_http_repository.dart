@@ -49,7 +49,7 @@ class UserHttpRepository {
   }
 
   // todo: implement
-  Future<UserModel> login({required String email, required String password}) =>
+  Future<bool> login({required String email, required String password}) =>
       throw UnimplementedError();
 
   // todo: implement

@@ -129,7 +129,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                                 });
                               }),
                           const SizedBox(height: 6.0),
-                          Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
+                          Text(isActive ? "Perfil actiu" : "Perfil inactiu"),
                         ]),
                       ],
                     ),
@@ -204,7 +204,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           user.copyWith(
                             name: _nameCtrl.text,
                             email: _emailCtrl.text,
-                            isActive: user.isActive,
+                            isActive: isActive,
                             location: _customMapCtrl.selectedLocation!,
                           ),
                           _passwordCtrl.text,

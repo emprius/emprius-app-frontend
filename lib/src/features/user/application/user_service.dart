@@ -7,13 +7,13 @@ import 'package:latlong2/latlong.dart';
 
 
 // The public methods on this class will be what allow the UI to modify the state.
-class UserService extends StateNotifier<UserModel> {
+class UserController extends StateNotifier<UserModel> {
 
   AuthState authState = const AuthState.unset();
   final UserStorageRepository _userStorageRepository;
   final UserHttpRepository _userHttpRepository;
 
-  UserService({
+  UserController({
     required UserStorageRepository userStorageRepository,
     required UserHttpRepository userHttpRepository,
   }) :

@@ -16,12 +16,12 @@ final _userHttpProvider = Provider<UserHttpRepository>((ref) {
 
 
 
-final userProvider = StateNotifierProvider<UserService, UserModel>((ref) {
+final userProvider = StateNotifierProvider<UserController, UserModel>((ref) {
   final _userStorageRepository = UserStorageRepository(
       storageServiceProvider: ref.watch(storageServiceProvider)
   );
   final _userHttpRepository =  ref.watch(_userHttpProvider);
-  return UserService(
+  return UserController(
       userStorageRepository: _userStorageRepository,
       userHttpRepository: _userHttpRepository
   );

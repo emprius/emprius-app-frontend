@@ -22,11 +22,12 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   List<bool> isChecked = [];
 
   late ToolModel tool;
+  late bool isAvailable = true;
 
   final _formKey = GlobalKey<FormState>();
   final _titleCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
-  late bool isAvailable = true;
+
 
   @override
   void dispose() {
@@ -39,8 +40,6 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   void initState() {
     currentValue = categories[0];
     isChecked = List<bool>.filled(price.length, false);
-    //TODO CHECK PROVIDER
-//    tool = ref.read(toolListProvider.notifier).state;
   }
 
   @override
@@ -101,8 +100,9 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   value: currentValue,
                   items: categories
                       .map((String category) => DropdownMenuItem<String>(
-                          value: category, child: Text(category)))
-                      .toList(),
+                          value: category, child: Text(category),
+                  ),
+                  ).toList(),
                   onChanged: (String? value) {
                     if (value != null && currentValue != value) {
                       setState(() {
@@ -138,7 +138,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   );
 
                   await ref
-                      .watch(ownToolsProvider.notifier);
+                      .watch(ownToolsProvider.notifier).addTool(
+                      title: _titleCtrl.text,
+                      description: _descriptionCtrl.text
+                  );
                       // .updateTool(tool.copyWith(
                       //   title: _titleCtrl.text,
                       //   description: _descriptionCtrl.text,

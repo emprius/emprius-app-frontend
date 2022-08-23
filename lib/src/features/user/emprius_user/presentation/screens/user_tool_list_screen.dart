@@ -26,9 +26,6 @@ class _UserToolListState extends ConsumerState<UserToolList> {
   @override
   void initState() {
     ref.read(ownToolsProvider.notifier).getOwnTools();
-
-    //TODO: provider for one tool?
-    //isAvailable = tool.isAvailable!;
     super.initState();
   }
 
@@ -60,14 +57,13 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                 activeColor: Colors.blue,
                 onChanged: (value) {
                  ref.watch(ownToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
-
                 },
               ),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     PopupMenuButton(
-                      //on selected go to editpage
+                      //TODO on selected go to editpage
                       itemBuilder: (context) => [
                         PopupMenuItem(
                           value: tool,
@@ -90,7 +86,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
               onTap: () {
                 //TODO cambiar a navigator:
 
-                //Navigator.pushNamed(context, toolCardScreenRoute);
+                //Navigator.pushNamed(context, toolCardScreenRoute, args);
 
 
                 Navigator.of(context).push(

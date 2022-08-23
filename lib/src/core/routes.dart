@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/features/tool/presentation/screens/add_tool_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/ask_tool_form_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_card_screen.dart';
+import 'package:empriusapp/src/features/tool/presentation/screens/tool_edit_card_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/login_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/register_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_activity_screen.dart';
@@ -23,6 +24,7 @@ const String userActivityScreenRoute = "/user-activty";
 const String userInboxScreenRoute = "/user-inbox";
 const String userToolsScreenRoute = "/user-toollist";
 const String toolCardScreenRoute = "/tool-card";
+const String toolEditCardScreenRoute = "/edit-tool";
 const String toolAddFormScreenRoute = "/tool-form";
 const String toolAskFormScreenRoute = "/ask-tool-form";
 const String splashScreenRoute = "/";
@@ -50,7 +52,10 @@ class Routes {
       case userToolsScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserToolList());
       case toolCardScreenRoute:
-        return MaterialPageRoute(builder: (_)=> ToolCardScreen());
+        return MaterialPageRoute(
+            builder: (_)=> ToolCardScreen());
+      case toolEditCardScreenRoute:
+        return MaterialPageRoute(builder: (_)=> ToolEditCardScreen(settings.arguments as EditToolArguments));
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
       case toolAskFormScreenRoute:
@@ -68,4 +73,9 @@ class EditProfileArguments{
 class ToolDetailArguments{
   ToolModel tool;
   ToolDetailArguments(this.tool);
+}
+
+class EditToolArguments{
+  int id;
+  EditToolArguments(this.id);
 }

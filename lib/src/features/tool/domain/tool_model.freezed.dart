@@ -20,11 +20,11 @@ ToolModel _$ToolModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ToolModel {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
-  bool? get isAvailable => throw _privateConstructorUsedError;
+  bool get isAvailable => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   bool? get needsTransport =>
       throw _privateConstructorUsedError; //List<TransportNeeded>transport; ?
@@ -49,11 +49,11 @@ abstract class $ToolModelCopyWith<$Res> {
   factory $ToolModelCopyWith(ToolModel value, $Res Function(ToolModel) then) =
       _$ToolModelCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String description,
       LatLng? location,
-      bool? isAvailable,
+      bool isAvailable,
       String? image,
       bool? needsTransport,
       bool? maybeFree,
@@ -98,7 +98,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
       isAvailable: isAvailable == freezed
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -170,11 +170,11 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       __$$_ToolModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String description,
       LatLng? location,
-      bool? isAvailable,
+      bool isAvailable,
       String? image,
       bool? needsTransport,
       bool? maybeFree,
@@ -221,7 +221,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -237,7 +237,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
       isAvailable: isAvailable == freezed
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -290,7 +290,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ToolModel implements _ToolModel {
   const _$_ToolModel(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.description,
       this.location,
@@ -311,7 +311,7 @@ class _$_ToolModel implements _ToolModel {
       _$$_ToolModelFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String title;
   @override
@@ -320,7 +320,7 @@ class _$_ToolModel implements _ToolModel {
   final LatLng? location;
   @override
   @JsonKey()
-  final bool? isAvailable;
+  final bool isAvailable;
   @override
   final String? image;
   @override
@@ -414,11 +414,11 @@ class _$_ToolModel implements _ToolModel {
 
 abstract class _ToolModel implements ToolModel {
   const factory _ToolModel(
-      {required final int id,
+      {final int? id,
       required final String title,
       required final String description,
       final LatLng? location,
-      final bool? isAvailable,
+      final bool isAvailable,
       final String? image,
       final bool? needsTransport,
       final bool? maybeFree,
@@ -435,7 +435,7 @@ abstract class _ToolModel implements ToolModel {
       _$_ToolModel.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get title;
   @override
@@ -443,7 +443,7 @@ abstract class _ToolModel implements ToolModel {
   @override
   LatLng? get location;
   @override
-  bool? get isAvailable;
+  bool get isAvailable;
   @override
   String? get image;
   @override

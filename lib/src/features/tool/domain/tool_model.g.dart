@@ -7,7 +7,7 @@ part of 'tool_model.dart';
 // **************************************************************************
 
 _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       title: json['title'] as String,
       description: json['description'] as String,
       location: json['location'] == null

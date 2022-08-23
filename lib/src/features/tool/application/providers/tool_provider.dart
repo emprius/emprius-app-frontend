@@ -15,3 +15,7 @@ final ownToolsProvider = StateNotifierProvider<OwnToolListController, List<ToolM
   );
 });
 
+
+final singleToolProvider = StateProvider.family<ToolModel?, int>((ref, id) {
+  return ref.watch(ownToolsProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id)));
+});

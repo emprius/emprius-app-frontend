@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/date_picker_widget.dart';
 import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +17,17 @@ class AskToolFormScreen extends ConsumerStatefulWidget {
 
 class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   DateTime date = DateTime(2022, 8, 1);
-  late ToolModel tool;
+  late int id;
 
   @override
   void initState() {
-    tool = widget.args.tool;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final tool = ref.watch(singleToolProvider(widget.args.id));
+
     return Scaffold(
       appBar: UserAppbar('Formulari contacte'),
       body: SingleChildScrollView(
@@ -37,7 +39,7 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Demana la eina ${tool.title}'),
+              Text('Demana la eina ${tool?.title}'),
               SizedBox(height: 20.0),
               CustomTextField(
                 //controller: _petitionCtrl,

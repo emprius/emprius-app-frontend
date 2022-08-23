@@ -1,6 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 class ToolCardScreen extends ConsumerStatefulWidget {
-  final ToolModel? tool;
-  const ToolCardScreen({Key? key, this.tool}) : super(key: key);
+  final ToolDetailArguments args;
+  const ToolCardScreen(this.args, {Key? key}) : super(key: key);
 
   @override
   createState() => _ToolCardScreenState();
@@ -24,15 +24,17 @@ class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
   //   isChecked = List<bool>.filled(needsTransport.length, false);
   // }
 
+  late int id;
+
   @override
   Widget build(BuildContext context) {
-    //final tools = ref.watch(toolListProvider);
+    final tool = ref.watch(singleToolProvider(widget.args.id));
 
     return Scaffold(
       appBar: UserAppbar("Eina"),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async{
-            await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(widget.tool!));
+            await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(id));
           },
           label: Text("Demana"),
       ),
@@ -52,7 +54,7 @@ class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
                     child: Text(
-                      widget.tool!.title,
+                      tool!.title,
                       style: const TextStyle(
                         fontSize: 20.0,
                       ),
@@ -105,7 +107,7 @@ class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
               Padding(
                 padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
                 child: Text(
-                  widget.tool!.description,
+                  tool.description,
                   textAlign: TextAlign.center,
                 ),
               ),

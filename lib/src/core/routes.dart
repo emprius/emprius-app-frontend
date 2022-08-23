@@ -50,10 +50,11 @@ class Routes {
       case userInboxScreenRoute:
         return MaterialPageRoute(builder: (_)=> UserInboxScreen());
       case userToolsScreenRoute:
+        //TODO: check this
         return MaterialPageRoute(builder: (_)=> UserToolList());
       case toolCardScreenRoute:
         return MaterialPageRoute(
-            builder: (_)=> ToolCardScreen());
+            builder: (_)=> ToolCardScreen(settings.arguments as ToolDetailArguments));
       case toolEditCardScreenRoute:
         return MaterialPageRoute(builder: (_)=> ToolEditCardScreen(settings.arguments as EditToolArguments));
       case toolAddFormScreenRoute:
@@ -71,8 +72,8 @@ class EditProfileArguments{
 }
 
 class ToolDetailArguments{
-  ToolModel tool;
-  ToolDetailArguments(this.tool);
+  int id;
+  ToolDetailArguments(this.id);
 }
 
 class EditToolArguments{

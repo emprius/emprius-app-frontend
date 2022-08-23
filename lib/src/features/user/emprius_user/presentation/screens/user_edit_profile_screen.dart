@@ -21,7 +21,6 @@ import 'package:latlong2/latlong.dart';
 
 class UserEditProfileScreen extends ConsumerStatefulWidget {
   final EditProfileArguments args;
-
   const UserEditProfileScreen(this.args, {Key? key}) : super(key: key);
 
   @override

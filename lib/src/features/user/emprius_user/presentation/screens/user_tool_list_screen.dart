@@ -8,17 +8,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 class UserToolList extends ConsumerStatefulWidget {
-  const UserToolList({
-    Key? key,
-  }) : super(key: key);
+  // final EditToolArguments args;
+  // const UserToolList(this.args, {Key? key}) : super(key: key);
 
   @override
   createState() => _UserToolListState();
 }
 
 class _UserToolListState extends ConsumerState<UserToolList> {
-
   late bool isAvailable;
+
+
   void _deleteTool(ToolModel tool) {
     ref.watch(ownToolsProvider.notifier).deleteTool(tool);
   }
@@ -63,16 +63,22 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     PopupMenuButton(
-                      //TODO on selected go to editpage
+                      icon: Icon(Icons.edit),
                       itemBuilder: (context) => [
                         PopupMenuItem(
                           value: tool,
                           child: Text("Editar eina"),
                         ),
                       ],
-                      icon: Icon(Icons.edit),
+                      onSelected: (value){
+                        if(value == tool) {
+                          Navigator.pushNamed(context, toolEditCardScreenRoute,
+                              arguments: EditToolArguments(tool.id!));
+                        }
+                        },
                     ),
                     PopupMenuButton(
+                      icon: Icon(Icons.delete),
                       onSelected:  _deleteTool,
                         itemBuilder: (context) => [
                           PopupMenuItem(
@@ -80,29 +86,11 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                             child: Text("Esborrar de la llista?"),
                           ),
                         ],
-                        icon: Icon(Icons.delete),
                     ),
                   ]),
               onTap: () {
-                //TODO cambiar a navigator:
-
-                //Navigator.pushNamed(context, toolCardScreenRoute, args);
-
-
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context)=> ToolCardScreen(
-                      //TODO pass tool id only - using .family provider on toolcardscreen
-                      //TODO args tool id in routes
-                      tool: tool,
-                        // tool: ToolModel(
-                        //   id: tool.id,
-                        //   title: tool.title,
-                        //   description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
-                        )
-                    ));},
-                //   ),
-                // );
+                Navigator.pushNamed(context, toolCardScreenRoute, arguments: ToolDetailArguments(tool.id!));
+              },
             );
           },
         ),

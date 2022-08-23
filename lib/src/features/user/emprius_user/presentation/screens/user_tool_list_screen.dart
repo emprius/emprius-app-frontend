@@ -1,5 +1,4 @@
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/deprecated_tool_provider.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_card_screen.dart';
@@ -19,18 +18,23 @@ class UserToolList extends ConsumerStatefulWidget {
 
 class _UserToolListState extends ConsumerState<UserToolList> {
 
+  late bool isAvailable;
+  void _deleteTool(ToolModel tool) {
+    ref.watch(ownToolsProvider.notifier).deleteTool(tool);
+  }
+
   @override
   void initState() {
     ref.read(ownToolsProvider.notifier).getOwnTools();
+
+    //TODO: provider for one tool?
+    //isAvailable = tool.isAvailable!;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final tools = ref.watch(ownToolsProvider);
-    _onSelected(dynamic val){
-      setState(()=> tools.removeWhere((tool)=>tool == val));
-    }
 
     return Scaffold(
       appBar: UserAppbar("Les meves eines"),
@@ -50,35 +54,59 @@ class _UserToolListState extends ConsumerState<UserToolList> {
             return ListTile(
               title: Text(tool.title),
               subtitle: Text(tool.description),
-              leading: Switch(value: tool.isAvailable!, onChanged: (value) {  },),
+              leading: Switch(
+                value: tool.isAvailable,
+                activeTrackColor: Colors.white10,
+                activeColor: Colors.blue,
+                onChanged: (value) {
+                 ref.watch(ownToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
+
+                },
+              ),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.edit),
                     PopupMenuButton(
-                      onSelected: _onSelected,
+                      //on selected go to editpage
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: tool,
+                          child: Text("Editar eina"),
+                        ),
+                      ],
+                      icon: Icon(Icons.edit),
+                    ),
+                    PopupMenuButton(
+                      onSelected:  _deleteTool,
                         itemBuilder: (context) => [
                           PopupMenuItem(
                             value: tool,
-                            child: Text("Borrar"),
+                            child: Text("Esborrar de la llista?"),
                           ),
                         ],
                         icon: Icon(Icons.delete),
                     ),
                   ]),
               onTap: () {
+                //TODO cambiar a navigator:
+
+                //Navigator.pushNamed(context, toolCardScreenRoute);
+
+
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context)=> ToolCardScreen(
-                        tool: ToolModel(
-                          id: tool.id,
-                          title: tool.title,
-                          description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
+                      //TODO pass tool id only - using .family provider on toolcardscreen
+                      //TODO args tool id in routes
+                      tool: tool,
+                        // tool: ToolModel(
+                        //   id: tool.id,
+                        //   title: tool.title,
+                        //   description: tool.description, maybeFree: tool.maybeFree, cost: tool.cost, needsTransport: tool.needsTransport, location: tool.location,
                         )
-                    ),
-                  ),
-                );
-              },
+                    ));},
+                //   ),
+                // );
             );
           },
         ),

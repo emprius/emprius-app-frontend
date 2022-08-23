@@ -49,7 +49,7 @@
 // //     return await _toolsRepository.fetchOne(toolId : toolId);
 // //   }
 // //
-// //   //TODO: finish implementation and return type:
+// //   //finish implementation and return type:
 // // //   Future<ToolModel> addTool({
 // // //     required String title,
 // // //     required String description,

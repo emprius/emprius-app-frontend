@@ -139,6 +139,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
 
                   await ref
                       .watch(ownToolsProvider.notifier).addTool(
+                    //TODO implement more fields coming from add tool screen
                       title: _titleCtrl.text,
                       description: _descriptionCtrl.text
                   );

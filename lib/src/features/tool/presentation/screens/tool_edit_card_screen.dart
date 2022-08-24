@@ -58,11 +58,13 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const Text("Cambiar el titol:"),
                 CustomTextField(
-                    labelText: tool!.title,
+                    labelText: "Cambiar el titol:",
+                    hintText: tool!.title,
                     controller: _titleCtrl,
-                    validator: FormValidator.nameValidator),
+                    validator: FormValidator.nameValidator,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
                 SizedBox(height: 10.0),
                 //TODO (m) extract to list of labels dynamic
                 Row(
@@ -106,13 +108,21 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 ),
                 SizedBox(height: 10.0),
                 ToolCaroussel(),
-                SizedBox(height: 20.0),
-                const Text("Cambiar descripcio:"),
                 SizedBox(height: 10.0),
-                CustomTextField(labelText: tool.description,
-
+                CustomTextField(
+                  labelText: "Cambiar descripcio:",
+                  hintText: tool.description,
                   controller: _descriptionCtrl,
-                  validator: FormValidator.nameValidator,
+                  validator:  FormValidator.nameValidator,
+                  //TODO (m) check validate only one field
+                  // validator:  (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //   return null;
+                  //   }else {
+                  //     FormValidator.nameValidator;
+                  //   }
+                  //   },
+                  //autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: 5,),
 
 

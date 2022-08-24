@@ -6,7 +6,9 @@ class CustomTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final autovalidateMode;
   final String? errorText;
+  final String? hintText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final int maxLines;
@@ -20,7 +22,9 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.controller,
     this.validator,
+    this.autovalidateMode,
     this.errorText,
+    this.hintText,
     this.keyboardType,
     this.textInputAction,
     this.maxLines = 1,
@@ -50,6 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: widget.autovalidateMode,
       validator: widget.validator,
       controller: controller,
       onChanged: widget.onChanged,
@@ -60,6 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
         suffixIcon: widget.suffixIcon,
         labelText: widget.labelText,
+        hintText: widget.hintText,
         errorText: widget.errorText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         border: OutlineInputBorder(

@@ -38,8 +38,11 @@ class ToolHttpRepository {
 
   Future<ToolModel> addTool({
     required ToolModel toolData,
+    required int lastId // todo: this is for mocking pourposes only
   }) async {
-    return toolData.copyWith(id: 4);
+    var newTool = toolData.copyWith(id: lastId);
+    _sampleTools.add(newTool);
+    return toolData.copyWith(id: lastId);
   }
 
   Future<ToolModel> updateTool({

@@ -59,7 +59,9 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 const Text("Cambiar el titol:"),
-                CustomTextField(labelText: tool!.title, controller: _titleCtrl,
+                CustomTextField(
+                    labelText: tool!.title,
+                    controller: _titleCtrl,
                     validator: FormValidator.nameValidator),
                 SizedBox(height: 10.0),
                 //TODO (m) extract to list of labels dynamic

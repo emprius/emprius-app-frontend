@@ -26,16 +26,15 @@ class OwnToolListController extends StateNotifier<List<ToolModel>> {
     bool? maybeFree,
     bool? askWithFee,
   }) async {
-    final newTool = ToolModel(
-      title: title,
-      description: description,
-      image: image,
-      maybeFree: maybeFree,
-      askWithFee: askWithFee,
-      id: 1,
-    );
-    await _toolHttpRepository.addTool(
-        toolData: newTool,
+    var newTool = await _toolHttpRepository.addTool(
+        toolData:  ToolModel(
+          title: title,
+          description: description,
+          image: image,
+          maybeFree: maybeFree,
+          askWithFee: askWithFee,
+        ),
+      lastId: state.length + 1
     );
     state = [...state, newTool];
   }

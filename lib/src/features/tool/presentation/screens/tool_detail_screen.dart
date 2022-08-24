@@ -24,8 +24,6 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
   //   isChecked = List<bool>.filled(needsTransport.length, false);
   // }
 
-  late int id;
-
   @override
   Widget build(BuildContext context) {
     final tool = ref.watch(singleToolProvider(widget.args.id));
@@ -34,7 +32,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
       appBar: UserAppbar("Eina"),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async{
-            await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(id));
+            await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(widget.args.id));
           },
           label: Text("Demana"),
       ),

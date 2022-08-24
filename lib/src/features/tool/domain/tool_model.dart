@@ -11,7 +11,7 @@ class ToolModel with _$ToolModel {
    required String description,
    LatLng? location,
    @Default(true)bool isAvailable,
-   String? image,
+   List<String>? images,
    bool? needsTransport,   //List<TransportNeeded>transport; ?
    bool? maybeFree,
    int? rating,

@@ -22,7 +22,7 @@ class OwnToolListController extends StateNotifier<List<ToolModel>> {
   Future<void> addTool({
     required String title,
     required String description,
-    String? image,
+    List<String>? images,
     bool? maybeFree,
     bool? askWithFee,
   }) async {
@@ -30,7 +30,7 @@ class OwnToolListController extends StateNotifier<List<ToolModel>> {
         toolData:  ToolModel(
           title: title,
           description: description,
-          image: image,
+          images: images,
           maybeFree: maybeFree,
           askWithFee: askWithFee,
         ),

@@ -25,7 +25,7 @@ mixin _$ToolModel {
   String get description => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
   bool? get needsTransport =>
       throw _privateConstructorUsedError; //List<TransportNeeded>transport; ?
   bool? get maybeFree => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $ToolModelCopyWith<$Res> {
       String description,
       LatLng? location,
       bool isAvailable,
-      String? image,
+      List<String>? images,
       bool? needsTransport,
       bool? maybeFree,
       int? rating,
@@ -82,7 +82,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
     Object? description = freezed,
     Object? location = freezed,
     Object? isAvailable = freezed,
-    Object? image = freezed,
+    Object? images = freezed,
     Object? needsTransport = freezed,
     Object? maybeFree = freezed,
     Object? rating = freezed,
@@ -115,10 +115,10 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: images == freezed
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       needsTransport: needsTransport == freezed
           ? _value.needsTransport
           : needsTransport // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       String description,
       LatLng? location,
       bool isAvailable,
-      String? image,
+      List<String>? images,
       bool? needsTransport,
       bool? maybeFree,
       int? rating,
@@ -205,7 +205,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
     Object? description = freezed,
     Object? location = freezed,
     Object? isAvailable = freezed,
-    Object? image = freezed,
+    Object? images = freezed,
     Object? needsTransport = freezed,
     Object? maybeFree = freezed,
     Object? rating = freezed,
@@ -238,10 +238,10 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: images == freezed
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       needsTransport: needsTransport == freezed
           ? _value.needsTransport
           : needsTransport // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ class _$_ToolModel implements _ToolModel {
       required this.description,
       this.location,
       this.isAvailable = true,
-      this.image,
+      final List<String>? images,
       this.needsTransport,
       this.maybeFree,
       this.rating,
@@ -305,7 +305,8 @@ class _$_ToolModel implements _ToolModel {
       this.height,
       this.width,
       this.length,
-      this.weight});
+      this.weight})
+      : _images = images;
 
   factory _$_ToolModel.fromJson(Map<String, dynamic> json) =>
       _$$_ToolModelFromJson(json);
@@ -321,8 +322,15 @@ class _$_ToolModel implements _ToolModel {
   @override
   @JsonKey()
   final bool isAvailable;
+  final List<String>? _images;
   @override
-  final String? image;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final bool? needsTransport;
 //List<TransportNeeded>transport; ?
@@ -347,7 +355,7 @@ class _$_ToolModel implements _ToolModel {
 
   @override
   String toString() {
-    return 'ToolModel(id: $id, title: $title, description: $description, location: $location, isAvailable: $isAvailable, image: $image, needsTransport: $needsTransport, maybeFree: $maybeFree, rating: $rating, cost: $cost, askWithFee: $askWithFee, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
+    return 'ToolModel(id: $id, title: $title, description: $description, location: $location, isAvailable: $isAvailable, images: $images, needsTransport: $needsTransport, maybeFree: $maybeFree, rating: $rating, cost: $cost, askWithFee: $askWithFee, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
   }
 
   @override
@@ -362,7 +370,7 @@ class _$_ToolModel implements _ToolModel {
             const DeepCollectionEquality().equals(other.location, location) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
                 .equals(other.needsTransport, needsTransport) &&
             const DeepCollectionEquality().equals(other.maybeFree, maybeFree) &&
@@ -387,7 +395,7 @@ class _$_ToolModel implements _ToolModel {
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(location),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(image),
+      const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(needsTransport),
       const DeepCollectionEquality().hash(maybeFree),
       const DeepCollectionEquality().hash(rating),
@@ -419,7 +427,7 @@ abstract class _ToolModel implements ToolModel {
       required final String description,
       final LatLng? location,
       final bool isAvailable,
-      final String? image,
+      final List<String>? images,
       final bool? needsTransport,
       final bool? maybeFree,
       final int? rating,
@@ -445,7 +453,7 @@ abstract class _ToolModel implements ToolModel {
   @override
   bool get isAvailable;
   @override
-  String? get image;
+  List<String>? get images;
   @override
   bool? get needsTransport;
   @override //List<TransportNeeded>transport; ?

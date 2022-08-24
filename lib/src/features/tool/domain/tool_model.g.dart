@@ -14,7 +14,8 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
           ? null
           : LatLng.fromJson(json['location'] as Map<String, dynamic>),
       isAvailable: json['isAvailable'] as bool? ?? true,
-      image: json['image'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       needsTransport: json['needsTransport'] as bool?,
       maybeFree: json['maybeFree'] as bool?,
       rating: json['rating'] as int?,
@@ -34,7 +35,7 @@ Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
       'description': instance.description,
       'location': instance.location,
       'isAvailable': instance.isAvailable,
-      'image': instance.image,
+      'images': instance.images,
       'needsTransport': instance.needsTransport,
       'maybeFree': instance.maybeFree,
       'rating': instance.rating,

@@ -46,29 +46,32 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: UserAppbar('Afegir eines'),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        physics: const BouncingScrollPhysics(),
-        child: Form(
+      body:
+      // SingleChildScrollView(
+      //   padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+      //   physics: const BouncingScrollPhysics(),
+      //   child:
+        Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(height: 20.0),
               Text('Afegeix nova eina:'),
               SizedBox(height: 20.0),
               CustomTextField(
                 controller: _titleCtrl,
                 validator: FormValidator.nameValidator,
-                labelText: "Nom de la eina",
-              ),
+                labelText: "Titol de la eina",
+              ), // Titol eina
               SizedBox(height: 20.0),
               CustomTextField(
                 controller: _descriptionCtrl,
                 validator: FormValidator.nameValidator,
                 labelText: "Descripcio de la eina",
                 maxLines: 5,
-              ),
+              ), // Descripcio eina
               SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -92,9 +95,12 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     child: Text("Puja fotos"),
                   ),
                 ],
-              ),
+              ), // Puja fotos
               SizedBox(height: 20.0),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
                 Text("Tria categoria:"),
                 DropdownButton(
                   value: currentValue,
@@ -111,21 +117,23 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     }
                   },
                 ),
-              ]),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: price.length,
-                  itemBuilder: (context, index) {
-                    return CheckboxListTile(
-                        title: Text(price[index]),
-                        value: isChecked[index],
-                        onChanged: (value) {
-                          setState(() {
-                            isChecked[index] = value as bool;
+              ]), //Categories
+              Container(
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: price.length,
+                    itemBuilder: (context, index) {
+                      return CheckboxListTile(
+                          title: Text(price[index]),
+                          value: isChecked[index],
+                          onChanged: (value) {
+                            setState(() {
+                              isChecked[index] = value as bool;
+                            });
                           });
-                        });
-                  }),
+                    }),
+              ), // Checkbox preu
               const SizedBox(height: 20.0),
               CustomTextButton(
                 text: 'Guarda',
@@ -150,11 +158,11 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
 
                   Navigator.of(context).pop();
                 },
-              ),
+              ), // Guardar
             ],
           ),
         ),
-      ),
-    );
+      );
+    //);
   }
 }

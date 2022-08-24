@@ -107,7 +107,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         ],
                 ),
                 SizedBox(height: 10.0),
-                ToolCaroussel(),
+                ToolCaroussel(tool.images!),
                 SizedBox(height: 10.0),
                 CustomTextField(
                   labelText: "Cambiar descripcio:",

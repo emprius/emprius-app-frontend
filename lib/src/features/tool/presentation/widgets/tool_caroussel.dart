@@ -1,21 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 
-class ToolCaroussel extends StatefulWidget {
-  //const ToolCaroussel({Key? key}) : super(key: key);
+
+class ToolCaroussel extends ConsumerStatefulWidget {
+  final List<String> images;
+  const ToolCaroussel(this.images, {Key? key}) : super(key: key);
 
   @override
-  State<ToolCaroussel> createState() => _ToolCarousselState();
+  createState() => _ToolCarousselState();
 }
 
-class _ToolCarousselState extends State<ToolCaroussel> {
-  final toolImagesUrl = [
-    "https://static.remove.bg/remove-bg-web/5c20d2ecc9ddb1b6c85540a333ec65e2c616dbbd/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png",
-    'https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1501516069922-a9982bd6f3bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1175&q=80',
-    'https://images.unsplash.com/photo-1587582423116-ec07293f0395?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  ];
+class _ToolCarousselState extends ConsumerState<ToolCaroussel> {
 
 
   @override
@@ -25,22 +22,33 @@ class _ToolCarousselState extends State<ToolCaroussel> {
           height: 200.0,
         enlargeCenterPage: true,
       ),
-      itemCount: toolImagesUrl.length,
+      itemCount: widget.images.length,
       itemBuilder: (context, index, realIndex) {
-        final toolImage = toolImagesUrl[index];
-        return buildImage(toolImage, index);
+        // final toolImage = widget.images[index].contains('https://')
+        //     ? NetworkImage(widget.images[index])
+        //     : FileImage(File(widget.images[index]));
+
+        return buildImage(widget.images[index], index);
       },
     );
   }
 
-  Widget buildImage(String toolImage, int index) => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 12),
-    color: Colors.black26,
-    width: double.infinity,
-    child: Image.network(
-      toolImage,
-      fit:BoxFit.cover,
-    ),
-  );
 }
+Widget buildImage(String imgPath, int index) {
 
+  final toolImage = imgPath.contains('https://')
+      ? NetworkImage(imgPath)
+      : FileImage(File(imgPath));
+
+  return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.black26,
+        image: DecorationImage(
+          fit: BoxFit.fill,
+            image: (toolImage as ImageProvider)
+        )
+      )
+      );
+}

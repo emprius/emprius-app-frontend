@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class ToolCardScreen extends ConsumerStatefulWidget {
+class ToolDetailScreen extends ConsumerStatefulWidget {
   final ToolDetailArguments args;
-  const ToolCardScreen(this.args, {Key? key}) : super(key: key);
+  const ToolDetailScreen(this.args, {Key? key}) : super(key: key);
 
   @override
-  createState() => _ToolCardScreenState();
+  createState() => _ToolDetailScreenState();
 }
 
-class _ToolCardScreenState extends ConsumerState<ToolCardScreen> {
+class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
   // List<String> needsTransport = ["Necessita transport", "No es necessari"];
   // List<bool> isChecked = [];
   //

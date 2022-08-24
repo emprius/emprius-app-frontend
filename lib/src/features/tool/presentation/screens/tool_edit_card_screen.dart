@@ -62,7 +62,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 CustomTextField(labelText: tool!.title, controller: _titleCtrl,
                     validator: FormValidator.nameValidator),
                 SizedBox(height: 10.0),
-                //todo: extract to list of labels dynamic
+                //TODO (m) extract to list of labels dynamic
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,7 +121,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 //     textAlign: TextAlign.center,
                 //   ),
                 // ),
-                //todo checkbox for if needs transport
+                //TODO (m) checkbox for if needs transport
                 // ListView.builder(
                 //     physics: NeverScrollableScrollPhysics(),
                 //     shrinkWrap: true,

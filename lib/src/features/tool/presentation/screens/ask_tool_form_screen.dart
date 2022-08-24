@@ -48,7 +48,7 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
               ),
               SizedBox(height: 20.0),
               DatePickerWidget("Selecciona dia d'inici"),
-              //todo: pass data from widget
+              //TODO (m): pass data from widget
               Text('${date.year}/${date.month}/${date.day}'),
               DatePickerWidget("Selecciona data de tornada"),
             ],

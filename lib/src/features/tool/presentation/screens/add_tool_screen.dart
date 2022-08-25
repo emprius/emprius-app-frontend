@@ -1,13 +1,15 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
-import 'package:empriusapp/src/features/tool/application/providers/deprecated_tool_provider.dart';
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class AddToolScreen extends ConsumerStatefulWidget {
   const AddToolScreen({Key? key}) : super(key: key);
@@ -22,8 +24,8 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   List<String> price = ["Gratuita", "Amb fiansa"];
   List<bool> isChecked = [];
 
-  late ToolModel tool;
   late bool isAvailable = true;
+  List<XFile>? _images;
 
   final _formKey = GlobalKey<FormState>();
   final _titleCtrl = TextEditingController();
@@ -47,7 +49,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
     return Scaffold(
       appBar: UserAppbar('Afegir eines'),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10), // try remove parent of expanded widget
         physics: const BouncingScrollPhysics(),
         child: Form(
           key: _formKey,
@@ -95,7 +97,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                       },
                     ),
                   ]), //Categories
-              Container(
+              SizedBox(
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -111,8 +113,12 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                           });
                     }),
               ), // Checkbox preu
-              const SizedBox(height: 20.0),
-              Container(height: 180, child: ImageListSelector()), //
+              const SizedBox(height: 10.0),
+              Container(
+                height: 200,
+                child: ImageListSelector(
+                    callback: ((selectedImages) => _images = selectedImages)),
+              ), //
               CustomTextButton(
                 text: 'Guarda',
                 onClicked: () async {
@@ -123,16 +129,13 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     const SnackBar(content: Text('Eina afegida')),
                   );
 
-                  await ref.read(ownToolsProvider.notifier).addTool(
-                      //TODO (m) implement more fields coming from add tool screen
-                      title: _titleCtrl.text,
-                      description: _descriptionCtrl.text);
-                  // .updateTool(tool.copyWith(
-                  //   title: _titleCtrl.text,
-                  //   description: _descriptionCtrl.text,
-                  //  ));
-
-                  Navigator.of(context).pop();
+                  await ref.read(ownToolsProvider.notifier).addTool(ToolModel(
+                        title: _titleCtrl.text,
+                        description: _descriptionCtrl.text,
+                        images: _images?.map((e) => e.path).toList(),
+                      ));
+                  //Navigator.of(context).pop();
+                  Navigator.pushReplacementNamed(context, userToolsScreenRoute);
                 },
               ), // Guardar
             ],

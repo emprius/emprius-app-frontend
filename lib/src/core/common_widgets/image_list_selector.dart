@@ -4,7 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class ImageListSelector extends StatefulWidget {
-  const ImageListSelector({Key? key}) : super(key: key);
+  final Function(List<XFile>?)? callback;
+  ImageListSelector({this.callback, Key? key}) : super(key: key);
 
   @override
   State<ImageListSelector> createState() => _ImageListSelectorState();
@@ -18,8 +19,10 @@ class _ImageListSelectorState extends State<ImageListSelector> {
 
   void selectToolImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (widget.callback == null) return;
     if (selectedImages!.isNotEmpty) {
       toolImageList!.addAll(selectedImages);
+      widget.callback!(selectedImages);
     }
     setState(() {
     });
@@ -27,16 +30,15 @@ class _ImageListSelectorState extends State<ImageListSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
+    // You have an expanded widget in the wrong place. It should be in a column or row.
+    return Column(
         children: [
           CustomTextButton(
             text: 'Pujar imatges',
             onClicked: () { selectToolImages(); },
           ),
           SizedBox(height: 10.0),
-          Container(
-            height: 100,
+          Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -44,11 +46,9 @@ class _ImageListSelectorState extends State<ImageListSelector> {
                 itemBuilder: (BuildContext context, int index) {
                   return Image.file(File(toolImageList![index].path), fit: BoxFit.cover);
                 }
-
             ),
           )
         ],
-      ),
     );
   }
 }

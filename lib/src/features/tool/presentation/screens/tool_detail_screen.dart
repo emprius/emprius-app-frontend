@@ -99,7 +99,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                       ],
                     ))
               ]),
-              ToolCaroussel(tool.images!),
+              if(tool.images !=null)ToolCaroussel(tool.images!),
               SizedBox(height: 10.0),
               RatingStars(rating: 5),
               Padding(

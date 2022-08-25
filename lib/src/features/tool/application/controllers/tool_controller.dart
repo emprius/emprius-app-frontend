@@ -19,22 +19,31 @@ class OwnToolListController extends StateNotifier<List<ToolModel>> {
     state = await _toolHttpRepository.getOwnTools();
   }
 
-  Future<void> addTool({
-    required String title,
-    required String description,
-    List<String>? images,
-    bool? maybeFree,
-    bool? askWithFee,
-  }) async {
+
+  // Future<void> addTool({
+  //   required String title,
+  //   required String description,
+  //   List<String>? images,
+  //   bool? maybeFree,
+  //   bool? askWithFee,
+  // }) async {
+  //   var newTool = await _toolHttpRepository.addTool(
+  //       toolData:  ToolModel(
+  //         title: title,
+  //         description: description,
+  //         images: images,
+  //         maybeFree: maybeFree,
+  //         askWithFee: askWithFee,
+  //       ),
+  //     lastId: state.length + 1
+  //   );
+  //   state = [...state, newTool];
+  // }
+
+  Future<void> addTool(ToolModel tool) async {
     var newTool = await _toolHttpRepository.addTool(
-        toolData:  ToolModel(
-          title: title,
-          description: description,
-          images: images,
-          maybeFree: maybeFree,
-          askWithFee: askWithFee,
-        ),
-      lastId: state.length + 1
+        toolData: tool,
+        lastId: state.length + 1
     );
     state = [...state, newTool];
   }

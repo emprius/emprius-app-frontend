@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/common_widgets/bottom_image_selector.dart';
+import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
@@ -100,7 +100,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           onTap: () {
                             showModalBottomSheet(
                                 context: context,
-                                builder: ((builder) => BottomImageSelector((image) {
+                                builder: ((builder) => SingleImageSelector((image) {
                                       if (image != null) {
                                         user = user.copyWith(avatar: image.path);
                                         setState(() {});

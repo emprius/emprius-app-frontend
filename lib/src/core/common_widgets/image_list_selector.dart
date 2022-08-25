@@ -30,7 +30,6 @@ class _ImageListSelectorState extends State<ImageListSelector> {
 
   @override
   Widget build(BuildContext context) {
-    // You have an expanded widget in the wrong place. It should be in a column or row.
     return Column(
         children: [
           CustomTextButton(

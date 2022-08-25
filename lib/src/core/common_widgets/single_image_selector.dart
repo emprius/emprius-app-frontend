@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class BottomImageSelector extends StatelessWidget {
+class SingleImageSelector extends StatelessWidget {
   final Function(File?) callback;
-  BottomImageSelector(this.callback, {Key? key}) : super(key: key);
+  SingleImageSelector(this.callback, {Key? key}) : super(key: key);
 
   File? _image;
 

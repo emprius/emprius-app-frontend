@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/features/tool/presentation/widgets/tool_extra_properties.dart';
@@ -19,17 +20,20 @@ class AddToolScreen extends ConsumerStatefulWidget {
 }
 
 class _AddToolScreenState extends ConsumerState<AddToolScreen> {
+
+  //TODO: CHANGE TO ENUM
   String? _currentCategory = "";
   List<String> categories = ["Vehicle", "Construccio", "Energia"];
 
-  String? _currentTransport = "";
-  List<String> transportOptions = [
-    "Cap en especial",
-    "Necessita remolc",
-    "Necessita vehicle pesat"
-  ];
+  //TODO: CHANGE TO ENUM
+  // String? _currentTransport = "";
+  // List<String> transportOptions = [
+  //   "Cap en especial",
+  //   "Necessita remolc",
+  //   "Necessita vehicle pesat"
+  // ];
 
-  List<String> price = ["Gratuita", "Amb fiansa"];
+  List<String> price = ["Gratuita", "Amb fiansa"]; //cambiar a boolean
   List<bool> isChecked = [];
 
   late bool isAvailable = true;
@@ -51,7 +55,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   @override
   void initState() {
     _currentCategory = categories[0];
-    _currentTransport = transportOptions[0];
+    _currentTransport = TransportOptions[0];
     isChecked = List<bool>.filled(price.length, false);
   }
 
@@ -99,6 +103,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                           shrinkWrap: true,
                           itemCount: price.length,
                           itemBuilder: (context, index) {
+                            //TODO booleans persist to model
                               return CheckboxListTile(
                                  title: Text(price[index]),
                                   value: isChecked[index],
@@ -136,24 +141,42 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text("Opcions \nde transport:"),
                 SizedBox(height: 10.0),
-                DropdownButton(
+                DropdownButton<TransportOptions>(
                   value: _currentTransport,
-                  items: transportOptions
+                  items: TransportOptions.values
                       .map(
-                        (String transport) => DropdownMenuItem<String>(
-                          value: transport,
-                          child: Text(transport),
-                        ),
-                      )
+                        (TransportOptions transport) => DropdownMenuItem<TransportOptions>(
+                      value: transport,
+                      child: Text(transport.toString()),
+                    ),
+                  )
                       .toList(),
-                  onChanged: (String? transport) {
+                  onChanged: (TransportOptions? transport) {
                     if (transport != null && _currentTransport != transport) {
                       setState(() {
-                        _currentTransport = transport;
+                        _currentTransport = transport.toString();
                       });
                     }
                   },
                 ),
+                // DropdownButton(
+                //   value: _currentTransport,
+                //   items: transportOptions
+                //       .map(
+                //         (String transport) => DropdownMenuItem<String>(
+                //           value: transport,
+                //           child: Text(transport),
+                //         ),
+                //       )
+                //       .toList(),
+                //   onChanged: (String? transport) {
+                //     if (transport != null && _currentTransport != transport) {
+                //       setState(() {
+                //         _currentTransport = transport;
+                //       });
+                //     }
+                //   },
+                // ),
               ]),
               SizedBox(height: 5.0),
               Container(

@@ -12,7 +12,7 @@ class ToolModel with _$ToolModel {
    LatLng? location,
    @Default(true)bool isAvailable,
    List<String>? images,
-   bool? needsTransport,   //List<TransportNeeded>transport; ?
+   bool? needsTransport,   //ENUM
    bool? maybeFree,
    int? rating,
    int? cost,

@@ -91,6 +91,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     child: CustomTextField(
                         controller: _costCtrl,
                         labelText: "Cost per dia",
+                        keyboardType: TextInputType.number,
                       ),
                   ),
                   Expanded(
@@ -156,7 +157,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               ]),
               SizedBox(height: 5.0),
               Container(
-                height: 200,
+                //height: 200,
                 child: ImageListSelector(
                     callback: ((selectedImages) => _images = selectedImages)),
               ),
@@ -186,6 +187,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                             title: _titleCtrl.text,
                             description: _descriptionCtrl.text,
                             images: _images?.map((e) => e.path).toList(),
+                        cost: int.parse(_costCtrl.text),
                           ));
                       //Navigator.of(context).pop();
                       Navigator.pushReplacementNamed(

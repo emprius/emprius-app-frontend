@@ -36,8 +36,10 @@ class _ImageListSelectorState extends State<ImageListSelector> {
             text: 'Pujar imatges',
             onClicked: () { selectToolImages(); },
           ),
-          SizedBox(height: 10.0),
-          Expanded(
+          if(toolImageList?.isNotEmpty ?? false)
+          SizedBox(
+    height: 150,
+
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
                 shrinkWrap: true,

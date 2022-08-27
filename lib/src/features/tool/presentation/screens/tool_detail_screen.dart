@@ -109,6 +109,13 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Cost per dia: "),
+                  Text(tool.cost.toString()),
+                ],
+              )
               //todo checkbox for if needs transport
               // ListView.builder(
               //     physics: NeverScrollableScrollPhysics(),

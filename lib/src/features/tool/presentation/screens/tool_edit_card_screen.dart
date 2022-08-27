@@ -22,6 +22,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
+  final _costCtrl = TextEditingController();
 
 
   @override
@@ -124,6 +125,37 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   //   },
                   //autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: 5,),
+
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      //height: 150,
+                      width: 150,
+                      child: CustomTextField(
+                        controller: _costCtrl,
+                        labelText: "Cost per dia",
+                        keyboardType: TextInputType.number,
+                        hintText: tool.cost.toString(),
+                      ),
+                    ),
+                    // Expanded(
+                    //     child: ListView.builder(
+                    //         shrinkWrap: true,
+                    //         itemCount: price.length,
+                    //         itemBuilder: (context, index) {
+                    //           return CheckboxListTile(
+                    //               title: Text(price[index]),
+                    //               value: isChecked[index],
+                    //               onChanged: (value) {
+                    //                 setState(() {
+                    //                   isChecked[index] = value as bool;
+                    //                 });
+                    //               });
+                    //         })),
+                  ],
+                ),
 
 
                 // Padding(

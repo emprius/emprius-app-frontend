@@ -3,6 +3,8 @@ import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -23,11 +25,18 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   final _titleCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
   final _costCtrl = TextEditingController();
+  late ToolModel? tool;
+
+  @override
+  void initState() {
+    tool = ref.read(singleToolProvider(widget.args.id));
+    super.initState();
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    final tool = ref.watch(singleToolProvider(widget.args.id));
+    // final tool = ref.watch(singleToolProvider(widget.args.id));
 
     return Scaffold(
       appBar: UserAppbar("Editar eina"),
@@ -35,16 +44,14 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Desar canvis"),
         onPressed: () async{
-          if (!_formKey.currentState!.validate()) {
-            return;
-          }
+          //TODO check validation
+          // if (!_formKey.currentState!.validate()) {
+          //   return;
+          // }
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Eina editada')),
           );
-          await ref.watch(ownToolsProvider.notifier).updateTool(tool!.copyWith(
-            title: _titleCtrl.text,
-            description: _descriptionCtrl.text,
-           ));
+          await ref.watch(ownToolsProvider.notifier).updateTool(tool!);
           Navigator.of(context).pop();
 
         },
@@ -61,7 +68,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
               children: <Widget>[
                 CustomTextField(
                     labelText: "Cambiar el titol:",
-                    hintText: tool!.title,
+                    hintText: tool?.title,
                     controller: _titleCtrl,
                     validator: FormValidator.nameValidator,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -108,11 +115,11 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         ],
                 ),
                 SizedBox(height: 10.0),
-                ToolCaroussel(tool.images!),
+                //if(tool?.images !=null)ToolCaroussel(tool?.images),
                 SizedBox(height: 10.0),
                 CustomTextField(
                   labelText: "Cambiar descripcio:",
-                  hintText: tool.description,
+                  hintText: tool?.description,
                   controller: _descriptionCtrl,
                   validator:  FormValidator.nameValidator,
                   //TODO (m) check validate only one field
@@ -137,49 +144,81 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         controller: _costCtrl,
                         labelText: "Cost per dia",
                         keyboardType: TextInputType.number,
-                        hintText: tool.cost.toString(),
+                        hintText: tool?.cost.toString(),
                       ),
                     ),
-                    // Expanded(
-                    //     child: ListView.builder(
-                    //         shrinkWrap: true,
-                    //         itemCount: price.length,
-                    //         itemBuilder: (context, index) {
-                    //           return CheckboxListTile(
-                    //               title: Text(price[index]),
-                    //               value: isChecked[index],
-                    //               onChanged: (value) {
-                    //                 setState(() {
-                    //                   isChecked[index] = value as bool;
-                    //                 });
-                    //               });
-                    //         })),
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            CheckboxListTile(
+                                title: Text("Gratuita"),
+                                value: tool?.maybeFree,
+                                onChanged: (value) {
+                                  setState(() {
+                                    tool = tool?.copyWith(maybeFree: value);
+                                        // ?.maybeFree = value as bool;
+                                  });
+                                }),
+                            CheckboxListTile(
+                                title: Text("Amb fiansa"),
+                                value: tool?.askWithFee,
+                                onChanged: (value) {
+                                  setState(() {
+                                    tool = tool?.copyWith(askWithFee: value);
+                                  });
+                                })
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
-
-
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
-                //   child: Text(
-                //     tool.description,
-                //     textAlign: TextAlign.center,
-                //   ),
-                // ),
-                //TODO (m) checkbox for if needs transport
-                // ListView.builder(
-                //     physics: NeverScrollableScrollPhysics(),
-                //     shrinkWrap: true,
-                //     itemCount: needsTransport.length,
-                //     itemBuilder: (context, index) {
-                //       return CheckboxListTile(
-                //           title: Text(needsTransport[index]),
-                //           value: isChecked[index],
-                //           onChanged: (value) {
-                //             setState(() {
-                //               isChecked[index] = value as bool;
-                //             });
-                //           });
-                //     }),
+                SizedBox(height: 20.0),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text("Tria categoria:"),
+                  SizedBox(height: 10.0),
+                  DropdownButton<ToolCategory>(
+                    value: tool?.toolCategory,
+                    items: ToolCategory.values
+                        .map(
+                          (ToolCategory category) => DropdownMenuItem<ToolCategory>(
+                        value: category,
+                        child: Text(category.displayName!),
+                      ),
+                    )
+                        .toList(),
+                    onChanged: (ToolCategory? value) {
+                      if (value != null && tool?.toolCategory != value) {
+                        setState(() {
+                          tool = tool?.copyWith(toolCategory: value);
+                        });
+                      }
+                    },
+                  ),
+                ]),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text("Opcions \nde transport:"),
+                  SizedBox(height: 10.0),
+                  DropdownButton<TransportOptions>(
+                    value: tool?.transportOptions,
+                    items: TransportOptions.values
+                        .map(
+                          (TransportOptions transport) => DropdownMenuItem<TransportOptions>(
+                        value: transport,
+                        child: Text(transport.displayName!),
+                      ),
+                    )
+                        .toList(),
+                    onChanged: (TransportOptions? transportChosen) {
+                      if (transportChosen != null && tool?.transportOptions != transportChosen) {
+                        setState(() {
+                          tool = tool?.copyWith(transportOptions: transportChosen);
+                        });
+                      }
+                    },
+                  ),
+                ]),
               ],
             ),
           ),

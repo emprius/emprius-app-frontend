@@ -24,12 +24,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
 
   var _currentTransport = TransportOptions.NOT_NECESSARY;
   var _currentCategory = ToolCategory.VEHICLE;
-
-
-  List<String> price = ["Gratuita", "Amb fiansa"]; //cambiar a boolean
-  List<bool> isChecked = [];
-
-  late bool isAvailable = true;
+  late bool _maybeFree = true;
+  late bool _askWithFee = true;
+  //TODO implement?
+  late bool _isAvailable = true;
   List<XFile>? _images;
 
   final _formKey = GlobalKey<FormState>();
@@ -43,11 +41,6 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
     _descriptionCtrl.dispose();
     _costCtrl.dispose();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    isChecked = List<bool>.filled(price.length, false);
   }
 
   @override
@@ -90,20 +83,29 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                       ),
                   ),
                   Expanded(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: price.length,
-                          itemBuilder: (context, index) {
-                            //TODO booleans persist to model
-                              return CheckboxListTile(
-                                 title: Text(price[index]),
-                                  value: isChecked[index],
-                                  onChanged: (value) {
-                                    setState(() {
-                                     isChecked[index] = value as bool;
-                          });
-                        });
-                  })),
+                    child: Container(
+                      child: Column(
+                        children: [
+                          CheckboxListTile(
+                              title: Text("Gratuita"),
+                              value: _maybeFree,
+                              onChanged: (value) {
+                                setState(() {
+                                  _maybeFree = value as bool;
+                                });
+                              }),
+                          CheckboxListTile(
+                              title: Text("Amb fiansa"),
+                              value: _askWithFee,
+                              onChanged: (value) {
+                                setState(() {
+                                  _askWithFee = value as bool;
+                                });
+                              })
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
               SizedBox(height: 20.0),
@@ -201,6 +203,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                             title: _titleCtrl.text,
                             description: _descriptionCtrl.text,
                             images: _images?.map((e) => e.path).toList(),
+                        maybeFree: _maybeFree,
+                        askWithFee: _askWithFee,
+                        toolCategory: _currentCategory,
+                        transportOptions: _currentTransport,
                         cost: int.parse(_costCtrl.text),
                           ));
                       //Navigator.of(context).pop();
@@ -215,6 +221,5 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
         ),
       ),
     );
-    //);
   }
 }

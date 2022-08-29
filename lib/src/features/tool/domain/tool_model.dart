@@ -1,3 +1,5 @@
+import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tool_model.freezed.dart';
@@ -9,14 +11,16 @@ class ToolModel with _$ToolModel {
    int? id,
    required String title,
    required String description,
-   LatLng? location,
    @Default(true)bool isAvailable,
-   List<String>? images,
-   bool? needsTransport,   //ENUM
    bool? maybeFree,
-   int? rating,
    int? cost,
+   List<String>? images,
+   TransportOptions? transportOptions,
+   ToolCategory? toolCategory,
    bool? askWithFee,
+   //TODO falta implementar:
+   LatLng? location,
+   int? rating,
    double? estimatedValue,
    double? height,
    double? width,

@@ -10,17 +10,20 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
       id: json['id'] as int?,
       title: json['title'] as String,
       description: json['description'] as String,
+      isAvailable: json['isAvailable'] as bool? ?? true,
+      maybeFree: json['maybeFree'] as bool?,
+      cost: json['cost'] as int?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      transportOptions: $enumDecodeNullable(
+          _$TransportOptionsEnumMap, json['transportOptions']),
+      toolCategory:
+          $enumDecodeNullable(_$ToolCategoryEnumMap, json['toolCategory']),
+      askWithFee: json['askWithFee'] as bool?,
       location: json['location'] == null
           ? null
           : LatLng.fromJson(json['location'] as Map<String, dynamic>),
-      isAvailable: json['isAvailable'] as bool? ?? true,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      needsTransport: json['needsTransport'] as bool?,
-      maybeFree: json['maybeFree'] as bool?,
       rating: json['rating'] as int?,
-      cost: json['cost'] as int?,
-      askWithFee: json['askWithFee'] as bool?,
       estimatedValue: (json['estimatedValue'] as num?)?.toDouble(),
       height: (json['height'] as num?)?.toDouble(),
       width: (json['width'] as num?)?.toDouble(),
@@ -33,17 +36,32 @@ Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
-      'location': instance.location,
       'isAvailable': instance.isAvailable,
-      'images': instance.images,
-      'needsTransport': instance.needsTransport,
       'maybeFree': instance.maybeFree,
-      'rating': instance.rating,
       'cost': instance.cost,
+      'images': instance.images,
+      'transportOptions': _$TransportOptionsEnumMap[instance.transportOptions],
+      'toolCategory': _$ToolCategoryEnumMap[instance.toolCategory],
       'askWithFee': instance.askWithFee,
+      'location': instance.location,
+      'rating': instance.rating,
       'estimatedValue': instance.estimatedValue,
       'height': instance.height,
       'width': instance.width,
       'length': instance.length,
       'weight': instance.weight,
     };
+
+const _$TransportOptionsEnumMap = {
+  TransportOptions.NOT_NECESSARY: 'Not_necessary',
+  TransportOptions.EXTRA_NECESSARY: 'Extra_necessary',
+  TransportOptions.NECESSARY: 'Necessary',
+};
+
+const _$ToolCategoryEnumMap = {
+  ToolCategory.VEHICLE: 'Vehicle',
+  ToolCategory.CONSTRUCTION: 'Construction',
+  ToolCategory.ENERGY: 'Energy',
+  ToolCategory.GARDENING: 'Gardening',
+  ToolCategory.WOODWORK: 'Woodwork',
+};

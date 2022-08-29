@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
@@ -21,17 +22,9 @@ class AddToolScreen extends ConsumerStatefulWidget {
 
 class _AddToolScreenState extends ConsumerState<AddToolScreen> {
 
-  //TODO: CHANGE TO ENUM
-  String? _currentCategory = "";
-  List<String> categories = ["Vehicle", "Construccio", "Energia"];
+  var _currentTransport = TransportOptions.NOT_NECESSARY;
+  var _currentCategory = ToolCategory.VEHICLE;
 
-  //TODO: CHANGE TO ENUM
-  // String? _currentTransport = "";
-  // List<String> transportOptions = [
-  //   "Cap en especial",
-  //   "Necessita remolc",
-  //   "Necessita vehicle pesat"
-  // ];
 
   List<String> price = ["Gratuita", "Amb fiansa"]; //cambiar a boolean
   List<bool> isChecked = [];
@@ -54,8 +47,6 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
 
   @override
   void initState() {
-    _currentCategory = categories[0];
-    _currentTransport = TransportOptions[0];
     isChecked = List<bool>.filled(price.length, false);
   }
 
@@ -119,17 +110,17 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text("Tria categoria:"),
                 SizedBox(height: 10.0),
-                DropdownButton(
+                DropdownButton<ToolCategory>(
                   value: _currentCategory,
-                  items: categories
+                  items: ToolCategory.values
                       .map(
-                        (String category) => DropdownMenuItem<String>(
+                        (ToolCategory category) => DropdownMenuItem<ToolCategory>(
                           value: category,
-                          child: Text(category),
+                          child: Text(category.displayName!),
                         ),
                       )
                       .toList(),
-                  onChanged: (String? value) {
+                  onChanged: (ToolCategory? value) {
                     if (value != null && _currentCategory != value) {
                       setState(() {
                         _currentCategory = value;
@@ -147,14 +138,14 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                       .map(
                         (TransportOptions transport) => DropdownMenuItem<TransportOptions>(
                       value: transport,
-                      child: Text(transport.toString()),
+                      child: Text(transport.displayName!),
                     ),
                   )
                       .toList(),
-                  onChanged: (TransportOptions? transport) {
-                    if (transport != null && _currentTransport != transport) {
+                  onChanged: (TransportOptions? transportChosen) {
+                    if (transportChosen != null && _currentTransport != transportChosen) {
                       setState(() {
-                        _currentTransport = transport.toString();
+                        _currentTransport = transportChosen;
                       });
                     }
                   },

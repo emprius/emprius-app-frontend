@@ -26,8 +26,7 @@ mixin _$ToolModel {
   LatLng? get location => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
-  bool? get needsTransport =>
-      throw _privateConstructorUsedError; //List<TransportNeeded>transport; ?
+  bool? get needsTransport => throw _privateConstructorUsedError; //ENUM
   bool? get maybeFree => throw _privateConstructorUsedError;
   int? get rating => throw _privateConstructorUsedError;
   int? get cost => throw _privateConstructorUsedError;
@@ -333,7 +332,7 @@ class _$_ToolModel implements _ToolModel {
 
   @override
   final bool? needsTransport;
-//List<TransportNeeded>transport; ?
+//ENUM
   @override
   final bool? maybeFree;
   @override
@@ -456,7 +455,7 @@ abstract class _ToolModel implements ToolModel {
   List<String>? get images;
   @override
   bool? get needsTransport;
-  @override //List<TransportNeeded>transport; ?
+  @override //ENUM
   bool? get maybeFree;
   @override
   int? get rating;

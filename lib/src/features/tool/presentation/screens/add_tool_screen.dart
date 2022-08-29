@@ -152,24 +152,6 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     }
                   },
                 ),
-                // DropdownButton(
-                //   value: _currentTransport,
-                //   items: transportOptions
-                //       .map(
-                //         (String transport) => DropdownMenuItem<String>(
-                //           value: transport,
-                //           child: Text(transport),
-                //         ),
-                //       )
-                //       .toList(),
-                //   onChanged: (String? transport) {
-                //     if (transport != null && _currentTransport != transport) {
-                //       setState(() {
-                //         _currentTransport = transport;
-                //       });
-                //     }
-                //   },
-                // ),
               ]),
               SizedBox(height: 5.0),
               Container(

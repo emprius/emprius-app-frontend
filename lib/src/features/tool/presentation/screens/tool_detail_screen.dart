@@ -5,6 +5,7 @@ import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 
 
 class ToolDetailScreen extends ConsumerStatefulWidget {
@@ -16,13 +17,6 @@ class ToolDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
-  // List<String> needsTransport = ["Necessita transport", "No es necessari"];
-  // List<bool> isChecked = [];
-  //
-  // @override
-  // void initState() {
-  //   isChecked = List<bool>.filled(needsTransport.length, false);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +36,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //todo: extract to list of labels dynamic
+              //TODO extract to list of labels dynamic
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +94,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                     ))
               ]),
               if(tool.images !=null)ToolCaroussel(tool.images!),
-              SizedBox(height: 10.0),
+              SizedBox(height: 20.0),
               RatingStars(rating: 5),
               Padding(
                 padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
@@ -112,25 +106,19 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Cost per dia: "),
+                  Text("Cost per dia: ", style: TextStyle(fontWeight: FontWeight.bold
+                  ),),
                   Text(tool.cost.toString()),
                 ],
+              ),
+              Column(
+                children: [
+                  if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
+                  if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
+                  //TODO display name correctly
+                  Text((tool?.transportOptions as TransportOptions).displayName!)
+                ],
               )
-              //todo checkbox for if needs transport
-              // ListView.builder(
-              //     physics: NeverScrollableScrollPhysics(),
-              //     shrinkWrap: true,
-              //     itemCount: needsTransport.length,
-              //     itemBuilder: (context, index) {
-              //       return CheckboxListTile(
-              //           title: Text(needsTransport[index]),
-              //           value: isChecked[index],
-              //           onChanged: (value) {
-              //             setState(() {
-              //               isChecked[index] = value as bool;
-              //             });
-              //           });
-              //     }),
             ],
           ),
         ),

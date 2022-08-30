@@ -1,3 +1,5 @@
+import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
+import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -14,6 +16,9 @@ final _sampleTools = [
       title: "Bici de paseig",
       description: "¿Qué le dice la foca a su madre? I love you, mother foca.",
       maybeFree: true,
+      askWithFee: true,
+      toolCategory: ToolCategory.VEHICLE,
+      transportOptions: TransportOptions.NOT_NECESSARY,
       cost: 10,
       images: _toolImagesUrl,
       location: LatLng(41.695384, 2.492793)),
@@ -22,6 +27,9 @@ final _sampleTools = [
       title: "Burra autonoma",
       description: "Sha fet servir per raves pero encara te molta potencia.",
       maybeFree: true,
+      askWithFee: true,
+      toolCategory: ToolCategory.ENERGY,
+      transportOptions: TransportOptions.NECESSARY,
       cost: 10,
       images: _toolImagesUrl,
       location: LatLng(41.695386, 2.492793)),
@@ -29,7 +37,10 @@ final _sampleTools = [
       id: 3,
       title: "Tractor",
       description: "Es de color groc com a la canso",
+      toolCategory: ToolCategory.GARDENING,
+      transportOptions: TransportOptions.EXTRA_NECESSARY,
       maybeFree: true,
+      askWithFee: true,
       cost: 10,
       images: _toolImagesUrl,
       location: LatLng(41.695386, 2.492796)),

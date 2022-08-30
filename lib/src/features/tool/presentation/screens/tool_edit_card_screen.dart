@@ -11,10 +11,10 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/u
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class ToolEditCardScreen extends ConsumerStatefulWidget {
   final EditToolArguments args;
-  const ToolEditCardScreen(this.args, {Key? key} ) : super(key: key);
+
+  const ToolEditCardScreen(this.args, {Key? key}) : super(key: key);
 
   @override
   createState() => _ToolEditCardScreenState();
@@ -33,17 +33,15 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     // final tool = ref.watch(singleToolProvider(widget.args.id));
 
     return Scaffold(
       appBar: UserAppbar("Editar eina"),
-
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Desar canvis"),
-        onPressed: () async{
+        onPressed: () async {
           //TODO check validation
           // if (!_formKey.currentState!.validate()) {
           //   return;
@@ -53,7 +51,6 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
           );
           await ref.watch(ownToolsProvider.notifier).updateTool(tool!);
           Navigator.of(context).pop();
-
         },
       ),
       body: SingleChildScrollView(
@@ -67,61 +64,18 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 CustomTextField(
-                    labelText: "Cambiar el titol:",
-                    hintText: tool?.title,
-                    controller: _titleCtrl,
-                    validator: FormValidator.nameValidator,
+                  labelText: "Cambiar el titol:",
+                  hintText: tool?.title,
+                  controller: _titleCtrl,
+                  validator: FormValidator.nameValidator,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
-                SizedBox(height: 10.0),
-                //TODO (m) extract to list of labels dynamic
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Text('Transport'),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.car_rental,
-                                  size: 24.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: 6.0),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Text('Eines'),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.handyman,
-                                  size: 24.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                ),
-                SizedBox(height: 10.0),
-                //if(tool?.images !=null)ToolCaroussel(tool?.images),
                 SizedBox(height: 10.0),
                 CustomTextField(
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
                   controller: _descriptionCtrl,
-                  validator:  FormValidator.nameValidator,
+                  validator: FormValidator.nameValidator,
                   //TODO (m) check validate only one field
                   // validator:  (value) {
                   //   if (value == null || value.isEmpty) {
@@ -131,9 +85,9 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   //   }
                   //   },
                   //autovalidateMode: AutovalidateMode.onUserInteraction,
-                  maxLines: 5,),
-
-                SizedBox(height: 20.0),
+                  maxLines: 5,
+                ),
+                SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -157,7 +111,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     tool = tool?.copyWith(maybeFree: value);
-                                        // ?.maybeFree = value as bool;
+                                    // ?.maybeFree = value as bool;
                                   });
                                 }),
                             CheckboxListTile(
@@ -174,51 +128,64 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 20.0),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Text("Tria categoria:"),
-                  SizedBox(height: 10.0),
-                  DropdownButton<ToolCategory>(
-                    value: tool?.toolCategory,
-                    items: ToolCategory.values
-                        .map(
-                          (ToolCategory category) => DropdownMenuItem<ToolCategory>(
-                        value: category,
-                        child: Text(category.displayName!),
+                SizedBox(height: 10.0),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                          height: 30.0,
+                          child: (tool?.toolCategory as ToolCategory).label
+                              as Widget),
+                      Text("Cambiar categoria:"),
+                      DropdownButton<ToolCategory>(
+                        value: tool?.toolCategory,
+                        items: ToolCategory.values
+                            .map(
+                              (ToolCategory category) =>
+                                  DropdownMenuItem<ToolCategory>(
+                                value: category,
+                                child: Text(category.displayName!),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (ToolCategory? value) {
+                          if (value != null && tool?.toolCategory != value) {
+                            setState(() {
+                              tool = tool?.copyWith(toolCategory: value);
+                            });
+                          }
+                        },
                       ),
-                    )
-                        .toList(),
-                    onChanged: (ToolCategory? value) {
-                      if (value != null && tool?.toolCategory != value) {
-                        setState(() {
-                          tool = tool?.copyWith(toolCategory: value);
-                        });
-                      }
-                    },
-                  ),
-                ]),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Text("Opcions \nde transport:"),
-                  SizedBox(height: 10.0),
-                  DropdownButton<TransportOptions>(
-                    value: tool?.transportOptions,
-                    items: TransportOptions.values
-                        .map(
-                          (TransportOptions transport) => DropdownMenuItem<TransportOptions>(
-                        value: transport,
-                        child: Text(transport.displayName!),
+                    ]),
+                SizedBox(height: 10.0),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Opcions \nde transport:"),
+
+                      DropdownButton<TransportOptions>(
+                        value: tool?.transportOptions,
+                        items: TransportOptions.values
+                            .map(
+                              (TransportOptions transport) =>
+                                  DropdownMenuItem<TransportOptions>(
+                                value: transport,
+                                child: Text(transport.displayName!),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (TransportOptions? transportChosen) {
+                          if (transportChosen != null &&
+                              tool?.transportOptions != transportChosen) {
+                            setState(() {
+                              tool = tool?.copyWith(
+                                  transportOptions: transportChosen);
+                            });
+                          }
+                        },
                       ),
-                    )
-                        .toList(),
-                    onChanged: (TransportOptions? transportChosen) {
-                      if (transportChosen != null && tool?.transportOptions != transportChosen) {
-                        setState(() {
-                          tool = tool?.copyWith(transportOptions: transportChosen);
-                        });
-                      }
-                    },
-                  ),
-                ]),
+                    ]),
+                //if(tool?.images !=null)ToolCaroussel(tool?.images),
               ],
             ),
           ),

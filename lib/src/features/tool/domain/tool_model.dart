@@ -18,7 +18,6 @@ class ToolModel with _$ToolModel {
    TransportOptions? transportOptions,
    ToolCategory? toolCategory,
    bool? askWithFee,
-   //TODO falta implementar:
    LatLng? location,
    int? rating,
    double? estimatedValue,

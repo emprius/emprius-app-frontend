@@ -4,8 +4,14 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class ImageListSelector extends StatefulWidget {
-  final Function(List<XFile>?)? callback;
-  ImageListSelector({this.callback, Key? key}) : super(key: key);
+  final Function(List<String>?)? callback;
+  final String text;
+  final List<String>? toolImageList;
+
+  ImageListSelector({
+    this.text = 'Pujar imatges',
+    this.toolImageList = const [],
+    this.callback, Key? key}) : super(key: key);
 
   @override
   State<ImageListSelector> createState() => _ImageListSelectorState();
@@ -15,14 +21,21 @@ class _ImageListSelectorState extends State<ImageListSelector> {
 
   final ImagePicker imagePicker = ImagePicker();
 
-  List<XFile>? toolImageList = [];
+  // List<XFile>? toolImageList = [];
+  late List<String>? toolImageList;
+
+  @override
+  void initState() {
+    toolImageList = widget.toolImageList;
+    super.initState();
+  }
 
   void selectToolImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (widget.callback == null) return;
     if (selectedImages!.isNotEmpty) {
-      toolImageList!.addAll(selectedImages);
-      widget.callback!(selectedImages);
+      toolImageList = [...selectedImages.map((e) => e.path)];
+      widget.callback!(toolImageList);
     }
     setState(() {
     });
@@ -33,7 +46,7 @@ class _ImageListSelectorState extends State<ImageListSelector> {
     return Column(
         children: [
           CustomTextButton(
-            text: 'Pujar imatges',
+            text: widget.text,
             onClicked: () { selectToolImages(); },
           ),
           if(toolImageList?.isNotEmpty ?? false)
@@ -44,7 +57,7 @@ class _ImageListSelectorState extends State<ImageListSelector> {
                 shrinkWrap: true,
                 itemCount: toolImageList!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Image.file(File(toolImageList![index].path), fit: BoxFit.cover);
+                  return Image.file(File(toolImageList![index]), fit: BoxFit.cover);
                 }
             ),
           )

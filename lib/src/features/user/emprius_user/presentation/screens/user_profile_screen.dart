@@ -43,8 +43,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
-
-    //TODO STUDY:
     ref.listen<LatLng>(userProvider.select(
             (user) => user.location!), (LatLng? previous, LatLng next) {
       _setMarkers(next);

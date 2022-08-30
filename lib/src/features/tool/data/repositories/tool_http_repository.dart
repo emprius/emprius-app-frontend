@@ -21,7 +21,7 @@ final _sampleTools = [
   ToolModel(
       id: 1,
       title: "Bici de paseig",
-      description: "¿Qué le dice la foca a su madre? I love you, mother foca.",
+      description: "No va be per a pujades fortes pero pots dur coses al cistell",
       maybeFree: true,
       askWithFee: true,
       toolCategory: ToolCategory.VEHICLE,

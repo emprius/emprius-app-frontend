@@ -11,7 +11,6 @@ import 'package:empriusapp/src/features/tool/presentation/widgets/tool_extra_pro
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddToolScreen extends ConsumerStatefulWidget {
   const AddToolScreen({Key? key}) : super(key: key);
@@ -26,9 +25,9 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   var _currentCategory = ToolCategory.VEHICLE;
   late bool _maybeFree = true;
   late bool _askWithFee = true;
-  //TODO implement?
+  //TODO where to implement _isAvailable?
   late bool _isAvailable = true;
-  List<XFile>? _images;
+  List<String>? _images;
 
   final _formKey = GlobalKey<FormState>();
   final _titleCtrl = TextEditingController();
@@ -184,7 +183,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                           .addTool(ToolModel(
                             title: _titleCtrl.text,
                             description: _descriptionCtrl.text,
-                            images: _images?.map((e) => e.path).toList(),
+                            images: _images,
                         maybeFree: _maybeFree,
                         askWithFee: _askWithFee,
                         toolCategory: _currentCategory,

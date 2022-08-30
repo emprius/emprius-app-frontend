@@ -208,7 +208,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           ),
                           _passwordCtrl.text,
                         );
-
+                        if (!mounted) return;
                         Navigator.of(context).pop();
                       },
                     ),

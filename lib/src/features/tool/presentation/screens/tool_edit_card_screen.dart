@@ -31,7 +31,6 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   final _descriptionCtrl = TextEditingController();
   final _costCtrl = TextEditingController();
   late ToolModel? tool;
-  List<XFile>? _images;
 
   @override
   void initState() {
@@ -48,7 +47,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Desar canvis"),
         onPressed: () async {
-          //TODO check validation
+          //TODO (m) check validate only one field
           // if (!_formKey.currentState!.validate()) {
           //   return;
           // }
@@ -72,6 +71,9 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
               children: <Widget>[
                 CustomTextField(
                   labelText: "Cambiar el titol:",
+                  onChanged: (value) {
+                    tool = tool!.copyWith(title: value);
+                  },
                   hintText: tool?.title,
                   controller: _titleCtrl,
                   validator: FormValidator.nameValidator,
@@ -79,6 +81,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 ),
                 SizedBox(height: 20.0),
                 CustomTextField(
+                  onChanged: (value) => tool = tool!.copyWith(description: value),
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
                   controller: _descriptionCtrl,
@@ -103,6 +106,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                       width: 150,
                       child: CustomTextField(
                         controller: _costCtrl,
+                        onChanged: (value) => tool = tool!.copyWith(cost: int.parse(value)),
                         labelText: "Cost per dia",
                         keyboardType: TextInputType.number,
                         hintText: tool?.cost.toString(),
@@ -118,7 +122,6 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     tool = tool?.copyWith(maybeFree: value);
-                                    // ?.maybeFree = value as bool;
                                   });
                                 }),
                             CheckboxListTile(
@@ -137,39 +140,45 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 ),
                 SizedBox(height: 10.0),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                           height: 30.0,
                           child: (tool?.toolCategory as ToolCategory).label
                               as Widget),
-                      Text("Cambiar categoria:"),
-                      DropdownButton<ToolCategory>(
-                        value: tool?.toolCategory,
-                        items: ToolCategory.values
-                            .map(
-                              (ToolCategory category) =>
-                                  DropdownMenuItem<ToolCategory>(
-                                value: category,
-                                child: Text(category.displayName!),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (ToolCategory? value) {
-                          if (value != null && tool?.toolCategory != value) {
-                            setState(() {
-                              tool = tool?.copyWith(toolCategory: value);
-                            });
-                          }
-                        },
+                      SizedBox(width: 25),
+                      Column(
+                        children: [
+                          Text("Cambiar categoria:"),
+                          DropdownButton<ToolCategory>(
+                            value: tool?.toolCategory,
+                            items: ToolCategory.values
+                                .map(
+                                  (ToolCategory category) =>
+                                      DropdownMenuItem<ToolCategory>(
+                                    value: category,
+                                    child: Text(category.displayName!),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (ToolCategory? value) {
+                              if (value != null && tool?.toolCategory != value) {
+                                setState(() {
+                                  tool = tool?.copyWith(toolCategory: value);
+                                });
+                              }
+                            },
+                          ),
+                        ],
                       ),
                     ]),
                 SizedBox(height: 10.0),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Opcions \nde transport:"),
-
+                      SizedBox(width: 25),
                       DropdownButton<TransportOptions>(
                         value: tool?.transportOptions,
                         items: TransportOptions.values
@@ -202,31 +211,11 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                 if(tool?.images !=null)
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Fotografies actuals:'),
-                          CustomTextButton(
-                            text: 'Cambiar',
-                            onClicked: () {
-                              ImageListSelector(
-                                  callback: ((selectedImages) => _images = selectedImages));
-                            },
-                          )
-                        ],
-                      ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      height: 150,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: tool?.images!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Image.file(File(tool!.images![index]), fit: BoxFit.cover);
-                          }
-                      ),
-                    ),]
+                      ImageListSelector(
+                        text: 'Cambiar fotografies',
+                        toolImageList: tool!.images,
+                        callback: ((selectedImages) => tool = tool!.copyWith(images: selectedImages))),
+                    ]
                   )
               ],
             ),

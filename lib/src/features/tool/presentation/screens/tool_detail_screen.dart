@@ -22,7 +22,6 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final tool = ref.watch(singleToolProvider(widget.args.id));
-    print(tool?.images);
 
     return Scaffold(
       appBar: UserAppbar("Eina"),
@@ -35,13 +34,8 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-<<<<<<< HEAD
-=======
-              //TODO extract to list of labels dynamic
->>>>>>> 0194594482959d5160208a83407b266323764b24
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,16 +69,19 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                   Text(tool.cost.toString()),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Opcions de transport: ", style: TextStyle(fontWeight: FontWeight.bold
+                  ),),
+                  Text((tool.transportOptions as TransportOptions).displayName!),
+                ],
+              ),
+              SizedBox(height: 20),
               Column(
                 children: [
                   if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
                   if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
-<<<<<<< HEAD
-                  Text((tool.transportOptions as TransportOptions).displayName!)
-=======
-                  //TODO display name correctly
-                  Text((tool?.transportOptions as TransportOptions).displayName!)
->>>>>>> 0194594482959d5160208a83407b266323764b24
                 ],
               )
             ],

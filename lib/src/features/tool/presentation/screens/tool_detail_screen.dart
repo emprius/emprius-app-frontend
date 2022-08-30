@@ -38,6 +38,10 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+<<<<<<< HEAD
+=======
+              //TODO extract to list of labels dynamic
+>>>>>>> 0194594482959d5160208a83407b266323764b24
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +79,12 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 children: [
                   if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
                   if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
+<<<<<<< HEAD
                   Text((tool.transportOptions as TransportOptions).displayName!)
+=======
+                  //TODO display name correctly
+                  Text((tool?.transportOptions as TransportOptions).displayName!)
+>>>>>>> 0194594482959d5160208a83407b266323764b24
                 ],
               )
             ],

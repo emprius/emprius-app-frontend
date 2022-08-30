@@ -191,7 +191,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                         transportOptions: _currentTransport,
                         cost: int.parse(_costCtrl.text),
                           ));
-                      //Navigator.of(context).pop();
+                      if (!mounted) return;
                       Navigator.pushReplacementNamed(
                           context, userToolsScreenRoute);
                     },

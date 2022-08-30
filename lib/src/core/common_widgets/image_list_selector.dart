@@ -38,8 +38,7 @@ class _ImageListSelectorState extends State<ImageListSelector> {
           ),
           if(toolImageList?.isNotEmpty ?? false)
           SizedBox(
-    height: 150,
-
+            height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
                 shrinkWrap: true,

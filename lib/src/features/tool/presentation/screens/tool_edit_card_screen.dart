@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
@@ -10,6 +14,7 @@ import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ToolEditCardScreen extends ConsumerStatefulWidget {
   final EditToolArguments args;
@@ -26,6 +31,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   final _descriptionCtrl = TextEditingController();
   final _costCtrl = TextEditingController();
   late ToolModel? tool;
+  List<XFile>? _images;
 
   @override
   void initState() {
@@ -50,6 +56,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
             const SnackBar(content: Text('Eina editada')),
           );
           await ref.watch(ownToolsProvider.notifier).updateTool(tool!);
+          if (!mounted) return;
           Navigator.of(context).pop();
         },
       ),
@@ -70,7 +77,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   validator: FormValidator.nameValidator,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 20.0),
                 CustomTextField(
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
@@ -185,7 +192,42 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         },
                       ),
                     ]),
-                //if(tool?.images !=null)ToolCaroussel(tool?.images),
+                SizedBox(height: 10.0),
+                const Divider(
+                  height: 20,
+                  indent: 20,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                if(tool?.images !=null)
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Fotografies actuals:'),
+                          CustomTextButton(
+                            text: 'Cambiar',
+                            onClicked: () {
+                              ImageListSelector(
+                                  callback: ((selectedImages) => _images = selectedImages));
+                            },
+                          )
+                        ],
+                      ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      height: 150,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: tool?.images!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Image.file(File(tool!.images![index]), fit: BoxFit.cover);
+                          }
+                      ),
+                    ),]
+                  )
               ],
             ),
           ),

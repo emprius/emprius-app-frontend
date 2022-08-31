@@ -26,6 +26,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
   @override
   void initState() {
     ref.read(ownToolsProvider.notifier).getOwnTools();
+    //isAvailable = tool.isAvailable;
     super.initState();
   }
 
@@ -40,59 +41,77 @@ class _UserToolListState extends ConsumerState<UserToolList> {
         onPressed: () { Navigator.pushNamed(context, toolAddFormScreenRoute); },
         label: Text('Afegir eina'),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: tools.length,
-          itemBuilder: (context, index) {
-            final tool = tools[index];
-            return ListTile(
-              title: Text(tool.title),
-              subtitle: Text(tool.description),
-              leading: Switch(
-                value: tool.isAvailable,
-                activeTrackColor: Colors.white10,
-                activeColor: Colors.blue,
-                onChanged: (value) {
-                 ref.watch(ownToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(('Disponibilitat:')),
+                SizedBox(height: 45),
+              ],
+            ),
+            SingleChildScrollView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: tools.length,
+                itemBuilder: (context, index) {
+                  final tool = tools[index];
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(tool.title),
+                        subtitle: Text(tool.description),
+                        leading: Switch(
+                          value: tool.isAvailable,
+                          activeTrackColor: Colors.white10,
+                          activeColor: Colors.blue,
+                          onChanged: (value) {
+                            ref.read(ownToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
+                          },
+                        ),
+                        trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              PopupMenuButton(
+                                icon: Icon(Icons.edit),
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: tool,
+                                    child: Text("Editar eina"),
+                                  ),
+                                ],
+                                onSelected: (value){
+                                  if(value == tool) {
+                                    Navigator.pushNamed(context, toolEditCardScreenRoute,
+                                        arguments: EditToolArguments(tool.id!));
+                                  }
+                                  },
+                              ),
+                              PopupMenuButton(
+                                icon: Icon(Icons.delete),
+                                onSelected:  _deleteTool,
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      value: tool,
+                                      child: Text("Esborrar de la llista?"),
+                                    ),
+                                  ],
+                              ),
+                            ]),
+                        onTap: () {
+                          Navigator.pushNamed(context, toolDetailScreenRoute, arguments: ToolDetailArguments(tool.id!));
+                        },
+                      ),
+                      Divider(),
+                    ],
+                  );
                 },
               ),
-              trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PopupMenuButton(
-                      icon: Icon(Icons.edit),
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: tool,
-                          child: Text("Editar eina"),
-                        ),
-                      ],
-                      onSelected: (value){
-                        if(value == tool) {
-                          Navigator.pushNamed(context, toolEditCardScreenRoute,
-                              arguments: EditToolArguments(tool.id!));
-                        }
-                        },
-                    ),
-                    PopupMenuButton(
-                      icon: Icon(Icons.delete),
-                      onSelected:  _deleteTool,
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            value: tool,
-                            child: Text("Esborrar de la llista?"),
-                          ),
-                        ],
-                    ),
-                  ]),
-              onTap: () {
-                Navigator.pushNamed(context, toolDetailScreenRoute, arguments: ToolDetailArguments(tool.id!));
-              },
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

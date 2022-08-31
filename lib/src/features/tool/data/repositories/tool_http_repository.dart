@@ -17,7 +17,7 @@ final _toolImagesPhone = [
 '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
 
-final _sampleTools = [
+var _sampleTools = [
   ToolModel(
       id: 1,
       title: "Bici de paseig",
@@ -71,9 +71,11 @@ class ToolHttpRepository {
 
   Future<ToolModel> updateTool({
   required ToolModel newTool,
-    required int toolId,
+    //required int toolId,
 }) async{
-    return newTool.copyWith(id: toolId);
+    _sampleTools = [..._sampleTools ]
+      ..[_sampleTools.indexWhere((tool) => tool.id == newTool.id )] = newTool;
+    return newTool.copyWith(id: newTool.id);
   }
 
   Future<ToolModel> deleteTool({

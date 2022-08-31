@@ -35,6 +35,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   @override
   void initState() {
     tool = ref.read(singleToolProvider(widget.args.id));
+    _titleCtrl.text = tool!.title;
     super.initState();
   }
 
@@ -48,9 +49,9 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
         label: Text("Desar canvis"),
         onPressed: () async {
           //TODO (m) check validate only one field
-          // if (!_formKey.currentState!.validate()) {
-          //   return;
-          // }
+          if (!_formKey.currentState!.validate()) {
+            return;
+          }
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Eina editada')),
           );
@@ -74,6 +75,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   onChanged: (value) {
                     tool = tool!.copyWith(title: value);
                   },
+
                   hintText: tool?.title,
                   controller: _titleCtrl,
                   validator: FormValidator.nameValidator,
@@ -85,7 +87,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
                   controller: _descriptionCtrl,
-                  validator: FormValidator.nameValidator,
+                  //validator: FormValidator.nameValidator,
                   //TODO (m) check validate only one field
                   // validator:  (value) {
                   //   if (value == null || value.isEmpty) {

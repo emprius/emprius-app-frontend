@@ -51,8 +51,12 @@ class OwnToolListController extends StateNotifier<List<ToolModel>> {
   Future<void> updateTool(ToolModel newTool) async {
     // var tempList = state;
     // tempList[tempList.indexWhere((tool) => tool.toolId == newTool.toolId )] = newTool;
+    var updatedTool = await _toolHttpRepository.updateTool(
+        newTool: newTool,
+        //toolId: newTool.id!
+    );
     state = [...state ]
-      ..[state.indexWhere((tool) => tool.id == newTool.id )] = newTool;
+      ..[state.indexWhere((tool) => tool.id == updatedTool.id )] = updatedTool;
   }
 
   Future<void> deleteTool(ToolModel tool) async {

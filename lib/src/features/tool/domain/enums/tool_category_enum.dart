@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/common_widgets/category_label.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/material.dart';
@@ -33,117 +34,39 @@ extension ExtToolCategory on ToolCategory{
   }
 
   Object? get label {
-    switch (this){
+    switch (this) {
       case ToolCategory.VEHICLE:
-        return ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: Colors.redAccent,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Vehicles'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-                Icons.car_rental,
-                size: 24.0,
-              ),
-            ],
-          ),
+        return const CategoryLabel(
+          text: 'Vehicles',
+          color: Colors.redAccent,
+          icon: Icons.car_rental,
         );
       case ToolCategory.CONSTRUCTION:
-        return ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: Colors.blueAccent,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Construccio'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-                Icons.construction,
-                size: 24.0,
-              ),
-            ],
-          ),
+        return const CategoryLabel(
+          text: 'Construccio',
+          color: Colors.blueAccent,
+          icon: Icons.construction,
         );
       case ToolCategory.ENERGY:
-        return ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: Colors.orangeAccent,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Energia'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-                Icons.lightbulb,
-                size: 24.0,
-              ),
-            ],
-          ),
+        return const CategoryLabel(
+          text: 'Energia',
+          color: Colors.orangeAccent,
+          icon:   Icons.lightbulb,
         );
       case ToolCategory.GARDENING:
-        return ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: Colors.lightGreen,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Hort'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-                Icons.yard,
-                size: 24.0,
-              ),
-            ],
-          ),
+        return const CategoryLabel(
+          text: 'Hort',
+          color: Colors.lightGreen,
+          icon: Icons.yard,
         );
       case ToolCategory.WOODWORK:
-        return ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            primary: Colors.brown,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Fusteria'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-                Icons.cabin,
-                size: 24.0,
-              ),
-            ],
-          ),
+        return const CategoryLabel(
+          text: 'Fusteria',
+          color: Colors.brown,
+          icon:  Icons.cabin,
         );
       default:
         return null;
     }
-
   }
-
-  //Marker get marker{}
-
-
-}
-
-class ToolLabel {
 }

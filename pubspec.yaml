@@ -33,6 +33,9 @@ dependencies:
   # map
   flutter_map: ^2.0.0
 
+  # floating search bar
+  material_floating_search_bar: ^0.3.7
+
   # provider
   flutter_riverpod: ^2.0.0-dev.9
 

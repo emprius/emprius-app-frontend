@@ -36,7 +36,6 @@ class _ToolExtraPropertiesState extends State<ToolExtraProperties> {
             children: [
           Text("Distancia maxima"),
            DropdownButton(
-
               value: _currentDistance,
               items: maxDistance
                   .map(

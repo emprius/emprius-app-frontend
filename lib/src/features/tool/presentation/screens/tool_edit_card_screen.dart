@@ -1,20 +1,14 @@
-import 'dart:io';
-
-import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
-import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
-import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ToolEditCardScreen extends ConsumerStatefulWidget {
   final EditToolArguments args;
@@ -36,13 +30,12 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   void initState() {
     tool = ref.read(singleToolProvider(widget.args.id));
     _titleCtrl.text = tool!.title;
+    _descriptionCtrl.text = tool!.description;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // final tool = ref.watch(singleToolProvider(widget.args.id));
-
     return Scaffold(
       appBar: UserAppbar("Editar eina"),
       floatingActionButton: FloatingActionButton.extended(
@@ -79,7 +72,6 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   hintText: tool?.title,
                   controller: _titleCtrl,
                   validator: FormValidator.nameValidator,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 SizedBox(height: 20.0),
                 CustomTextField(

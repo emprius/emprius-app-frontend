@@ -164,61 +164,58 @@ paths:
           description: Default error sample response
       tags:
         - tools
-  /tools/category/{categoryId}:
-    summary: Filter tools by categoryId
+  /tools/search/:
+    summary: Search tools
     get:
-      summary: Get a list of tool summaries by categoryId
-      description: ''
-      operationId: ''
-      parameters:
-        - name: categoryId
-          in: path
-          description: ID for the category to search
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        default:
-          description: Default error sample response
-      tags:
-        - tools
-  /tools/geo/:
-    summary: List of tools by geolocation
-    get:
-      summary: Get a list of tools by geolocated square area
+      summary: Get a list of tools by filtered params
       description: >-
-        It get query parameters defining top left point and bottom right point
-        to draw the square where to look for the tools
+        todo
       operationId: ''
       parameters:
         - in: query
-          name: topLat
+          name: searchTerm
           schema:
-            type: integer
-            format: int64
-          description: Top left latitude
+            type: string
+          description: Partial title or description
         - in: query
-          name: topLon
+          name: center
           schema:
-            type: integer
-            format: int64
-          description: Top left longitude
+            type: string
+          description: LatLong JSON with the center point of the search
         - in: query
-          name: botLat
+          name: categories
           schema:
-            type: integer
-            format: int64
-          description: Bottom right latitude
+            type: array
+            items:
+              type: string
+          description: Array of categories
         - in: query
-          name: botLon
+          name: maxCost
           schema:
             type: integer
-            format: int64
-          description: Bottom right longitude
+            format: int32
+        - in: query
+          name: maybeFree
+          schema:
+            type: boolean
+        - in: query
+          name: availableFrom
+          schema:
+            type: integer
       responses:
-        default:
-          description: Default error sample response
+        '200':
+          description: List of results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: string
+                      description: toolModel
+                    description: List of tool models
       tags:
         - tools
   /tool:

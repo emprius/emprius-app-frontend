@@ -19,7 +19,7 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           color: Colors.white,
           onPressed: () {
-            Navigator.pushNamed(context, homeScreenRoute);
+            Navigator.pushNamed(context, searchMapScreenRoute);
           },
           icon: const Icon(Icons.house),
         ),

@@ -1,12 +1,12 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
-import 'package:empriusapp/src/features/main/presentation/widgets/emprius_map.dart';
+import 'package:empriusapp/src/features/search/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_marker.dart';
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
-import 'package:empriusapp/src/features/main/presentation/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/src/features/search/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';

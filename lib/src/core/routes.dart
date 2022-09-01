@@ -10,13 +10,13 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/u
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';
-import '../features/main/presentation/screens/home_screen.dart';
-import '../features/main/presentation/screens/splash_screen.dart';
+import '../features/search/presentation/screens/search_map_screen.dart';
+import '../features/main/splash_screen.dart';
 import '../features/tool/domain/tool_model.dart';
 import '../features/user/emprius_user/domain/user_model.dart';
 
 const String loginScreenRoute = "/login";
-const String homeScreenRoute = "/home";
+const String searchMapScreenRoute = "/home";
 const String registerScreenRoute = "/register";
 const String userProfileScreenRoute = "/user-profile";
 const String editProfileScreenRoute = "/edit-profile";
@@ -36,8 +36,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case loginScreenRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case homeScreenRoute:
-        return MaterialPageRoute(builder: (_)=> HomeScreen());
+      case searchMapScreenRoute:
+        return MaterialPageRoute(builder: (_)=> SearchMapScreen());
       case registerScreenRoute:
         return MaterialPageRoute(builder: (_)=> RegisterScreen());
       case userProfileScreenRoute:

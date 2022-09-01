@@ -47,7 +47,7 @@ class BaseMarker extends StatelessWidget {
   BaseMarker.availableTool() : color = Colors.green;
   // BaseMarker.availableTool({this.color = Colors.red});
 
-  BaseMarker.bookedTool() : color = Colors.black12;
+  BaseMarker.bookedTool() : color = Colors.black54;
 
   BaseMarker.userMarker() : color = Colors.blueAccent;
 

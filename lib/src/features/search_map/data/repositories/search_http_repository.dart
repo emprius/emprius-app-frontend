@@ -47,6 +47,30 @@ var _sampleTools = [
       cost: 10,
       images: _toolImagesPhone,
       location: LatLng(41.695386, 2.992756)),
+  ToolModel(
+      id: 3,
+      isAvailable: false,
+      title: "Tractor",
+      description: "Es de color groc com a la canso",
+      toolCategory: ToolCategory.GARDENING,
+      transportOptions: TransportOptions.EXTRA_NECESSARY,
+      maybeFree: true,
+      askWithFee: true,
+      cost: 10,
+      images: _toolImagesPhone,
+      location: LatLng(41.675386, 2.982756)),
+  ToolModel(
+      id: 3,
+      isAvailable: false,
+      title: "Tractor",
+      description: "Es de color groc com a la canso",
+      toolCategory: ToolCategory.WOODWORK,
+      transportOptions: TransportOptions.EXTRA_NECESSARY,
+      maybeFree: true,
+      askWithFee: true,
+      cost: 10,
+      images: _toolImagesPhone,
+      location: LatLng(41.695376, 2.992456)),
 ];
 
 // search tools DTO:

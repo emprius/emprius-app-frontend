@@ -1,8 +1,10 @@
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
-import 'package:empriusapp/src/core/common_widgets/custom_marker.dart';
-import 'package:empriusapp/src/features/search/application/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
+import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/marker_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong2/latlong.dart';
 
 
@@ -73,6 +75,8 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
                   if (widget.isViewOnly) return;
+
+
                   markers = [
                     CustomMarker.tapMarker(tapLocation)
                   ];
@@ -83,12 +87,23 @@ class _EmpriusMapState extends State<EmpriusMap> {
                   setState((){});
                 }
             ),
-            layers: [
-              TileLayerOptions(
+            children: [
+              TileLayerWidget(
+                options: TileLayerOptions(
                 urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-              ),
-              MarkerLayerOptions(
-                markers: markers,
+                )),
+              // MarkerLayerOptions(
+              //   markers: markers,
+              // ),
+              PopupMarkerLayerWidget(
+                options: PopupMarkerLayerOptions(
+                  //popupController: _popupLayerController,
+                  markers: markers,
+                  //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
+                  //TODO: implement popup
+                  popupBuilder: (BuildContext context, Marker marker) =>
+                      MarkerPopup(marker),
+                ),
               ),
             ],
             /*nonRotatedChildren: [

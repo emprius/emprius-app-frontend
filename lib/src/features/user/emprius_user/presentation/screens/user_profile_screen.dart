@@ -4,14 +4,13 @@ import 'package:empriusapp/src/features/search/presentation/widgets/emprius_map.
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_marker.dart';
+import 'package:empriusapp/src/core/common_widgets/custom_marker.dart';
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
 import 'package:empriusapp/src/features/search/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -26,17 +25,15 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
   final _customMapCtrl = EmpriusMapController();
 
-  void _setMarkers(LatLng newLatLng){
+  void _setMarkers(UserModel user){
     _customMapCtrl.markers = [
-      Marker(
-        point: newLatLng,
-        builder: (ctx) => UserMarker(),
-        ),];
+      CustomMarker.fromUserModel(user)
+    ];
   }
 
   @override
   void initState() {
-    _setMarkers( ref.read(userProvider.notifier).state.location!);
+    _setMarkers(ref.read(userProvider.notifier).state);
     super.initState();
   }
 
@@ -45,7 +42,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     var user = ref.watch(userProvider);
     ref.listen<LatLng>(userProvider.select(
             (user) => user.location!), (LatLng? previous, LatLng next) {
-      _setMarkers(next);
+      _setMarkers(user);
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });
 

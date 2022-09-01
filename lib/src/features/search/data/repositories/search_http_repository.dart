@@ -22,7 +22,7 @@ var _sampleTools = [
       transportOptions: TransportOptions.NOT_NECESSARY,
       cost: 10,
       images: _toolImagesPhone,
-      location: LatLng(41.695384, 2.492793)),
+      location: LatLng(41.795394, 2.792793)),
   ToolModel(
       id: 2,
       isAvailable: true,
@@ -34,7 +34,7 @@ var _sampleTools = [
       transportOptions: TransportOptions.NECESSARY,
       cost: 10,
       images: _toolImagesPhone,
-      location: LatLng(41.695386, 2.492793)),
+      location: LatLng(41.995386, 2.492793)),
   ToolModel(
       id: 3,
       isAvailable: true,
@@ -46,7 +46,7 @@ var _sampleTools = [
       askWithFee: true,
       cost: 10,
       images: _toolImagesPhone,
-      location: LatLng(41.695386, 2.492796)),
+      location: LatLng(41.695386, 2.992756)),
 ];
 
 // search tools DTO:
@@ -56,7 +56,7 @@ class SearchHttpRepository {
 
   Future<List<ToolModel>> searchTools({
    String? searchTerm,
-   String? center,
+   LatLng? center,
    List<ToolCategory>? categories,
    int? maxCost,
    bool? maybeFree,

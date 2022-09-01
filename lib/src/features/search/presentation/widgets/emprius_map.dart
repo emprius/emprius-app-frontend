@@ -1,15 +1,16 @@
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_marker.dart';
+import 'package:empriusapp/src/core/common_widgets/custom_marker.dart';
+import 'package:empriusapp/src/features/search/application/controllers/emprius_map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import '../../application/controllers/emprius_map_controller.dart';
 
 
 /// Widget that show a flutter_map.
 ///
 /// It can get a [controller] used for validation purposes or to extract/modify
 /// selected points on the map.
+///
 class EmpriusMap extends StatefulWidget {
   final EmpriusMapController? empriusMapController;
   final MapValidator? mapValidator;
@@ -27,6 +28,7 @@ class EmpriusMap extends StatefulWidget {
   @override
   _EmpriusMapState createState() => _EmpriusMapState();
 }
+
 
 class _EmpriusMapState extends State<EmpriusMap> {
   late List<Marker> markers = [];
@@ -51,8 +53,8 @@ class _EmpriusMapState extends State<EmpriusMap> {
   Widget build(BuildContext context) {
     if(widget.empriusMapController?.markers != null ) {
       markers = widget.empriusMapController!.markers!;
-      // mapController.move(widget.controller!.markers!.first.point, _defaultZoom);
     }
+
 
     return Column(
       children: [
@@ -65,7 +67,6 @@ class _EmpriusMapState extends State<EmpriusMap> {
           child: FlutterMap(
             mapController: _flutterMapController,
             options: MapOptions(
-              //TODO: ADD DYNAMIC CENTER
                 center: widget.initialCenter ?? LatLng(41.695384, 2.492793),
                 zoom: _defaultZoom,
                 interactiveFlags:  InteractiveFlag.all,
@@ -73,12 +74,7 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 onTap: (tapPos, LatLng tapLocation) {
                   if (widget.isViewOnly) return;
                   markers = [
-                    Marker(
-                        point: tapLocation,
-                        builder: (ctx) => Container(
-                          child: UserMarker()
-                          ),
-                        ),
+                    CustomMarker.tapMarker(tapLocation)
                   ];
                   widget.empriusMapController?.markers = markers;
                   widget.empriusMapController?.selectedLocation = tapLocation;

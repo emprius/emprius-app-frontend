@@ -10,7 +10,7 @@ import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_marker.dart';
+import 'package:empriusapp/src/core/common_widgets/custom_marker.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,10 +51,12 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
 
   void _setMarkers(LatLng newLatLng){
     _customMapCtrl.markers = [
-      Marker(
-        point: newLatLng,
-        builder: (ctx) => UserMarker(),
-      ),];
+      CustomMarker.tapMarker(newLatLng)
+      // Marker(
+      //   point: newLatLng,
+      //   builder: (ctx) =>  CustomMarker.tapMarker(tapLocation),
+      // ),
+    ];
   }
 
 

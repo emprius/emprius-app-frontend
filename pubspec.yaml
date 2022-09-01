@@ -33,6 +33,9 @@ dependencies:
   # map
   flutter_map: ^2.0.0
 
+  # to show a customisable popup Widget
+  flutter_map_marker_popup: ^3.2.0
+
   # floating search bar
   material_floating_search_bar: ^0.3.7
 

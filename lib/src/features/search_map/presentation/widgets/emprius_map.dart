@@ -80,15 +80,10 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 options: TileLayerOptions(
                 urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 )),
-              // MarkerLayerOptions(
-              //   markers: markers,
-              // ),
               PopupMarkerLayerWidget(
                 options: PopupMarkerLayerOptions(
-                  //popupController: _popupLayerController,
                   markers: markers,
                   //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
-                  //TODO: implement popup
                   popupBuilder: (BuildContext context, Marker marker) {
                     return (marker as CustomMarker).popup ?? Container();
                   }

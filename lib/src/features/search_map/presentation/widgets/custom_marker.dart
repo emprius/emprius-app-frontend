@@ -19,7 +19,8 @@ class CustomMarker extends Marker {
           builder: (ctx) => BaseMarker.availableTool());
     } else {
       return CustomMarker(
-        point: tool.location!,
+          popup: MarkerPopup.fromToolModel(tool),
+          point: tool.location!,
         builder: (ctx) => BaseMarker.bookedTool());
     }
   }

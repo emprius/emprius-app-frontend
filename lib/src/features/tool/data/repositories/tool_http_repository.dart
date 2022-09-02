@@ -21,6 +21,7 @@ var _sampleTools = [
       toolCategory: ToolCategory.VEHICLE,
       transportOptions: TransportOptions.NOT_NECESSARY,
       cost: 10,
+      rating: 5,
       images: _toolImagesPhone,
       location: LatLng(41.695384, 2.492793)),
   ToolModel(
@@ -33,6 +34,7 @@ var _sampleTools = [
       toolCategory: ToolCategory.ENERGY,
       transportOptions: TransportOptions.NECESSARY,
       cost: 10,
+      rating: 5,
       images: _toolImagesPhone,
       location: LatLng(41.695386, 2.492793)),
   ToolModel(
@@ -45,6 +47,7 @@ var _sampleTools = [
       maybeFree: true,
       askWithFee: true,
       cost: 10,
+      rating: 5,
       images: _toolImagesPhone,
       location: LatLng(41.695386, 2.492796)),
 ];

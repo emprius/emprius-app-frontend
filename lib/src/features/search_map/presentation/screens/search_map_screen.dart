@@ -3,6 +3,7 @@ import 'package:empriusapp/src/features/search_map/application/providers/search_
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_search_bar.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/marker_popup.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/search_filters.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -31,8 +32,11 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
 
 
     var searchResults = ref.watch(searchProvider);
+    var markers = searchResults.map(
+            (tool) => CustomMarker.fromToolModel(tool) ).toList();
+
     var controller = EmpriusMapController(
-        markers: searchResults.map((tool) => CustomMarker.fromToolModel(tool)).toList()
+        markers: markers,
     );
 
 

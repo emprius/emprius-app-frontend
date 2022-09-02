@@ -1,3 +1,5 @@
+import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/marker_popup.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -11,7 +13,7 @@ class EmpriusMapController {
   LatLng? selectedLocation;
 
   /// List of Markers to paint or already painted on the map
-  List<Marker>? markers;
+  List<CustomMarker>? markers;
 
   /// Controller used to control the inner flutter_map widget.
   ///
@@ -21,7 +23,7 @@ class EmpriusMapController {
 
   EmpriusMapController({
     this.selectedLocation,
-    this.markers
+    this.markers,
   });
 
 }

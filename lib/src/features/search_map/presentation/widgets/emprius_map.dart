@@ -1,18 +1,12 @@
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
-import 'package:empriusapp/src/features/search_map/presentation/widgets/marker_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong2/latlong.dart';
 
 
-/// Widget that show a flutter_map.
-///
-/// It can get a [controller] used for validation purposes or to extract/modify
-/// selected points on the map.
-///
 class EmpriusMap extends StatefulWidget {
   final EmpriusMapController? empriusMapController;
   final MapValidator? mapValidator;
@@ -33,11 +27,9 @@ class EmpriusMap extends StatefulWidget {
 
 
 class _EmpriusMapState extends State<EmpriusMap> {
-  late List<Marker> markers = [];
+  late List<CustomMarker> markers = [];
   MapController _flutterMapController = MapController();
-
   void _refresh() => setState((){});
-
   double _defaultZoom = 15.0;
 
   @override
@@ -45,7 +37,6 @@ class _EmpriusMapState extends State<EmpriusMap> {
     if(widget.empriusMapController != null) {
       widget.empriusMapController!.flutterMapController = _flutterMapController;
     }
-
     if(widget.mapValidator !=null){
       widget.mapValidator!.refresh = _refresh;
     }
@@ -56,7 +47,6 @@ class _EmpriusMapState extends State<EmpriusMap> {
     if(widget.empriusMapController?.markers != null ) {
       markers = widget.empriusMapController!.markers!;
     }
-
 
     return Column(
       children: [
@@ -76,14 +66,12 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 onTap: (tapPos, LatLng tapLocation) {
                   if (widget.isViewOnly) return;
 
-
                   markers = [
                     CustomMarker.tapMarker(tapLocation)
                   ];
                   widget.empriusMapController?.markers = markers;
                   widget.empriusMapController?.selectedLocation = tapLocation;
                   widget.mapValidator?.selectedLocation = tapLocation;
-
                   setState((){});
                 }
             ),
@@ -101,8 +89,9 @@ class _EmpriusMapState extends State<EmpriusMap> {
                   markers: markers,
                   //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
                   //TODO: implement popup
-                  popupBuilder: (BuildContext context, Marker marker) =>
-                      MarkerPopup(marker),
+                  popupBuilder: (BuildContext context, Marker marker) {
+                    return (marker as CustomMarker).popup ?? Container();
+                  }
                 ),
               ),
             ],

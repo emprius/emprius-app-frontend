@@ -1,17 +1,20 @@
+import 'package:empriusapp/src/features/search_map/presentation/widgets/marker_popup.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-
 class CustomMarker extends Marker {
 
-  CustomMarker({required super.point, required super.builder});
+  MarkerPopup? popup;
+
+  CustomMarker({this.popup, required super.point, required super.builder});
 
   factory CustomMarker.fromToolModel(ToolModel tool){
     if(tool.isAvailable) {
       return CustomMarker(
+         popup: MarkerPopup.fromToolModel(tool),
           point: tool.location!,
           builder: (ctx) => BaseMarker.availableTool());
     } else {

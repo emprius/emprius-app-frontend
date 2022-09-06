@@ -1,16 +1,44 @@
+import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomSearchBar extends StatefulWidget {
-  const CustomSearchBar({Key? key}) : super(key: key);
+class CustomSearchBar extends ConsumerStatefulWidget {
+ CustomSearchBar({
+   Key? key,
+   //this.controller,
+ }) : super(key: key);
+
+ //final TextEditingController controller;
 
   @override
-  State<CustomSearchBar> createState() => _CustomSearchBarState();
+  createState() => _CustomSearchBarState();
 }
 
-class _CustomSearchBarState extends State<CustomSearchBar> {
+class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
+
+  final _searchTermCtrl = TextEditingController();
+
+  // @override
+  // void dispose() {
+  //   _searchTermCtrl.dispose()
+  //   super.dispose();
+  // }
+  //
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   widget.controller((){
+  //     setState((){
+  //
+  //     });
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: _searchTermCtrl,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
           prefixIcon: filterOptions(),
@@ -33,9 +61,13 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
 IconButton doSearch() {
   return IconButton(
-      onPressed: () {
+      onPressed: () async {
+
+        //await ref
+        //    .read(searchProvider.notifier).searchTools();
         // get filters
-        // get searrch term
+        // get searrch term:
+        //searchTerm: _searchTermCtrl.text,
         // Get center of map
         //var actualCenter = controller!.flutterMapController!.center;
         // Call notifier

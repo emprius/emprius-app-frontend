@@ -54,7 +54,7 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
             isViewOnly: true,
             empriusMapController: controller,
           ),
-          const Positioned(
+          Positioned(
             top: 10,
             right: 15,
             left: 15,

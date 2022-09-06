@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_search_bar.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/search_filters.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
@@ -53,27 +54,11 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
             isViewOnly: true,
             empriusMapController: controller,
           ),
-          Positioned(
+          const Positioned(
             top: 10,
             right: 15,
             left: 15,
-            child: TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                prefixIcon: filterOptions(),
-                  suffixIcon: doSearch(),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: "Cerca eines"
-              ),
-            ),
+            child: CustomSearchBar(),
             ),
         ],
       ),
@@ -81,24 +66,3 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
   }
 }
 
-IconButton doSearch() {
- return IconButton(
- onPressed: () {
-   // get filters
-   // get searrch term
-   // Get center of map
-   //var actualCenter = controller!.flutterMapController!.center;
-   // Call notifier
-  },
-     icon: const Icon(Icons.search));
-
-}
-
-IconButton filterOptions() {
-  return IconButton(
-      onPressed: (){
-        // showModalBottomSheet(
-        //     context: context, builder: ((builder) => SearchFilters()));
-  },
-  icon: const Icon(Icons.menu_open_outlined));
-}

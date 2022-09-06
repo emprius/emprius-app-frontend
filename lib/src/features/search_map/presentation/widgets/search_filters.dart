@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -17,9 +15,9 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
   late bool _isAvailable = true;
   late bool _maybeFree = true;
   var _currentCategory = ToolCategory.GARDENING;
+  final _maxCostCtrl = TextEditingController();
 
   //TODO Implement searchTerm, center, maxCost and availableFrom
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +44,7 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                 }),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Buscar per categoria:"),
                 SizedBox(width: 10.0),
@@ -69,16 +68,29 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                 ),
               ],
             ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Filtra per cost maxim:"),
+                     //SizedBox(width: 10.0),
+                  Expanded(
+                    child: TextField(
+                      controller: _maxCostCtrl,
+                      keyboardType: TextInputType.number,
+                    ),
+                  )
+                ]),
             CustomTextButton(
                 text: 'Aplica filtres',
                 //onClicked: (){},
-    //TODO: check this
+                //TODO: check this
                 onClicked: () async{
 
                   await ref.watch(searchProvider.notifier)
                       .searchTools(
-                    //TODO create textfield controller:
-                    //maxCost: _maxCost,
+                    maxCost: int.parse(_maxCostCtrl.text),
                     maybeFree: _maybeFree,
                     //TODO select and pass diferent categories - FLUTTER CHIPS INPUT
                     //categories: _currentCategory,

@@ -1,8 +1,9 @@
+import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomSearchBar extends ConsumerStatefulWidget {
+class CustomSearchBar extends StatefulWidget {
  CustomSearchBar({
    Key? key,
    //this.controller,
@@ -14,9 +15,9 @@ class CustomSearchBar extends ConsumerStatefulWidget {
   createState() => _CustomSearchBarState();
 }
 
-class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
-
+class _CustomSearchBarState extends State<CustomSearchBar> {
   final _searchTermCtrl = TextEditingController();
+  EmpriusMapController? controller;
 
   // @override
   // void dispose() {
@@ -37,7 +38,9 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+
     return TextField(
+      onChanged: searchTerm,
       controller: _searchTermCtrl,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
@@ -59,20 +62,32 @@ class _CustomSearchBarState extends ConsumerState<CustomSearchBar> {
 }
 
 
-IconButton doSearch() {
-  return IconButton(
-      onPressed: () async {
+void searchTerm(String query) {
 
-        //await ref
-        //    .read(searchProvider.notifier).searchTools();
-        // get filters
-        // get searrch term:
-        //searchTerm: _searchTermCtrl.text,
-        // Get center of map
-        //var actualCenter = controller!.flutterMapController!.center;
-        // Call notifier
-      },
-      icon: const Icon(Icons.search));
+}
+
+
+  class doSearch extends ConsumerWidget {
+  final _searchTermCtrl = TextEditingController();
+  EmpriusMapController? controller;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var actualCenter = controller!.flutterMapController!.center;
+
+
+    return IconButton(
+        onPressed: () async{
+          await ref.watch(searchProvider.notifier).searchTools(
+            searchTerm: _searchTermCtrl.text,
+            center: actualCenter,
+          );
+          // get filters
+          // Call notifier
+        },
+        icon: const Icon(Icons.search));
+
+  }
 
 }
 

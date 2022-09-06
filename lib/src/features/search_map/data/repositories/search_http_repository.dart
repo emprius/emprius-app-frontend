@@ -81,6 +81,7 @@ var _sampleTools = [
 // search tools DTO:
 
 class SearchHttpRepository {
+
   String get path => "/tools/search";
 
   Future<List<ToolModel>> searchTools({
@@ -95,6 +96,8 @@ class SearchHttpRepository {
     return _sampleTools;
   }
 }
+
+//TODO mock responses with different search filters results
 
 /////another way:
 

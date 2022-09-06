@@ -14,8 +14,3 @@ final searchProvider = StateNotifierProvider<SearchToolsController, List<ToolMod
   );
 });
 
-
-//TODO check wich kind of Provider - ASYNC?
-// final searchByCategory = StateProvider.family<ToolModel?, categories>((ref, categories) {
-//   return ref.watch(searchProvider.select());
-// });

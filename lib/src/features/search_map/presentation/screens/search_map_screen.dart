@@ -1,6 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
-import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_search_bar.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/search_filters.dart';
@@ -19,25 +18,24 @@ class SearchMapScreen extends ConsumerStatefulWidget {
 }
 
 class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
+
+  EmpriusMapController? controller;
   @override
   void initState() {
     ref.read(searchProvider.notifier).searchTools(center: ref.read(userProvider).location);
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
-
-
     var searchResults = ref.watch(searchProvider);
     var markers = searchResults.map(
             (tool) => CustomMarker.fromToolModel(tool) ).toList();
-
-    var controller = EmpriusMapController(
+    controller = EmpriusMapController(
         markers: markers,
     );
-
 
     return Scaffold(
       appBar: UserAppbar("Mapa d'Eines"),
@@ -46,19 +44,61 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
           text: 'Filtres',
           onClicked: () {
             showModalBottomSheet(
-                context: context, builder: ((builder) => SearchFilters()));
+                context: context, builder: ((builder) => const SearchFilters()));
           }),
       body: Stack(
-        fit: StackFit.expand,
         children: [
           EmpriusMap(
             initialCenter: user.location,
             isViewOnly: true,
             empriusMapController: controller,
           ),
-          CustomSearchbar(),
+          Positioned(
+            top: 10,
+            right: 15,
+            left: 15,
+            child: TextField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                prefixIcon: filterOptions(),
+                  suffixIcon: doSearch(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(
+                      width: 0,
+                      style: BorderStyle.none,
+                    ),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: "Cerca eines"
+              ),
+            ),
+            ),
         ],
       ),
     );
   }
+}
+
+IconButton doSearch() {
+ return IconButton(
+ onPressed: () {
+   // get filters
+   // get searrch term
+   // Get center of map
+   //var actualCenter = controller!.flutterMapController!.center;
+   // Call notifier
+  },
+     icon: const Icon(Icons.search));
+
+}
+
+IconButton filterOptions() {
+  return IconButton(
+      onPressed: (){
+        // showModalBottomSheet(
+        //     context: context, builder: ((builder) => SearchFilters()));
+  },
+  icon: const Icon(Icons.menu_open_outlined));
 }

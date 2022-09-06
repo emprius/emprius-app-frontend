@@ -1,17 +1,24 @@
+import 'dart:ffi';
+
+import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
+import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchFilters extends StatefulWidget {
+class SearchFilters extends ConsumerStatefulWidget {
   const SearchFilters({Key? key}) : super(key: key);
 
   @override
-  State<SearchFilters> createState() => _SearchFiltersState();
+  createState() => _SearchFiltersState();
 }
 
-class _SearchFiltersState extends State<SearchFilters> {
+class _SearchFiltersState extends ConsumerState<SearchFilters> {
   late bool _isAvailable = true;
   late bool _maybeFree = true;
   var _currentCategory = ToolCategory.GARDENING;
+
+  //TODO Implement searchTerm, center, maxCost and availableFrom
 
 
   @override
@@ -62,6 +69,21 @@ class _SearchFiltersState extends State<SearchFilters> {
                 ),
               ],
             ),
+            CustomTextButton(
+                text: 'Aplica filtres',
+                //onClicked: (){},
+    //TODO: check this
+                onClicked: () async{
+
+                  await ref.watch(searchProvider.notifier)
+                      .searchTools(
+                    //TODO create textfield controller:
+                    //maxCost: _maxCost,
+                    maybeFree: _maybeFree,
+                    //TODO select and pass diferent categories - FLUTTER CHIPS INPUT
+                    //categories: _currentCategory,
+                  );}
+                )
       ]),
     );
   }

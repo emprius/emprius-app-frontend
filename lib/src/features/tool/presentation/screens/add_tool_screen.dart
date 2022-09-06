@@ -25,8 +25,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   var _currentCategory = ToolCategory.VEHICLE;
   late bool _maybeFree = true;
   late bool _askWithFee = true;
-  //TODO where to implement _isAvailable?
-  late bool _isAvailable = true;
+  //late bool _isAvailable = true;
   List<String>? _images;
 
   final _formKey = GlobalKey<FormState>();

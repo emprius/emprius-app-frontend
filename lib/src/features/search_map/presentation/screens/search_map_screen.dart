@@ -58,7 +58,15 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
             top: 10,
             right: 15,
             left: 15,
-            child: CustomSearchBar(),
+            child: CustomSearchBar(searchCallback: (String _searchTerm, SelectedFilters selectedFilters) async {
+              await ref.watch(searchProvider.notifier).searchTools(
+                categories: selectedFilters.selectedCategories,
+                maxCost: selectedFilters.maxCostCtrl,
+                maybeFree: selectedFilters.maybeFree,
+                searchTerm: _searchTerm,
+                center: controller!.flutterMapController!.center,
+              );
+            },),
             ),
         ],
       ),

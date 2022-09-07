@@ -155,24 +155,30 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               Container(
                 //height: 200,
                 child: ImageListSelector(
-                    callback: ((selectedImages) => _images = selectedImages)),
+                    callback: ((selectedImages) => _images = selectedImages)
+                     ),
+
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomTextButton(
-                      text: "Altres caracteristiques",
-                      onClicked: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: ((builder) => ToolExtraProperties()));
-                      }),
+                  Expanded(
+                    child: CustomTextButton(
+                        text: "Altres caracteristiques",
+                        onClicked: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: ((builder) => ToolExtraProperties()));
+                        }),
+                  ),
                   CustomTextButton(
                     text: "Guarda",
                     onClicked: () async {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
+                      print(_images);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Eina afegida')),
                       );
@@ -187,8 +193,9 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                         askWithFee: _askWithFee,
                         toolCategory: _currentCategory,
                         transportOptions: _currentTransport,
-                        cost: int.parse(_costCtrl.text),
+                        cost: _costCtrl.text.isNotEmpty ? int.parse(_costCtrl.text) : null,
                           ));
+
                       if (!mounted) return;
                       Navigator.pushReplacementNamed(
                           context, userToolsScreenRoute);

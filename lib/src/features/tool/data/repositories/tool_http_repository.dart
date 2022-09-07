@@ -4,10 +4,10 @@ import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:latlong2/latlong.dart';
 
 final _toolImagesPhone = [
-'/data/user/0/com.example.empriusapp/cache/image_picker4801801919904609723.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker8754154934436486707.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
+'/data/user/0/com.example.empriusapp/cache/image_picker290442785517590.jpg',
+'/data/user/0/com.example.empriusapp/cache/image_picker3004196561469944603.jpg',
+'/data/user/0/com.example.empriusapp/cache/image_picker130200792494777690.jpg',
+'/data/user/0/com.example.empriusapp/cache/image_picker5889187328360687785.jpg'
 ];
 
 var _sampleTools = [
@@ -23,7 +23,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
-      location: LatLng(41.695384, 2.492793)),
+      location: LatLng(41.765626, 2.407599)),
   ToolModel(
       id: 2,
       isAvailable: true,
@@ -36,7 +36,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
-      location: LatLng(41.695386, 2.492793)),
+      location: LatLng(41.692915, 2.540445)),
   ToolModel(
       id: 3,
       isAvailable: true,
@@ -49,7 +49,33 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
-      location: LatLng(41.695386, 2.492796)),
+      location: LatLng(41.765964, 2.350709)),
+  ToolModel(
+      id: 3,
+      isAvailable: false,
+      title: "Tractor",
+      description: "Es de color groc com a la canso",
+      toolCategory: ToolCategory.GARDENING,
+      transportOptions: TransportOptions.EXTRA_NECESSARY,
+      maybeFree: true,
+      askWithFee: true,
+      cost: 10,
+      rating: 5,
+      images: _toolImagesPhone,
+      location: LatLng(41.647657, 2.469107)),
+  ToolModel(
+      id: 3,
+      isAvailable: false,
+      title: "Tractor",
+      description: "Es de color groc com a la canso",
+      toolCategory: ToolCategory.WOODWORK,
+      transportOptions: TransportOptions.EXTRA_NECESSARY,
+      maybeFree: true,
+      askWithFee: true,
+      cost: 10,
+      rating: 5,
+      images: _toolImagesPhone,
+      location: LatLng(41.738964, 2.498198)),
 ];
 
 class ToolHttpRepository {

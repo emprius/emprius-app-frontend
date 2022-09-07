@@ -29,8 +29,9 @@ class EmpriusMap extends StatefulWidget {
 class _EmpriusMapState extends State<EmpriusMap> {
   late List<CustomMarker> markers = [];
   MapController _flutterMapController = MapController();
+  final PopupController? _popupLayerController = PopupController();
   void _refresh() => setState((){});
-  double _defaultZoom = 15.0;
+  double _defaultZoom = 12.0;
 
   @override
   initState() {
@@ -66,8 +67,13 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 onTap: (tapPos, LatLng tapLocation) {
                   if (widget.isViewOnly) return;
 
-                  markers = [
-                    CustomMarker.tapMarker(tapLocation)
+                  // TODO: // Hide popup when the map is tapped.
+                  _popupLayerController?.hideAllPopups();
+
+
+                    markers = [
+                      CustomMarker.tapMarker(tapLocation)
+
                   ];
                   widget.empriusMapController?.markers = markers;
                   widget.empriusMapController?.selectedLocation = tapLocation;
@@ -82,6 +88,7 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 )),
               PopupMarkerLayerWidget(
                 options: PopupMarkerLayerOptions(
+                    popupController: _popupLayerController,
                   markers: markers,
                   //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
                   popupBuilder: (BuildContext context, Marker marker) {

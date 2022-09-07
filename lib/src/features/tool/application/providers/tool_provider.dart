@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/tool/application/controllers/tool_controller.dart';
 import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
@@ -16,6 +17,7 @@ final ownToolsProvider = StateNotifierProvider<OwnToolListController, List<ToolM
 });
 
 
-final singleToolProvider = StateProvider.family<ToolModel?, int>((ref, id) {
-  return ref.watch(ownToolsProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id)));
+final toolByIdProvider = StateProvider.family<ToolModel?, int>((ref, id) {
+  var tool = ref.watch(ownToolsProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id)));
+  return tool == null ? ref.watch(searchProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id))) : tool;
 });

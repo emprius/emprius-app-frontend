@@ -28,7 +28,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
 
   @override
   void initState() {
-    tool = ref.read(singleToolProvider(widget.args.id));
+    tool = ref.read(toolByIdProvider(widget.args.id));
     _titleCtrl.text = tool!.title;
     _descriptionCtrl.text = tool!.description;
     super.initState();

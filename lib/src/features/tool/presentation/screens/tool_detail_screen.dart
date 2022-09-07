@@ -21,7 +21,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final tool = ref.watch(singleToolProvider(widget.args.id));
+    final tool = ref.watch(toolByIdProvider(widget.args.id));
 
     return Scaffold(
       appBar: UserAppbar("Eina"),

@@ -197,7 +197,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                           ));
 
                       if (!mounted) return;
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushNamed(
                           context, userToolsScreenRoute);
                     },
                   )

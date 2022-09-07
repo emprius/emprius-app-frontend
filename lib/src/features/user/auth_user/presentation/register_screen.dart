@@ -183,7 +183,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         return;
                       }
 
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushNamed(
                           context, userProfileScreenRoute);
                     },
                   ),

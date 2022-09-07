@@ -27,7 +27,7 @@ class MarkerPopup extends StatefulWidget {
         image = tool.images![0],
         rating = tool.rating {
     // onClick = (BuildContext context) {
-    //   Navigator.pushReplacementNamed(context, toolDetailScreenRoute,
+    //   Navigator.pushNamed(context, toolDetailScreenRoute,
     //       arguments: ToolDetailArguments(tool.id!));
     // };
   }

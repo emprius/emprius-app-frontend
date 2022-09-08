@@ -18,6 +18,16 @@ final ownToolsProvider = StateNotifierProvider<OwnToolListController, List<ToolM
 
 
 final toolByIdProvider = StateProvider.family<ToolModel?, int>((ref, id) {
-  var tool = ref.watch(ownToolsProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id)));
-  return tool == null ? ref.watch(searchProvider.select((toolList) => toolList.firstWhere((tool) => tool.id == id))) : tool;
+  var ownToolsProv = ref.watch(ownToolsProvider);
+  ToolModel? tool;
+  if(ownToolsProv.isNotEmpty) {
+     tool = ref.watch(ownToolsProvider.select((toolList) => toolList
+        .firstWhere((tool) => tool.id == id,)));
+  }
+  var searchProvi = ref.watch(searchProvider);
+  if(tool == null && searchProvi.isNotEmpty) {
+    tool = ref.watch(searchProvider.select((toolList) =>
+        toolList.firstWhere((tool) => tool.id == id)));
+  }
+  return tool;
 });

@@ -12,7 +12,7 @@ final _toolImagesPhone = [
 
 var _sampleTools = [
   ToolModel(
-      id: 1,
+      id: 6,
       isAvailable: true,
       title: "Bici de paseig",
       description: "No va be per a pujades fortes pero pots dur coses al cistell",
@@ -25,7 +25,7 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.765626, 2.407599)),
   ToolModel(
-      id: 2,
+      id: 7,
       isAvailable: true,
       title: "Burra autonoma",
       description: "Sha fet servir per raves pero encara te molta potencia.",
@@ -38,7 +38,7 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.692915, 2.540445)),
   ToolModel(
-      id: 3,
+      id: 8,
       isAvailable: true,
       title: "Tractor",
       description: "Es de color groc com a la canso",
@@ -51,7 +51,7 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
-      id: 3,
+      id: 9,
       isAvailable: false,
       title: "Tractor",
       description: "Es de color groc com a la canso",
@@ -64,7 +64,7 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
-      id: 3,
+      id: 10,
       isAvailable: false,
       title: "Tractor",
       description: "Es de color groc com a la canso",

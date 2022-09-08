@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_search_bar.dart';
@@ -44,8 +45,10 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
       floatingActionButton: CustomTextButton(
           text: 'Filtres',
           onClicked: () {
-            showModalBottomSheet(
-                context: context, builder: ((builder) => const SearchFilters()));
+              Navigator.pushNamed(context, toolDetailScreenRoute,
+                  arguments: ToolDetailArguments(1));
+            // showModalBottomSheet(
+            //     context: context, builder: ((builder) => const SearchFilters()));
           }),
       body: Stack(
         children: [

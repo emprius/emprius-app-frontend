@@ -21,9 +21,10 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     final tool = ref.watch(toolByIdProvider(widget.args.id));
 
-    return Scaffold(
+    return tool == null ? Container() :  Scaffold(
       appBar: UserAppbar("Eina"),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async{
@@ -82,7 +83,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 children: [
                   if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
                   if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
-                ],
+               ],
               )
             ],
           ),

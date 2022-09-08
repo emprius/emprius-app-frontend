@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:flutter/material.dart';
@@ -65,11 +66,8 @@ class _EmpriusMapState extends State<EmpriusMap> {
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
-                  if (widget.isViewOnly) return;
-
-                  // TODO: // Hide popup when the map is tapped.
                   _popupLayerController?.hideAllPopups();
-
+                  if (widget.isViewOnly) return;
 
                     markers = [
                       CustomMarker.tapMarker(tapLocation)
@@ -92,7 +90,7 @@ class _EmpriusMapState extends State<EmpriusMap> {
                   markers: markers,
                   //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
                   popupBuilder: (BuildContext context, Marker marker) {
-                    return (marker as CustomMarker).popup ?? Container();
+                    return  (marker as CustomMarker).popup ?? Container();
                   }
                 ),
               ),

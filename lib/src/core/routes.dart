@@ -57,9 +57,9 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> ToolEditCardScreen(settings.arguments as EditToolArguments));
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
-      case toolAskFormScreenRoute:
-        return MaterialPageRoute(
-            builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
+      // case toolAskFormScreenRoute:
+      //   return MaterialPageRoute(
+      //       builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
     }
   }
 }

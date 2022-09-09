@@ -1,5 +1,5 @@
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -20,19 +20,19 @@ class _UserToolListState extends ConsumerState<UserToolList> {
 
 
   void _deleteTool(ToolModel tool) {
-    ref.watch(ownToolsProvider.notifier).deleteTool(tool);
+//    ref.watch(authUserToolsProvider.notifier).deleteTool(tool);
   }
 
   @override
   void initState() {
-    ref.read(ownToolsProvider.notifier).getOwnTools();
+    ref.read(authUserToolsProvider);
     //isAvailable = tool.isAvailable;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tools = ref.watch(ownToolsProvider);
+    final tools = ref.watch(authUserToolsProvider);
 
     return Scaffold(
       appBar: UserAppbar("Les meves eines"),
@@ -69,7 +69,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                           activeTrackColor: Colors.white10,
                           activeColor: Colors.blue,
                           onChanged: (value) {
-                            ref.read(ownToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
+                            //ref.read(authUserToolsProvider.notifier).updateTool(tool.copyWith(isAvailable: value));
                           },
                         ),
                         trailing: Row(

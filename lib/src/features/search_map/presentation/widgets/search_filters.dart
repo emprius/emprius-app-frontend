@@ -9,25 +9,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../tool/domain/enums/tool_category_enum.dart';
 
-class SelectedFilters{
+class CurrentFilters{
   bool isAvailable = true;
   bool maybeFree = true;
   List<ToolCategory>? selectedCategories = [];
-  int? maxCostCtrl;
+  int? maxCost;
 
-  SelectedFilters();
-  SelectedFilters.update(this.isAvailable, this.maybeFree, this.selectedCategories,
-      this.maxCostCtrl);
+  CurrentFilters();
 
+  CurrentFilters.update(this.isAvailable, this.maybeFree, this.selectedCategories,
+      this.maxCost);
 //TODO Implement availableFrom
 
 }
 
 class SearchFilters extends ConsumerStatefulWidget {
-  final void Function(SelectedFilters)? callback;
+  final void Function(CurrentFilters)? callback;
+  final CurrentFilters currentFilters;
 
   const SearchFilters({
     Key? key,
+    required this.currentFilters,
     this.callback
   }) : super(key: key);
 
@@ -38,8 +40,21 @@ class SearchFilters extends ConsumerStatefulWidget {
 class _SearchFiltersState extends ConsumerState<SearchFilters> {
   late bool _isAvailable = true;
   late bool _maybeFree = true;
+  // todo: this is a list of categories
     var _currentCategory = ToolCategory.GARDENING;
    final _maxCostCtrl = TextEditingController();
+
+   @override
+  void initState() {
+     _isAvailable = widget.currentFilters.isAvailable;
+     _maybeFree = widget.currentFilters.maybeFree;
+     // todo: implement list of categories
+     // _currentCategory = widget.currentFilters.;
+     if(widget.currentFilters.maxCost != null) {
+       _maxCostCtrl.text = widget.currentFilters.maxCost.toString();
+     }
+    super.initState();
+  }
 
 
   @override
@@ -116,7 +131,7 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                 //TODO: check this
                 onClicked: () {
                   widget.callback?.call(
-                      SelectedFilters.update(
+                      CurrentFilters.update(
                       _isAvailable,
                       _maybeFree,
                         //TODO select and pass diferent categories - FLUTTER CHIPS INPUT

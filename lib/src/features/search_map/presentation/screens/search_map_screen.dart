@@ -24,7 +24,7 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
   EmpriusMapController? controller;
   @override
   void initState() {
-    ref.read(searchProvider.notifier).searchTools(center: ref.read(userProvider).location);
+    // ref.read(searchProvider.notifier).search(center: ref.read(userProvider).location);
     super.initState();
   }
 
@@ -42,14 +42,14 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
     return Scaffold(
       appBar: UserAppbar("Mapa d'Eines"),
       drawer: UserDrawer(),
-      floatingActionButton: CustomTextButton(
-          text: 'Filtres',
-          onClicked: () {
-              Navigator.pushNamed(context, toolDetailScreenRoute,
-                  arguments: ToolDetailArguments(1));
-            // showModalBottomSheet(
-            //     context: context, builder: ((builder) => const SearchFilters()));
-          }),
+      // floatingActionButton: CustomTextButton(
+      //     text: 'Filtres',
+      //     onClicked: () {
+      //         Navigator.pushNamed(context, toolDetailScreenRoute,
+      //             arguments: ToolDetailArguments(1));
+      //       // showModalBottomSheet(
+      //       //     context: context, builder: ((builder) => const SearchFilters()));
+      //     }),
       body: Stack(
         children: [
           EmpriusMap(
@@ -61,11 +61,15 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
             top: 10,
             right: 15,
             left: 15,
-            child: CustomSearchBar(searchCallback: (String _searchTerm, SelectedFilters selectedFilters) async {
-              await ref.watch(searchProvider.notifier).searchTools(
-                categories: selectedFilters.selectedCategories,
-                maxCost: selectedFilters.maxCostCtrl,
-                maybeFree: selectedFilters.maybeFree,
+            child: CustomSearchBar(
+              searchCallback: (
+                  String _searchTerm,
+                  CurrentFilters currentFilters) async {
+
+              await ref.read(searchProvider.notifier).search(
+                categories: currentFilters.selectedCategories,
+                maxCost: currentFilters.maxCost,
+                maybeFree: currentFilters.maybeFree,
                 searchTerm: _searchTerm,
                 center: controller!.flutterMapController!.center,
               );

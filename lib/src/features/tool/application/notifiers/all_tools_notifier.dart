@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/application/tool_use_cases.dart';
@@ -6,10 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 
 
+///We define the methods that will be in charge of changing and emitting new states when necessary:
 class AllToolsNotifier extends StateNotifier<List<ToolModel>> {
 
   final ToolHttpRepository toolHttpRepository;
-  AllToolsNotifier({required this.toolHttpRepository}) : super([]);
+
+  AllToolsNotifier({
+    required this.toolHttpRepository}) : super([]);
 
   Future<void> addTool(ToolModel tool) async {
     var newTool = await toolHttpRepository.addTool(
@@ -31,41 +35,32 @@ class AllToolsNotifier extends StateNotifier<List<ToolModel>> {
   }
 
   Future<void> deleteTool(ToolModel tool) async {
+    await toolHttpRepository.deleteTool(toolId: tool.id!);
     state = [...state]..removeWhere((t) => tool.id! == t.id);
   }
 
-  //TODO: check methods and state
-  // Future<ToolModel> deleteTool({
-  //   required int toolId,
-  // }) async {
-  //   return await _toolHttpRepository.deleteTool(toolId: toolId);
-  // }
 
-  Future<ToolModel> getToolById({
+  Future<void> getToolById({
     required int toolId,
   }) async {
-    return await toolHttpRepository.fetchOne(toolId: toolId);
+    await toolHttpRepository.fetchOne(toolId: toolId);
   }
 
-  Future<List<ToolModel>> getAllTools() {
+  Future<void> getAllTools() {
     return toolHttpRepository.fetchAll();
   }
 
 
-  Future<List<ToolModel>> getAllByUser({
-    required UserModel user,
+  Future<void> getAllByUser ({
+    required int userId,
   }) async {
-    return toolHttpRepository.fetchAllByUser(user: user);
+    var toolsByUserId = await toolHttpRepository.getAllByUser(userId: userId);
+    state = [...state, ...toolsByUserId];
   }
 
-  //
-  // Future<void> fetchAllByUser() async{
-  //   state = await toolHttpRepository.fetchAllByUser(user: null);
-  // }
 
   Future<void> addAllTool(List<ToolModel> tool) async {
     state = [...state, ...tool];
   }
-
 
 }

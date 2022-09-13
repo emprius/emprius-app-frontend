@@ -7,11 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 final _toolImagesPhone = [
-'/data/user/0/com.example.empriusapp/cache/image_picker290442785517590.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker3004196561469944603.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker130200792494777690.jpg',
-'/data/user/0/com.example.empriusapp/cache/image_picker5889187328360687785.jpg'
+  '/data/user/0/com.example.empriusapp/cache/image_picker4801801919904609723.jpg',
+  '/data/user/0/com.example.empriusapp/cache/image_picker8754154934436486707.jpg',
+  '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
+  '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
+
 var _sampleTools = [
   ToolModel(
       id: 6,
@@ -72,7 +73,7 @@ var _sampleTools = [
       description: "Es de color groc com a la canso",
       toolCategory: ToolCategory.WOODWORK,
       transportOptions: TransportOptions.EXTRA_NECESSARY,
-      maybeFree: true,
+      maybeFree: false,
       askWithFee: true,
       cost: 10,
       rating: 5,
@@ -136,15 +137,27 @@ class ToolHttpRepository {
   }
 
 
-  Future<List<ToolModel>> fetchAllByUser({
-    required UserModel user,
+  Future<List<ToolModel>> getAllByUser({
+    required int userId,
   }) async {
     return _sampleTools;
   }
 
   Future<List<ToolModel>> search({
-    required searchDTO,
+    String? searchTerm,
+    LatLng? center,
+    List<ToolCategory>? categories,
+    int? maxCost,
+    bool? maybeFree,
+    bool? isAvailable,
+    int? availableFrom
+    //required searchDTO,
   }) async {
-    return _sampleTools;
+    print("AAAAA");
+    print(isAvailable);
+    // await Future.delayed(Duration(seconds: 1));
+    // return _sampleTools;
+    ///Mocking response by filter
+    return _sampleTools.where((element) => element.maybeFree == maybeFree).toList();
   }
 }

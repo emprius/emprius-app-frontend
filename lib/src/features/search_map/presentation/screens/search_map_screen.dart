@@ -67,11 +67,12 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
                   CurrentFilters currentFilters) async {
 
               await ref.read(searchProvider.notifier).search(
+                isAvailable: currentFilters.isAvailable,
                 categories: currentFilters.selectedCategories,
                 maxCost: currentFilters.maxCost,
                 maybeFree: currentFilters.maybeFree,
                 searchTerm: _searchTerm,
-                center: controller!.flutterMapController!.center,
+                center: controller!.flutterMapController?.center,
               );
             },),
             ),

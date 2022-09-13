@@ -26,7 +26,7 @@ const String toolDetailScreenRoute = "/tool-detail";
 const String toolEditCardScreenRoute = "/edit-tool";
 const String toolAddFormScreenRoute = "/tool-form";
 const String toolAskFormScreenRoute = "/ask-tool-form";
-const String splashScreenRoute = "/";
+const String splashScreenRoute = "/splash";
 
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {

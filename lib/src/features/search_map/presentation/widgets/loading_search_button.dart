@@ -34,7 +34,7 @@ class LoadingTextButton extends ConsumerWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        onPressed: ()=> ref.read(searchProvider.notifier).searchTools(),
+        onPressed: ()=> ref.read(searchProvider.notifier).search(),
         child: Text(text),
       ),
     );

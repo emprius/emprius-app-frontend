@@ -23,7 +23,8 @@ final allToolsProvider = StateNotifierProvider<AllToolsNotifier, List<ToolModel>
 
 final authUserToolsProvider = StateProvider<List<ToolModel>>((ref) {
   var userId = ref.watch(userProvider.select((user) => user.id));
-  return ref.watch(toolsByUserProvider(userId));
+  return  ref.watch(toolsByUserProvider(userId)); //x size 0!
+
 });
 
 
@@ -35,7 +36,7 @@ final toolsByUserProvider = StateProvider.family<List<ToolModel>, int>((ref, use
 
 
 final toolByIdProvider = StateProvider.family<ToolModel, int>((ref, toolId) {
- return ref.watch(allToolsProvider.select((toolList) => toolList
-      .firstWhere((tool) => tool.id == toolId)));
+ return ref.watch(allToolsProvider)
+      .firstWhere((tool) => tool.id == toolId);
 });
 

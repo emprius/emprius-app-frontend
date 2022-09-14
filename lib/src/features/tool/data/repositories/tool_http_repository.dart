@@ -7,15 +7,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 final _toolImagesPhone = [
-  '/data/user/0/com.example.empriusapp/cache/image_picker4801801919904609723.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker8754154934436486707.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
+'/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg',
+'/data/user/0/com.example.empriusapp/cache/image_picker2314740962926778978.png',
+'/data/user/0/com.example.empriusapp/cache/image_picker2519909079312788563.jpg',
+'/data/user/0/com.example.empriusapp/cache/image_picker5181464323563610078.jpg'
+  // '/data/user/0/com.example.empriusapp/cache/image_picker4801801919904609723.jpg',
+  // '/data/user/0/com.example.empriusapp/cache/image_picker8754154934436486707.jpg',
+  // '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
+  // '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
 
 var _sampleTools = [
   ToolModel(
       id: 6,
+      userId: 1,
       isAvailable: true,
       title: "Bici de paseig",
       description: "No va be per a pujades fortes pero pots dur coses al cistell",
@@ -29,6 +34,7 @@ var _sampleTools = [
       location: LatLng(41.765626, 2.407599)),
   ToolModel(
       id: 7,
+      userId: 1,
       isAvailable: true,
       title: "Burra autonoma",
       description: "Sha fet servir per raves pero encara te molta potencia.",
@@ -42,6 +48,7 @@ var _sampleTools = [
       location: LatLng(41.692915, 2.540445)),
   ToolModel(
       id: 8,
+      userId: 1,
       isAvailable: true,
       title: "Tractor",
       description: "Es de color groc com a la canso",
@@ -55,6 +62,7 @@ var _sampleTools = [
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
       id: 9,
+      userId: 1,
       isAvailable: false,
       title: "Tractor",
       description: "Es de color groc com a la canso",
@@ -68,6 +76,7 @@ var _sampleTools = [
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
       id: 10,
+      userId: 1,
       isAvailable: false,
       title: "Tractor",
       description: "Es de color groc com a la canso",

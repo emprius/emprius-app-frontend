@@ -2,7 +2,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
@@ -25,8 +25,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   var _currentCategory = ToolCategory.VEHICLE;
   late bool _maybeFree = true;
   late bool _askWithFee = true;
-  //TODO where to implement _isAvailable?
-  late bool _isAvailable = true;
+  //late bool _isAvailable = true;
   List<String>? _images;
 
   final _formKey = GlobalKey<FormState>();
@@ -156,30 +155,36 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               Container(
                 //height: 200,
                 child: ImageListSelector(
-                    callback: ((selectedImages) => _images = selectedImages)),
+                    callback: ((selectedImages) => _images = selectedImages)
+                     ),
+
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomTextButton(
-                      text: "Altres caracteristiques",
-                      onClicked: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: ((builder) => ToolExtraProperties()));
-                      }),
+                  Expanded(
+                    child: CustomTextButton(
+                        text: "Altres caracteristiques",
+                        onClicked: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: ((builder) => ToolExtraProperties()));
+                        }),
+                  ),
                   CustomTextButton(
                     text: "Guarda",
                     onClicked: () async {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
+                      print(_images);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Eina afegida')),
                       );
-
+//TODO: PUSH LOGIC TO PROVIDERS (GENERAL TOOLS AND USER TOOLS) AWAY FROM UI
                       await ref
-                          .read(ownToolsProvider.notifier)
+                          .read(allToolsProvider.notifier)
                           .addTool(ToolModel(
                             title: _titleCtrl.text,
                             description: _descriptionCtrl.text,
@@ -188,10 +193,11 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                         askWithFee: _askWithFee,
                         toolCategory: _currentCategory,
                         transportOptions: _currentTransport,
-                        cost: int.parse(_costCtrl.text),
+                        cost: _costCtrl.text.isNotEmpty ? int.parse(_costCtrl.text) : null,
                           ));
+
                       if (!mounted) return;
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushNamed(
                           context, userToolsScreenRoute);
                     },
                   )

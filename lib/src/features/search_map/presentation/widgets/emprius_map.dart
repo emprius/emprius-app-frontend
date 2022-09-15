@@ -1,15 +1,13 @@
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_marker.dart';
+import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
+import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong2/latlong.dart';
-import '../controllers/emprius_map_controller.dart';
 
 
-/// Widget that show a flutter_map.
-///
-/// It can get a [controller] used for validation purposes or to extract/modify
-/// selected points on the map.
 class EmpriusMap extends StatefulWidget {
   final EmpriusMapController? empriusMapController;
   final MapValidator? mapValidator;
@@ -28,20 +26,19 @@ class EmpriusMap extends StatefulWidget {
   _EmpriusMapState createState() => _EmpriusMapState();
 }
 
+
 class _EmpriusMapState extends State<EmpriusMap> {
-  late List<Marker> markers = [];
+  late List<CustomMarker> markers = [];
   MapController _flutterMapController = MapController();
-
+  final PopupController? _popupLayerController = PopupController();
   void _refresh() => setState((){});
-
-  double _defaultZoom = 15.0;
+  double _defaultZoom = 12.0;
 
   @override
   initState() {
     if(widget.empriusMapController != null) {
       widget.empriusMapController!.flutterMapController = _flutterMapController;
     }
-
     if(widget.mapValidator !=null){
       widget.mapValidator!.refresh = _refresh;
     }
@@ -51,7 +48,6 @@ class _EmpriusMapState extends State<EmpriusMap> {
   Widget build(BuildContext context) {
     if(widget.empriusMapController?.markers != null ) {
       markers = widget.empriusMapController!.markers!;
-      // mapController.move(widget.controller!.markers!.first.point, _defaultZoom);
     }
 
     return Column(
@@ -65,34 +61,38 @@ class _EmpriusMapState extends State<EmpriusMap> {
           child: FlutterMap(
             mapController: _flutterMapController,
             options: MapOptions(
-              //TODO: ADD DYNAMIC CENTER
                 center: widget.initialCenter ?? LatLng(41.695384, 2.492793),
                 zoom: _defaultZoom,
                 interactiveFlags:  InteractiveFlag.all,
                 enableScrollWheel: true,
                 onTap: (tapPos, LatLng tapLocation) {
+                  _popupLayerController?.hideAllPopups();
                   if (widget.isViewOnly) return;
-                  markers = [
-                    Marker(
-                        point: tapLocation,
-                        builder: (ctx) => Container(
-                          child: UserMarker()
-                          ),
-                        ),
+
+                    markers = [
+                      CustomMarker.tapMarker(tapLocation)
+
                   ];
                   widget.empriusMapController?.markers = markers;
                   widget.empriusMapController?.selectedLocation = tapLocation;
                   widget.mapValidator?.selectedLocation = tapLocation;
-
                   setState((){});
                 }
             ),
-            layers: [
-              TileLayerOptions(
+            children: [
+              TileLayerWidget(
+                options: TileLayerOptions(
                 urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-              ),
-              MarkerLayerOptions(
-                markers: markers,
+                )),
+              PopupMarkerLayerWidget(
+                options: PopupMarkerLayerOptions(
+                    popupController: _popupLayerController,
+                  markers: markers,
+                  //markerRotateAlignment: PopupMarkerLayerOptions.rotationAlignmentFor(AnchorAlign.top),
+                  popupBuilder: (BuildContext context, Marker marker) {
+                    return  (marker as CustomMarker).popup ?? Container();
+                  }
+                ),
               ),
             ],
             /*nonRotatedChildren: [

@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: "Entra a l'app!",
                       onClicked: () {
                         if (!_formKey.currentState!.validate()) return;
-                        Navigator.pushReplacementNamed(context, homeScreenRoute);
+                        Navigator.pushNamed(context, searchMapScreenRoute);
                       },
                     ),
                 ),

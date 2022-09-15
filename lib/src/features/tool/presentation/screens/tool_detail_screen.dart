@@ -1,6 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -21,9 +21,10 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final tool = ref.watch(singleToolProvider(widget.args.id));
 
-    return Scaffold(
+    final tool = ref.watch(toolByIdProvider(widget.args.id));
+
+    return tool == null ? Container() :  Scaffold(
       appBar: UserAppbar("Eina"),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async{
@@ -43,7 +44,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
                   child: Text(
-                    tool!.title,
+                    tool.title,
                     style: const TextStyle(
                       fontSize: 20.0,
                     ),
@@ -82,7 +83,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 children: [
                   if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
                   if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
-                ],
+               ],
               )
             ],
           ),

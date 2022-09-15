@@ -2,7 +2,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
@@ -28,7 +28,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
 
   @override
   void initState() {
-    tool = ref.read(singleToolProvider(widget.args.id));
+    tool = ref.read(toolByIdProvider(widget.args.id));
     _titleCtrl.text = tool!.title;
     _descriptionCtrl.text = tool!.description;
     super.initState();
@@ -48,7 +48,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Eina editada')),
           );
-          await ref.watch(ownToolsProvider.notifier).updateTool(tool!);
+          await ref.watch(allToolsProvider.notifier).updateTool(tool!);
           if (!mounted) return;
           Navigator.of(context).pop();
         },

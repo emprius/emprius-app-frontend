@@ -10,13 +10,12 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/u
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';
-import '../features/main/presentation/screens/home_screen.dart';
-import '../features/main/presentation/screens/splash_screen.dart';
-import '../features/tool/domain/tool_model.dart';
+import '../features/search_map/presentation/screens/search_map_screen.dart';
+import '../features/main/splash_screen.dart';
 import '../features/user/emprius_user/domain/user_model.dart';
 
 const String loginScreenRoute = "/login";
-const String homeScreenRoute = "/home";
+const String searchMapScreenRoute = "/home";
 const String registerScreenRoute = "/register";
 const String userProfileScreenRoute = "/user-profile";
 const String editProfileScreenRoute = "/edit-profile";
@@ -27,7 +26,7 @@ const String toolDetailScreenRoute = "/tool-detail";
 const String toolEditCardScreenRoute = "/edit-tool";
 const String toolAddFormScreenRoute = "/tool-form";
 const String toolAskFormScreenRoute = "/ask-tool-form";
-const String splashScreenRoute = "/";
+const String splashScreenRoute = "/splash";
 
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -36,8 +35,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case loginScreenRoute:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case homeScreenRoute:
-        return MaterialPageRoute(builder: (_)=> HomeScreen());
+      case searchMapScreenRoute:
+        return MaterialPageRoute(builder: (_)=> SearchMapScreen());
       case registerScreenRoute:
         return MaterialPageRoute(builder: (_)=> RegisterScreen());
       case userProfileScreenRoute:
@@ -58,9 +57,9 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> ToolEditCardScreen(settings.arguments as EditToolArguments));
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
-      case toolAskFormScreenRoute:
-        return MaterialPageRoute(
-            builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
+      // case toolAskFormScreenRoute:
+      //   return MaterialPageRoute(
+      //       builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
     }
   }
 }

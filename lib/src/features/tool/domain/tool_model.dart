@@ -14,6 +14,7 @@ class ToolModel with _$ToolModel {
    @Default(true)bool isAvailable,
    bool? maybeFree,
    int? cost,
+   int? userId,
    List<String>? images,
    TransportOptions? transportOptions,
    ToolCategory? toolCategory,
@@ -30,6 +31,3 @@ class ToolModel with _$ToolModel {
   factory ToolModel.fromJson(Map<String, dynamic> json) => _$ToolModelFromJson(json);
 
 }
-
-
-//   //List<CategoryModel>categories;

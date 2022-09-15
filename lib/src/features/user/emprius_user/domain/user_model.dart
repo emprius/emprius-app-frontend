@@ -9,7 +9,7 @@ class UserModel with _$UserModel{
 
   const factory UserModel({
     required String? name,
-    @Default(-1) UserID userId,
+    @Default(-1) UserID id,
     LatLng? location,
     required bool? isActive,
     required String email,

@@ -53,10 +53,10 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.mail),
-            title: Text("Missatges"),
+            leading: Icon(Icons.auto_graph_outlined),
+            title: Text("Historial d'us"),
             onTap: (){
-              Navigator.pushNamed(context, userInboxScreenRoute);
+              Navigator.pushNamed(context, userStoryScreenRoute);
             },
           ),
           ListTile(

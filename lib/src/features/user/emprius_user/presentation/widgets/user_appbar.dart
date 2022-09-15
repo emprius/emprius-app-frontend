@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
   //const UserAppbar({Key? key}) : super(key: key);
   String title;
+  //bool goToMap = true;
   UserAppbar(this.title);
 
 
@@ -15,21 +16,25 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 20,
       // toolbarHeight: 70,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
+
       actions: [
-        IconButton(
+        Visibility(
+          //visible: goToMap,
+          child: IconButton(
           color: Colors.white,
-          onPressed: () {
-            Navigator.pushNamed(context, searchMapScreenRoute);
-          },
-          icon: const Icon(Icons.house),
+            icon: const Icon(Icons.house),
+            onPressed: () {
+              Navigator.pushNamed(context, searchMapScreenRoute);
+            },
+          ),
         ),
-        PopupMenuButton(
-            elevation: 30,
-            //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: 1, child: Text("les meves eines")),
-            ])
+        // PopupMenuButton(
+        //     elevation: 30,
+        //     //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
+        //     icon: Icon(Icons.more_vert),
+        //     itemBuilder: (context) => [
+        //       const PopupMenuItem(value: 1, child: Text("les meves eines")),
+        //     ])
       ],
     );
   }

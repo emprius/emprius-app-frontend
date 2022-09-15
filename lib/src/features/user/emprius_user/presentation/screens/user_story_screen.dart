@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class UserActivityScreen extends ConsumerStatefulWidget {
-  const UserActivityScreen({Key? key}) : super(key: key);
+class UserStoryScreen extends ConsumerStatefulWidget {
+  const UserStoryScreen({Key? key}) : super(key: key);
 
   @override
-  createState() => _UserActivityState();
+  createState() => _UserStoryState();
 }
 
-class _UserActivityState extends ConsumerState<UserActivityScreen> {
+class _UserStoryState extends ConsumerState<UserStoryScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _UserActivityState extends ConsumerState<UserActivityScreen> {
     //final user = UserPreferences.getUser();
 
     return Scaffold(
-      appBar: UserAppbar("La meva activitat"),
+      appBar: UserAppbar("Historial d'us"),
       body: Container(
         color: Colors.teal,
       )

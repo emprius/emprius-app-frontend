@@ -23,7 +23,7 @@ final allToolsProvider = StateNotifierProvider<AllToolsNotifier, List<ToolModel>
 
 final authUserToolsProvider = StateProvider<List<ToolModel>>((ref) {
   var userId = ref.watch(userProvider.select((user) => user.id));
-  return  ref.watch(toolsByUserProvider(userId)); //x size 0!
+  return  ref.watch(toolsByUserProvider(userId));
 
 });
 

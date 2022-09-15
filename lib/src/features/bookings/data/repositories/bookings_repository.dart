@@ -7,6 +7,7 @@ var _sampleBookings = [
   BookingModel(
       contact: "El meu telefon es el 676899700",
       bookingStatus: BookingStatus.ASKED),
+
   BookingModel(
       contact: "Escriume al seguen mail",
       bookingStatus: BookingStatus.ASKED),
@@ -29,11 +30,13 @@ class BookingsRepository {
     return booking.copyWith(bookingId: lastId);
   }
 
-  Future<List<BookingModel>> getAllByUser({
+  Future<List<BookingModel>> getAllPetitions({
   required int userId,
 }) async {
     return _sampleBookings;
   }
+
+  // TODO getAllRequests
 
 
 

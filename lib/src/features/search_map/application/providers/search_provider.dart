@@ -1,16 +1,17 @@
 
-import 'package:empriusapp/src/features/search_map/application/controllers/search_controller.dart';
-import 'package:empriusapp/src/features/search_map/data/repositories/search_http_repository.dart';
+import 'package:empriusapp/src/features/search_map/application/controllers/search_tools_notifier.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
+import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _searchHttpProvider = Provider<SearchHttpRepository>((ref){
-  return SearchHttpRepository();
-});
+final searchProvider = StateNotifierProvider<SearchToolsNotifier, List<ToolModel>>((ref) {
+  final _toolHttpRepository = ref.watch(toolHttpProvider);
+  final _allToolsNotifier = ref.watch(allToolsProvider.notifier);
 
-final searchProvider = StateNotifierProvider<SearchToolsController, List<ToolModel>>((ref) {
-  final _searchHttpRepository = ref.watch(_searchHttpProvider);
-  return SearchToolsController(searchHttpRepository: _searchHttpRepository,
+  return SearchToolsNotifier(
+    toolHttpRepository: _toolHttpRepository,
+    allToolsNotifier: _allToolsNotifier,
   );
 });
 

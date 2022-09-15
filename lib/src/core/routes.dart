@@ -26,7 +26,7 @@ const String toolDetailScreenRoute = "/tool-detail";
 const String toolEditCardScreenRoute = "/edit-tool";
 const String toolAddFormScreenRoute = "/tool-form";
 const String toolAskFormScreenRoute = "/ask-tool-form";
-const String splashScreenRoute = "/";
+const String splashScreenRoute = "/splash";
 
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -57,9 +57,9 @@ class Routes {
         return MaterialPageRoute(builder: (_)=> ToolEditCardScreen(settings.arguments as EditToolArguments));
       case toolAddFormScreenRoute:
         return MaterialPageRoute(builder: (_)=> AddToolScreen());
-      case toolAskFormScreenRoute:
-        return MaterialPageRoute(
-            builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
+      // case toolAskFormScreenRoute:
+      //   return MaterialPageRoute(
+      //       builder: (_)=> AskToolFormScreen(settings.arguments as ToolDetailArguments));
     }
   }
 }

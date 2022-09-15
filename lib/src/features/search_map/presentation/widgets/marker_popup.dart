@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -45,7 +45,7 @@ class UserHttpRepository {
     //  String invite
     // }
 
-    return userData.copyWith(userId: 1);
+    return userData.copyWith(id: 1);
   }
 
   // todo: implement

@@ -13,6 +13,7 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
       isAvailable: json['isAvailable'] as bool? ?? true,
       maybeFree: json['maybeFree'] as bool?,
       cost: json['cost'] as int?,
+      userId: json['userId'] as int?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       transportOptions: $enumDecodeNullable(
@@ -39,6 +40,7 @@ Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
       'isAvailable': instance.isAvailable,
       'maybeFree': instance.maybeFree,
       'cost': instance.cost,
+      'userId': instance.userId,
       'images': instance.images,
       'transportOptions': _$TransportOptionsEnumMap[instance.transportOptions],
       'toolCategory': _$ToolCategoryEnumMap[instance.toolCategory],

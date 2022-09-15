@@ -1,33 +1,28 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
-import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
-import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
-import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
-import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../tool/domain/enums/tool_category_enum.dart';
-
-class SelectedFilters{
+class CurrentFilters{
   bool isAvailable = true;
   bool maybeFree = true;
-  List<ToolCategory>? selectedCategories = [];
-  int? maxCostCtrl;
+  int? maxCost;
+  List<ToolCategory> selectedCategories = [];
 
-  SelectedFilters();
-  SelectedFilters.update(this.isAvailable, this.maybeFree, this.selectedCategories,
-      this.maxCostCtrl);
-
+  CurrentFilters();
+  CurrentFilters.update(this.isAvailable, this.maybeFree, this.selectedCategories,
+      this.maxCost);
 //TODO Implement availableFrom
 
 }
 
 class SearchFilters extends ConsumerStatefulWidget {
-  final void Function(SelectedFilters)? callback;
+  final void Function(CurrentFilters)? callback;
+  final CurrentFilters currentFilters;
 
   const SearchFilters({
     Key? key,
+    required this.currentFilters,
     this.callback
   }) : super(key: key);
 
@@ -38,8 +33,21 @@ class SearchFilters extends ConsumerStatefulWidget {
 class _SearchFiltersState extends ConsumerState<SearchFilters> {
   late bool _isAvailable = true;
   late bool _maybeFree = true;
-    var _currentCategory = ToolCategory.GARDENING;
-   final _maxCostCtrl = TextEditingController();
+
+  final _maxCostCtrl = TextEditingController();
+  late List<ToolCategory> _selectedCategories = [];
+
+
+  @override
+  void initState() {
+    _isAvailable = widget.currentFilters.isAvailable;
+    _maybeFree = widget.currentFilters.maybeFree;
+    _selectedCategories = widget.currentFilters.selectedCategories;
+    if (widget.currentFilters.maxCost != null) {
+      _maxCostCtrl.text = widget.currentFilters.maxCost.toString();
+    }
+    super.initState();
+  }
 
 
   @override
@@ -65,39 +73,39 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                     _maybeFree = value as bool;
                   });
                 }),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text("Buscar per categoria:"),
+            //     SizedBox(width: 10.0),
+            //     DropdownButton<ToolCategory>(
+            //       value: _currentCategory,
+            //       items: ToolCategory.values
+            //           .map(
+            //             (ToolCategory category) =>
+            //             DropdownMenuItem<ToolCategory>(
+            //               value: category,
+            //               child: Text(category.displayName!),
+            //             ),
+            //       )
+            //           .toList(),
+            //       onChanged: (ToolCategory? value) {
+            //         if (value != null && _currentCategory != value) {
+            //           setState(() {
+            //             _currentCategory = value;
+            //           });
+            //         }
+            //       },
+            //     ),
+            //   ],
+            // ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Buscar per categoria:"),
-                SizedBox(width: 10.0),
-                DropdownButton<ToolCategory>(
-                  value: _currentCategory,
-                  items: ToolCategory.values
-                      .map(
-                        (ToolCategory category) => DropdownMenuItem<ToolCategory>(
-                      value: category,
-                      child: Text(category.displayName!),
-                    ),
-                  )
-                      .toList(),
-                  onChanged: (ToolCategory? value) {
-                    if (value != null && _currentCategory != value) {
-                      setState(() {
-                        _currentCategory = value;
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("Filtra per cost maxim:"),
-                     //SizedBox(width: 10.0),
                   Expanded(
                     child: TextField(
                       controller: _maxCostCtrl,
@@ -105,43 +113,49 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                     ),
                   )
                 ]),
-            // Wrap(
-            //   spacing: 8,
-            //   direction: Axis.horizontal,
-            //   children: choiceChips(),
-            // ),
+            Wrap(
+              spacing: 8,
+              direction: Axis.horizontal,
+              children: choiceChips().toList(),
+            ),
             CustomTextButton(
                 text: 'Aplica filtres',
-                //onClicked: (){},
-                //TODO: check this
                 onClicked: () {
                   widget.callback?.call(
-                      SelectedFilters.update(
-                      _isAvailable,
-                      _maybeFree,
-                        //TODO select and pass diferent categories - FLUTTER CHIPS INPUT
-                      [_currentCategory],
-                        _maxCostCtrl.text.isNotEmpty ? int.parse(_maxCostCtrl.text): null,
-                  ));
+                      CurrentFilters.update(
+                        _isAvailable,
+                        _maybeFree,
+                        _selectedCategories,
+                        _maxCostCtrl.text.isNotEmpty ? int.parse(
+                            _maxCostCtrl.text) : null,
+                      ));
                   if (!mounted) return;
                   Navigator.of(context).pop();
                 }
-                )
-      ]),
+            )
+          ]),
     );
   }
+
+
+  Iterable<FilterChip> choiceChips() {
+    return ToolCategory.values
+        .map((ToolCategory category) {
+      return FilterChip(
+          label: Text(category.displayName!),
+          selected: _selectedCategories.contains(category),
+          onSelected: (bool value) {
+            setState(() {
+              if (value) {
+                _selectedCategories.add(category);
+              } else {
+                _selectedCategories.removeWhere(
+                        (selectedCategory) => selectedCategory == category);
+              }
+            },
+            );
+          }
+      );
+    });
+  }
 }
-
-
-// Iterable<ToolCategory> choiceChips() {
-//   return ToolCategory.values
-//       .map((ToolCategory category) {
-//     return Padding(
-//       padding: const EdgeInsets.all(4.0),
-//       child: FilterChip(
-//
-//       ),
-//     )
-//   })
-// }
-

@@ -26,11 +26,11 @@ mixin _$ToolModel {
   bool get isAvailable => throw _privateConstructorUsedError;
   bool? get maybeFree => throw _privateConstructorUsedError;
   int? get cost => throw _privateConstructorUsedError;
+  int? get userId => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
   TransportOptions? get transportOptions => throw _privateConstructorUsedError;
   ToolCategory? get toolCategory => throw _privateConstructorUsedError;
-  bool? get askWithFee =>
-      throw _privateConstructorUsedError; //TODO falta implementar:
+  bool? get askWithFee => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
   int? get rating => throw _privateConstructorUsedError;
   double? get estimatedValue => throw _privateConstructorUsedError;
@@ -56,6 +56,7 @@ abstract class $ToolModelCopyWith<$Res> {
       bool isAvailable,
       bool? maybeFree,
       int? cost,
+      int? userId,
       List<String>? images,
       TransportOptions? transportOptions,
       ToolCategory? toolCategory,
@@ -85,6 +86,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
     Object? isAvailable = freezed,
     Object? maybeFree = freezed,
     Object? cost = freezed,
+    Object? userId = freezed,
     Object? images = freezed,
     Object? transportOptions = freezed,
     Object? toolCategory = freezed,
@@ -121,6 +123,10 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
+              as int?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       images: images == freezed
           ? _value.images
@@ -183,6 +189,7 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       bool isAvailable,
       bool? maybeFree,
       int? cost,
+      int? userId,
       List<String>? images,
       TransportOptions? transportOptions,
       ToolCategory? toolCategory,
@@ -214,6 +221,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
     Object? isAvailable = freezed,
     Object? maybeFree = freezed,
     Object? cost = freezed,
+    Object? userId = freezed,
     Object? images = freezed,
     Object? transportOptions = freezed,
     Object? toolCategory = freezed,
@@ -250,6 +258,10 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
+              as int?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       images: images == freezed
           ? _value._images
@@ -309,6 +321,7 @@ class _$_ToolModel implements _ToolModel {
       this.isAvailable = true,
       this.maybeFree,
       this.cost,
+      this.userId,
       final List<String>? images,
       this.transportOptions,
       this.toolCategory,
@@ -338,6 +351,8 @@ class _$_ToolModel implements _ToolModel {
   final bool? maybeFree;
   @override
   final int? cost;
+  @override
+  final int? userId;
   final List<String>? _images;
   @override
   List<String>? get images {
@@ -353,7 +368,6 @@ class _$_ToolModel implements _ToolModel {
   final ToolCategory? toolCategory;
   @override
   final bool? askWithFee;
-//TODO falta implementar:
   @override
   final LatLng? location;
   @override
@@ -371,7 +385,7 @@ class _$_ToolModel implements _ToolModel {
 
   @override
   String toString() {
-    return 'ToolModel(id: $id, title: $title, description: $description, isAvailable: $isAvailable, maybeFree: $maybeFree, cost: $cost, images: $images, transportOptions: $transportOptions, toolCategory: $toolCategory, askWithFee: $askWithFee, location: $location, rating: $rating, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
+    return 'ToolModel(id: $id, title: $title, description: $description, isAvailable: $isAvailable, maybeFree: $maybeFree, cost: $cost, userId: $userId, images: $images, transportOptions: $transportOptions, toolCategory: $toolCategory, askWithFee: $askWithFee, location: $location, rating: $rating, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
   }
 
   @override
@@ -387,6 +401,7 @@ class _$_ToolModel implements _ToolModel {
                 .equals(other.isAvailable, isAvailable) &&
             const DeepCollectionEquality().equals(other.maybeFree, maybeFree) &&
             const DeepCollectionEquality().equals(other.cost, cost) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality()
                 .equals(other.transportOptions, transportOptions) &&
@@ -414,6 +429,7 @@ class _$_ToolModel implements _ToolModel {
       const DeepCollectionEquality().hash(isAvailable),
       const DeepCollectionEquality().hash(maybeFree),
       const DeepCollectionEquality().hash(cost),
+      const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(_images),
       const DeepCollectionEquality().hash(transportOptions),
       const DeepCollectionEquality().hash(toolCategory),
@@ -447,6 +463,7 @@ abstract class _ToolModel implements ToolModel {
       final bool isAvailable,
       final bool? maybeFree,
       final int? cost,
+      final int? userId,
       final List<String>? images,
       final TransportOptions? transportOptions,
       final ToolCategory? toolCategory,
@@ -475,6 +492,8 @@ abstract class _ToolModel implements ToolModel {
   @override
   int? get cost;
   @override
+  int? get userId;
+  @override
   List<String>? get images;
   @override
   TransportOptions? get transportOptions;
@@ -482,7 +501,7 @@ abstract class _ToolModel implements ToolModel {
   ToolCategory? get toolCategory;
   @override
   bool? get askWithFee;
-  @override //TODO falta implementar:
+  @override
   LatLng? get location;
   @override
   int? get rating;

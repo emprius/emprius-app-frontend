@@ -83,8 +83,8 @@
 // // //
 // // //
 // // //
-// // // class ToolProvider extends StateNotifier<List<ToolModel>>{
-// // //   ToolProvider([List<ToolModel> ? _sampleTools]) : super (_sampleTools ?? []);
+// // // class ToolsProvider extends StateNotifier<List<ToolModel>>{
+// // //   ToolsProvider([List<ToolModel> ? _sampleTools]) : super (_sampleTools ?? []);
 // // //
 // // //   void add(String title, String description) {
 // // //     state = [

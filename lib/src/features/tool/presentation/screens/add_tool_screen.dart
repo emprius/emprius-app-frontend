@@ -2,7 +2,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/features/tool/application/providers/tool_provider.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
@@ -182,9 +182,9 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Eina afegida')),
                       );
-
+//TODO: PUSH LOGIC TO PROVIDERS (GENERAL TOOLS AND USER TOOLS) AWAY FROM UI
                       await ref
-                          .read(ownToolsProvider.notifier)
+                          .read(allToolsProvider.notifier)
                           .addTool(ToolModel(
                             title: _titleCtrl.text,
                             description: _descriptionCtrl.text,

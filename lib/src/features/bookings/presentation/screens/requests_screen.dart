@@ -16,7 +16,6 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: UserAppbar("Peticions"),
       body: ListView(),
     );
   }

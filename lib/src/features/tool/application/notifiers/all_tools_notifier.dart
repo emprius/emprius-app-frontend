@@ -66,7 +66,7 @@ var _sampleTools = [
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
       id: 9,
-      userId: 1,
+      userId: 2,
       isAvailable: false,
       title: "Tractor",
       description: "Es de color groc com a la canso",
@@ -80,9 +80,9 @@ var _sampleTools = [
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
       id: 10,
-      userId: 1,
-      isAvailable: false,
-      title: "Tractor",
+      userId: 2,
+      isAvailable: true,
+      title: "Taladro autonom",
       description: "Es de color groc com a la canso",
       toolCategory: ToolCategory.WOODWORK,
       transportOptions: TransportOptions.EXTRA_NECESSARY,

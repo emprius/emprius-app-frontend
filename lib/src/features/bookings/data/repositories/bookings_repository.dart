@@ -101,10 +101,9 @@ class BookingsRepository {
   }
 
 
-  // TODO Rating repository?
-///String get path => "/bookings/rate";
-///String post path => "/booking/rate";
-
+  // TODO change booking status call + Rating repository
+//String get path => "/bookings/rate";
+//String post path => "/booking/rate";
 
 
 }

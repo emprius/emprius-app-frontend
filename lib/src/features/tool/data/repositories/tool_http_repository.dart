@@ -102,7 +102,6 @@ class ToolHttpRepository {
 
   String get path => "/tool";
 
-
   Future<ToolModel> addTool({
     required ToolModel toolData,
     required int lastId // todo: this is for mocking pourposes only
@@ -120,6 +119,7 @@ class ToolHttpRepository {
   }
 
 
+  ///String post path => "/tool/{toolId}";
   Future<ToolModel> updateTool({
     required ToolModel newTool,
     required int toolId,
@@ -129,29 +129,34 @@ class ToolHttpRepository {
     return newTool.copyWith(id: newTool.id);
   }
 
+  ///String delete path => "/tool/{toolId}";
   Future<ToolModel> deleteTool({
     required int toolId,
   }) async {
     return _sampleTools.removeAt(toolId);
   }
 
+  ///String get path => "/tool/{toolId}";
   Future<ToolModel> fetchOne({
     required int toolId,
   }) async {
     return _sampleTools.elementAt(toolId);
   }
 
+  ///String get path => "/tools";
   Future<List<ToolModel>> fetchAll() async {
     return _sampleTools;
   }
 
 
+  ///String get path => "/tools/search/";
   Future<List<ToolModel>> getAllByUser({
     required int userId,
   }) async {
     return _sampleTools;
   }
 
+  ///String get path => "/tools/search/";
   Future<List<ToolModel>> search({
     String? searchTerm,
     LatLng? center,

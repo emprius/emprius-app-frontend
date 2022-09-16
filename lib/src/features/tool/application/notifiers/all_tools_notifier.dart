@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart';
 
 
-
+///So that tools are always painted for mocking response:
 final _toolImagesPhone = [
   '/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg',
   '/data/user/0/com.example.empriusapp/cache/image_picker2314740962926778978.png',
@@ -21,7 +21,6 @@ final _toolImagesPhone = [
   // '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
   // '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
-
 var _sampleTools = [
   ToolModel(
       id: 6,
@@ -94,7 +93,6 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.738964, 2.498198)),
 ];
-
 
 
 ///We define the methods that will be in charge of changing and emitting new states when necessary:

@@ -9,15 +9,14 @@ final allBookingsProvider = StateNotifierProvider<AllBookingsNotifier, List<Book
   return AllBookingsNotifier(bookingsRepository: _bookingsRepository);
 });
 
+///Petitioned bookings FROM a user (incoming)
+final petitionedBookingsByUserProvider = StateProvider.family<List<BookingModel>, int>((ref, userId){
+  var petitionsList = ref.watch(allBookingsProvider).where((booking) => booking.fromUserId == userId).toList();
+  return petitionsList;
+});
 
 ///Requested bookings TO a user (outcoming)
 final requestedBookingsByUserProvider = StateProvider.family<List<BookingModel>, int>((ref, userId){
   var bookingsList = ref.watch(allBookingsProvider).where((booking) => booking.toUserId == userId).toList();
   return bookingsList;
-});
-
-///Petitioned bookings FROM a user (incoming)
-final petitionedBookingsByUserProvider = StateProvider.family<List<BookingModel>, int>((ref, userId){
-  var petitionsList = ref.watch(allBookingsProvider).where((booking) => booking.fromUserId == userId).toList();
-  return petitionsList;
 });

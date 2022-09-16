@@ -21,22 +21,64 @@ final bookingsProvider = Provider<BookingsRepository>((ref) {
 
 class BookingsRepository {
 
-  Future<BookingModel> createBooking(
-      {required BookingModel booking,
-      required ToolModel toolData,
-      required int lastId}) async {
+  ///String get path => "/bookings/petitions";
+  ///Petitioned bookings FROM a user (incoming)
+  Future<List<BookingModel>> getAllPetitions({
+  required int fromUserId,
+}) async {
+    return _sampleBookings;
+  }
+
+  ///String get path => "/bookings/requests";
+  ///Requested bookings TO a user (outcoming)
+  Future<List<BookingModel>> getAllRequests({
+    required int toUserId,
+  }) async {
+    return _sampleBookings;
+  }
+
+
+  ///String get path => "/booking";
+  Future<BookingModel> createBooking({
+    required BookingModel booking,
+    //required toolId toolId,
+    required int lastId
+  }) async {
     var newBooking = booking.copyWith(bookingId: lastId);
     _sampleBookings.add(newBooking);
     return booking.copyWith(bookingId: lastId);
   }
 
-  Future<List<BookingModel>> getAllPetitions({
-  required int userId,
-}) async {
-    return _sampleBookings;
+  ///String get path => "/booking/{bookingId}";
+  Future<BookingModel> fetchOne({
+    required int bookingId,
+  }) async {
+    return _sampleBookings.elementAt(bookingId);
   }
 
-  // TODO getAllRequests
+
+  ///String post path => "/booking/{bookingId}";
+  Future<BookingModel> editBooking({
+    required BookingModel newBooking,
+    required int bookingId,
+  }) async {
+    _sampleBookings = [..._sampleBookings]
+      ..[_sampleBookings.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
+    return newBooking.copyWith(bookingId: newBooking.bookingId);
+  }
+
+
+  ///String delete path => "/booking/{bookingId}";
+  Future<BookingModel> deleteBooking({
+    required int bookingId,
+  }) async {
+    return _sampleBookings.removeAt(bookingId);
+  }
+
+
+  // TODO Rating repository?
+///String get path => "/bookings/rate";
+///String post path => "/booking/rate";
 
 
 

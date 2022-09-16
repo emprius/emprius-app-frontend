@@ -5,13 +5,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 var _sampleBookings = [
   BookingModel(
+    bookingId: 1,
+      toolId: 6, //bici de passeig
+      emps: 6,
+      fromUserId: 1,
+      toUserId: 2,
       contact: "El meu telefon es el 676899700",
       bookingStatus: BookingStatus.ASKED),
 
   BookingModel(
+      bookingId: 2,
+      toolId: 7, //burra autonoma
+      fromUserId: 1,
+      toUserId: 2,
       contact: "Escriume al seguen mail",
+      bookingStatus: BookingStatus.APPROVED),
+
+  BookingModel(
+    bookingId: 2,
+      toolId: 10, //taladro
+      fromUserId: 2,
+      toUserId: 1,
+      contact: "Escriume al seguen mail",
+      bookingStatus: BookingStatus.APPROVED),
+
+  BookingModel(
+      bookingId: 2,
+      toolId: 9, //tractor
+      fromUserId: 2,
+      toUserId: 1,
+      contact: "Enviam un signal el meu usuari es",
       bookingStatus: BookingStatus.ASKED),
-  //TODO write all fields and pass tool info
+
 ];
 
 final bookingsProvider = Provider<BookingsRepository>((ref) {

@@ -2,8 +2,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'user_info/user_info_model.dart';
 part 'booking_model.freezed.dart';
 part 'booking_model.g.dart';
+
+
 
 @freezed
 class BookingModel with _$BookingModel{
@@ -16,6 +20,7 @@ class BookingModel with _$BookingModel{
     DateTime? endDate,
     int? fromUserId,
     int? toUserId,
+    UserInfo? userInfo,
     required String contact,
     required BookingStatus bookingStatus,
     String? comments

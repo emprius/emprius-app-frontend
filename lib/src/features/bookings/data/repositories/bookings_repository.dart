@@ -11,7 +11,8 @@ var _sampleBookings = [
       fromUserId: 1,
       toUserId: 2,
       contact: "El meu telefon es el 676899700",
-      bookingStatus: BookingStatus.ASKED),
+      bookingStatus: BookingStatus.ASKED,
+      userInfo: null),
 
   BookingModel(
       bookingId: 2,
@@ -19,7 +20,8 @@ var _sampleBookings = [
       fromUserId: 1,
       toUserId: 2,
       contact: "Escriume al seguen mail",
-      bookingStatus: BookingStatus.APPROVED),
+      bookingStatus: BookingStatus.APPROVED,
+      userInfo: null),
 
   BookingModel(
     bookingId: 2,
@@ -27,7 +29,8 @@ var _sampleBookings = [
       fromUserId: 2,
       toUserId: 1,
       contact: "Escriume al seguen mail",
-      bookingStatus: BookingStatus.APPROVED),
+      bookingStatus: BookingStatus.APPROVED,
+      userInfo: null),
 
   BookingModel(
       bookingId: 2,
@@ -35,7 +38,8 @@ var _sampleBookings = [
       fromUserId: 2,
       toUserId: 1,
       contact: "Enviam un signal el meu usuari es",
-      bookingStatus: BookingStatus.ASKED),
+      bookingStatus: BookingStatus.ASKED,
+      userInfo: null),
 
 ];
 

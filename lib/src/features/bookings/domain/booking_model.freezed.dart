@@ -27,6 +27,7 @@ mixin _$BookingModel {
   DateTime? get endDate => throw _privateConstructorUsedError;
   int? get fromUserId => throw _privateConstructorUsedError;
   int? get toUserId => throw _privateConstructorUsedError;
+  UserInfo? get userInfo => throw _privateConstructorUsedError;
   String get contact => throw _privateConstructorUsedError;
   BookingStatus get bookingStatus => throw _privateConstructorUsedError;
   String? get comments => throw _privateConstructorUsedError;
@@ -50,9 +51,12 @@ abstract class $BookingModelCopyWith<$Res> {
       DateTime? endDate,
       int? fromUserId,
       int? toUserId,
+      UserInfo? userInfo,
       String contact,
       BookingStatus bookingStatus,
       String? comments});
+
+  $UserInfoCopyWith<$Res>? get userInfo;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
     Object? endDate = freezed,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
+    Object? userInfo = freezed,
     Object? contact = freezed,
     Object? bookingStatus = freezed,
     Object? comments = freezed,
@@ -105,6 +110,10 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserInfo?,
       contact: contact == freezed
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
@@ -118,6 +127,17 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
           : comments // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+
+  @override
+  $UserInfoCopyWith<$Res>? get userInfo {
+    if (_value.userInfo == null) {
+      return null;
+    }
+
+    return $UserInfoCopyWith<$Res>(_value.userInfo!, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
   }
 }
 
@@ -136,9 +156,13 @@ abstract class _$$_BookingModelCopyWith<$Res>
       DateTime? endDate,
       int? fromUserId,
       int? toUserId,
+      UserInfo? userInfo,
       String contact,
       BookingStatus bookingStatus,
       String? comments});
+
+  @override
+  $UserInfoCopyWith<$Res>? get userInfo;
 }
 
 /// @nodoc
@@ -161,6 +185,7 @@ class __$$_BookingModelCopyWithImpl<$Res>
     Object? endDate = freezed,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
+    Object? userInfo = freezed,
     Object? contact = freezed,
     Object? bookingStatus = freezed,
     Object? comments = freezed,
@@ -194,6 +219,10 @@ class __$$_BookingModelCopyWithImpl<$Res>
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserInfo?,
       contact: contact == freezed
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
@@ -221,6 +250,7 @@ class _$_BookingModel implements _BookingModel {
       this.endDate,
       this.fromUserId,
       this.toUserId,
+      this.userInfo,
       required this.contact,
       required this.bookingStatus,
       this.comments});
@@ -243,6 +273,8 @@ class _$_BookingModel implements _BookingModel {
   @override
   final int? toUserId;
   @override
+  final UserInfo? userInfo;
+  @override
   final String contact;
   @override
   final BookingStatus bookingStatus;
@@ -251,7 +283,7 @@ class _$_BookingModel implements _BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel(bookingId: $bookingId, toolId: $toolId, emps: $emps, startDate: $startDate, endDate: $endDate, fromUserId: $fromUserId, toUserId: $toUserId, contact: $contact, bookingStatus: $bookingStatus, comments: $comments)';
+    return 'BookingModel(bookingId: $bookingId, toolId: $toolId, emps: $emps, startDate: $startDate, endDate: $endDate, fromUserId: $fromUserId, toUserId: $toUserId, userInfo: $userInfo, contact: $contact, bookingStatus: $bookingStatus, comments: $comments)';
   }
 
   @override
@@ -267,6 +299,7 @@ class _$_BookingModel implements _BookingModel {
             const DeepCollectionEquality()
                 .equals(other.fromUserId, fromUserId) &&
             const DeepCollectionEquality().equals(other.toUserId, toUserId) &&
+            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
             const DeepCollectionEquality().equals(other.contact, contact) &&
             const DeepCollectionEquality()
                 .equals(other.bookingStatus, bookingStatus) &&
@@ -284,6 +317,7 @@ class _$_BookingModel implements _BookingModel {
       const DeepCollectionEquality().hash(endDate),
       const DeepCollectionEquality().hash(fromUserId),
       const DeepCollectionEquality().hash(toUserId),
+      const DeepCollectionEquality().hash(userInfo),
       const DeepCollectionEquality().hash(contact),
       const DeepCollectionEquality().hash(bookingStatus),
       const DeepCollectionEquality().hash(comments));
@@ -310,6 +344,7 @@ abstract class _BookingModel implements BookingModel {
       final DateTime? endDate,
       final int? fromUserId,
       final int? toUserId,
+      final UserInfo? userInfo,
       required final String contact,
       required final BookingStatus bookingStatus,
       final String? comments}) = _$_BookingModel;
@@ -331,6 +366,8 @@ abstract class _BookingModel implements BookingModel {
   int? get fromUserId;
   @override
   int? get toUserId;
+  @override
+  UserInfo? get userInfo;
   @override
   String get contact;
   @override

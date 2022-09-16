@@ -19,6 +19,9 @@ _$_BookingModel _$$_BookingModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['endDate'] as String),
       fromUserId: json['fromUserId'] as int?,
       toUserId: json['toUserId'] as int?,
+      userInfo: json['userInfo'] == null
+          ? null
+          : UserInfo.fromJson(json['userInfo'] as Map<String, dynamic>),
       contact: json['contact'] as String,
       bookingStatus: $enumDecode(_$BookingStatusEnumMap, json['bookingStatus']),
       comments: json['comments'] as String?,
@@ -33,6 +36,7 @@ Map<String, dynamic> _$$_BookingModelToJson(_$_BookingModel instance) =>
       'endDate': instance.endDate?.toIso8601String(),
       'fromUserId': instance.fromUserId,
       'toUserId': instance.toUserId,
+      'userInfo': instance.userInfo,
       'contact': instance.contact,
       'bookingStatus': _$BookingStatusEnumMap[instance.bookingStatus]!,
       'comments': instance.comments,

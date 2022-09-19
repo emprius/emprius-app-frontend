@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/features/bookings/presentation/screens/current_bookings_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/petitions_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/keepings_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/requests_screen.dart';
@@ -17,7 +17,7 @@ class _UserActivityNavbarState extends State<UserActivityNavbar> {
   int currentIndex = 0;
   final screens = [
     RequestsScreen(),
-    CurrentBookingsScreen(),
+    PetitionsScreen(),
     RatingScreen(),
     KeepingsScreen()
   ];
@@ -41,16 +41,16 @@ class _UserActivityNavbarState extends State<UserActivityNavbar> {
         currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.front_hand_rounded), label: "Peticions"),
+              icon: Icon(Icons.front_hand_rounded), label: "Demanades"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.workspaces_sharp), label: "En curs"),
+              icon: Icon(Icons.workspaces_sharp), label: "Prestades"),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
             label: "Valoracions",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.lock_clock),
-            label: "Custodies",
+            label: "Custodiades",
           ),
         ],
       ),

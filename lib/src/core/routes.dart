@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/features/bookings/presentation/screens/current_bookings_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/petitions_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/keepings_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/widgets/user_activity_navbar.dart';
@@ -26,7 +26,7 @@ const String editProfileScreenRoute = "/edit-profile";
 const String userStoryScreenRoute = "/user-story";
 const String userActivityScreenRoute = "/user-activity";
 const String requestsScreenRoute = "/requests";
-const String currentBookingsScreenRoute = "/current-bookings";
+const String petitionsScreenRouteRoute = "/petitions";
 const String keepingsScreenRoute = "/keepings";
 const String ratingScreenRoute = "/rating";
 const String userToolsScreenRoute = "/user-toollist";
@@ -75,8 +75,8 @@ class Routes {
                 AskToolFormScreen(settings.arguments as ToolDetailArguments));
       case requestsScreenRoute:
         return MaterialPageRoute(builder: (_) => RequestsScreen());
-      case currentBookingsScreenRoute:
-        return MaterialPageRoute(builder: (_) => CurrentBookingsScreen());
+      case petitionsScreenRouteRoute:
+        return MaterialPageRoute(builder: (_) => PetitionsScreen());
       case keepingsScreenRoute:
         return MaterialPageRoute(builder: (_) => KeepingsScreen());
       case ratingScreenRoute:

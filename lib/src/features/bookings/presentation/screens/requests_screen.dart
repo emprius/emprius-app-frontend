@@ -26,7 +26,6 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
   @override
   void initState() {
-    //TODO get also petitions from
     ref
         .read(allBookingsProvider.notifier)
         .getAllUserRequests(toUserId: ref.read(userProvider).id);
@@ -44,25 +43,27 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
         itemBuilder: (context, index) {
           final booking = bookings[index];
           final tool = ref.watch(toolByIdProvider(booking.toolId!));
-          late bool _waitingAproval =
-              booking.bookingStatus.displayStatus == "Demanada";
+          // late bool _waitingAproval =
+          //     booking.bookingStatus.displayStatus == "Demanada";
 
           return Column(
             children: [
+              Text("Eines demanades"),
               ListTile(
                 onTap: (){
                   //TODO SHOW DETAIL DIALOG and a buttom to aprove?
                 },
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),
-                leading: IconButton(
-                  onPressed: () {
-                    //TODO PASS FROM ASKED TO APROVED SWITCH STATUS?
-                  },
-                  icon: _waitingAproval
-                      ? Icon(Icons.question_mark_outlined)
-                      : Icon(Icons.check),
-                ),
+                // leading: IconButton(
+                //   onPressed: () {
+                //     //TODO PASS FROM ASKED TO APROVED SWITCH STATUS?
+                //   },
+                //   icon: _waitingAproval
+                //       ? Icon(Icons.question_mark_outlined)
+                //       : Icon(Icons.check),
+                // ),
+                leading: (booking.bookingStatus as BookingStatus).label as Widget,
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                   PopupMenuButton(
                     icon: Icon(Icons.edit),

@@ -1,4 +1,6 @@
 
+import 'package:empriusapp/src/core/common_widgets/status_label.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter/foundation.dart';
@@ -21,6 +23,31 @@ extension ExtBookingStatus on BookingStatus{
         return 'Acceptada';
       case BookingStatus.RETURNED:
         return 'Retornada';
+      default:
+        return null;
+    }
+  }
+
+  Object? get label {
+    switch(this){
+      case BookingStatus.ASKED:
+        return StatusLabel(
+          color: Colors.redAccent,
+          icon: Icons.question_mark,
+          //text: 'Demanda',
+        );
+      case BookingStatus.APPROVED:
+        return StatusLabel(
+          color: Colors.green,
+          icon: Icons.handshake,
+         // text: 'Aprovada',
+        );
+      case BookingStatus.RETURNED:
+        return StatusLabel(
+          color: Colors.blueAccent,
+          icon: Icons.check_box,
+         // text: 'Retornada',
+        );
       default:
         return null;
     }

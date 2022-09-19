@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
@@ -37,6 +38,7 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
     final bookings = ref.watch(requestBookingsProvider);
 
     return Scaffold(
+
       body: ListView.builder(
         shrinkWrap: true,
         itemCount: bookings.length,
@@ -50,9 +52,9 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
             children: [
               Text("Eines demanades"),
               ListTile(
-                onTap: (){
-                  //TODO SHOW DETAIL DIALOG and a buttom to aprove?
-                },
+                onTap: () async{
+                    await Navigator.pushNamed(context, bookingDetailScreenRoute, arguments: BookingDetailArguments(booking.bookingId!));
+                    },
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),
                 // leading: IconButton(

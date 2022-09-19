@@ -10,6 +10,7 @@ enum BookingStatus{
   @JsonValue('Asked') ASKED,
   @JsonValue('Approved') APPROVED,
   @JsonValue('Returned') RETURNED,
+  @JsonValue('Returned') ALL,
 }
 
 extension ExtBookingStatus on BookingStatus{
@@ -38,15 +39,21 @@ extension ExtBookingStatus on BookingStatus{
         );
       case BookingStatus.APPROVED:
         return StatusLabel(
-          color: Colors.green,
+          color: Colors.purple,
           icon: Icons.handshake,
          // text: 'Aprovada',
         );
       case BookingStatus.RETURNED:
         return StatusLabel(
-          color: Colors.blueAccent,
+          color: Colors.green,
           icon: Icons.check_box,
          // text: 'Retornada',
+        );
+      case BookingStatus.ALL:
+        return StatusLabel(
+          color: Colors.blueAccent,
+          icon: Icons.workspaces_sharp,
+          // text: '',
         );
       default:
         return null;

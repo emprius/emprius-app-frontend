@@ -24,6 +24,8 @@ final filteredBookingProvider = Provider<List<BookingModel>>((ref){
   final bookings = ref.watch(allBookingsProvider);
 
   switch(filterStatus){
+    case BookingStatus.ALL:
+      return bookings.where((booking) => booking.bookingStatus == BookingStatus.ALL).toList();
     case BookingStatus.APPROVED:
       return bookings.where((booking) => booking.bookingStatus == BookingStatus.APPROVED).toList();
     case BookingStatus.ASKED:
@@ -45,4 +47,10 @@ final petitionBookingsProvider = StateProvider<List<BookingModel>>((ref) {
   var userId = ref.watch(userProvider.select((user) => user.id));
   var allBookings = ref.watch(filteredBookingProvider);
   return allBookings.where((booking) => booking.fromUserId == userId).toList();
+});
+
+
+final bookingByIdProvider = StateProvider.family<BookingModel, int>((ref, id) {
+  return ref.watch(allBookingsProvider)
+      .firstWhere((booking) => booking.bookingId == id);
 });

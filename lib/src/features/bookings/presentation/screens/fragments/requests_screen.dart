@@ -15,10 +15,10 @@ class RequestsScreen extends ConsumerStatefulWidget {
 }
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
-  //TODO implement edit/details booking?:
-  void _editBooking(BookingModel booking) {
-    ref.watch(allBookingsProvider.notifier).editBooking(booking);
-  }
+
+  // void _editBooking(BookingModel booking) {
+  //   ref.watch(allBookingsProvider.notifier).editBooking(booking);
+  // }
 
   //TODO why is deleting everything
   void _deleteBooking(BookingModel booking) {
@@ -52,31 +52,18 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
             children: [
               Text("Eines demanades"),
               ListTile(
-                onTap: () async{
-                    await Navigator.pushNamed(context, bookingDetailScreenRoute, arguments: BookingDetailArguments(booking.bookingId!));
-                    },
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),
-                // leading: IconButton(
-                //   onPressed: () {
-                //     //TODO PASS FROM ASKED TO APROVED SWITCH STATUS?
-                //   },
-                //   icon: _waitingAproval
-                //       ? Icon(Icons.question_mark_outlined)
-                //       : Icon(Icons.check),
-                // ),
                 leading: (booking.bookingStatus as BookingStatus).label as Widget,
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                   PopupMenuButton(
                     icon: Icon(Icons.edit),
-                    onSelected: _editBooking,
-                    //TODO needs a new screen to edit:
-                    // onSelected: (value){
-                    //   if(value == booking) {
-                    //     Navigator.pushNamed(context, toolEditCardScreenRoute,
-                    //         arguments: EditToolArguments(tool.id!));
-                    //   }
-                    // },
+                    onSelected: (value){
+                      if(value == booking) {
+                        Navigator.pushNamed(context, bookingEditScreenRoute,
+                            arguments: BookingDetailArguments(booking.toolId!));
+                      }
+                    },
                     itemBuilder: (context) => [
                       PopupMenuItem(
                         value: booking,

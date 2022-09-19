@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_detail_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/booking_edit_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/petitions_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/keepings_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/rating_screen.dart';
@@ -36,6 +37,7 @@ const String toolEditCardScreenRoute = "/edit-tool";
 const String toolAddFormScreenRoute = "/tool-form";
 const String toolAskFormScreenRoute = "/ask-tool-form";
 const String bookingDetailScreenRoute = "/booking-detail";
+const String bookingEditScreenRoute = "/booking-edit";
 const String splashScreenRoute = "/splash";
 
 class Routes {
@@ -79,11 +81,14 @@ class Routes {
         return MaterialPageRoute(builder: (_) => RequestsScreen());
       case petitionsScreenRoute:
         return MaterialPageRoute(builder: (_) => PetitionsScreen());
-
       case bookingDetailScreenRoute:
         return MaterialPageRoute(
             builder: (_) =>
                 BookingDetailScreen(settings.arguments as BookingDetailArguments));
+      case bookingEditScreenRoute:
+        return MaterialPageRoute(
+            builder: (_) =>
+                BookingEditScreen(settings.arguments as BookingDetailArguments));
       case keepingsScreenRoute:
         return MaterialPageRoute(builder: (_) => KeepingsScreen());
       case ratingScreenRoute:

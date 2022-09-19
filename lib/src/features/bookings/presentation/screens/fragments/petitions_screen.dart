@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
@@ -40,6 +41,9 @@ class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
                     title: Text(tool.title),
                     subtitle: Text(booking.bookingStatus.displayStatus!),
                     leading: (booking.bookingStatus as BookingStatus).label as Widget,
+                      onTap: () async{
+            await Navigator.pushNamed(context, bookingDetailScreenRoute, arguments: BookingDetailArguments(booking.bookingId!));
+            },
                   )
                 ],
             );

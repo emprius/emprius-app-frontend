@@ -1,5 +1,6 @@
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
+import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,24 +24,26 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         ? Container()
         : Scaffold(
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {}, //TODO: change booking status
+              onPressed: () {
+                ref.read(allBookingsProvider.notifier).editBooking(booking.copyWith(bookingStatus: BookingStatus.APPROVED ));
+              }, //TODO persist change status
               label: Text("Aprova"),
             ),
             body: Center(
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                            tool.title,
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                            ),)
-                      ])
-                ])),
+                      Text("L'usuaria XXX et fa la seguent peticio:"),
+                      Text(
+                      tool.title,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      ),),
+                      Text("Desitja ser contacta de la seguent manera:"),
+                      Text(booking.contact),
+                      if(booking.comments !=null)Text(booking.comments!),
+                      ]),
+            ),
           );
   }
 }

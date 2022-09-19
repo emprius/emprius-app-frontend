@@ -1,5 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/widgets/date_picker_widget.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/widgets/date_picker_widget.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';

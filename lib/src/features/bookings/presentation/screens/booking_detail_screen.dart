@@ -33,7 +33,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("L'usuaria XXX et fa la seguent peticio:"),
+                      Text("L'usuaria ${booking.userInfo!.name} et fa la seguent peticio:"),
                       Text(
                       tool.title,
                       style: const TextStyle(

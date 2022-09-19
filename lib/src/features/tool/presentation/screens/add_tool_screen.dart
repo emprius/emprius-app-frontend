@@ -178,7 +178,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
-                      print(_images);
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Eina afegida')),
                       );

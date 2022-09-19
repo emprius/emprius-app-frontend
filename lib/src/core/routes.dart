@@ -1,8 +1,8 @@
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_detail_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/petitions_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/keepings_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/rating_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/widgets/user_activity_navbar.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/petitions_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/keepings_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/rating_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/user_activity_navbar.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/add_tool_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/ask_tool_form_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_screen.dart';
@@ -11,7 +11,7 @@ import 'package:empriusapp/src/features/user/auth_user/presentation/login_screen
 import 'package:empriusapp/src/features/user/auth_user/presentation/register_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_story_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_edit_profile_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/requests_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/requests_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ const String editProfileScreenRoute = "/edit-profile";
 const String userStoryScreenRoute = "/user-story";
 const String userActivityScreenRoute = "/user-activity";
 const String requestsScreenRoute = "/requests";
-const String petitionsScreenRouteRoute = "/petitions";
+const String petitionsScreenRoute = "/petitions";
 const String keepingsScreenRoute = "/keepings";
 const String ratingScreenRoute = "/rating";
 const String userToolsScreenRoute = "/user-toollist";
@@ -77,7 +77,7 @@ class Routes {
                 AskToolFormScreen(settings.arguments as ToolDetailArguments));
       case requestsScreenRoute:
         return MaterialPageRoute(builder: (_) => RequestsScreen());
-      case petitionsScreenRouteRoute:
+      case petitionsScreenRoute:
         return MaterialPageRoute(builder: (_) => PetitionsScreen());
 
       case bookingDetailScreenRoute:

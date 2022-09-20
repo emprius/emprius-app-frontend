@@ -1,5 +1,6 @@
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
+import 'package:empriusapp/src/features/bookings/domain/user_info/user_info_model.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,8 +12,13 @@ var _sampleBookings = [
       fromUserId: 1,
       toUserId: 2,
       contact: "El meu telefon es el 676899700",
+      comments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       bookingStatus: BookingStatus.ASKED,
-      userInfo: null),
+      userInfo: UserInfo(
+        name: "Crac",
+        rating: 10,
+        avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
+      )),
 
   BookingModel(
       bookingId: 2,
@@ -20,26 +26,56 @@ var _sampleBookings = [
       fromUserId: 1,
       toUserId: 2,
       contact: "Escriume al seguen mail",
+      comments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       bookingStatus: BookingStatus.APPROVED,
-      userInfo: null),
+      userInfo: UserInfo(
+        name: "Elai",
+        rating: 3,
+        avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
+      )),
 
   BookingModel(
-    bookingId: 2,
-      toolId: 10, //taladro
-      fromUserId: 2,
-      toUserId: 1,
-      contact: "Escriume al seguen mail",
-      bookingStatus: BookingStatus.APPROVED,
-      userInfo: null),
-
-  BookingModel(
-      bookingId: 2,
-      toolId: 9, //tractor
+      bookingId: 5,
+      toolId: 8, //tractor
       fromUserId: 2,
       toUserId: 1,
       contact: "Enviam un signal el meu usuari es",
+      comments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       bookingStatus: BookingStatus.ASKED,
-      userInfo: null),
+      userInfo: UserInfo(
+        name: "Ariadna",
+        rating: 10,
+        avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
+      )),
+
+  BookingModel(
+    bookingId: 3,
+      toolId: 9, //rec automatic
+      fromUserId: 2,
+      toUserId: 1,
+      contact: "Escriume al seguen mail",
+      comments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      bookingStatus: BookingStatus.APPROVED,
+      userInfo: UserInfo(
+        name: "Coco",
+        rating: 5,
+        avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
+      )),
+
+  BookingModel(
+      bookingId: 4,
+      toolId: 10, //taladro
+      fromUserId: 2,
+      toUserId: 1,
+      contact: "Enviam un signal el meu usuari es",
+      comments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      bookingStatus: BookingStatus.RETURNED,
+      userInfo: UserInfo(
+        name: "Ariadna",
+        rating: 10,
+        avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
+      )),
+
 
 ];
 

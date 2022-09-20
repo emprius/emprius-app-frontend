@@ -66,9 +66,9 @@ var _sampleTools = [
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
       id: 9,
-      userId: 2,
+      userId: 1,
       isAvailable: false,
-      title: "Tractor",
+      title: "Rec automatic",
       description: "Es de color groc com a la canso",
       toolCategory: ToolCategory.GARDENING,
       transportOptions: TransportOptions.EXTRA_NECESSARY,
@@ -80,9 +80,9 @@ var _sampleTools = [
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
       id: 10,
-      userId: 2,
-      isAvailable: true,
-      title: "Taladro autonom",
+      userId: 1,
+      isAvailable: false,
+      title: "Taladro",
       description: "Es de color groc com a la canso",
       toolCategory: ToolCategory.WOODWORK,
       transportOptions: TransportOptions.EXTRA_NECESSARY,
@@ -93,6 +93,7 @@ var _sampleTools = [
       images: _toolImagesPhone,
       location: LatLng(41.738964, 2.498198)),
 ];
+
 
 
 ///We define the methods that will be in charge of changing and emitting new states when necessary:

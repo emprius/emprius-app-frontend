@@ -29,7 +29,7 @@ class _BookingEditScreenState extends ConsumerState<BookingEditScreen> {
 
   @override
   void initState() {
-    booking = ref.read(bookingByIdProvider(widget.args.id));
+    booking = ref.read(bookingByIdProvider(widget.args.bookingId));
    _contactCtrl.text = booking!.contact;
    _commentsCtrl.text = booking!.comments!;
     super.initState();
@@ -38,7 +38,7 @@ class _BookingEditScreenState extends ConsumerState<BookingEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-     booking = ref.watch(bookingByIdProvider(widget.args.id));
+     booking = ref.watch(bookingByIdProvider(widget.args.bookingId));
 
     return Scaffold(
       appBar: UserAppbar('Canviar peticio'),

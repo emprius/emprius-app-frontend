@@ -116,6 +116,6 @@ class EditToolArguments {
 }
 
 class BookingDetailArguments{
-  int id;
-  BookingDetailArguments(this.id);
+  int bookingId;
+  BookingDetailArguments(this.bookingId);
 }

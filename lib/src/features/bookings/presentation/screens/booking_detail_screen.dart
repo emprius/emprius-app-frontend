@@ -17,7 +17,7 @@ class BookingDetailScreen extends ConsumerStatefulWidget {
 class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final booking = ref.watch(bookingByIdProvider(widget.args.id));
+    final booking = ref.watch(bookingByIdProvider(widget.args.bookingId));
     final tool = ref.watch(toolByIdProvider(booking.toolId!));
 
     return booking == null
@@ -39,6 +39,10 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                       style: const TextStyle(
                         fontSize: 20.0,
                       ),),
+                      SizedBox(height: 20.0),
+Row(
+
+),
                       Text("Desitja ser contacta de la seguent manera:"),
                       Text(booking.contact),
                       if(booking.comments !=null)Text(booking.comments!),

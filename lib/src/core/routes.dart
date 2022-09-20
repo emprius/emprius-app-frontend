@@ -1,8 +1,9 @@
+import 'package:empriusapp/src/features/bookings/presentation/fragments/keepings_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/fragments/petitions_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/fragments/rating_screen.dart';
+import 'package:empriusapp/src/features/bookings/presentation/fragments/requests_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_detail_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_edit_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/petitions_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/keepings_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/user_activity_navbar.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/add_tool_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/ask_tool_form_screen.dart';
@@ -12,7 +13,6 @@ import 'package:empriusapp/src/features/user/auth_user/presentation/login_screen
 import 'package:empriusapp/src/features/user/auth_user/presentation/register_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_story_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_edit_profile_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/requests_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';

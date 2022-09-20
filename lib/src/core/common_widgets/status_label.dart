@@ -22,12 +22,12 @@ class StatusLabel extends StatelessWidget {
       onPressed: () {},
       style: ElevatedButton.styleFrom(
         primary: color,
-      ),
+        shape: CircleBorder(),       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           //Text(text),
-          SizedBox(width: width),
+          //SizedBox(width: width),
           Icon(icon, size: 20.0),
         ],
       ),

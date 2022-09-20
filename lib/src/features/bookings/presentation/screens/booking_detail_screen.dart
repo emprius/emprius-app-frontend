@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
@@ -24,29 +25,55 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         ? Container()
         : Scaffold(
             floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                ref.read(allBookingsProvider.notifier).editBooking(booking.copyWith(bookingStatus: BookingStatus.APPROVED ));
+              onPressed: () async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Has acceptat la peticio!')),
+                );
+                await ref.read(allBookingsProvider.notifier).editBooking(
+                    booking.copyWith(bookingStatus: BookingStatus.APPROVED));
+                if (!mounted) return;
+                Navigator.pushNamed(
+                    context, userActivityScreenRoute);
               }, //TODO persist change status
               label: Text("Aprova"),
+
             ),
             body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("L'usuaria ${booking.userInfo!.name} et fa la seguent peticio:"),
-                      Text(
-                      tool.title,
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                      ),),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
+                                child: CircleAvatar(
+                                  child: Text(booking.userInfo!.avatar!),
+                                )),
+                            SizedBox(height: 20.0),
+                            RatingStars(rating: booking.userInfo!.rating!),
+                          ]),
                       SizedBox(height: 20.0),
-Row(
-
-),
+                      Text(
+                          "L'usuaria ${booking.userInfo!.name} et fa la seguent peticio:"),
+                      Text(
+                        tool.title,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      SizedBox(height: 20.0),
                       Text("Desitja ser contacta de la seguent manera:"),
+                      SizedBox(height: 20.0),
                       Text(booking.contact),
-                      if(booking.comments !=null)Text(booking.comments!),
-                      ]),
+                      SizedBox(height: 20.0),
+                      if (booking.comments != null) Text(booking.comments!),
+                    ]),
+              ),
             ),
           );
   }

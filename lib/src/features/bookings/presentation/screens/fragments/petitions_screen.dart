@@ -16,17 +16,19 @@ class PetitionsScreen extends ConsumerStatefulWidget {
 
 class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
 
-  @override
-  void initState() {
-    ref.read(allBookingsProvider.notifier).getAllUserPetitions(fromUserId: ref.read(userProvider).id);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //     ref.read(allBookingsProvider.notifier)
+  //         .getAllUserPetitions(fromUserId: ref.read(userProvider).id);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final bookings = ref.watch(petitionBookingsProvider);
 
     return Scaffold(
+      appBar: UserAppbar("Eines emprestades"),
         body: ListView.builder(
           shrinkWrap: true,
           itemCount: bookings.length,
@@ -36,7 +38,6 @@ class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
 
             return Column(
                 children: [
-                Text("Eines emprestades"),
                   ListTile(
                     title: Text(tool.title),
                     subtitle: Text(booking.bookingStatus.displayStatus!),

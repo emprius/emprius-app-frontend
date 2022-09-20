@@ -1,19 +1,21 @@
+import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/petitions_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/keepings_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/fragments/requests_screen.dart';
+import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class UserActivityNavbar extends StatefulWidget {
+class UserActivityNavbar extends ConsumerStatefulWidget {
 
   @override
   createState() => _UserActivityNavbarState();
 }
 
-class _UserActivityNavbarState extends State<UserActivityNavbar> {
+class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
   int currentIndex = 0;
   final screens = [
     RequestsScreen(),
@@ -23,9 +25,17 @@ class _UserActivityNavbarState extends State<UserActivityNavbar> {
   ];
 
   @override
+  void initState() {
+    ref.read(allBookingsProvider.notifier)
+        .getAllUserPetitions(fromUserId: ref.read(userProvider).id);
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserAppbar("Activitat"),
+      //appBar: UserAppbar("Activitat"),
       body: IndexedStack(
         children: screens,
         index: currentIndex,

@@ -15,7 +15,7 @@ final allBookingsProvider = StateNotifierProvider<AllBookingsNotifier, List<Book
 
 ///To filter the list of bookings according to the booking status,
 ///Create a StateProvider which exposes the currently selected filter method:
-final bookingFilterProvider = StateProvider<BookingStatus>((ref) => BookingStatus.ASKED);
+final bookingFilterProvider = StateProvider<BookingStatus>((ref) => BookingStatus.ALL);
 
 ///Together with the global StateNotifierProvider that exposes a bookings list,
 ///And a separate provider which combines the filter method and the bookings list:
@@ -25,7 +25,7 @@ final filteredBookingProvider = Provider<List<BookingModel>>((ref){
 
   switch(filterStatus){
     case BookingStatus.ALL:
-      return bookings.where((booking) => booking.bookingStatus == BookingStatus.ALL).toList();
+      return bookings;
     case BookingStatus.APPROVED:
       return bookings.where((booking) => booking.bookingStatus == BookingStatus.APPROVED).toList();
     case BookingStatus.ASKED:
@@ -46,6 +46,7 @@ final requestBookingsProvider = StateProvider<List<BookingModel>>((ref) {
 final petitionBookingsProvider = StateProvider<List<BookingModel>>((ref) {
   var userId = ref.watch(userProvider.select((user) => user.id));
   var allBookings = ref.watch(filteredBookingProvider);
+  print('');
   return allBookings.where((booking) => booking.fromUserId == userId).toList();
 });
 

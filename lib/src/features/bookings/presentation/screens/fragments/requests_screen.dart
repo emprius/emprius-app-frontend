@@ -4,6 +4,7 @@ import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,28 +17,25 @@ class RequestsScreen extends ConsumerStatefulWidget {
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
-  // void _editBooking(BookingModel booking) {
-  //   ref.watch(allBookingsProvider.notifier).editBooking(booking);
-  // }
-
   //TODO why is deleting everything
   void _deleteBooking(BookingModel booking) {
     ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
   }
 
-  @override
-  void initState() {
-    ref
-        .read(allBookingsProvider.notifier)
-        .getAllUserRequests(toUserId: ref.read(userProvider).id);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   ref
+  //       .read(allBookingsProvider.notifier)
+  //       .getAllUserRequests(toUserId: ref.read(userProvider).id);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final bookings = ref.watch(requestBookingsProvider);
 
     return Scaffold(
+      appBar: UserAppbar("Eines demanades"),
 
       body: ListView.builder(
         shrinkWrap: true,
@@ -50,7 +48,7 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
           return Column(
             children: [
-              Text("Eines demanades"),
+
               ListTile(
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),
@@ -61,7 +59,7 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
                     onSelected: (value){
                       if(value == booking) {
                         Navigator.pushNamed(context, bookingEditScreenRoute,
-                            arguments: BookingDetailArguments(booking.toolId!));
+                            arguments: BookingDetailArguments(booking.bookingId!));
                       }
                     },
                     itemBuilder: (context) => [

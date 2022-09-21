@@ -35,8 +35,8 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                                padding:
-                                const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
+                                padding: const EdgeInsets.fromLTRB(
+                                    10.0, 0, 5.0, 10.0),
                                 child: CircleAvatar(
                                   child: Text(booking.userInfo!.avatar!),
                                 )),
@@ -53,6 +53,9 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                         ),
                       ),
                       SizedBox(height: 20.0),
+                      Text("Inici de la reserva:"),
+                      (booking.startDate) as Widget,
+                      SizedBox(height: 20.0),
                       Text("Desitja ser contacta de la seguent manera:"),
                       SizedBox(height: 20.0),
                       Text(booking.contact),
@@ -61,39 +64,40 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                     ]),
               ),
             ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          if(booking.bookingStatus == BookingStatus.ASKED)
-          FloatingActionButton.extended(
-            onPressed: () async {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Has acceptat la peticio!')),
-              );
-              await ref.read(allBookingsProvider.notifier).editBooking(
-                  booking.copyWith(bookingStatus: BookingStatus.APPROVED));
-              if (!mounted) return;
-              Navigator.pushNamed(
-                  context, userActivityScreenRoute);
-            }, //TODO persist change status
-            label: Text("Aprova"),
-          ),
-          if(booking.bookingStatus == BookingStatus.APPROVED)
-            FloatingActionButton.extended(
-              onPressed: () async {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Eina retornada!')),
-                );
-                await ref.read(allBookingsProvider.notifier).editBooking(
-                    booking.copyWith(bookingStatus: BookingStatus.RETURNED));
-                if (!mounted) return;
-                Navigator.pushNamed(
-                    context, userActivityScreenRoute);
-              }, //TODO persist change status
-              label: Text("Marca com a retornada"),
+            floatingActionButton: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (booking.bookingStatus == BookingStatus.ASKED)
+                  FloatingActionButton.extended(
+                    onPressed: () async {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Has acceptat la peticio!')),
+                      );
+                      await ref.read(allBookingsProvider.notifier).editBooking(
+                          booking.copyWith(
+                              bookingStatus: BookingStatus.APPROVED));
+                      if (!mounted) return;
+                      Navigator.pushNamed(context, userActivityScreenRoute);
+                    }, //TODO persist change status
+                    label: Text("Aprova"),
+                  ),
+                if (booking.bookingStatus == BookingStatus.APPROVED)
+                  FloatingActionButton.extended(
+                    onPressed: () async {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Eina retornada!')),
+                      );
+                      await ref.read(allBookingsProvider.notifier).editBooking(
+                          booking.copyWith(
+                              bookingStatus: BookingStatus.RETURNED));
+                      if (!mounted) return;
+                      Navigator.pushNamed(context, userActivityScreenRoute);
+                    }, //TODO persist change status
+                    label: Text("Marca com a retornada"),
+                  ),
+              ],
             ),
-        ],
-      ),
           );
   }
 }

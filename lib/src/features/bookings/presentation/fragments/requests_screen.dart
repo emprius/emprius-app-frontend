@@ -50,7 +50,8 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),
                 leading: (booking.bookingStatus as BookingStatus).label as Widget,
-                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                trailing:  Row(mainAxisSize: MainAxisSize.min, children: [
+                  if(booking.bookingStatus == BookingStatus.ASKED)
                   PopupMenuButton(
                     icon: Icon(Icons.edit),
                     onSelected: (value){
@@ -66,6 +67,7 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
                       ),
                     ],
                   ),
+                  if(booking.bookingStatus == BookingStatus.ASKED)
                   PopupMenuButton(
                     icon: Icon(Icons.delete),
                     onSelected: _deleteBooking,

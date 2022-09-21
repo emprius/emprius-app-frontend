@@ -16,8 +16,6 @@ class RequestsScreen extends ConsumerStatefulWidget {
 }
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
-
-  //TODO why is deleting everything
   void _deleteBooking(BookingModel booking) {
     ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
   }
@@ -48,7 +46,6 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
           return Column(
             children: [
-
               ListTile(
                 title: Text(tool.title),
                 subtitle: Text(booking.bookingStatus.displayStatus!),

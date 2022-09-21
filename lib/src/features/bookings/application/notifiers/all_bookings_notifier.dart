@@ -15,6 +15,7 @@ class AllBookingsNotifier extends StateNotifier<List<BookingModel>>{
         lastId: state.length + 1
     );
     state = [...state,newBooking];
+    //state = new List.from([...state])..add(newBooking);
   }
 
   Future<void> editBooking(BookingModel newBooking) async{
@@ -43,14 +44,15 @@ class AllBookingsNotifier extends StateNotifier<List<BookingModel>>{
   required int fromUserId,
 })async{
     var petitionsFromUserId = await bookingsRepository.getAllPetitions(fromUserId: fromUserId);
-    state = [...state, ...petitionsFromUserId];
+    state = {...state, ...petitionsFromUserId}.toList();
+
   }
 
   Future<void> getAllUserRequests({
     required int toUserId,
   })async{
     var requestsToUserId = await bookingsRepository.getAllRequests(toUserId: toUserId);
-    state = [...state, ...requestsToUserId];
+    state = {...state, ...requestsToUserId}.toList();
   }
 
 }

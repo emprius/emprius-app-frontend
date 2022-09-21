@@ -28,6 +28,8 @@ class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
   void initState() {
     ref.read(allBookingsProvider.notifier)
         .getAllUserPetitions(fromUserId: ref.read(userProvider).id);
+    ref.read(allBookingsProvider.notifier)
+    .getAllUserRequests(toUserId: ref.read(userProvider).id);
     super.initState();
   }
 

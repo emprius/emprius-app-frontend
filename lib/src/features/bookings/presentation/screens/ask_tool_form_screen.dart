@@ -1,4 +1,7 @@
+//import 'dart:html';
+
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
@@ -12,6 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AskToolFormScreen extends ConsumerStatefulWidget {
   final ToolDetailArguments args;
+
   const AskToolFormScreen(this.args, {Key? key}) : super(key: key);
 
   @override
@@ -19,11 +23,16 @@ class AskToolFormScreen extends ConsumerStatefulWidget {
 }
 
 class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
-  DateTime date = DateTime(2022, 8, 1);
 
-  final _formKey =GlobalKey<FormState>();
+  //DateTime date = DateTime(2022, 8, 1);
+
+  final _formKey = GlobalKey<FormState>();
   final _contactCtrl = TextEditingController();
   final _commentsCtrl = TextEditingController();
+  final _startDateCtrl = TextEditingController();
+  //final _endDateCtrl = TextEditingController();
+  DateTime startDate = DateTime.now();
+
 
   @override
   void initState() {
@@ -43,10 +52,12 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
           );
           await ref
               .read(allBookingsProvider.notifier)
+          ///New booking:
               .createBooking(BookingModel(
-              bookingStatus: BookingStatus.ASKED,
-              contact: _contactCtrl.text,
+            bookingStatus: BookingStatus.ASKED,
+            contact: _contactCtrl.text,
             comments: _commentsCtrl.text,
+            startDate: startDate,
             //userInfo:
           ));
 
@@ -78,11 +89,35 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
                 labelText: "Pots afegir aqui comentaris adicionals",
               ),
               SizedBox(height: 20.0),
-              DatePickerWidget("Selecciona dia d'inici"),
-              //TODO (m): pass data from widget > endDate and startDate
-              Text('${date.year}/${date.month}/${date.day}'),
-              DatePickerWidget("Selecciona data de tornada"),
-              Text('${date.year}/${date.month}/${date.day}'),
+              TextField(
+                  controller: _startDateCtrl,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.calendar_today),
+                    labelText: "Selecciona dia d'inici",
+                  ),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: startDate,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2040),
+                    );
+                    if (selectedDate != null) {
+                      String formatDate = getFormattedDate(selectedDate);
+                      setState(() {
+                        _startDateCtrl.text = formatDate;
+                        //TODO: CHANGE DATETIME TO STRING?
+                       startDate = DateTime.tryParse(formatDate)!;
+                      });
+                    }
+                  }
+              ),
+              // DatePickerWidget("Selecciona dia d'inici"),
+              // //TODO (m): pass data from widget > endDate and startDate
+              // Text('${date.year}/${date.month}/${date.day}'),
+              // DatePickerWidget("Selecciona data de tornada"),
+              // Text('${date.year}/${date.month}/${date.day}'),
             ],
           ),
         ),

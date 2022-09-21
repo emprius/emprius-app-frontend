@@ -78,10 +78,10 @@ class _BookingEditScreenState extends ConsumerState<BookingEditScreen> {
                 hintText: booking?.comments,
               ),
               SizedBox(height: 20.0),
-              DatePickerWidget("Canviar dia d'inici"),
+              //DatePickerWidget("Canviar dia d'inici"),
               //TODO (m): pass data from widget > endDate and startDate
               Text('${date.year}/${date.month}/${date.day}'),
-              DatePickerWidget("Canviar data de tornada"),
+              //DatePickerWidget("Canviar data de tornada"),
               Text('${date.year}/${date.month}/${date.day}'),
             ],
           ),

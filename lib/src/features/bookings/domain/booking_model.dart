@@ -1,7 +1,8 @@
 
+import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'user_info/user_info_model.dart';
 part 'booking_model.freezed.dart';
@@ -16,8 +17,9 @@ class BookingModel with _$BookingModel{
     int? bookingId,
     int? toolId,
     double? emps,
-    DateTime? startDate,
-    DateTime? endDate,
+    //DateTime? startDate,
+    //DateTime? endDate,
+    @TimestampOrNullConverter() DateTimeRange? reservedDates,
     int? fromUserId,
     int? toUserId,
     UserInfo? userInfo,
@@ -29,4 +31,17 @@ class BookingModel with _$BookingModel{
 
 factory BookingModel.fromJson(Map<String, dynamic> json) => _$BookingModelFromJson(json);
 
+}
+
+
+class TimestampOrNullConverter implements JsonConverter<DateTimeRange?, String?> {
+  const TimestampOrNullConverter();
+
+  @override
+  DateTimeRange? fromJson(String? string) {
+    return new DateTimeRange(start: DateTime.now(), end:  DateTime.now());
+  }
+
+  @override
+  String? toJson(DateTimeRange? date) => date == null ? null : getFormattedDate(date.start);
 }

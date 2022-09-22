@@ -22,9 +22,10 @@ BookingModel _$BookingModelFromJson(Map<String, dynamic> json) {
 mixin _$BookingModel {
   int? get bookingId => throw _privateConstructorUsedError;
   int? get toolId => throw _privateConstructorUsedError;
-  double? get emps => throw _privateConstructorUsedError;
-  DateTime? get startDate => throw _privateConstructorUsedError;
-  DateTime? get endDate => throw _privateConstructorUsedError;
+  double? get emps => throw _privateConstructorUsedError; //DateTime? startDate,
+//DateTime? endDate,
+  @TimestampOrNullConverter()
+  DateTimeRange? get reservedDates => throw _privateConstructorUsedError;
   int? get fromUserId => throw _privateConstructorUsedError;
   int? get toUserId => throw _privateConstructorUsedError;
   UserInfo? get userInfo => throw _privateConstructorUsedError;
@@ -47,8 +48,7 @@ abstract class $BookingModelCopyWith<$Res> {
       {int? bookingId,
       int? toolId,
       double? emps,
-      DateTime? startDate,
-      DateTime? endDate,
+      @TimestampOrNullConverter() DateTimeRange? reservedDates,
       int? fromUserId,
       int? toUserId,
       UserInfo? userInfo,
@@ -72,8 +72,7 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
     Object? bookingId = freezed,
     Object? toolId = freezed,
     Object? emps = freezed,
-    Object? startDate = freezed,
-    Object? endDate = freezed,
+    Object? reservedDates = freezed,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? userInfo = freezed,
@@ -94,14 +93,10 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
               as double?,
-      startDate: startDate == freezed
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: endDate == freezed
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      reservedDates: reservedDates == freezed
+          ? _value.reservedDates
+          : reservedDates // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange?,
       fromUserId: fromUserId == freezed
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
@@ -152,8 +147,7 @@ abstract class _$$_BookingModelCopyWith<$Res>
       {int? bookingId,
       int? toolId,
       double? emps,
-      DateTime? startDate,
-      DateTime? endDate,
+      @TimestampOrNullConverter() DateTimeRange? reservedDates,
       int? fromUserId,
       int? toUserId,
       UserInfo? userInfo,
@@ -181,8 +175,7 @@ class __$$_BookingModelCopyWithImpl<$Res>
     Object? bookingId = freezed,
     Object? toolId = freezed,
     Object? emps = freezed,
-    Object? startDate = freezed,
-    Object? endDate = freezed,
+    Object? reservedDates = freezed,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? userInfo = freezed,
@@ -203,14 +196,10 @@ class __$$_BookingModelCopyWithImpl<$Res>
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
               as double?,
-      startDate: startDate == freezed
-          ? _value.startDate
-          : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: endDate == freezed
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      reservedDates: reservedDates == freezed
+          ? _value.reservedDates
+          : reservedDates // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange?,
       fromUserId: fromUserId == freezed
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
@@ -246,8 +235,7 @@ class _$_BookingModel implements _BookingModel {
       {this.bookingId,
       this.toolId,
       this.emps,
-      this.startDate,
-      this.endDate,
+      @TimestampOrNullConverter() this.reservedDates,
       this.fromUserId,
       this.toUserId,
       this.userInfo,
@@ -264,10 +252,11 @@ class _$_BookingModel implements _BookingModel {
   final int? toolId;
   @override
   final double? emps;
+//DateTime? startDate,
+//DateTime? endDate,
   @override
-  final DateTime? startDate;
-  @override
-  final DateTime? endDate;
+  @TimestampOrNullConverter()
+  final DateTimeRange? reservedDates;
   @override
   final int? fromUserId;
   @override
@@ -283,7 +272,7 @@ class _$_BookingModel implements _BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel(bookingId: $bookingId, toolId: $toolId, emps: $emps, startDate: $startDate, endDate: $endDate, fromUserId: $fromUserId, toUserId: $toUserId, userInfo: $userInfo, contact: $contact, bookingStatus: $bookingStatus, comments: $comments)';
+    return 'BookingModel(bookingId: $bookingId, toolId: $toolId, emps: $emps, reservedDates: $reservedDates, fromUserId: $fromUserId, toUserId: $toUserId, userInfo: $userInfo, contact: $contact, bookingStatus: $bookingStatus, comments: $comments)';
   }
 
   @override
@@ -294,8 +283,8 @@ class _$_BookingModel implements _BookingModel {
             const DeepCollectionEquality().equals(other.bookingId, bookingId) &&
             const DeepCollectionEquality().equals(other.toolId, toolId) &&
             const DeepCollectionEquality().equals(other.emps, emps) &&
-            const DeepCollectionEquality().equals(other.startDate, startDate) &&
-            const DeepCollectionEquality().equals(other.endDate, endDate) &&
+            const DeepCollectionEquality()
+                .equals(other.reservedDates, reservedDates) &&
             const DeepCollectionEquality()
                 .equals(other.fromUserId, fromUserId) &&
             const DeepCollectionEquality().equals(other.toUserId, toUserId) &&
@@ -313,8 +302,7 @@ class _$_BookingModel implements _BookingModel {
       const DeepCollectionEquality().hash(bookingId),
       const DeepCollectionEquality().hash(toolId),
       const DeepCollectionEquality().hash(emps),
-      const DeepCollectionEquality().hash(startDate),
-      const DeepCollectionEquality().hash(endDate),
+      const DeepCollectionEquality().hash(reservedDates),
       const DeepCollectionEquality().hash(fromUserId),
       const DeepCollectionEquality().hash(toUserId),
       const DeepCollectionEquality().hash(userInfo),
@@ -340,8 +328,7 @@ abstract class _BookingModel implements BookingModel {
       {final int? bookingId,
       final int? toolId,
       final double? emps,
-      final DateTime? startDate,
-      final DateTime? endDate,
+      @TimestampOrNullConverter() final DateTimeRange? reservedDates,
       final int? fromUserId,
       final int? toUserId,
       final UserInfo? userInfo,
@@ -358,10 +345,10 @@ abstract class _BookingModel implements BookingModel {
   int? get toolId;
   @override
   double? get emps;
-  @override
-  DateTime? get startDate;
-  @override
-  DateTime? get endDate;
+  @override //DateTime? startDate,
+//DateTime? endDate,
+  @TimestampOrNullConverter()
+  DateTimeRange? get reservedDates;
   @override
   int? get fromUserId;
   @override

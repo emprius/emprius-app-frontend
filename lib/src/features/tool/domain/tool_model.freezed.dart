@@ -38,6 +38,8 @@ mixin _$ToolModel {
   double? get width => throw _privateConstructorUsedError;
   double? get length => throw _privateConstructorUsedError;
   double? get weight => throw _privateConstructorUsedError;
+  @TimestampListOrNullConverter()
+  List<DateTimeRange> get reservedDates => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,7 +69,8 @@ abstract class $ToolModelCopyWith<$Res> {
       double? height,
       double? width,
       double? length,
-      double? weight});
+      double? weight,
+      @TimestampListOrNullConverter() List<DateTimeRange> reservedDates});
 }
 
 /// @nodoc
@@ -98,6 +101,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
     Object? width = freezed,
     Object? length = freezed,
     Object? weight = freezed,
+    Object? reservedDates = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -172,6 +176,10 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as double?,
+      reservedDates: reservedDates == freezed
+          ? _value.reservedDates
+          : reservedDates // ignore: cast_nullable_to_non_nullable
+              as List<DateTimeRange>,
     ));
   }
 }
@@ -200,7 +208,8 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       double? height,
       double? width,
       double? length,
-      double? weight});
+      double? weight,
+      @TimestampListOrNullConverter() List<DateTimeRange> reservedDates});
 }
 
 /// @nodoc
@@ -233,6 +242,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
     Object? width = freezed,
     Object? length = freezed,
     Object? weight = freezed,
+    Object? reservedDates = freezed,
   }) {
     return _then(_$_ToolModel(
       id: id == freezed
@@ -307,6 +317,10 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as double?,
+      reservedDates: reservedDates == freezed
+          ? _value._reservedDates
+          : reservedDates // ignore: cast_nullable_to_non_nullable
+              as List<DateTimeRange>,
     ));
   }
 }
@@ -332,8 +346,11 @@ class _$_ToolModel implements _ToolModel {
       this.height,
       this.width,
       this.length,
-      this.weight})
-      : _images = images;
+      this.weight,
+      @TimestampListOrNullConverter()
+          final List<DateTimeRange> reservedDates = const []})
+      : _images = images,
+        _reservedDates = reservedDates;
 
   factory _$_ToolModel.fromJson(Map<String, dynamic> json) =>
       _$$_ToolModelFromJson(json);
@@ -382,10 +399,18 @@ class _$_ToolModel implements _ToolModel {
   final double? length;
   @override
   final double? weight;
+  final List<DateTimeRange> _reservedDates;
+  @override
+  @JsonKey()
+  @TimestampListOrNullConverter()
+  List<DateTimeRange> get reservedDates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reservedDates);
+  }
 
   @override
   String toString() {
-    return 'ToolModel(id: $id, title: $title, description: $description, isAvailable: $isAvailable, maybeFree: $maybeFree, cost: $cost, userId: $userId, images: $images, transportOptions: $transportOptions, toolCategory: $toolCategory, askWithFee: $askWithFee, location: $location, rating: $rating, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight)';
+    return 'ToolModel(id: $id, title: $title, description: $description, isAvailable: $isAvailable, maybeFree: $maybeFree, cost: $cost, userId: $userId, images: $images, transportOptions: $transportOptions, toolCategory: $toolCategory, askWithFee: $askWithFee, location: $location, rating: $rating, estimatedValue: $estimatedValue, height: $height, width: $width, length: $length, weight: $weight, reservedDates: $reservedDates)';
   }
 
   @override
@@ -416,31 +441,35 @@ class _$_ToolModel implements _ToolModel {
             const DeepCollectionEquality().equals(other.height, height) &&
             const DeepCollectionEquality().equals(other.width, width) &&
             const DeepCollectionEquality().equals(other.length, length) &&
-            const DeepCollectionEquality().equals(other.weight, weight));
+            const DeepCollectionEquality().equals(other.weight, weight) &&
+            const DeepCollectionEquality()
+                .equals(other._reservedDates, _reservedDates));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(maybeFree),
-      const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(transportOptions),
-      const DeepCollectionEquality().hash(toolCategory),
-      const DeepCollectionEquality().hash(askWithFee),
-      const DeepCollectionEquality().hash(location),
-      const DeepCollectionEquality().hash(rating),
-      const DeepCollectionEquality().hash(estimatedValue),
-      const DeepCollectionEquality().hash(height),
-      const DeepCollectionEquality().hash(width),
-      const DeepCollectionEquality().hash(length),
-      const DeepCollectionEquality().hash(weight));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(title),
+        const DeepCollectionEquality().hash(description),
+        const DeepCollectionEquality().hash(isAvailable),
+        const DeepCollectionEquality().hash(maybeFree),
+        const DeepCollectionEquality().hash(cost),
+        const DeepCollectionEquality().hash(userId),
+        const DeepCollectionEquality().hash(_images),
+        const DeepCollectionEquality().hash(transportOptions),
+        const DeepCollectionEquality().hash(toolCategory),
+        const DeepCollectionEquality().hash(askWithFee),
+        const DeepCollectionEquality().hash(location),
+        const DeepCollectionEquality().hash(rating),
+        const DeepCollectionEquality().hash(estimatedValue),
+        const DeepCollectionEquality().hash(height),
+        const DeepCollectionEquality().hash(width),
+        const DeepCollectionEquality().hash(length),
+        const DeepCollectionEquality().hash(weight),
+        const DeepCollectionEquality().hash(_reservedDates)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -474,7 +503,9 @@ abstract class _ToolModel implements ToolModel {
       final double? height,
       final double? width,
       final double? length,
-      final double? weight}) = _$_ToolModel;
+      final double? weight,
+      @TimestampListOrNullConverter()
+          final List<DateTimeRange> reservedDates}) = _$_ToolModel;
 
   factory _ToolModel.fromJson(Map<String, dynamic> json) =
       _$_ToolModel.fromJson;
@@ -515,6 +546,9 @@ abstract class _ToolModel implements ToolModel {
   double? get length;
   @override
   double? get weight;
+  @override
+  @TimestampListOrNullConverter()
+  List<DateTimeRange> get reservedDates;
   @override
   @JsonKey(ignore: true)
   _$$_ToolModelCopyWith<_$_ToolModel> get copyWith =>

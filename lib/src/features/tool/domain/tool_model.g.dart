@@ -30,6 +30,10 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
       width: (json['width'] as num?)?.toDouble(),
       length: (json['length'] as num?)?.toDouble(),
       weight: (json['weight'] as num?)?.toDouble(),
+      reservedDates: json['reservedDates'] == null
+          ? const []
+          : const TimestampListOrNullConverter()
+              .fromJson(json['reservedDates'] as List<String>),
     );
 
 Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
@@ -52,6 +56,8 @@ Map<String, dynamic> _$$_ToolModelToJson(_$_ToolModel instance) =>
       'width': instance.width,
       'length': instance.length,
       'weight': instance.weight,
+      'reservedDates':
+          const TimestampListOrNullConverter().toJson(instance.reservedDates),
     };
 
 const _$TransportOptionsEnumMap = {

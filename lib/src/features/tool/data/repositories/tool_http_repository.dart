@@ -3,6 +3,7 @@ import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum
 import 'package:empriusapp/src/features/tool/domain/i_tool_repository.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -16,6 +17,16 @@ final _toolImagesPhone = [
   // '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
   // '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
+
+//TODO class to tool model
+var _sampleAvailability = [
+  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 20)),
+  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().month + 2)),
+  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 5)),
+  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().month + 1)),
+  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 40)),
+];
+
 
 var _sampleTools = [
   ToolModel(

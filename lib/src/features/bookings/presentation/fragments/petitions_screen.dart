@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
@@ -15,7 +16,6 @@ class PetitionsScreen extends ConsumerStatefulWidget {
 }
 
 class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
-
   // @override
   // void initState() {
   //     ref.read(allBookingsProvider.notifier)
@@ -28,7 +28,7 @@ class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
     final bookings = ref.watch(petitionBookingsProvider);
 
     return Scaffold(
-      appBar: UserAppbar("Eines emprestades"),
+        appBar: UserAppbar("Eines emprestades"),
         body: ListView.builder(
           shrinkWrap: true,
           itemCount: bookings.length,
@@ -37,16 +37,30 @@ class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
             final tool = ref.watch(toolByIdProvider(booking.toolId!));
 
             return Column(
-                children: [
-                  ListTile(
-                    title: Text(tool.title),
-                    subtitle: Text(booking.bookingStatus.displayStatus!),
-                    leading: (booking.bookingStatus as BookingStatus).label as Widget,
-                      onTap: () async{
-            await Navigator.pushNamed(context, bookingDetailScreenRoute, arguments: BookingDetailArguments(booking.bookingId!));
-            },
-                  )
-                ],
+              children: [
+                ListTile(
+                  title: Text(tool.title),
+                  subtitle: Text(booking.bookingStatus.displayStatus!),
+                  leading:
+                      (booking.bookingStatus as BookingStatus).label as Widget,
+                  onTap: () async {
+                    await Navigator.pushNamed(context, bookingDetailScreenRoute,
+                        arguments: BookingDetailArguments(booking.bookingId!));
+                  },
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    if (booking.bookingStatus == BookingStatus.RETURNED)
+                      PopupMenuButton(
+                        icon: Icon(Icons.star),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: booking,
+                            child: Text("Valorar usuari"),
+                          ),
+                        ],
+                      )
+                  ]),
+                )
+              ],
             );
           },
         ));

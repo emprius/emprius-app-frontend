@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
@@ -53,8 +54,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                         ),
                       ),
                       SizedBox(height: 20.0),
-                      Text("Inici de la reserva:"),
-                      (booking.startDate) as Widget,
+                      Text("Inici de la reserva:${getFormattedDate(booking.reservedDates!.start)}"),
                       SizedBox(height: 20.0),
                       Text("Desitja ser contacta de la seguent manera:"),
                       SizedBox(height: 20.0),
@@ -79,7 +79,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                               bookingStatus: BookingStatus.APPROVED));
                       if (!mounted) return;
                       Navigator.pushNamed(context, userActivityScreenRoute);
-                    }, //TODO persist change status
+                    },
                     label: Text("Aprova"),
                   ),
                 if (booking.bookingStatus == BookingStatus.APPROVED)
@@ -93,7 +93,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                               bookingStatus: BookingStatus.RETURNED));
                       if (!mounted) return;
                       Navigator.pushNamed(context, userActivityScreenRoute);
-                    }, //TODO persist change status
+                    },
                     label: Text("Marca com a retornada"),
                   ),
               ],

@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
@@ -23,16 +21,16 @@ class AskToolFormScreen extends ConsumerStatefulWidget {
 }
 
 class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
-
-  //DateTime date = DateTime(2022, 8, 1);
-
   final _formKey = GlobalKey<FormState>();
   final _contactCtrl = TextEditingController();
   final _commentsCtrl = TextEditingController();
-  final _startDateCtrl = TextEditingController();
+  //final _startDateCtrl = TextEditingController();
   //final _endDateCtrl = TextEditingController();
-  DateTime startDate = DateTime.now();
 
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
+  DateTimeRange dateRange =
+      DateTimeRange(start: DateTime.now(), end: DateTime.now());
 
   @override
   void initState() {
@@ -42,6 +40,9 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   @override
   Widget build(BuildContext context) {
     final tool = ref.watch(toolByIdProvider(widget.args.id));
+    final start = dateRange.start;
+    final end = dateRange.end;
+    final totalDays = dateRange.duration;
 
     return Scaffold(
       appBar: UserAppbar('Formulari contacte'),
@@ -52,18 +53,20 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
           );
           await ref
               .read(allBookingsProvider.notifier)
-          ///New booking:
+
+              ///New booking instance:
               .createBooking(BookingModel(
-            bookingStatus: BookingStatus.ASKED,
-            contact: _contactCtrl.text,
-            comments: _commentsCtrl.text,
-            startDate: startDate,
-            //userInfo:
-          ));
+                bookingStatus: BookingStatus.ASKED,
+                contact: _contactCtrl.text,
+                comments: _commentsCtrl.text,
+                reservedDates: dateRange,
+                //startDate: startDate,
+                //endDate: endDate,
+                //userInfo:
+              ));
 
           if (!mounted) return;
-          Navigator.pushNamed(
-              context, userActivityScreenRoute);
+          Navigator.pushNamed(context, userActivityScreenRoute);
         },
         label: Text("Envia"),
       ),
@@ -89,39 +92,87 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
                 labelText: "Pots afegir aqui comentaris adicionals",
               ),
               SizedBox(height: 20.0),
-              TextField(
-                  controller: _startDateCtrl,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.calendar_today),
-                    labelText: "Selecciona dia d'inici",
+              Text("Selecciona les dades en que vols reservar:"),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      child: Text('${start.day}/${start.month}/${start.year}'),
+                      onPressed: pickDateRange,
+                    ),
                   ),
-                  readOnly: true,
-                  onTap: () async {
-                    DateTime? selectedDate = await showDatePicker(
-                      context: context,
-                      initialDate: startDate,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2040),
-                    );
-                    if (selectedDate != null) {
-                      String formatDate = getFormattedDate(selectedDate);
-                      setState(() {
-                        _startDateCtrl.text = formatDate;
-                        //TODO: CHANGE DATETIME TO STRING?
-                       startDate = DateTime.tryParse(formatDate)!;
-                      });
-                    }
-                  }
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      child: Text('${end.day}/${end.month}/${end.year}'),
+                      onPressed: pickDateRange,
+                    ),
+                  ),
+                ],
               ),
-              // DatePickerWidget("Selecciona dia d'inici"),
-              // //TODO (m): pass data from widget > endDate and startDate
-              // Text('${date.year}/${date.month}/${date.day}'),
-              // DatePickerWidget("Selecciona data de tornada"),
-              // Text('${date.year}/${date.month}/${date.day}'),
+              SizedBox(height: 20),
+              Text("Dies en total: ${totalDays.inDays}"),
+              // TextField(
+              //     controller: _startDateCtrl,
+              //     decoration: InputDecoration(
+              //       icon: Icon(Icons.calendar_today),
+              //       labelText: "Selecciona dia d'inici",
+              //     ),
+              //     readOnly: true,
+              //     onTap: () async {
+              //       DateTime? selectedDate = await showDatePicker(
+              //         context: context,
+              //         initialDate: startDate,
+              //         firstDate: DateTime.now(),
+              //         lastDate: DateTime(2040),
+              //       );
+              //       if (selectedDate != null) {
+              //         startDate = selectedDate;
+              //         String formatDate = getFormattedDate(selectedDate);
+              //         setState(() {
+              //           _startDateCtrl.text = formatDate;
+              //         });
+              //       }
+              //     }),
+              // TextField(
+              //     controller: _endDateCtrl,
+              //     decoration: InputDecoration(
+              //       icon: Icon(Icons.calendar_today),
+              //       labelText: "Selecciona dia de tornada",
+              //     ),
+              //     readOnly: true,
+              //     onTap: () async {
+              //       DateTimeRange? reservationDates = await showDateRangePicker(
+              //         context: context,
+              //         initialDateRange: dateRange,
+              //         firstDate: DateTime.now(),
+              //         lastDate: DateTime(2040),
+              //       );
+              //       if (reservationDates == null) return;
+              //       setState(() {
+              //         dateRange = reservationDates;
+              //       });
+              //     })
             ],
           ),
         ),
       ),
     );
+  }
+
+  pickDateRange() async {
+    DateTimeRange? reservationDates = await showDateRangePicker(
+      context: context,
+      initialDateRange: dateRange,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2040),
+    );
+    if (reservationDates == null) return;
+    setState(() {
+      dateRange = reservationDates;
+
+    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/common_widgets/reservations_calendar.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -37,12 +38,13 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              SizedBox(height: 20.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
+                  padding: const EdgeInsets.fromLTRB(10.0, 5.0, 5.0, 10.0),
                   child: Text(
                     tool.title,
                     style: const TextStyle(
@@ -84,7 +86,10 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                   if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
                   if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
                ],
-              )
+              ),
+
+              ReservationsCalendar(dateRanges: tool.reservedDates),
+              SizedBox(height: 40),
             ],
           ),
         ),

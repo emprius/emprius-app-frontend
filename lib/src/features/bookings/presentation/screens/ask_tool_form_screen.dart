@@ -103,7 +103,9 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
                       onPressed: pickDateRange,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  SizedBox(width: 8),
+                  Icon(Icons.arrow_forward),
+                  SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton(
                       child: Text('${end.day}/${end.month}/${end.year}'),

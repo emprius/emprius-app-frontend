@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/common_widgets/status_label.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,9 +29,11 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
     return booking == null
         ? Container()
         : Scaffold(
+            appBar: UserAppbar("Reserva"),
             body: Center(
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.fromLTRB(
+                    40.0, 0, 40.0, 10.0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -39,25 +45,38 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                                 padding: const EdgeInsets.fromLTRB(
                                     10.0, 0, 5.0, 10.0),
                                 child: CircleAvatar(
-                                  child: Text(booking.userInfo!.avatar!),
-                                )),
+                                 backgroundImage: FileImage(File(booking.userInfo!.avatar!)),
+                                ),
+                                ),
                             SizedBox(height: 20.0),
                             RatingStars(rating: booking.userInfo!.rating!),
                           ]),
                       SizedBox(height: 20.0),
-                      Text(
-                          "L'usuaria ${booking.userInfo!.name} et fa la seguent peticio:"),
-                      Text(
-                        tool.title,
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                  "L'usuaria ${booking.userInfo!.name} ha demanat:"),
+                              Text(
+                                tool.title,
+                                style: const TextStyle(
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          (booking.bookingStatus as BookingStatus).label as Widget,
+                        ],
                       ),
                       SizedBox(height: 20.0),
-                      Text("Inici de la reserva: ${getFormattedDate(booking.reservedDates!.start)}"),
-                      Text("Data de retorn: ${getFormattedDate(booking.reservedDates!.end)}"),
+                      Text(
+                          "Inici de la reserva: ${getFormattedDate(booking.reservedDates!.start)}"),
+                      Text(
+                          "Data de retorn: ${getFormattedDate(booking.reservedDates!.end)}"),
                       SizedBox(height: 20.0),
-                      Text("Desitja ser contacta de la seguent manera:"),
+                      Text("Detalls de contacte:"),
                       SizedBox(height: 20.0),
                       Text(booking.contact),
                       SizedBox(height: 20.0),

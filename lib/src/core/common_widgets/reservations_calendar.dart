@@ -1,0 +1,244 @@
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
+import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+
+class Reservation {
+  DateTime startDate;
+  DateTime endDate;
+  Reservation({required this.startDate, required this.endDate});
+}
+
+class ReservationsCalendar extends StatefulWidget {
+  final List<DateTimeRange> dateRanges;
+
+  const ReservationsCalendar({required this.dateRanges, Key? key}) : super(key: key);
+
+  @override
+  State<ReservationsCalendar> createState() => _ReservationsCalendarState();
+}
+
+class _ReservationsCalendarState extends State<ReservationsCalendar> {
+
+  Reservation reservation = Reservation(
+      startDate:  DateTime.now(),
+      endDate:   DateTime(DateTime.now().day+5),
+  );
+
+
+  DateTime _focusedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
+  CalendarFormat calendarFormat = CalendarFormat.month;
+  RangeSelectionMode rangeSelectionMode = RangeSelectionMode.enforced;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  bool isSameDay(DateTime a, DateTime b){
+    if (a == null || b == null) {
+      return false;
+    }
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  ///Checks if the list of DateTimeRanges in dateRanges contains a DateTimeRange in which the day lies:
+  DateTimeRange? dayInRange(DateTime day) {
+    List<DateTimeRange> list = widget.dateRanges.where((element) => element.start.isBefore(day) && element.end.isAfter(day) || element.start.year == day.year && element.start.day == day.day  && element.start.month == day.month || element.end.year == day.year && element.end.day == day.day && element.end.month == day.month).toList();
+    return list.isNotEmpty ? list[0] : null;
+  }
+
+  ///Checks if a day is between two days:
+  bool isInRange(DateTime day, DateTime start, DateTime end) {
+    if (isSameDay(day, start) || isSameDay(day, end)) {
+      return true;
+    }
+    if (day.isAfter(start) && day.isBefore(end)) {
+      return true;
+    }
+    return false;
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      padding: EdgeInsets.all(35.0),
+      child: TableCalendar(
+        headerStyle: const HeaderStyle(
+          formatButtonVisible: false,
+          titleCentered: true
+        ),
+        startingDayOfWeek: StartingDayOfWeek.monday,
+        focusedDay: _focusedDay,
+        firstDay: DateTime.now(),
+        lastDay: DateTime.now().add(Duration(days:365)),
+
+        /// Function deciding whether given day should be marked as selected:
+        selectedDayPredicate: (day) =>
+            isSameDay(_selectedDay, day),
+        rangeStartDay: reservation.startDate,
+        rangeEndDay: reservation.endDate,
+
+        calendarBuilders: CalendarBuilders(
+          /// Custom builder for day cells, with a priority over any other builder:
+        prioritizedBuilder: (context, day, focusedMonth) {
+            DateTimeRange? dateTimeRange = dayInRange(day);
+
+            ///If day is in any saved DateTimeRange show a highlighted cell:
+            if(dateTimeRange != null) {
+              return LayoutBuilder(
+                  builder:  (context, constraints) {
+                    final shorterSide = constraints.maxHeight > constraints.maxWidth
+                     ? constraints.maxWidth : constraints.maxHeight;
+
+                    final children = <Widget>[];
+
+                    /// Logic to define start and end range:
+                    final isRangeStart = isSameDay(day, dateTimeRange.start);
+                    final isRangeEnd = isSameDay(day, dateTimeRange.end);
+                    final isWithinRange = isInRange(day, dateTimeRange.start, dateTimeRange.end);
+
+                    if (isWithinRange) {
+                      ///Paint highlight UI:
+                      Widget rangeHighlight = Center(
+                        child: Container(
+                          margin: EdgeInsetsDirectional.only(
+                            start: isRangeStart ? constraints.maxWidth * 0.5 : 0.0,
+                            end: isRangeEnd ? constraints.maxWidth * 0.5 : 0.0,
+                          ),
+                          height: (shorterSide -  EdgeInsets.all(6.0).vertical) * 1.0,
+                          color: Colors.blueAccent,
+                        ),
+                      );
+                      children.add(rangeHighlight);
+                    }
+
+                    Widget? content;
+
+                    if (isRangeStart) {
+                      content = AnimatedContainer(
+                        duration: Duration(milliseconds: 250),
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF6699FF),
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text('${day.day}', //style: style.rangeStartTextStyle
+                        ),
+                      );
+                    } else if (isRangeEnd) {
+                      content = AnimatedContainer(
+                          duration: Duration(milliseconds: 250),
+                          margin: const EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF6699FF),
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text('${day.day}', // style: style.rangeEndTextStyle
+                          )
+                      );
+                    } else if (isWithinRange) {
+                      content = AnimatedContainer(
+                          duration: Duration(milliseconds: 250),
+                          margin: const EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                              '${day.day}', //style: style.withinRangeTextStyle
+                          )
+                      );
+                    }
+
+                    if (content != null) children.add(content);
+
+                    return Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: children,
+                      //clipBehavior: style.canMarkersOverflow ? Clip.none : Clip.hardEdge,
+                    );
+                  }
+              );
+            }
+            return null;
+          }
+        ),
+
+        onDaySelected: (selDay, focDay) {
+          // if (!isSameDay(_selectedDay, selDay)) {
+          //   setState(() {
+          //     _selectedDay = _selectedDay;
+          //     _focusedDay = focDay;
+          //     // reservation.startDate = null; // Important to clean those
+          //     // reservation.endDate = null;
+          //     rangeSelectionMode =
+          //         RangeSelectionMode.toggledOff;
+          //   });
+          // }
+        },
+        onRangeSelected: (start, end, focDay) {
+          // setState(() {
+          //  // _selectedDay = null;
+          //   _focusedDay = focDay;
+          //   reservation.startDate = start!;
+          //   reservation.endDate = end!;
+          //
+          //   bool startDateInRange = false;
+          //   bool endDateInRange = false;
+          //
+          //   DateTimeRange? range = dayInRange(reservation.startDate);
+          //   if(range == null && reservation.endDate != null) {
+          //     range = dayInRange(reservation.endDate);
+          //     if(range != null)
+          //       endDateInRange = true;
+          //   } else if(range != null) {
+          //     startDateInRange = true;
+          //     if(reservation.endDate != null && dayInRange(reservation.endDate) != null)
+          //       endDateInRange = true;
+          //   }
+          //
+          //   //bool insertNewRange = true;
+          //
+          //   // if(startDateInRange) {
+          //   //   if(isInRange(reservation.startDate, range.start, range.end)) {
+          //   //     int index = dateRanges.indexOf(range);
+          //   //     if(!endDateInRange && reservation.endDate != null)
+          //   //       dateRanges[index] = DateTimeRange(start: reservation.startDate, end: reservation.endDate);
+          //   //     else
+          //   //       dateRanges[index] = DateTimeRange(start: reservation.startDate, end: range.end);
+          //   //     insertNewRange = false;
+          //   //   }
+          //   // }
+          //   //
+          //   // if(endDateInRange) {
+          //   //   if(isInRange(reservation.endDate, range.start, range.end)) {
+          //   //     print("enddate is not null and is in range");
+          //   //     int index = dateRanges.indexOf(range);
+          //   //     dateRanges[index] = DateTimeRange(start: reservation.startDate, end: reservation.endDate);
+          //   //     insertNewRange = false;
+          //   //   }
+          //   // }
+          //
+          //   // if(reservation.startDate != null && reservation.endDate != null && insertNewRange) {
+          //   //   dateRanges.add(
+          //   //       DateTimeRange(start: reservation.startDate, end: reservation.endDate));
+          //   // }
+          //
+          // });
+        },
+
+        /// Called whenever currently visible calendar page is changed:
+        onPageChanged: (focDay) {
+          _focusedDay = focDay;
+        },
+      ),
+    );
+  }
+}

@@ -36,6 +36,9 @@ dependencies:
   # to show a customisable popup Widget
   flutter_map_marker_popup: ^3.2.0
 
+  # calendar:
+  table_calendar: ^3.0.7
+
   # floating search bar
   material_floating_search_bar: ^0.3.7
 

@@ -17,8 +17,8 @@ final toolImagesPhone = [
 ];
 var sampleAvailability = [
   DateTimeRange(start: DateTime(2022, 08, 28), end: DateTime(2022, 09, 15)),
-  DateTimeRange(start: DateTime.now()..add(const Duration(days: 1)), end: DateTime.now()..add(const Duration(days: 3))),
-  DateTimeRange(start: DateTime.now()..add(const Duration(days: 10)), end: DateTime.now()..add(const Duration(days: 23))),
+  DateTimeRange(start: DateTime.now().add(const Duration(days: 1)), end: DateTime.now().add(const Duration(days: 3))),
+  DateTimeRange(start: DateTime.now().add(const Duration(days: 10)), end: DateTime.now().add(const Duration(days: 23))),
 ];
 var sampleTools = [
   ToolModel(

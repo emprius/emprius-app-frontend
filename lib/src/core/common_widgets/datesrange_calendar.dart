@@ -10,16 +10,16 @@ class Reservation {
   Reservation({required this.startDate, required this.endDate});
 }
 
-class ReservationsCalendar extends StatefulWidget {
+class DatesRangeCalendar extends StatefulWidget {
   final List<DateTimeRange> dateRanges;
 
-  const ReservationsCalendar({required this.dateRanges, Key? key}) : super(key: key);
+  const DatesRangeCalendar({required this.dateRanges, Key? key}) : super(key: key);
 
   @override
-  State<ReservationsCalendar> createState() => _ReservationsCalendarState();
+  State<DatesRangeCalendar> createState() => _DatesRangeCalendarState();
 }
 
-class _ReservationsCalendarState extends State<ReservationsCalendar> {
+class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
   Reservation reservation = Reservation(
       startDate:  DateTime.now(),
@@ -110,7 +110,7 @@ class _ReservationsCalendarState extends State<ReservationsCalendar> {
                             start: isRangeStart ? constraints.maxWidth * 0.5 : 0.0,
                             end: isRangeEnd ? constraints.maxWidth * 0.5 : 0.0,
                           ),
-                          height: (shorterSide -  EdgeInsets.all(6.0).vertical) * 1.0,
+                          height: (shorterSide - EdgeInsets.all(6.0).vertical) * 1.0,
                           color: Colors.blueAccent,
                         ),
                       );

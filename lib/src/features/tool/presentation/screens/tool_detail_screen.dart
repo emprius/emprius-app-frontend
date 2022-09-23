@@ -1,5 +1,5 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
-import 'package:empriusapp/src/core/common_widgets/reservations_calendar.dart';
+import 'package:empriusapp/src/core/common_widgets/datesrange_calendar.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -88,7 +88,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                ],
               ),
 
-              ReservationsCalendar(dateRanges: tool.reservedDates),
+              DatesRangeCalendar(dateRanges: tool.reservedDates),
               SizedBox(height: 40),
             ],
           ),

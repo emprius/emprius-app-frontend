@@ -18,13 +18,10 @@ final _toolImagesPhone = [
   // '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
 
-//TODO class to tool model
 var _sampleAvailability = [
-  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 20)),
-  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().month + 2)),
-  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 5)),
-  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().month + 1)),
-  DateTimeRange(start: DateTime.now(), end: DateTime(DateTime.now().day + 40)),
+  DateTimeRange(start: DateTime(2022, 11, 15), end: DateTime(2022, 11, 29)),
+  DateTimeRange(start: DateTime(2022, 12, 15), end: DateTime(2022, 12, 29)),
+  DateTimeRange(start: DateTime(2023, 01, 05), end: DateTime(2023, 02, 29)),
 ];
 
 
@@ -42,6 +39,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
+      reservedDates: _sampleAvailability,
       location: LatLng(41.765626, 2.407599)),
   ToolModel(
       id: 7,
@@ -56,6 +54,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
+      reservedDates: _sampleAvailability,
       location: LatLng(41.692915, 2.540445)),
   ToolModel(
       id: 8,
@@ -70,6 +69,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
+      reservedDates: _sampleAvailability,
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
       id: 9,
@@ -84,6 +84,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
+      reservedDates: _sampleAvailability,
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
       id: 10,
@@ -98,6 +99,7 @@ var _sampleTools = [
       cost: 10,
       rating: 5,
       images: _toolImagesPhone,
+      reservedDates: _sampleAvailability,
       location: LatLng(41.738964, 2.498198)),
 ];
 

@@ -29,7 +29,6 @@ class ToolModel with _$ToolModel {
    double? length,
    double? weight,
    @TimestampListOrNullConverter() @Default([])List<DateTimeRange> reservedDates,
-   //List<DateTimeRange>? reservedDates,
   }) = _ToolModel;
 
   factory ToolModel.fromJson(Map<String, dynamic> json) => _$ToolModelFromJson(json);

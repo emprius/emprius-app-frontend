@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
       endDate:   DateTime(DateTime.now().day+5),
   );
 
-
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
   CalendarFormat calendarFormat = CalendarFormat.month;
@@ -44,13 +44,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
-  ///Checks if the list of DateTimeRanges in dateRanges contains a DateTimeRange in which the day lies:
-  DateTimeRange? dayInRange(DateTime day) {
-    List<DateTimeRange> list = widget.dateRanges.where((element) => element.start.isBefore(day) && element.end.isAfter(day) || element.start.year == day.year && element.start.day == day.day  && element.start.month == day.month || element.end.year == day.year && element.end.day == day.day && element.end.month == day.month).toList();
-    return list.isNotEmpty ? list[0] : null;
-  }
-
-  ///Checks if a day is between two days:
+  ///Checks if a day is between two days for UI display purposes:
   bool isInRange(DateTime day, DateTime start, DateTime end) {
     if (isSameDay(day, start) || isSameDay(day, end)) {
       return true;
@@ -62,9 +56,17 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
   }
 
 
+  // ///Checks if the list of DateTimeRanges in dateRanges contains a DateTimeRange in which the day lies:
+  // DateTimeRange? dayInRange(DateTime day) {
+  //   List<DateTimeRange> list = widget.dateRanges.where((element) => element.start.isBefore(day) && element.end.isAfter(day) || element.start.year == day.year && element.start.day == day.day  && element.start.month == day.month || element.end.year == day.year && element.end.day == day.day && element.end.month == day.month).toList();
+  //   return list.isNotEmpty ? list[0] : null;
+  // }
+  //dateRanges.getDayInRange();
+
+  final rangeValidator = CalendarValidator();
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       padding: EdgeInsets.all(35.0),
       child: TableCalendar(
@@ -86,9 +88,11 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
         calendarBuilders: CalendarBuilders(
           /// Custom builder for day cells, with a priority over any other builder:
         prioritizedBuilder: (context, day, focusedMonth) {
-            DateTimeRange? dateTimeRange = dayInRange(day);
+            //DateTimeRange? dateTimeRange = dayInRange(day);
+            DateTimeRange? dateTimeRange = rangeValidator.getDayInRange(day, widget.dateRanges);
 
-            ///If day is in any saved DateTimeRange show a highlighted cell:
+
+            ///If day is in any saved DateTimeRange (prior dayInRange) show a highlighted cell:
             if(dateTimeRange != null) {
               return LayoutBuilder(
                   builder:  (context, constraints) {
@@ -162,7 +166,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                     return Stack(
                       alignment: Alignment.bottomCenter,
                       children: children,
-                      //clipBehavior: style.canMarkersOverflow ? Clip.none : Clip.hardEdge,
+                      clipBehavior: Clip.hardEdge,
                     );
                   }
               );

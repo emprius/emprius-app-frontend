@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
@@ -24,13 +25,18 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _contactCtrl = TextEditingController();
   final _commentsCtrl = TextEditingController();
+
   //final _startDateCtrl = TextEditingController();
   //final _endDateCtrl = TextEditingController();
 
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
-  DateTimeRange dateRange =
-      DateTimeRange(start: DateTime.now(), end: DateTime.now());
+  DateTimeRange? dateRange;
+  // DateTimeRange(start: DateTime.now(), end: DateTime.now());
+
+
+  final rangeValidator = CalendarValidator();
+
 
   @override
   void initState() {
@@ -40,9 +46,10 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   @override
   Widget build(BuildContext context) {
     final tool = ref.watch(toolByIdProvider(widget.args.id));
-    final start = dateRange.start;
-    final end = dateRange.end;
-    final totalDays = dateRange.duration;
+    final start = dateRange?.start;
+    final end = dateRange?.end;
+    final totalDays = dateRange?.duration;
+    final bookedRanges = tool.reservedDates;
 
     return Scaffold(
       appBar: UserAppbar('Formulari contacte'),
@@ -54,16 +61,16 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
           await ref
               .read(allBookingsProvider.notifier)
 
-              ///New booking instance:
+          ///New booking instance:
               .createBooking(BookingModel(
-                bookingStatus: BookingStatus.ASKED,
-                contact: _contactCtrl.text,
-                comments: _commentsCtrl.text,
-                reservedDates: dateRange,
-                //startDate: startDate,
-                //endDate: endDate,
-                //userInfo:
-              ));
+            bookingStatus: BookingStatus.ASKED,
+            contact: _contactCtrl.text,
+            comments: _commentsCtrl.text,
+            reservedDates: dateRange,
+            //startDate: startDate,
+            //endDate: endDate,
+            //userInfo:
+          ));
 
           if (!mounted) return;
           Navigator.pushNamed(context, userActivityScreenRoute);
@@ -99,8 +106,8 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      child: Text('${start.day}/${start.month}/${start.year}'),
-                      onPressed: pickDateRange,
+                      child: start == null ? Icon(Icons.calendar_today) : Text('${start.day}/${start.month}/${start.year}'),
+                      onPressed: () => pickDateRange(bookedRanges),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -108,55 +115,16 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
                   SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton(
-                      child: Text('${end.day}/${end.month}/${end.year}'),
-                      onPressed: pickDateRange,
+                      child:  end == null ? Icon(Icons.calendar_today) : Text('${end.day}/${end.month}/${end.year}'),
+                      onPressed: () {
+                        pickDateRange(bookedRanges);
+                      },
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 20),
-              Text("Dies en total: ${totalDays.inDays}"),
-              // TextField(
-              //     controller: _startDateCtrl,
-              //     decoration: InputDecoration(
-              //       icon: Icon(Icons.calendar_today),
-              //       labelText: "Selecciona dia d'inici",
-              //     ),
-              //     readOnly: true,
-              //     onTap: () async {
-              //       DateTime? selectedDate = await showDatePicker(
-              //         context: context,
-              //         initialDate: startDate,
-              //         firstDate: DateTime.now(),
-              //         lastDate: DateTime(2040),
-              //       );
-              //       if (selectedDate != null) {
-              //         startDate = selectedDate;
-              //         String formatDate = getFormattedDate(selectedDate);
-              //         setState(() {
-              //           _startDateCtrl.text = formatDate;
-              //         });
-              //       }
-              //     }),
-              // TextField(
-              //     controller: _endDateCtrl,
-              //     decoration: InputDecoration(
-              //       icon: Icon(Icons.calendar_today),
-              //       labelText: "Selecciona dia de tornada",
-              //     ),
-              //     readOnly: true,
-              //     onTap: () async {
-              //       DateTimeRange? reservationDates = await showDateRangePicker(
-              //         context: context,
-              //         initialDateRange: dateRange,
-              //         firstDate: DateTime.now(),
-              //         lastDate: DateTime(2040),
-              //       );
-              //       if (reservationDates == null) return;
-              //       setState(() {
-              //         dateRange = reservationDates;
-              //       });
-              //     })
+              if(totalDays !=null) Text("Dies en total: ${totalDays.inDays}"),
             ],
           ),
         ),
@@ -164,17 +132,26 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
     );
   }
 
-  pickDateRange() async {
+  Future<void> pickDateRange(List<DateTimeRange> bookedRanges) async {
+
     DateTimeRange? reservationDates = await showDateRangePicker(
       context: context,
       initialDateRange: dateRange,
       firstDate: DateTime.now(),
       lastDate: DateTime(2040),
     );
-    if (reservationDates == null) return;
-    setState(() {
-      dateRange = reservationDates;
+    if (reservationDates != null) {
 
-    });
+      rangeValidator.isSelectedRangeInBookedRange(
+          reservationDates, bookedRanges)
+          ? rangeValidator.showRangeErrorDialog(context)
+
+     : setState(() {
+          dateRange = reservationDates;
+        });
+
+
+    }
   }
+
 }

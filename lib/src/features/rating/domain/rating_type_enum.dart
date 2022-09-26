@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 @JsonEnum()
 
 enum RatingType{
-  @JsonValue('All') ALL,
+ // @JsonValue('All') ALL,
   @JsonValue('Tool') TOOL_RATE,
   @JsonValue('User') USER_RATE,
 }

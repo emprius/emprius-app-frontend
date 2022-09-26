@@ -20,6 +20,7 @@ class RatingStars extends StatelessWidget {
     final stars = numStars(rating);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         //Rating number
         // Text(

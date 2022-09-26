@@ -15,7 +15,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       isActive: json['isActive'] as bool?,
       email: json['email'] as String,
       avatar: json['avatar'] as String?,
-      rating: json['rating'] as int? ?? 3,
+      rating: (json['rating'] as num?)?.toDouble() ?? 3.0,
       emps: json['emps'] as int? ?? 10,
     );
 

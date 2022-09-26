@@ -26,7 +26,7 @@ mixin _$UserModel {
   bool? get isActive => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
-  int? get rating => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
   int? get emps => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $UserModelCopyWith<$Res> {
       bool? isActive,
       String email,
       String? avatar,
-      int? rating,
+      double? rating,
       int? emps});
 }
 
@@ -97,7 +97,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       emps: emps == freezed
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       bool? isActive,
       String email,
       String? avatar,
-      int? rating,
+      double? rating,
       int? emps});
 }
 
@@ -172,7 +172,7 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       emps: emps == freezed
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class _$_UserModel implements _UserModel {
       required this.isActive,
       required this.email,
       this.avatar,
-      this.rating = 3,
+      this.rating = 3.0,
       this.emps = 10});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
@@ -212,7 +212,7 @@ class _$_UserModel implements _UserModel {
   final String? avatar;
   @override
   @JsonKey()
-  final int? rating;
+  final double? rating;
   @override
   @JsonKey()
   final int? emps;
@@ -271,7 +271,7 @@ abstract class _UserModel implements UserModel {
       required final bool? isActive,
       required final String email,
       final String? avatar,
-      final int? rating,
+      final double? rating,
       final int? emps}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -290,7 +290,7 @@ abstract class _UserModel implements UserModel {
   @override
   String? get avatar;
   @override
-  int? get rating;
+  double? get rating;
   @override
   int? get emps;
   @override

@@ -21,7 +21,7 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserInfo {
   String? get name => throw _privateConstructorUsedError;
-  int? get rating => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ mixin _$UserInfo {
 abstract class $UserInfoCopyWith<$Res> {
   factory $UserInfoCopyWith(UserInfo value, $Res Function(UserInfo) then) =
       _$UserInfoCopyWithImpl<$Res>;
-  $Res call({String? name, int? rating, String? avatar});
+  $Res call({String? name, double? rating, String? avatar});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       avatar: avatar == freezed
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,7 @@ abstract class _$$_UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
           _$_UserInfo value, $Res Function(_$_UserInfo) then) =
       __$$_UserInfoCopyWithImpl<$Res>;
   @override
-  $Res call({String? name, int? rating, String? avatar});
+  $Res call({String? name, double? rating, String? avatar});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$_UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       avatar: avatar == freezed
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ class _$_UserInfo implements _UserInfo {
   @override
   final String? name;
   @override
-  final int? rating;
+  final double? rating;
   @override
   final String? avatar;
 
@@ -164,7 +164,7 @@ class _$_UserInfo implements _UserInfo {
 abstract class _UserInfo implements UserInfo {
   const factory _UserInfo(
       {required final String? name,
-      final int? rating,
+      final double? rating,
       final String? avatar}) = _$_UserInfo;
 
   factory _UserInfo.fromJson(Map<String, dynamic> json) = _$_UserInfo.fromJson;
@@ -172,7 +172,7 @@ abstract class _UserInfo implements UserInfo {
   @override
   String? get name;
   @override
-  int? get rating;
+  double? get rating;
   @override
   String? get avatar;
   @override

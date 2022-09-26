@@ -14,7 +14,7 @@ _$_RatingModel _$$_RatingModelFromJson(Map<String, dynamic> json) =>
       toUserId: json['toUserId'] as int?,
       thumbnail: json['thumbnail'] as String?,
       title: json['title'] as String?,
-      rating: json['rating'] as int?,
+      rating: (json['rating'] as num?)?.toDouble(),
       bookingId: json['bookingId'] as int?,
       ratingType: $enumDecodeNullable(_$RatingTypeEnumMap, json['ratingType']),
       bookingReservedDates: json['bookingReservedDates'] == null

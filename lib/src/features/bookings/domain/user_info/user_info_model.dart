@@ -7,7 +7,7 @@ class UserInfo with _$UserInfo{
 
   const factory UserInfo({
     required String? name,
-    int? rating,
+    double? rating,
     String? avatar,
   }) = _UserInfo;
 

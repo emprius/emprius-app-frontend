@@ -14,7 +14,7 @@ class RatingModel with _$RatingModel {
     int? toUserId,
     String? thumbnail,
     String? title,
-    int? rating,
+    double? rating,
     int? bookingId,
     RatingType? ratingType,
     @TimestampListOrNullConverter() @Default([])List<DateTimeRange> bookingReservedDates,

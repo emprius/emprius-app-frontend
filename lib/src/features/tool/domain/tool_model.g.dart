@@ -24,7 +24,7 @@ _$_ToolModel _$$_ToolModelFromJson(Map<String, dynamic> json) => _$_ToolModel(
       location: json['location'] == null
           ? null
           : LatLng.fromJson(json['location'] as Map<String, dynamic>),
-      rating: json['rating'] as int?,
+      rating: (json['rating'] as num?)?.toDouble(),
       estimatedValue: (json['estimatedValue'] as num?)?.toDouble(),
       height: (json['height'] as num?)?.toDouble(),
       width: (json['width'] as num?)?.toDouble(),

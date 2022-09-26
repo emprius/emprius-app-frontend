@@ -26,7 +26,7 @@ mixin _$RatingModel {
   int? get toUserId => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  int? get rating => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
   int? get bookingId => throw _privateConstructorUsedError;
   RatingType? get ratingType => throw _privateConstructorUsedError;
   @TimestampListOrNullConverter()
@@ -51,7 +51,7 @@ abstract class $RatingModelCopyWith<$Res> {
       int? toUserId,
       String? thumbnail,
       String? title,
-      int? rating,
+      double? rating,
       int? bookingId,
       RatingType? ratingType,
       @TimestampListOrNullConverter()
@@ -107,7 +107,7 @@ class _$RatingModelCopyWithImpl<$Res> implements $RatingModelCopyWith<$Res> {
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bookingId: bookingId == freezed
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ abstract class _$$_RatingModelCopyWith<$Res>
       int? toUserId,
       String? thumbnail,
       String? title,
-      int? rating,
+      double? rating,
       int? bookingId,
       RatingType? ratingType,
       @TimestampListOrNullConverter()
@@ -196,7 +196,7 @@ class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bookingId: bookingId == freezed
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
@@ -246,7 +246,7 @@ class _$_RatingModel implements _RatingModel {
   @override
   final String? title;
   @override
-  final int? rating;
+  final double? rating;
   @override
   final int? bookingId;
   @override
@@ -321,7 +321,7 @@ abstract class _RatingModel implements RatingModel {
       final int? toUserId,
       final String? thumbnail,
       final String? title,
-      final int? rating,
+      final double? rating,
       final int? bookingId,
       final RatingType? ratingType,
       @TimestampListOrNullConverter()
@@ -343,7 +343,7 @@ abstract class _RatingModel implements RatingModel {
   @override
   String? get title;
   @override
-  int? get rating;
+  double? get rating;
   @override
   int? get bookingId;
   @override

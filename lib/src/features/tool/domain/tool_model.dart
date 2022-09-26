@@ -22,7 +22,7 @@ class ToolModel with _$ToolModel {
    ToolCategory? toolCategory,
    bool? askWithFee,
    LatLng? location,
-   int? rating,
+   double? rating,
    double? estimatedValue,
    double? height,
    double? width,

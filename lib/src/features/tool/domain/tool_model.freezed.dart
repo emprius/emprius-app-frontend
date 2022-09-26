@@ -32,7 +32,7 @@ mixin _$ToolModel {
   ToolCategory? get toolCategory => throw _privateConstructorUsedError;
   bool? get askWithFee => throw _privateConstructorUsedError;
   LatLng? get location => throw _privateConstructorUsedError;
-  int? get rating => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
   double? get estimatedValue => throw _privateConstructorUsedError;
   double? get height => throw _privateConstructorUsedError;
   double? get width => throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ abstract class $ToolModelCopyWith<$Res> {
       ToolCategory? toolCategory,
       bool? askWithFee,
       LatLng? location,
-      int? rating,
+      double? rating,
       double? estimatedValue,
       double? height,
       double? width,
@@ -155,7 +155,7 @@ class _$ToolModelCopyWithImpl<$Res> implements $ToolModelCopyWith<$Res> {
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       estimatedValue: estimatedValue == freezed
           ? _value.estimatedValue
           : estimatedValue // ignore: cast_nullable_to_non_nullable
@@ -203,7 +203,7 @@ abstract class _$$_ToolModelCopyWith<$Res> implements $ToolModelCopyWith<$Res> {
       ToolCategory? toolCategory,
       bool? askWithFee,
       LatLng? location,
-      int? rating,
+      double? rating,
       double? estimatedValue,
       double? height,
       double? width,
@@ -296,7 +296,7 @@ class __$$_ToolModelCopyWithImpl<$Res> extends _$ToolModelCopyWithImpl<$Res>
       rating: rating == freezed
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       estimatedValue: estimatedValue == freezed
           ? _value.estimatedValue
           : estimatedValue // ignore: cast_nullable_to_non_nullable
@@ -388,7 +388,7 @@ class _$_ToolModel implements _ToolModel {
   @override
   final LatLng? location;
   @override
-  final int? rating;
+  final double? rating;
   @override
   final double? estimatedValue;
   @override
@@ -498,7 +498,7 @@ abstract class _ToolModel implements ToolModel {
       final ToolCategory? toolCategory,
       final bool? askWithFee,
       final LatLng? location,
-      final int? rating,
+      final double? rating,
       final double? estimatedValue,
       final double? height,
       final double? width,
@@ -535,7 +535,7 @@ abstract class _ToolModel implements ToolModel {
   @override
   LatLng? get location;
   @override
-  int? get rating;
+  double? get rating;
   @override
   double? get estimatedValue;
   @override

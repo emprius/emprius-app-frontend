@@ -14,7 +14,7 @@ class UserModel with _$UserModel{
     required bool? isActive,
     required String email,
     String? avatar,
-    @Default(3) int? rating,
+    @Default(3.0) double? rating,
     @Default(10) int? emps,
   }) = _UserModel;
 

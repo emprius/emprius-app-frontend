@@ -13,7 +13,7 @@ typedef PopupCallback = void Function(BuildContext context)?;
 class MarkerPopup extends StatefulWidget {
   final String? title;
   final String? description;
-  final int? rating;
+  final double? rating;
   final String? image;
   PopupCallback onClick;
 

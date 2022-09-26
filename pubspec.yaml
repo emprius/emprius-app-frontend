@@ -57,6 +57,9 @@ dependencies:
   # carousel slider
   carousel_slider: ^4.1.1
 
+  # rating bar
+  flutter_rating_bar: ^4.0.1
+
   # @freezed decorator to tell the build_runner to run the freezed tasks
   freezed_annotation: ^2.1.0
 

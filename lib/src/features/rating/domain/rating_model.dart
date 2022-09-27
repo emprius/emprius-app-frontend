@@ -9,7 +9,7 @@ part 'rating_model.g.dart';
 class RatingModel with _$RatingModel {
   const factory RatingModel({
     int? ratingId,
-    bool? isPending,
+    @Default(true)bool isPending,
     int? fromUserId,
     int? toUserId,
     String? thumbnail,

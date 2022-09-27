@@ -14,40 +14,53 @@ class RatingStars extends StatefulWidget {
 }
 
 class _RatingStarsState extends State<RatingStars> {
-  // int numStars(double rating) {
-  //   const currentRange = 10 - 1; //max - min of current range
-  //   const targetRange = 5 - 0; //max - min of target range
-  //   final currentRatio = (rating - 1) / currentRange;
-  //   return (currentRatio * targetRange + 0).toInt();
-  // }
+  double numStars(double rating) {
+    const currentRange = 10 - 1.0; //max - min of current range
+    const targetRange = 5.0 - 0.0; //max - min of target range
+    final currentRatio = (rating - 1) / currentRange;
+    return (currentRatio * targetRange + 0).toDouble();
+  }
 
   double? _ratingValue;
 
   @override
   Widget build(BuildContext context) {
-    //final stars = numStars(widget.rating);
+    //var stars = numStars(widget.rating);
 
-    return RatingBar(
-      initialRating: 0,
+    return RatingBarIndicator(
+      rating: widget.rating,
         itemSize: 20,
         itemCount: 5,
-        allowHalfRating: true,
-        ratingWidget: RatingWidget(
-            empty: const Icon(
-          Icons.star_outline,
-          color: Colors.orange,
-        ),
-            full: const Icon(Icons.star, color: Colors.orange),
-            half: const Icon(
-              Icons.star_half,
-              color: Colors.orange,
-            ),
-        ),
-        onRatingUpdate:(value) {
-          setState(() {
-            _ratingValue = value;
-          });
-        });
+      itemBuilder: (context, index) => Icon(
+        Icons.star,
+        color: Colors.amberAccent,
+      ),
+    );
+
+    // RatingBar(
+    //   initialRating: widget.rating,
+    //   itemSize: 20,
+    //   itemCount: 5,
+    //   allowHalfRating: true,
+    //   ratingWidget: RatingWidget(
+    //     empty: const Icon(
+    //       Icons.star_outline,
+    //       color: Colors.orange,
+    //     ),
+    //     full: const Icon(Icons.star, color: Colors.orange),
+    //     half: const Icon(
+    //       Icons.star_half,
+    //       color: Colors.orange,
+    //     ),
+    //   ),
+    //   onRatingUpdate:(value) {
+    //     setState(() {
+    //       //stars = value;
+    //       _ratingValue = value;
+    //     });
+    //   },
+    // );
+
 
     //return Row(
       //mainAxisAlignment: MainAxisAlignment.center,

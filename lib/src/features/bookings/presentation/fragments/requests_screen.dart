@@ -43,8 +43,9 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
     return Scaffold(
       appBar: UserAppbar("Eines demanades"),
 
-      body: bookings.isEmpty ? Center(child: CircularProgressIndicator()) :
-      RefreshIndicator(
+      body: bookings.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : RefreshIndicator(
         onRefresh: _refresh,
         child: ListView.builder(
           shrinkWrap: true,

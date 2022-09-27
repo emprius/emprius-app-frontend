@@ -60,7 +60,7 @@ var sampleRatings = [
     title: "Reg automatic",
     thumbnail: sampleThumbnails[3],
     rating: 10,
-    bookingId: 9, //Reg automatic,
+    bookingId: 3, //Reg automatic,
     ratingType: RatingType.TOOL_RATE,
     bookingReservedDates: sampleReservations,
   ),

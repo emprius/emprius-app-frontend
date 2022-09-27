@@ -48,7 +48,7 @@ var _sampleBookings = [
       reservedDates: DateTimeRange(start: DateTime.now(), end: DateTime(2022, 11, 31)),
       userInfo: UserInfo(
         name: "Ariadna",
-        rating: 10,
+        rating: 5,
         avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
       )),
 
@@ -78,7 +78,7 @@ var _sampleBookings = [
       reservedDates: DateTimeRange(start: DateTime.now(), end: DateTime(2023, 12, 31)),
       userInfo: UserInfo(
         name: "Ariadna",
-        rating: 10,
+        rating: 4,
         avatar: "/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg",
       )),
 

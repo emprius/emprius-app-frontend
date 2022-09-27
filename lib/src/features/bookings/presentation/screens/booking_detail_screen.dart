@@ -32,8 +32,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
             appBar: UserAppbar("Reserva"),
             body: Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    40.0, 0, 40.0, 10.0),
+                padding: const EdgeInsets.fromLTRB(40.0, 0, 40.0, 10.0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -42,12 +41,13 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    10.0, 0, 5.0, 10.0),
-                                child: CircleAvatar(
-                                 backgroundImage: FileImage(File(booking.userInfo!.avatar!)),
-                                ),
-                                ),
+                              padding:
+                                  const EdgeInsets.fromLTRB(10.0, 0, 5.0, 10.0),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    FileImage(File(booking.userInfo!.avatar!)),
+                              ),
+                            ),
                             SizedBox(height: 20.0),
                             RatingStars(rating: booking.userInfo!.rating!),
                           ]),
@@ -67,7 +67,8 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                               ),
                             ],
                           ),
-                          (booking.bookingStatus as BookingStatus).label as Widget,
+                          (booking.bookingStatus as BookingStatus).label
+                              as Widget,
                         ],
                       ),
                       SizedBox(height: 20.0),
@@ -84,40 +85,47 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                     ]),
               ),
             ),
-            floatingActionButton: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (booking.bookingStatus == BookingStatus.ASKED)
-                  FloatingActionButton.extended(
-                    onPressed: () async {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Has acceptat la peticio!')),
-                      );
-                      await ref.read(allBookingsProvider.notifier).editBooking(
-                          booking.copyWith(
-                              bookingStatus: BookingStatus.APPROVED));
-                      if (!mounted) return;
-                      Navigator.pushNamed(context, userActivityScreenRoute);
-                    },
-                    label: Text("Aprova"),
+            floatingActionButton: booking.bookingStatus ==
+                    BookingStatus.RETURNED
+                ? Container()
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (booking.bookingStatus == BookingStatus.ASKED)
+                        FloatingActionButton.extended(
+                          onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Has acceptat la peticio!')),
+                            );
+                            await ref
+                                .read(allBookingsProvider.notifier)
+                                .editBooking(booking.copyWith(
+                                    bookingStatus: BookingStatus.APPROVED));
+                            if (!mounted) return;
+                            Navigator.pushNamed(
+                                context, userActivityScreenRoute);
+                          },
+                          label: Text("Aprova"),
+                        ),
+                      if (booking.bookingStatus == BookingStatus.APPROVED)
+                        FloatingActionButton.extended(
+                          onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Eina retornada!')),
+                            );
+                            await ref
+                                .read(allBookingsProvider.notifier)
+                                .editBooking(booking.copyWith(
+                                    bookingStatus: BookingStatus.RETURNED));
+                            if (!mounted) return;
+                            Navigator.pushNamed(
+                                context, userActivityScreenRoute);
+                          },
+                          label: Text("Marca com a retornada"),
+                        ),
+                    ],
                   ),
-                if (booking.bookingStatus == BookingStatus.APPROVED)
-                  FloatingActionButton.extended(
-                    onPressed: () async {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Eina retornada!')),
-                      );
-                      await ref.read(allBookingsProvider.notifier).editBooking(
-                          booking.copyWith(
-                              bookingStatus: BookingStatus.RETURNED));
-                      if (!mounted) return;
-                      Navigator.pushNamed(context, userActivityScreenRoute);
-                    },
-                    label: Text("Marca com a retornada"),
-                  ),
-              ],
-            ),
           );
   }
 }

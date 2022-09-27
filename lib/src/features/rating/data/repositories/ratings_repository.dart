@@ -41,12 +41,14 @@ class RatingsRepository{
 
   ///String post path => "/rating/{ratingId}";
   Future<RatingModel> doRate({
-    required RatingModel doRating,
-    required int ratingId,
+    required RatingModel ratingModel,
+    required double value,
   }) async {
+    // Llamaria al back con el ratingId y el valor en la DTO
+    var updatedRating = ratingModel.copyWith(rating: value, isPending: false);
     sampleRatings = [...sampleRatings]
-      ..[sampleRatings.indexWhere((rating) => rating.ratingId == doRating.ratingId)] = doRating;
-    return doRating.copyWith(ratingId: doRating.ratingId);
+      ..[sampleRatings.indexWhere((rating) => rating.ratingId == ratingModel.ratingId)] = updatedRating;
+    return updatedRating;
   }
 
 }

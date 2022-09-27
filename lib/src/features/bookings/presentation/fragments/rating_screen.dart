@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/routes.dart';
@@ -12,26 +11,25 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RatingScreen extends ConsumerStatefulWidget {
-  const RatingScreen({Key? key}) : super(key: key);
+  //const RatingScreen({Key? key}) : super(key: key);
 
   @override
   createState() => _RatingScreenState();
 }
 
 class _RatingScreenState extends ConsumerState<RatingScreen> {
+ late double _newRating;
+
   @override
   void initState() {
+    /// Fetch all ratings
     ref.read(allRatingsProvider.notifier).getAllRatings();
     super.initState();
   }
 
-
-double? _newRating;
-
   @override
   Widget build(BuildContext context) {
     final ratings = ref.watch(allRatingsProvider);
-    //late RatingModel rating;
 
     return Scaffold(
       appBar: UserAppbar("Rating"),
@@ -43,6 +41,7 @@ double? _newRating;
         itemBuilder: (context, index) {
           final rating = ratings[index];
           var stars = rating.rating;
+          //late RatingModel newRating;
 
           return Card(
             child: Column(
@@ -96,7 +95,7 @@ double? _newRating;
                                                 setState(() {
                                                   //TODO PERSIST and show - make not final?
                                                   stars = value;
-                                                  //rating = rating!.copyWith(rating: value);
+                                                  ref.read(allRatingsProvider.notifier).doRating(rating.copyWith(rating : value));
                                                 }),
                                           ),
                                         ]),

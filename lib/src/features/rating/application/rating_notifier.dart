@@ -14,11 +14,12 @@ class AllRatingsNotifier extends StateNotifier<List<RatingModel>> {
 }
 
   Future<void> doRating(RatingModel doRating) async {
-    var doneRating = await ratingsRepository.doRate(
-        doRating: doRating, ratingId: doRating.ratingId!);
+    var newRating = await ratingsRepository.doRate(
+        doRating: doRating,
+        ratingId: doRating.ratingId!);
     state = [...state]
-      ..[state.indexWhere((rating) => rating.ratingId == doneRating.ratingId)] =
-          doneRating;
+      ..[state.indexWhere((rating) => rating.ratingId == newRating.ratingId)] =
+          newRating;
   }
 
   // Future<void> getRatingById({

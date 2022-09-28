@@ -18,6 +18,8 @@ class RequestsScreen extends ConsumerStatefulWidget {
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
   List<BookingModel> bookings = [];
 
+  var isSelected = <bool>[false, false, false];
+
   void _deleteBooking(BookingModel booking) {
     ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
   }
@@ -29,6 +31,24 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
   @override
   Widget build(BuildContext context) {
     final bookings = ref.watch(requestBookingsProvider);
+    final filterState = ref.watch(bookingFilterProvider);
+
+    switch(filterState){
+      case BookingStatus.RETURNED:
+        isSelected = <bool>[false, false, true, false];
+        break;
+      case BookingStatus.APPROVED:
+        isSelected = <bool>[false, true, false, false];
+        break;
+      case BookingStatus.ASKED:
+        isSelected = <bool>[true, false, false, false];
+        break;
+      case BookingStatus.ALL:
+      default:
+        isSelected = <bool>[false, false, false, true];
+    }
+
+
 
     return Scaffold(
       appBar: UserAppbar("Eines demanades"),
@@ -39,15 +59,66 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
+                    leadingWidth: 0.0,
                     backgroundColor: Colors.transparent,
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    title: ToggleButtons(
+                      color: Colors.black.withOpacity(0.60),
+                      selectedColor: Color(0xFF6200EE),
+                      selectedBorderColor: Color(0xFF6200EE),
+                      fillColor: Color(0xFF6200EE).withOpacity(0.08),
+                      splashColor: Color(0xFF6200EE).withOpacity(0.12),
+                      hoverColor: Color(0xFF6200EE).withOpacity(0.04),
+                      borderRadius: BorderRadius.circular(4.0),
+                      constraints: BoxConstraints(minHeight: 36.0),
+                      isSelected: isSelected,
+                      onPressed: (index) {
+                        if(index == 0) {
+                          ref.read(bookingFilterProvider.state).state = BookingStatus.ASKED;
+                        }
+                        if(index == 1) {
+                          ref.read(bookingFilterProvider.state).state = BookingStatus.APPROVED;
+                        }
+                        if(index == 2) {
+                          ref.read(bookingFilterProvider.state).state = BookingStatus.RETURNED;
+                        }
+                        if(index == 3) {
+                          ref.read(bookingFilterProvider.state).state = BookingStatus.ALL;
+                        }
+
+                        // setState(() {
+                        //   isSelected[index] = !isSelected[index];
+                        // });
+                      },
                       children: [
-                        TextButton(onPressed: (){}, child: Text("Pendents")),
-                        TextButton(onPressed: (){}, child: Text("En curs")),
-                        TextButton(onPressed: (){}, child: Text("Retornades")),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('PENDENTS'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('EN CURS'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('RETORNADES'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('TOTES'),
+                        ),
                       ],
-                    ),
+                    )
+                    
+                    
+                    //
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+                    //     TextButton(onPressed: (){}, child: Text("Pendents")),
+                    //     TextButton(onPressed: (){}, child: Text("En curs")),
+                    //     TextButton(onPressed: (){}, child: Text("Retornades")),
+                    //   ],
+                    // ),
                   ),
                   SliverList(
                       delegate: SliverChildBuilderDelegate(

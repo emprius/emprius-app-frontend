@@ -37,7 +37,6 @@ class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: UserAppbar("Activitat"),
       body: IndexedStack(
         children: screens,
         index: currentIndex,

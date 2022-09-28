@@ -34,27 +34,21 @@ extension ExtBookingStatus on BookingStatus{
       case BookingStatus.ASKED:
         return StatusLabel(
           color: Colors.redAccent,
-          icon: Icons.question_mark,
-          //text: 'Demanda',
         );
       case BookingStatus.APPROVED:
         return StatusLabel(
           color: Colors.purple,
-          icon: Icons.handshake,
-         // text: 'Aprovada',
         );
       case BookingStatus.RETURNED:
         return StatusLabel(
           color: Colors.green,
-          icon: Icons.check_box,
-         // text: 'Retornada',
         );
-      case BookingStatus.ALL:
-        return StatusLabel(
-          color: Colors.blueAccent,
-          icon: Icons.workspaces_sharp,
-          // text: '',
-        );
+      // case BookingStatus.ALL:
+      //   return StatusLabel(
+      //     color: Colors.blueAccent,
+      //     icon: Icons.workspaces_sharp,
+      //     // text: '',
+      //   );
       default:
         return null;
     }

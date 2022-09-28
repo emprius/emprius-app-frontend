@@ -16,25 +16,15 @@ class RequestsScreen extends ConsumerStatefulWidget {
 }
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
-
-  List<BookingModel> bookings =[];
+  List<BookingModel> bookings = [];
 
   void _deleteBooking(BookingModel booking) {
     ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
   }
 
-  // @override
-  // void initState() {
-  //   ref
-  //       .read(allBookingsProvider.notifier)
-  //       .getAllUserRequests(toUserId: ref.read(userProvider).id);
-  //   super.initState();
-  // }
-
   Future _refresh() async {
     bookings = ref.watch(requestBookingsProvider);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,65 +32,145 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
     return Scaffold(
       appBar: UserAppbar("Eines demanades"),
-
       body: bookings.isEmpty
           ? Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-        onRefresh: _refresh,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: bookings.length,
-          itemBuilder: (context, index) {
-            final booking = bookings[index];
-            final tool = ref.watch(toolByIdProvider(booking.toolId!));
-            // late bool _waitingAproval =
-            //     booking.bookingStatus.displayStatus == "Demanada";
+              onRefresh: _refresh,
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    backgroundColor: Colors.transparent,
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(onPressed: (){}, child: Text("Pendents")),
+                        TextButton(onPressed: (){}, child: Text("En curs")),
+                        TextButton(onPressed: (){}, child: Text("Retornades")),
+                      ],
+                    ),
+                  ),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          (context, index) => ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: bookings.length,
+                            itemBuilder: (context, index) {
+                              final booking = bookings[index];
+                              final tool = ref.watch(toolByIdProvider(booking.toolId!));
 
-            return Column(
-              children: [
-                ListTile(
-                  title: Text(tool.title),
-                  subtitle: Text(booking.bookingStatus.displayStatus!),
-                  leading: (booking.bookingStatus as BookingStatus).label as Widget,
-                  onTap: () async {
-                    await Navigator.pushNamed(context, bookingDetailScreenRoute,
-                        arguments: BookingDetailArguments(booking.bookingId!));
-                  },
-                  trailing:  Row(mainAxisSize: MainAxisSize.min, children: [
-                    if(booking.bookingStatus == BookingStatus.ASKED)
-                    PopupMenuButton(
-                      icon: Icon(Icons.edit),
-                      onSelected: (value){
-                        if(value == booking) {
-                          Navigator.pushNamed(context, bookingEditScreenRoute,
-                              arguments: BookingDetailArguments(booking.bookingId!));
-                        }
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: booking,
-                          child: Text("Modificar peticio"),
-                        ),
-                      ],
-                    ),
-                    if(booking.bookingStatus == BookingStatus.ASKED)
-                    PopupMenuButton(
-                      icon: Icon(Icons.delete),
-                      onSelected: _deleteBooking,
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: booking,
-                          child: Text("Anul.lar peticio?"),
-                        ),
-                      ],
-                    ),
-                  ]),
-                )
-              ],
-            );
-          },
-        ),
-      ),
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(tool.title),
+                                    subtitle: Text(booking.bookingStatus.displayStatus!),
+                                    leading: (booking.bookingStatus as BookingStatus).label
+                                    as Widget,
+                                    onTap: () async {
+                                      await Navigator.pushNamed(
+                                          context, bookingDetailScreenRoute,
+                                          arguments:
+                                          BookingDetailArguments(booking.bookingId!));
+                                    },
+                                    trailing: Row(mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (booking.bookingStatus == BookingStatus.ASKED)
+                                            PopupMenuButton(
+                                              icon: Icon(Icons.edit),
+                                              onSelected: (value) {
+                                                if (value == booking) {
+                                                  Navigator.pushNamed(
+                                                      context, bookingEditScreenRoute,
+                                                      arguments: BookingDetailArguments(
+                                                          booking.bookingId!));
+                                                }
+                                              },
+                                              itemBuilder: (context) => [
+                                                PopupMenuItem(
+                                                  value: booking,
+                                                  child: Text("Modificar peticio"),
+                                                ),
+                                              ],
+                                            ),
+                                          if (booking.bookingStatus == BookingStatus.ASKED)
+                                            PopupMenuButton(
+                                              icon: Icon(Icons.delete),
+                                              onSelected: _deleteBooking,
+                                              itemBuilder: (context) => [
+                                                PopupMenuItem(
+                                                  value: booking,
+                                                  child: Text("Anul.lar peticio?"),
+                                                ),
+                                              ],
+                                            ),
+                                        ]),
+                                  )
+                                ],
+                              );
+                            },
+                          ),
+                      ),
+                  ),
+                  ],
+
+                // child: ListView.builder(
+                //   shrinkWrap: true,
+                //   itemCount: bookings.length,
+                //   itemBuilder: (context, index) {
+                //     final booking = bookings[index];
+                //     final tool = ref.watch(toolByIdProvider(booking.toolId!));
+                //
+                //     return Column(
+                //       children: [
+                //         ListTile(
+                //           title: Text(tool.title),
+                //           subtitle: Text(booking.bookingStatus.displayStatus!),
+                //           leading: (booking.bookingStatus as BookingStatus).label
+                //               as Widget,
+                //           onTap: () async {
+                //             await Navigator.pushNamed(
+                //                 context, bookingDetailScreenRoute,
+                //                 arguments:
+                //                     BookingDetailArguments(booking.bookingId!));
+                //           },
+                //           trailing: Row(mainAxisSize: MainAxisSize.min,
+                //               children: [
+                //             if (booking.bookingStatus == BookingStatus.ASKED)
+                //               PopupMenuButton(
+                //                 icon: Icon(Icons.edit),
+                //                 onSelected: (value) {
+                //                   if (value == booking) {
+                //                     Navigator.pushNamed(
+                //                         context, bookingEditScreenRoute,
+                //                         arguments: BookingDetailArguments(
+                //                             booking.bookingId!));
+                //                   }
+                //                 },
+                //                 itemBuilder: (context) => [
+                //                   PopupMenuItem(
+                //                     value: booking,
+                //                     child: Text("Modificar peticio"),
+                //                   ),
+                //                 ],
+                //               ),
+                //             if (booking.bookingStatus == BookingStatus.ASKED)
+                //               PopupMenuButton(
+                //                 icon: Icon(Icons.delete),
+                //                 onSelected: _deleteBooking,
+                //                 itemBuilder: (context) => [
+                //                   PopupMenuItem(
+                //                     value: booking,
+                //                     child: Text("Anul.lar peticio?"),
+                //                   ),
+                //                 ],
+                //               ),
+                //           ]),
+                //         )
+                //       ],
+                //     );
+                //   },
+                // ),
+              ),
+            ),
     );
   }
 }

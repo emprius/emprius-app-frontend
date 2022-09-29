@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,6 +17,7 @@ class _KeepingsScreenState extends ConsumerState<KeepingsScreen> {
 
     return Scaffold(
       appBar: UserAppbar("Custodies"),
+      drawer: UserDrawer(),
       body: ListView(),
     );
   }

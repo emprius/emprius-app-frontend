@@ -4,6 +4,7 @@ import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enu
 import 'package:empriusapp/src/features/bookings/presentation/fragments/skeleton/booking_list_tile.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,6 +52,7 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
 
     return Scaffold(
       appBar: UserAppbar(widget.appbarTitle),
+      drawer: UserDrawer(),
       body: bookings.isEmpty
           ? Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -115,8 +117,14 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
                         itemBuilder: (context, index) {
                           final booking = bookings[index];
                           final tool = ref.watch(toolByIdProvider(booking.toolId!));
-                          return BookingListTile(booking, tool,
-                              deleteBooking: widget.deleteBooking);
+                          return Column(
+                            children: [
+                              BookingListTile(booking, tool,
+                                  deleteBooking: widget.deleteBooking),
+                              Divider(),
+                            ],
+                          );
+
                         }),
                     ),
                   ),

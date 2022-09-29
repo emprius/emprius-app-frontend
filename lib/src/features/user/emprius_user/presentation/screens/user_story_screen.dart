@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,6 +20,7 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
 
     return Scaffold(
       appBar: UserAppbar("Historial d'us"),
+        drawer: UserDrawer(),
       body: Container(
         color: Colors.teal,
       )

@@ -7,6 +7,7 @@ import 'package:empriusapp/src/features/rating/data/repositories/ratings_reposit
 import 'package:empriusapp/src/features/rating/domain/rating_model.dart';
 import 'package:empriusapp/src/features/rating/presentation/widgets/rating_card.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,6 +37,7 @@ class _RatingScreenState extends ConsumerState<RatingScreen> {
 
     return Scaffold(
       appBar: UserAppbar("Rating"),
+      drawer: UserDrawer(),
       body: ratings.isEmpty
       ? const Center(child: CircularProgressIndicator())
       : RefreshIndicator(

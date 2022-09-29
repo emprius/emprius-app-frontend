@@ -4,6 +4,7 @@ import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,6 +47,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
 
     return Scaffold(
       appBar: UserAppbar("Les meves eines"),
+      drawer: UserDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
         onPressed: () {

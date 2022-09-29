@@ -33,10 +33,6 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
             currentAccountPicture: UserProfileAvatar(
               avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
             ),
-
-            // const CircleAvatar(
-            //   backgroundImage: AssetImage("assets/images/sharing.png"),
-            // ),
           ),
           ListTile(
             leading: Icon(Icons.person),
@@ -60,12 +56,19 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Configuracio"),
+            leading: Icon(Icons.search_sharp),
+            title: Text("Cerca eines"),
+            onTap: () {
+              Navigator.pushNamed(context, searchMapScreenRoute);
+            },
           ),
           Divider(
             height: 6,
             color: Colors.black,
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text("Configuracio"),
           ),
           ListTile(
             leading: Icon(Icons.close),

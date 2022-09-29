@@ -17,25 +17,25 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       // toolbarHeight: 70,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
 
-      actions: [
-        Visibility(
-          //visible: goToMap,
-          child: IconButton(
-          color: Colors.white,
-            icon: const Icon(Icons.house),
-            onPressed: () {
-              Navigator.pushNamed(context, searchMapScreenRoute);
-            },
-          ),
-        ),
-        // PopupMenuButton(
-        //     elevation: 30,
-        //     //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
-        //     icon: Icon(Icons.more_vert),
-        //     itemBuilder: (context) => [
-        //       const PopupMenuItem(value: 1, child: Text("les meves eines")),
-        //     ])
-      ],
+      // actions: [
+      //   Visibility(
+      //     //visible: goToMap,
+      //     child: IconButton(
+      //     color: Colors.white,
+      //       icon: const Icon(Icons.house),
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, searchMapScreenRoute);
+      //       },
+      //     ),
+      //   ),
+      //   // PopupMenuButton(
+      //   //     elevation: 30,
+      //   //     //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
+      //   //     icon: Icon(Icons.more_vert),
+      //   //     itemBuilder: (context) => [
+      //   //       const PopupMenuItem(value: 1, child: Text("les meves eines")),
+      //   //     ])
+      // ],
     );
   }
 

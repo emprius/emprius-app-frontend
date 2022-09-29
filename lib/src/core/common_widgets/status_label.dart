@@ -16,6 +16,6 @@ class StatusLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(icon, size: 25.0, color: color);
+    return Icon(icon, size: 20.0, color: color);
   }
 }

@@ -34,14 +34,17 @@ extension ExtBookingStatus on BookingStatus{
       case BookingStatus.ASKED:
         return StatusLabel(
           color: Colors.redAccent,
+          text: "demanada",
         );
       case BookingStatus.APPROVED:
         return StatusLabel(
           color: Colors.purple,
+            text: "acceptada",
         );
       case BookingStatus.RETURNED:
         return StatusLabel(
           color: Colors.green,
+          text: "retornada",
         );
       // case BookingStatus.ALL:
       //   return StatusLabel(

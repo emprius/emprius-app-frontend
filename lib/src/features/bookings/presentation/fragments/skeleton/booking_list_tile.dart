@@ -29,15 +29,25 @@ class BookingListTile extends ConsumerWidget {
           Stack(
             children: [
               CircleAvatar(
+                radius: 30,
                   backgroundImage: FileImage(File(booking.userInfo!.avatar!))),
               //Icon(Icons.label),
-              (booking.bookingStatus).label as Widget,
+              //(booking.bookingStatus).label as Widget,
             ],
           ),
-          VerticalDivider(width: 8),
+          //VerticalDivider(width: 8),
         ]),
-      title: Text(tool.title),
-      subtitle: Text(booking.bookingStatus.displayStatus!),
+      title: Row(
+        children: [
+          Text(tool.title),
+        ],
+      ),
+      subtitle: Row(
+        children: [
+          (booking.bookingStatus).label as Widget,
+          Text(booking.bookingStatus.displayStatus!),
+        ],
+      ),
       onTap: () async {
         await Navigator.pushNamed(
             context, bookingDetailScreenRoute,

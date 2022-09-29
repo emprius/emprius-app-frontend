@@ -4,16 +4,17 @@ import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
+final toolImagesAssets = [
+  'assets/tools/tool1.jpg',
+  'assets/tools/tool2.jpg',
+  'assets/tools/tool3.jpg',
+];
 
 final toolImagesPhone = [
   '/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg',
   '/data/user/0/com.example.empriusapp/cache/image_picker2314740962926778978.png',
   '/data/user/0/com.example.empriusapp/cache/image_picker2519909079312788563.jpg',
   '/data/user/0/com.example.empriusapp/cache/image_picker5181464323563610078.jpg'
-  // '/data/user/0/com.example.empriusapp/cache/image_picker4801801919904609723.jpg',
-  // '/data/user/0/com.example.empriusapp/cache/image_picker8754154934436486707.jpg',
-  // '/data/user/0/com.example.empriusapp/cache/image_picker5039266792256567929.jpg',
-  // '/data/user/0/com.example.empriusapp/cache/image_picker6463638125453935552.jpg'
 ];
 var sampleAvailability = [
   DateTimeRange(start: DateTime(2022, 08, 28), end: DateTime(2022, 09, 15)),
@@ -33,7 +34,7 @@ var sampleTools = [
       transportOptions: TransportOptions.NOT_NECESSARY,
       cost: 10,
       rating: 5,
-      images: toolImagesPhone,
+      images: toolImagesAssets,
       reservedDates: sampleAvailability,
       location: LatLng(41.765626, 2.407599)),
   ToolModel(
@@ -48,7 +49,7 @@ var sampleTools = [
       transportOptions: TransportOptions.NECESSARY,
       cost: 10,
       rating: 5,
-      images: toolImagesPhone,
+      images: toolImagesAssets,
       reservedDates: sampleAvailability,
       location: LatLng(41.692915, 2.540445)),
   ToolModel(
@@ -63,7 +64,7 @@ var sampleTools = [
       askWithFee: true,
       cost: 10,
       rating: 5,
-      images: toolImagesPhone,
+      images:  toolImagesAssets,
       reservedDates: sampleAvailability,
       location: LatLng(41.765964, 2.350709)),
   ToolModel(
@@ -78,7 +79,7 @@ var sampleTools = [
       askWithFee: true,
       cost: 10,
       rating: 5,
-      images: toolImagesPhone,
+      images:  toolImagesAssets,
       reservedDates: sampleAvailability,
       location: LatLng(41.647657, 2.469107)),
   ToolModel(
@@ -93,7 +94,7 @@ var sampleTools = [
       askWithFee: true,
       cost: 10,
       rating: 5,
-      images: toolImagesPhone,
+      images:  toolImagesAssets,
       reservedDates: sampleAvailability,
       location: LatLng(41.738964, 2.498198)),
 ];

@@ -9,10 +9,10 @@ DateTimeRange(start: DateTime.now().add(const Duration(days: 10)), end: DateTime
 ];
 
 var sampleThumbnails = [
-  '/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker2314740962926778978.png',
-  '/data/user/0/com.example.empriusapp/cache/image_picker2519909079312788563.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker5181464323563610078.jpg'
+  'assets/avatars/avatar2.png',
+  'assets/avatars/avatar1.png',
+  'assets/tools/tool2.jpg',
+  'assets/tools/tool3.jpg',
 ];
 
 var sampleRatings = [
@@ -21,7 +21,7 @@ var sampleRatings = [
     isPending: true,
     fromUserId: 1,
     toUserId: 2,
-    title: "User1",
+    title: "Pepito",
     thumbnail: sampleThumbnails[0],
     rating: 0,
     bookingId: 1, //bici de passeig
@@ -33,7 +33,7 @@ var sampleRatings = [
     isPending: true,
     fromUserId: 1,
     toUserId: 2,
-    title: "User1.1",
+    title: "Kili",
     thumbnail: sampleThumbnails[1],
     rating: 0,
     bookingId: 2, //burra autonoma
@@ -45,7 +45,7 @@ var sampleRatings = [
     isPending: true,
     fromUserId: 2,
     toUserId: 1,
-    title: "Tractor",
+    title: "Formons fusteria",
     thumbnail: sampleThumbnails[2],
     rating: 15,
     bookingId: 5, //Tractor,
@@ -57,7 +57,7 @@ var sampleRatings = [
     isPending: true,
     fromUserId: 2,
     toUserId: 1,
-    title: "Reg automatic",
+    title: "Carretilla",
     thumbnail: sampleThumbnails[3],
     rating: 10,
     bookingId: 3, //Reg automatic,

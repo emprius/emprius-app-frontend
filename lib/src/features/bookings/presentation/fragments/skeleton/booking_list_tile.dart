@@ -30,9 +30,7 @@ class BookingListTile extends ConsumerWidget {
             children: [
               CircleAvatar(
                 radius: 30,
-                  backgroundImage: FileImage(File(booking.userInfo!.avatar!))),
-              //Icon(Icons.label),
-              //(booking.bookingStatus).label as Widget,
+                  backgroundImage: AssetImage(booking.userInfo!.avatar!)),
             ],
           ),
           //VerticalDivider(width: 8),

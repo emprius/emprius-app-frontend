@@ -9,14 +9,25 @@ final ratingsRepositoryProvider = Provider<RatingsRepository>((ref) {
 
 class RatingsRepository{
 
-
   ///String get path => "/ratings";
   Future<List<RatingModel>> getAllRatings() async{
     return sampleRatings;
   }
 
-  ///String get path => "ratings/tool";
-  ///Rate tool booked FROM a user
+  ///String post path => "/rating/{ratingId}";
+  Future<RatingModel> doRate({
+    required RatingModel ratingModel,
+    required double value,
+  }) async {
+    var updatedRating = ratingModel.copyWith(rating: value, isPending: false);
+    sampleRatings = [...sampleRatings]
+      ..[sampleRatings.indexWhere((rating) => rating.ratingId == ratingModel.ratingId)] = updatedRating;
+    return updatedRating;
+  }
+
+
+///String get path => "ratings/tool";
+///Rate tool booked FROM a user
 //   Future<List<RatingModel>> getToolRatings({
 //   required int fromUserId,
 // }) async{
@@ -24,31 +35,20 @@ class RatingsRepository{
 //   }
 
 
-  ///String get path => "/ratings/user";
-  ///Rate user TO whom one have rented a tool;
-  // Future<List<RatingModel>> getUserRatings({
-  //   required int toUserId,
-  // }) async{
-  //   return sampleRatings;
-  // }
+///String get path => "/ratings/user";
+///Rate user TO whom one have rented a tool;
+// Future<List<RatingModel>> getUserRatings({
+//   required int toUserId,
+// }) async{
+//   return sampleRatings;
+// }
 
-  ///String get path => "/rating/{ratingId}";
-  // Future<RatingModel> fetchOne({
-  //   required int ratingId,
-  // }) async {
-  //   return sampleRatings.elementAt(ratingId);
-  // }
+///String get path => "/rating/{ratingId}";
+// Future<RatingModel> fetchOne({
+//   required int ratingId,
+// }) async {
+//   return sampleRatings.elementAt(ratingId);
+// }
 
-  ///String post path => "/rating/{ratingId}";
-  Future<RatingModel> doRate({
-    required RatingModel ratingModel,
-    required double value,
-  }) async {
-    // Llamaria al back con el ratingId y el valor en la DTO
-    var updatedRating = ratingModel.copyWith(rating: value, isPending: false);
-    sampleRatings = [...sampleRatings]
-      ..[sampleRatings.indexWhere((rating) => rating.ratingId == ratingModel.ratingId)] = updatedRating;
-    return updatedRating;
-  }
 
 }

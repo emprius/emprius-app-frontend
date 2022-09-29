@@ -91,7 +91,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                   Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
                 ]),
               ]),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 10.0),
               buildLocation(user),
               const SizedBox(height: 10.0),
               CustomTextButton(
@@ -131,8 +131,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
           const Text('Localitzacio actual:'),
           const SizedBox(height: 6.0),
           Container(
-            width: 300,
-            height: 300,
+            width: 280,
+            height: 150,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black26),
@@ -145,10 +145,9 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   Widget buildStatistics(UserModel user) => Column(
         children: [
-          const Text('La meva activitat:'),
-          const SizedBox(height: 6.0),
           Container(
-            width: 300,
+            child: Text('La meva activitat'),
+            width: 280,
             height: 150,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(

@@ -4,81 +4,92 @@ info:
   description: Emprius app endpoints
   version: 1.0.0
 tags:
-  - name: auth
+  - name: Auth
     description: Oauth stuff for authentication
-  - name: user
+  - name: Users
     description: Operations about own user and other users
-  - name: tool
-    description: Get single tool info
-  - name: tools
-    description: Search tools
-  - name: bookings
-    description: Accepted, pending requests for tool bookings
-  - name: booking
-    description: Specific booking operations
+  - name: Tools
+    description: Related to tool operations
+  - name: Bookings
+    description: Booking operations, request a tool, accept a request, rate..
+  - name: Sync
+    description: "Used to sync server information such as enums like transport options or others"
+
 paths:
+  /sync:
+    get:
+      summary: "Sync data with server"
+      description: |-
+        This endpoint will provide static data such as enums or other stuff that dynamically could be updated on frontend
+      operationId: "sync"
+      tags:
+        - Sync
+      responses:
+        default:
+          description: TODO
   /auth/login:
-    summary: Login with email and password
-    description: It should return JWT access and refresh token
     get:
       tags:
-        - auth
-      summary: ''
-      description: ''
-      operationId: ''
+        - Auth
+      summary: "Do Login"
+      description: "Login with email and password. It should return JWT access and refresh token"
+      operationId: 'login'
       responses:
         default:
           description: Default error sample response
   /auth/register:
-    summary: Register with a required invite
-    description: It will recieve a full user model
+    summary: "Register"
+    description: "Require invite. Return a full user model"
     put:
       summary: ''
       description: ''
-      operationId: ''
+      operationId: 'register'
       responses:
         default:
           description: Default error sample response
       tags:
-        - auth
+        - Auth
   /auth/refresh:
-    summary: Refresh access token
+    summary: "Refresh access token"
     get:
       summary: Use refresh token to get an updated access token
       description: ''
-      operationId: ''
+      operationId: 'refresh'
       responses:
         default:
           description: Default error sample response
       tags:
-        - auth
-  /user:
+        - Auth
+  /users:
     summary: Own user related actions
     description: Like get, put etc..
     get:
-      summary: Get auth user information
-      description: Will return private info like available  EMPS and other stuff
-      operationId: ''
+      summary: "Authored user information"
+      description: |-
+        Return the info for authored user (get by token). It return private user info like available EMPS and other
+        stuff"
+      operationId: 'getOwnUser'
       responses:
         default:
           description: Default error sample response
       tags:
-        - user
+        - Users
     post:
-      summary: Modify user profile
+      summary: "Edit user profile"
       description: ''
-      operationId: ''
+      operationId: 'modifyUser'
       responses:
         default:
           description: Default error sample response
       tags:
-        - user
-  /user/{userId}:
-    summary: Get specific user information
+        - Users
+  /users/{userId}:
+    summary: "Specific user information"
+    description: "Return public information for specific user"
     get:
       summary: Get user profile info by id
       description: ''
-      operationId: ''
+      operationId: 'getUserInfo'
       parameters:
         - name: userId
           in: path
@@ -99,13 +110,15 @@ paths:
         '404':
           description: User not found
       tags:
-        - user
-  /tool/{toolId}:
-    summary: Get tool info
+        - Users
+  /tools/{toolId}:
+    summary: "Tool info"
     get:
       summary: Get tool info by id
       description: ''
-      operationId: ''
+      operationId: 'getTool'
+      tags:
+        - Tools
       parameters:
         - name: toolId
           in: path
@@ -117,12 +130,10 @@ paths:
       responses:
         default:
           description: Default error sample response
-      tags:
-        - tool
     post:
-      summary: Modify own tool by Id
-      description: ''
-      operationId: ''
+      summary: "Edit tool"
+      description: "Modify own tool by Id"
+      operationId: 'editTool'
       parameters:
         - name: toolId
           in: path
@@ -135,11 +146,11 @@ paths:
         default:
           description: Default error sample response
       tags:
-        - tool
+        - Tools
     delete:
-      summary: Delete specific tool
-      description: ''
-      operationId: ''
+      summary: "Delete tool"
+      description: 'Delete tool. Need to be the owner'
+      operationId: 'deleteTool'
       parameters:
         - name: toolId
           in: path
@@ -152,25 +163,35 @@ paths:
         default:
           description: Default error sample response
       tags:
-        - tool
+        - Tools
   /tools:
-    summary: List of tools operations
+    summary: "List tools"
     get:
       summary: Get owned tools
-      description: ''
-      operationId: ''
+      description: 'List tools'
+      operationId: 'listTools'
       responses:
         default:
           description: Default error sample response
       tags:
-        - tools
+        - Tools
+    post:
+      summary: "Create a tool"
+      description: ''
+      operationId: 'createTool'
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Tools
   /tools/search/:
-    summary: Search tools
     get:
-      summary: Get a list of tools by filtered params
+      summary: "Search tools"
       description: >-
-        todo
-      operationId: ''
+        Get a list of tools by filtered params
+      operationId: 'searchTools'
+      tags:
+        - Tools
       parameters:
         - in: query
           name: searchTerm
@@ -216,46 +237,39 @@ paths:
                       type: string
                       description: toolModel
                     description: List of tool models
-      tags:
-        - tools
-  /tool:
-    get:
-      summary: Create a tool
-      description: ''
-      operationId: ''
-      responses:
-        default:
-          description: Default error sample response
-      tags:
-        - tool
+
   /bookings/requests:
-    summary: Get list of tools you own and somebody wants to rent
+    summary: "Booking requests"
+    description: "Get list of tools you own and somebody wants to rent"
     get:
       summary: 'Get paginated list of tools you own and somebody wants to rent or somebody rented'
       description: 'It shows a booking summary'
-      operationId: ''
+      operationId: 'bookingsRequests'
       responses:
         default:
           description: Default error sample response
       tags:
-        - bookings
+        - Bookings
   /bookings/petitions:
-    summary: Get list of tools you want to rent
+    summary: "Booking petitions"
+    description: "Get list of tools you want to rent"
     get:
       summary: 'Get paginated list of tools you want to rent or you have rented'
       description: 'It shows a booking summary'
-      operationId: ''
+      operationId: 'bookingsPetitions'
       responses:
         default:
           description: Default error sample response
       tags:
-        - bookings
-  /booking/{bookingId}:
+        - Bookings
+  /bookings/{bookingId}:
     summary: Specific booking operation
     get:
-      summary: Get specific booking detail by booking id
-      description: ''
-      operationId: ''
+      summary: "Get booking"
+      description: 'Get specific booking detail by booking id'
+      operationId: 'bookingGet'
+      tags:
+        - Bookings
       parameters:
         - name: bookingId
           in: path
@@ -267,15 +281,15 @@ paths:
       responses:
         default:
           description: Default error sample response
-      tags:
-        - booking
+
+  /bookings/{bookingId}/return:
     post:
-      summary: Change state to returned if you are
-        the owner of the tool
+      summary: "Return tool"
       description: >-
+        Mark tool as returned if you are the owner of the tool.
         It change if is returned, and the user/tool rating, depending if you are
         the owner of the tool
-      operationId: ''
+      operationId: 'bookingReturn'
       parameters:
         - name: bookingId
           in: path
@@ -288,23 +302,25 @@ paths:
         default:
           description: Default error sample response
       tags:
-        - booking
-  /booking/rate:
-    summary: Rate a booking
+        - Bookings
+  /bookings/rates:
     get:
-      summary: Get list of booking ids to rate
-      description: ''
-      operationId: ''
+      summary: "List pending rates"
+      description: 'Get list of booking ids to rate'
+      operationId: 'rateList'
+      tags:
+        - Bookings
       responses:
         default:
           description: Default error sample response
-      tags:
-        - booking
     post:
-      summary: Rate a specific booking by booking id
+      summary: "Do rate"
       description: >-
+        Rate a specific booking by booking id
         You could rate user and tool. If you are the owner just the other user
-      operationId: ''
+      operationId: 'doRate'
+      tags:
+        - Bookings
       parameters:
         - name: bookingId
           in: query
@@ -316,11 +332,189 @@ paths:
       responses:
         default:
           description: Default error sample response
-      tags:
-        - booking
+
 
 components:
   schemas:
+    Image:
+      type: string
+      description: "To choose between an URL or Base64"
+      example: "https://emprius.com/static/<user|tool>/image.jpg"
+    Date:
+      type: integer
+      format: int32
+      description: "Unix format timestamp"
+      example:
+        1234566
+    DateRange:
+      type: object
+      properties:
+        init:
+          $ref: '#/components/schemas/Date'
+        end:
+          $ref: '#/components/schemas/Date'
+    LatLng:
+      type: object
+      properties:
+        lat:
+          type: string
+          example: "2.097123134"
+        lng:
+          type: string
+          example: "2.097123134"
+    Tool:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        title:
+          type: string
+          example: Screwdriver
+        description:
+          type: string
+          example: Screwdriver
+        isAvailable:
+          type: boolean
+          description: |-
+            User can mark a tool as not available and will not appear on search results
+          example: true
+        maybeFree:
+          type: boolean
+          example: true
+        askWithFee:
+          type: boolean
+          example: true
+        cost:
+          type: integer
+          format: double
+          example: 12.43
+        userId:
+          type: integer
+          description: "Owner"
+          format: int32
+          example: 2
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+          description: "Array of associated images resources"
+          example:
+            - "base64"
+            - "url"
+        transportOptions:
+          type: string
+          example: "todo: this have to be an enum exposed on sync endpoint"
+        toolCategory:
+          type: string
+          example: "todo: this have to be an enum exposed on sync endpoint"
+        location:
+          $ref: "#/components/schemas/LatLng"
+        rating:
+          type: number
+          format: double
+          example: 2.4
+        estimatedValue:
+          type: number
+          format: double
+          example: 2.4
+        height:
+          type: number
+          format: double
+          example: 2.4
+        width:
+          type: number
+          format: double
+          example: 2.4
+        length:
+          type: number
+          format: double
+          example: 2.4
+        weight:
+          type: number
+          format: double
+          example: 2.4
+        reservedDates:
+          type: array
+          description: "Array of date ranges that represents reserved dates"
+          items:
+            $ref: '#/components/schemas/DateRange'
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        toolId:
+          type: integer
+          format: int64
+          description: "Tool id which is referred this booking"
+          example: 10
+        fromUserId:
+          type: integer
+          format: int64
+          example: 10
+        toUserId:
+          type: integer
+          format: int64
+          example: 10
+        startDate:
+          $ref: '#/components/schemas/Date'
+        endDate:
+          $ref: '#/components/schemas/Date'
+        reservedDates:
+          $ref: '#/components/schemas/DateRange'
+        contact:
+          type: string
+          description: "Contact information, number mail..."
+          example: "hi@hi.com"
+        comments:
+          type: string
+          description: "Comments wrote when the booking is submitted"
+        bookingStatus:
+          type: string
+          example: "todo: this have to be an enum exposed on sync endpoint"
+    Rating:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        isPending:
+          type: boolean
+          description: "If true, user can post a rating, instead, the rating is done"
+          example: true
+        fromUserId:
+          type: integer
+          format: int64
+          example: 10
+        toUserId:
+          type: integer
+          format: int64
+          example: 10
+        bookingId:
+          type: integer
+          format: int64
+          example: 10
+        thumbnail:
+          $ref: '#/components/schemas/Image'
+        title:
+          type: string
+          description: "Rate title"
+          example: "Rate ${tool|user} now!"
+        rating:
+          type: integer
+          format: double
+          description: "Rating punctuation. Null if not rated yet. "
+          example: 2.5
+        reservedDates:
+          $ref: '#/components/schemas/DateRange'
+        ratingType:
+          type: string
+          example: "todo: this have to be an enum exposed on sync endpoint"
     UserDetail:
       type: object
       properties:

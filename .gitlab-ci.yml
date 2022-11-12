@@ -1,0 +1,29 @@
+image: docker:stable
+
+services:
+  - docker:stable-dind
+
+stages:
+  - build
+
+variables:
+  FLUTTER_VERSION: "3.0.0"
+
+build-android-apk:
+  stage: build
+  only:
+    - develop
+    - master
+  script:
+    - >
+      docker build -t emprius:android_latest
+      --build-arg flutter_version=$FLUTTER_VERSION
+      --file $CI_PROJECT_DIR/misc/android_gitlabci.Dockerfile
+      .
+    - >
+      docker cp
+      $(docker create --rm emprius:android_latest):/emprius-APK/
+      $CI_PROJECT_DIR/emprius-APK/
+  artifacts:
+    paths:
+      - emprius-APK/

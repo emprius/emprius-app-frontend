@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/emprius/emprius-app:android_base
+FROM registry.gitlab.com/emprius/emprius-app:latest
 ARG flutter_version=latest
 FROM cirrusci/flutter:$flutter_version
 

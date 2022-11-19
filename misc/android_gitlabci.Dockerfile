@@ -1,6 +1,6 @@
-FROM registry.gitlab.com/emprius/emprius-app:latest
 ARG flutter_version=latest
 FROM cirrusci/flutter:$flutter_version
+
 
 ENV B_WORKDIR="/emprius-android/"
 ARG SOURCE_PATH="./"

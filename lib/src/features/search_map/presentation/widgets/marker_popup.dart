@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/search_map/application/providers/search_provider.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
@@ -60,7 +61,7 @@ class _MarkerPopupState extends State<MarkerPopup> {
                     height: 80.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: FileImage(File(widget.image!)),
+                            image: assetOrFileImage(widget.image!),
                             fit: BoxFit.cover)),),
                   //   CircleAvatar(
                   //   radius: 40,

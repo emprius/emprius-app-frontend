@@ -14,9 +14,10 @@ class FormValidator{
   static String? emailValidator(String? value){
     if(value == null || value.isEmpty)  {
       return Constants.emptyEmailInputError;
-    } else if (!Constants.emailRegex.hasMatch(value)) {
-      return Constants.invalidEmailError;
     }
+    // else if (!Constants.emailRegex.hasMatch(value)) {
+    //   return Constants.invalidEmailError;
+    // }
     return null;
   }
 

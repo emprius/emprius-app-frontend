@@ -41,7 +41,7 @@ class FormValidator{
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return Constants.emptyPasswordInputError;
-    } else if (value.length < 8) {
+    } else if (value.length < 4) {
       return Constants.shortPasswordInputError;
     }
     return null;

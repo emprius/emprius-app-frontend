@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:empriusapp/src/features/bookings/data/repositories/bookings_repository.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +16,7 @@ class AllBookingsNotifier extends StateNotifier<List<BookingModel>>{
   Future<void> createBooking(BookingModel booking) async {
     var newBooking = await bookingsRepository.createBooking(
         booking: booking,
-        lastId: state.length + 1
+        lastId: Random().nextInt(10000) + 50
     );
     state = [...state, newBooking];
     //state = new List.from([...state])..add(newBooking);

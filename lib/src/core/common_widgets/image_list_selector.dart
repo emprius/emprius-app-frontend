@@ -1,4 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
+import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
+import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -50,17 +52,7 @@ class _ImageListSelectorState extends State<ImageListSelector> {
             onClicked: () { selectToolImages(); },
           ),
           if(toolImageList?.isNotEmpty ?? false)
-          SizedBox(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: toolImageList!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Image.file(File(toolImageList![index]), fit: BoxFit.cover);
-                }
-            ),
-          )
+            ToolCaroussel(toolImageList!),
         ],
     );
   }

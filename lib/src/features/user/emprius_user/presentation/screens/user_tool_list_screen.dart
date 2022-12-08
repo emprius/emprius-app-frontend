@@ -10,9 +10,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 class UserToolList extends ConsumerStatefulWidget {
-  // final EditToolArguments args;
-  // const UserToolList(this.args, {Key? key}) : super(key: key);
-
   @override
   createState() => _UserToolListState();
 }
@@ -28,17 +25,14 @@ class _UserToolListState extends ConsumerState<UserToolList> {
   @override
   void initState() {
     /// Fetch tools by userId
-    ref.read(allToolsProvider.notifier).getAllByUser(userId: ref
-        .read(userProvider)
-        .id);
+    ref.read(allToolsProvider.notifier).getAllByUser(
+        userId: ref.read(userProvider).id);
     super.initState();
   }
 
   Future<void> _refresh() async {
     ref.watch(allToolsProvider.notifier)
-        .getAllByUser(userId: ref
-        .read(userProvider)
-        .id);
+        .getAllByUser(userId: ref.read(userProvider).id);
   }
 
   @override
@@ -46,7 +40,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
     final tools = ref.watch(authUserToolsProvider);
 
     return Scaffold(
-      appBar: UserAppbar("Les meves eines!"),
+      appBar: UserAppbar("Les meves eines"),
       drawer: UserDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),

@@ -10,18 +10,13 @@ final toolImagesAssets = [
   'assets/tools/tool3.jpg',
 ];
 
-final toolImagesPhone = [
-  '/data/user/0/com.example.empriusapp/cache/image_picker4192891788779617458.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker2314740962926778978.png',
-  '/data/user/0/com.example.empriusapp/cache/image_picker2519909079312788563.jpg',
-  '/data/user/0/com.example.empriusapp/cache/image_picker5181464323563610078.jpg'
-];
 var sampleAvailability = [
   DateTimeRange(start: DateTime(2022, 08, 28), end: DateTime(2022, 09, 15)),
   DateTimeRange(start: DateTime.now().add(const Duration(days: 1)), end: DateTime.now().add(const Duration(days: 3))),
   DateTimeRange(start: DateTime.now().add(const Duration(days: 10)), end: DateTime.now().add(const Duration(days: 23))),
 ];
-var sampleTools = [
+
+var userTools = [
   ToolModel(
       id: 6,
       userId: 1,

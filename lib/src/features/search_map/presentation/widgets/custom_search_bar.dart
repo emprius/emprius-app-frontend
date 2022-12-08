@@ -111,7 +111,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 //   '/data/user/0/com.example.empriusapp/cache/image_picker5889187328360687785.jpg'
 // ];
 //
-// var _sampleTools = [
+// var _userTools = [
 //   ToolModel(
 //       id: 1,
 //       isAvailable: true,

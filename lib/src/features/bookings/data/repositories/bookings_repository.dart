@@ -17,9 +17,9 @@ class BookingsRepository {
   ///String get path => "/bookings/petitions";
   ///Petitioned bookings FROM a user (incoming)
   Future<List<BookingModel>> getAllPetitions({
-  required int fromUserId,
-}) async {
-    return sampleBookings;
+    required int fromUserId,
+  }) async {
+    return samplePetitions;
   }
 
   ///String get path => "/bookings/requests";
@@ -27,7 +27,7 @@ class BookingsRepository {
   Future<List<BookingModel>> getAllRequests({
     required int toUserId,
   }) async {
-    return sampleBookings;
+    return sampleRequests;
   }
 
 
@@ -38,16 +38,17 @@ class BookingsRepository {
     required int lastId
   }) async {
     var newBooking = booking.copyWith(bookingId: lastId);
-    sampleBookings.add(newBooking);
+    sampleRequests.add(newBooking); // not needed
     return booking.copyWith(bookingId: lastId);
   }
 
+  // todo(kon): not used for the moment
   ///String get path => "/booking/{bookingId}";
-  Future<BookingModel> fetchOne({
-    required int bookingId,
-  }) async {
-    return sampleBookings.elementAt(bookingId);
-  }
+  // Future<BookingModel> fetchOne({
+  //   required int bookingId,
+  // }) async {
+  //   return sampleBookings.elementAt(bookingId);
+  // }
 
 
   ///String post path => "/booking/{bookingId}";
@@ -55,8 +56,8 @@ class BookingsRepository {
     required BookingModel newBooking,
     required int bookingId,
   }) async {
-    sampleBookings = [...sampleBookings]
-      ..[sampleBookings.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
+    sampleRequests = [...sampleRequests]
+      ..[sampleRequests.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
     return newBooking.copyWith(bookingId: newBooking.bookingId);
   }
 
@@ -65,7 +66,7 @@ class BookingsRepository {
   Future<BookingModel> deleteBooking({
     required int bookingId,
   }) async {
-    return sampleBookings.removeAt(bookingId);
+    return sampleRequests.removeAt(bookingId);
   }
 
 }

@@ -29,6 +29,26 @@ class BookingListSkeleton extends ConsumerStatefulWidget {
 class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
   var isSelected = <bool>[false, false, false];
 
+  void toggleOnPressed (int index) {
+      if (index == 0) {
+        ref.read(bookingFilterProvider.state).state =
+            BookingStatus.ASKED;
+      }
+      else if (index == 1) {
+        ref.read(bookingFilterProvider.state).state =
+            BookingStatus.APPROVED;
+      }
+      else if (index == 2) {
+        ref.read(bookingFilterProvider.state).state =
+            BookingStatus.RETURNED;
+      }
+      else if (index == 3) {
+        ref.read(bookingFilterProvider.state).state =
+            BookingStatus.ALL;
+      }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final filterState = ref.watch(bookingFilterProvider);
@@ -53,16 +73,16 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
     return Scaffold(
       appBar: UserAppbar(widget.appbarTitle),
       drawer: UserDrawer(),
-      body: bookings.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : RefreshIndicator(
-              onRefresh: widget.onRefresh,
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                      leadingWidth: 0.0,
-                      backgroundColor: Colors.transparent,
-                      title: ToggleButtons(
+      body: RefreshIndicator(
+        onRefresh: widget.onRefresh,
+        child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                leadingWidth: 0.0,
+                backgroundColor: Colors.transparent,
+                title: Column(
+                      children: [
+                        ToggleButtons(
                         color: Colors.black.withOpacity(0.60),
                         selectedColor: Color(0xFF6200EE),
                         selectedBorderColor: Color(0xFF6200EE),
@@ -72,24 +92,7 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
                         borderRadius: BorderRadius.circular(4.0),
                         constraints: BoxConstraints(minHeight: 36.0),
                         isSelected: isSelected,
-                        onPressed: (index) {
-                          if (index == 0) {
-                            ref.read(bookingFilterProvider.state).state =
-                                BookingStatus.ASKED;
-                          }
-                          if (index == 1) {
-                            ref.read(bookingFilterProvider.state).state =
-                                BookingStatus.APPROVED;
-                          }
-                          if (index == 2) {
-                            ref.read(bookingFilterProvider.state).state =
-                                BookingStatus.RETURNED;
-                          }
-                          if (index == 3) {
-                            ref.read(bookingFilterProvider.state).state =
-                                BookingStatus.ALL;
-                          }
-                        },
+                        onPressed: toggleOnPressed,
                         children: const [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -108,28 +111,28 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
                             child: Text('TOTES'),
                           ),
                         ]),
-                      ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) => ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: bookings.length,
-                        itemBuilder: (context, index) {
-                          final booking = bookings[index];
-                          final tool = ref.watch(toolByIdProvider(booking.toolId!));
-                          return Column(
-                            children: [
-                              BookingListTile(booking, tool,
-                                  deleteBooking: widget.deleteBooking),
-                              Divider(),
-                            ],
-                          );
-
-                        }),
+                        if (bookings.isEmpty) const Center(child: CircularProgressIndicator())
+                      ],
                     ),
-                  ),
-                ]),
-            ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                    childCount: bookings.length,
+                        (context, index) {
+                      final booking = bookings[index];
+                      final tool = ref.watch(toolByIdProvider(booking.toolId!));
+                      return Column(
+                        children: [
+                          BookingListTile(booking, tool,
+                              deleteBooking: widget.deleteBooking),
+                          Divider(),
+                        ],
+                      );
+                    }
+                ),
+              ),
+            ]),
+      ),
     );
   }
 }

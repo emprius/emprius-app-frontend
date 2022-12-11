@@ -63,10 +63,9 @@ class BookingsRepository {
 
 
   ///String delete path => "/booking/{bookingId}";
-  Future<BookingModel> deleteBooking({
+  Future<void> deleteBooking({
     required int bookingId,
   }) async {
-    return sampleRequests.removeAt(bookingId);
+    sampleRequests.removeWhere((booking) => booking.bookingId! == bookingId);
   }
-
 }

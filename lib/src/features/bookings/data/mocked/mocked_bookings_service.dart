@@ -35,7 +35,7 @@ var samplePetitions = [
       contact: "Escriume al seguent mail",
       comments:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-      bookingStatus: BookingStatus.APPROVED,
+      bookingStatus: BookingStatus.RETURNED,
       reservedDates:
           DateTimeRange(start: DateTime.now(), end: DateTime.now().add(const Duration(days: 30))),
       userInfo: UserInfo(

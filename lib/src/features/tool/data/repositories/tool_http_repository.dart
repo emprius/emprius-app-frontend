@@ -82,6 +82,6 @@ class ToolHttpRepository {
     await Future.delayed(const Duration(seconds: 1));
     // return _userTools;
     ///Mocking response by filter
-    return userTools.where((element) => element.maybeFree == maybeFree).toList();
+    return searchTools.where((element) => element.maybeFree == maybeFree).toList();
   }
 }

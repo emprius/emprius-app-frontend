@@ -27,24 +27,16 @@ class BookingListSkeleton extends ConsumerStatefulWidget {
 class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
   var isSelected = <bool>[false, false, false];
 
-  void toggleOnPressed (int index) {
-      if (index == 0) {
-        ref.read(bookingFilterProvider.state).state =
-            BookingStatus.ASKED;
-      }
-      else if (index == 1) {
-        ref.read(bookingFilterProvider.state).state =
-            BookingStatus.APPROVED;
-      }
-      else if (index == 2) {
-        ref.read(bookingFilterProvider.state).state =
-            BookingStatus.RETURNED;
-      }
-      else if (index == 3) {
-        ref.read(bookingFilterProvider.state).state =
-            BookingStatus.ALL;
-      }
-
+  void toggleOnPressed(int index) {
+    if (index == 0) {
+      ref.read(bookingFilterProvider.state).state = BookingStatus.ASKED;
+    } else if (index == 1) {
+      ref.read(bookingFilterProvider.state).state = BookingStatus.APPROVED;
+    } else if (index == 2) {
+      ref.read(bookingFilterProvider.state).state = BookingStatus.RETURNED;
+    } else if (index == 3) {
+      ref.read(bookingFilterProvider.state).state = BookingStatus.ALL;
+    }
   }
 
   @override
@@ -73,62 +65,69 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
       drawer: UserDrawer(),
       body: RefreshIndicator(
         onRefresh: widget.onRefresh,
-        child: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                leadingWidth: 0.0,
-                backgroundColor: Colors.transparent,
-                title: Column(
+        child: CustomScrollView(slivers: <Widget>[
+          SliverAppBar(
+            leadingWidth: 0.0,
+            backgroundColor: Colors.transparent,
+            title: Column(
+              children: [
+                ToggleButtons(
+                    color: Colors.black.withOpacity(0.60),
+                    selectedColor: Color(0xFF6200EE),
+                    selectedBorderColor: Color(0xFF6200EE),
+                    fillColor: Color(0xFF6200EE).withOpacity(0.08),
+                    splashColor: Color(0xFF6200EE).withOpacity(0.12),
+                    hoverColor: Color(0xFF6200EE).withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(4.0),
+                    constraints: BoxConstraints(minHeight: 36.0),
+                    isSelected: isSelected,
+                    onPressed: toggleOnPressed,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('PENDENTS'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('EN CURS'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('RETORNADES'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('TOTES'),
+                      ),
+                    ]),
+              ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                childCount: bookings.isEmpty ? 1 : bookings.length,
+                (context, index) {
+              //final booking = bookings[index];
+              //final tool = ref.watch(toolByIdProvider(booking.toolId!));
+              return bookings.isEmpty
+                  ? const Center(
+                      child: Text('No hi ha eines en aquesta categoria'))
+                  : Column(
                       children: [
-                        ToggleButtons(
-                        color: Colors.black.withOpacity(0.60),
-                        selectedColor: Color(0xFF6200EE),
-                        selectedBorderColor: Color(0xFF6200EE),
-                        fillColor: Color(0xFF6200EE).withOpacity(0.08),
-                        splashColor: Color(0xFF6200EE).withOpacity(0.12),
-                        hoverColor: Color(0xFF6200EE).withOpacity(0.04),
-                        borderRadius: BorderRadius.circular(4.0),
-                        constraints: BoxConstraints(minHeight: 36.0),
-                        isSelected: isSelected,
-                        onPressed: toggleOnPressed,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('PENDENTS'),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('EN CURS'),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('RETORNADES'),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('TOTES'),
-                          ),
-                        ]),
-                        if (bookings.isEmpty) const Center(child: CircularProgressIndicator())
+                        BookingListTile(
+                            bookings[index],
+                            ref.watch(
+                                toolByIdProvider(bookings[index].toolId!))),
+                        Divider(),
+                        if (bookings.isEmpty)
+                          const Center(
+                              child:
+                                  Text('No hi ha eines en aquesta categoria'))
                       ],
-                    ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    childCount: bookings.length,
-                        (context, index) {
-                      final booking = bookings[index];
-                      final tool = ref.watch(toolByIdProvider(booking.toolId!));
-                      return Column(
-                        children: [
-                          BookingListTile(booking, tool),
-                          Divider(),
-                        ],
-                      );
-                    }
-                ),
-              ),
-            ]),
+                    );
+            }),
+          ),
+        ]),
       ),
     );
   }

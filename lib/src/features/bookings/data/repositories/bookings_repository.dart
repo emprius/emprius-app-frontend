@@ -24,9 +24,7 @@ class BookingsRepository {
 
   ///String get path => "/bookings/requests";
   ///Requested bookings TO a user (outcoming)
-  Future<List<BookingModel>> getAllRequests({
-    required int toUserId,
-  }) async {
+  Future<List<BookingModel>> getAllRequests() async {
     return sampleRequests;
   }
 
@@ -56,8 +54,8 @@ class BookingsRepository {
     required BookingModel newBooking,
     required int bookingId,
   }) async {
-    sampleRequests = [...sampleRequests]
-      ..[sampleRequests.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
+    samplePetitions = [...samplePetitions]
+      ..[samplePetitions.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
     return newBooking.copyWith(bookingId: newBooking.bookingId);
   }
 
@@ -66,6 +64,6 @@ class BookingsRepository {
   Future<void> deleteBooking({
     required int bookingId,
   }) async {
-    sampleRequests.removeWhere((booking) => booking.bookingId! == bookingId);
+    samplePetitions.removeWhere((booking) => booking.bookingId! == bookingId);
   }
 }

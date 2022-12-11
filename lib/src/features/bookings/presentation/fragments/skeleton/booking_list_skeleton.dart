@@ -12,14 +12,12 @@ class BookingListSkeleton extends ConsumerStatefulWidget {
   final List<BookingModel> bookings;
   final String appbarTitle;
   final Future<void> Function() onRefresh;
-  final void Function(BookingModel)? deleteBooking;
 
   const BookingListSkeleton({
     Key? key,
     required this.onRefresh,
     required this.bookings,
     required this.appbarTitle,
-    this.deleteBooking,
   }) : super(key: key);
 
   @override
@@ -123,8 +121,7 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
                       final tool = ref.watch(toolByIdProvider(booking.toolId!));
                       return Column(
                         children: [
-                          BookingListTile(booking, tool,
-                              deleteBooking: widget.deleteBooking),
+                          BookingListTile(booking, tool),
                           Divider(),
                         ],
                       );

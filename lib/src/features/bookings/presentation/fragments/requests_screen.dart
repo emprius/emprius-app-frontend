@@ -20,13 +20,9 @@ class RequestsScreen extends ConsumerStatefulWidget {
 
 class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
-  void _deleteBooking(BookingModel booking) {
-    ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
-  }
-
   Future _refresh() async {
       ref.watch(allBookingsProvider.notifier)
-          .getAllUserRequests(toUserId: ref.read(userProvider).id);
+          .getAllUserRequests(userId: ref.read(userProvider).id);
     }
 
   @override
@@ -36,6 +32,6 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
       onRefresh: _refresh,
       bookings: bookings,
       appbarTitle: "Eines demanades",
-      deleteBooking: _deleteBooking,);
+    );
   }
 }

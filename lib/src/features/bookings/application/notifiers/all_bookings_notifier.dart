@@ -34,7 +34,8 @@ class AllBookingsNotifier extends StateNotifier<List<BookingModel>>{
   Future<void> deleteBooking(BookingModel booking) async {
     await bookingsRepository.deleteBooking(
         bookingId: booking.bookingId!);
-    state = [...state]..removeWhere((b) => booking.bookingId! == b.bookingId);
+    state.removeWhere((b) => booking.bookingId! == b.bookingId);
+    state = [...state];
   }
 
   // todo(kon): not used for the moment
@@ -45,19 +46,19 @@ class AllBookingsNotifier extends StateNotifier<List<BookingModel>>{
   // }
 
   Future<void> getAllUserPetitions({
-    required int fromUserId, // todo: use actual session user id instead of use it as parameter
-  })async{
-    var petitionsFromUserId = await bookingsRepository.getAllPetitions(fromUserId: fromUserId);
-    state.removeWhere((booking) => booking.fromUserId == fromUserId ); // Remove here old petitions (we are requesting an updated list from the server)
-    state = [...state, ...petitionsFromUserId]; // Update the state with the new list
+    required int userId, // todo: use actual session user id instead of use it as parameter
+  }) async {
+    var petitionsFromMe = await bookingsRepository.getAllPetitions(fromUserId: userId);
+    state.removeWhere((booking) => booking.fromUserId == userId ); // Remove here old petitions (we are requesting an updated list from the server)
+    state = [...state, ...petitionsFromMe]; // Update the state with the new list
   }
 
   Future<void> getAllUserRequests({
-    required int toUserId, // todo: use actual session user id instead of use it as parameter
-  })async{
-    var requestsToUserId = await bookingsRepository.getAllRequests(toUserId: toUserId);
-    state.removeWhere((booking) => booking.toUserId == toUserId ); // Remove here old petitions (we are requesting an updated list from the server)
-    state = [...state, ...requestsToUserId]; // Update the state with the new list
+    required int userId
+  }) async {
+    var requestsToMe = await bookingsRepository.getAllRequests();
+    state.removeWhere((booking) => booking.fromUserId != userId ); // Remove here old petitions (we are requesting an updated list from the server)
+    state = [...state, ...requestsToMe]; // Update the state with the new list
   }
 
 }

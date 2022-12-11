@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
@@ -9,18 +10,25 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/u
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookingListTile extends ConsumerWidget {
+class BookingListTile extends ConsumerStatefulWidget {
   final BookingModel booking;
   final ToolModel tool;
-  final void Function(BookingModel)? deleteBooking;
 
-  const BookingListTile(this.booking, this.tool, {
-    this.deleteBooking,
-    Key? key
-  }) : super(key: key);
+  const BookingListTile(this.booking, this.tool, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<BookingListTile> createState() => _BookingListTileState();
+}
+
+class _BookingListTileState extends ConsumerState<BookingListTile> {
+
+
+  void _deleteBooking(BookingModel booking) {
+    ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
       leading: Row(
         mainAxisSize: MainAxisSize.min,
@@ -30,57 +38,57 @@ class BookingListTile extends ConsumerWidget {
             children: [
               CircleAvatar(
                 radius: 30,
-                  backgroundImage: AssetImage(booking.userInfo!.avatar!)),
+                  backgroundImage: AssetImage(widget.booking.userInfo!.avatar!)),
             ],
           ),
           //VerticalDivider(width: 8),
         ]),
       title: Row(
         children: [
-          Text(tool.title),
+          Text(widget.tool.title),
         ],
       ),
       subtitle: Row(
         children: [
-          (booking.bookingStatus).label as Widget,
-          Text(booking.bookingStatus.displayStatus!),
+          (widget.booking.bookingStatus).label as Widget,
+          Text(widget.booking.bookingStatus.displayStatus!),
         ],
       ),
       onTap: () async {
         await Navigator.pushNamed(
             context, bookingDetailScreenRoute,
             arguments:
-            BookingDetailArguments(booking.bookingId!));
+            BookingDetailArguments(widget.booking.bookingId!));
       },
       trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (booking.bookingStatus == BookingStatus.ASKED && ref.read(userProvider).id == booking.toUserId)
+            if (widget.booking.bookingStatus == BookingStatus.ASKED && ref.read(userProvider).id == widget.booking.fromUserId)
               Row(
                 children: [
                   PopupMenuButton(
                     icon: Icon(Icons.edit, size: 20),
                     onSelected: (value) {
-                      if (value == booking) {
+                      if (value == widget.booking) {
                         Navigator.pushNamed(
                             context, bookingEditScreenRoute,
                             arguments: BookingDetailArguments(
-                                booking.bookingId!));
+                                widget.booking.bookingId!));
                       }
                     },
                     itemBuilder: (context) => [
                       PopupMenuItem(
-                        value: booking,
+                        value: widget.booking,
                         child: Text("Modificar peticio"),
                       ),
                     ],
                   ),
                   PopupMenuButton(
                     icon: Icon(Icons.delete, size: 20),
-                    onSelected: deleteBooking,
+                    onSelected: _deleteBooking,
                     itemBuilder: (context) => [
                       PopupMenuItem(
-                        value: booking,
+                        value: widget.booking,
                         child: Text("Anul.lar peticio?"),
                       ),
                     ],

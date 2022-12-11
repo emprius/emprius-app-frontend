@@ -24,7 +24,7 @@ var sampleRatings = [
     title: "Pepito",
     thumbnail: sampleThumbnails[0],
     rating: 0,
-    bookingId: 1, //bici de passeig
+    bookingId: 4, //bici de passeig
     ratingType: RatingType.USER_RATE,
     bookingReservedDates: sampleReservations,
   ),

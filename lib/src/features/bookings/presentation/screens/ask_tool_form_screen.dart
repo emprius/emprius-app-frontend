@@ -3,11 +3,14 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
+import 'package:empriusapp/src/features/bookings/data/mocked/mocked_bookings_service.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
+import 'package:empriusapp/src/features/bookings/domain/user_info/user_info_model.dart';
 import 'package:empriusapp/src/features/bookings/presentation/widgets/date_picker_widget.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
+import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,25 +58,29 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
       appBar: UserAppbar('Formulari contacte'),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Peticio enviada!')),
-          );
+
           await ref
               .read(allBookingsProvider.notifier)
-
-          ///New booking instance:
               .createBooking(BookingModel(
             bookingStatus: BookingStatus.ASKED,
             contact: _contactCtrl.text,
             comments: _commentsCtrl.text,
             reservedDates: dateRange,
-            //startDate: startDate,
-            //endDate: endDate,
-            //userInfo:
+            // fromUserId: ref.read(userProvider).id,
+            fromUserId: 1,
+            // toUserId: tool.userId,
+            toUserId: 2,
+            toolId: tool.id,
+            startDate: startDate,
+            endDate: endDate,
+            userInfo: UserInfo(name: "Mocked1", rating: 5, avatar: sampleAvatars[0]),
           ));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Peticio enviada!')),
+          );
 
           if (!mounted) return;
-          Navigator.pushNamed(context, userActivityScreenRoute);
+          Navigator.pop(context);
         },
         label: Text("Envia"),
       ),

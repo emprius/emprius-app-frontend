@@ -22,44 +22,49 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-              accountName: Text(
-                user.name!,
-                style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),),
-              accountEmail: Text(user.email),
-            currentAccountPicture: UserProfileAvatar(
-              avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+            },
+            child: UserAccountsDrawerHeader(
+                accountName: Text(
+                  user.name!,
+                  style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),),
+                accountEmail: Text(user.email),
+              currentAccountPicture: UserProfileAvatar(
+                avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+              ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text("El meu perfil"),
-            onTap: (){
-              Navigator.pushNamed(context, userProfileScreenRoute);
+            leading: Icon(Icons.search_sharp),
+            title: Text("Cerca eines"),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, searchMapScreenRoute);
             },
           ),
+          // ListTile(
+          //   leading: Icon(Icons.person),
+          //   title: Text("El meu perfil"),
+          //   onTap: (){
+          //     Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.workspaces_sharp),
             title: Text("La meva activitat"),
             onTap: (){
-              Navigator.pushNamed(context, userActivityScreenRoute);
+              Navigator.pushReplacementNamed(context, userActivityScreenRoute);
             },
           ),
           ListTile(
             leading: Icon(Icons.auto_graph_outlined),
             title: Text("Historial d'us"),
             onTap: (){
-              Navigator.pushNamed(context, userStoryScreenRoute);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.search_sharp),
-            title: Text("Cerca eines"),
-            onTap: () {
-              Navigator.pushNamed(context, searchMapScreenRoute);
+              Navigator.pushReplacementNamed(context, userStoryScreenRoute);
             },
           ),
           Divider(

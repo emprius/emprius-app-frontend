@@ -33,18 +33,36 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   final _descriptionCtrl = TextEditingController();
   final _costCtrl = TextEditingController();
 
-  @override
-  void dispose() {
-    _titleCtrl.dispose();
-    _descriptionCtrl.dispose();
-    _costCtrl.dispose();
-    super.dispose();
+  void saveTool () async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Eina afegida')),
+    );
+    //TODO: PUSH LOGIC TO PROVIDERS (GENERAL TOOLS AND USER TOOLS) AWAY FROM UI
+    await ref
+        .read(allToolsProvider.notifier)
+        .addTool(ToolModel(
+      title: _titleCtrl.text,
+      description: _descriptionCtrl.text,
+      images: _images,
+      maybeFree: _maybeFree,
+      askWithFee: _askWithFee,
+      toolCategory: _currentCategory,
+      transportOptions: _currentTransport,
+      cost: _costCtrl.text.isNotEmpty ? int.parse(_costCtrl.text) : null,
+    ));
+
+    if (!mounted) return;
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserAppbar('Afegir eia'),
+      appBar: UserAppbar('Afegir eina'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
         physics: const BouncingScrollPhysics(),
@@ -75,10 +93,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     //height: 150,
                     width: 150,
                     child: CustomTextField(
-                        controller: _costCtrl,
-                        labelText: "Cost per dia",
-                        keyboardType: TextInputType.number,
-                      ),
+                      controller: _costCtrl,
+                      labelText: "Cost per dia",
+                      keyboardType: TextInputType.number,
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -115,10 +133,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   items: ToolCategory.values
                       .map(
                         (ToolCategory category) => DropdownMenuItem<ToolCategory>(
-                          value: category,
-                          child: Text(category.displayName!),
-                        ),
-                      )
+                      value: category,
+                      child: Text(category.displayName!),
+                    ),
+                  )
                       .toList(),
                   onChanged: (ToolCategory? value) {
                     if (value != null && _currentCategory != value) {
@@ -156,7 +174,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                 //height: 200,
                 child: ImageListSelector(
                     callback: ((selectedImages) => _images = selectedImages)
-                     ),
+                ),
 
               ),
 
@@ -173,33 +191,8 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                         }),
                   ),
                   CustomTextButton(
-                    text: "Guarda",
-                    onClicked: () async {
-                      if (!_formKey.currentState!.validate()) {
-                        return;
-                      }
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Eina afegida')),
-                      );
-//TODO: PUSH LOGIC TO PROVIDERS (GENERAL TOOLS AND USER TOOLS) AWAY FROM UI
-                      await ref
-                          .read(allToolsProvider.notifier)
-                          .addTool(ToolModel(
-                            title: _titleCtrl.text,
-                            description: _descriptionCtrl.text,
-                            images: _images,
-                        maybeFree: _maybeFree,
-                        askWithFee: _askWithFee,
-                        toolCategory: _currentCategory,
-                        transportOptions: _currentTransport,
-                        cost: _costCtrl.text.isNotEmpty ? int.parse(_costCtrl.text) : null,
-                          ));
-
-                      if (!mounted) return;
-                      Navigator.pushNamed(
-                          context, userToolsScreenRoute);
-                    },
+                      text: "Guarda",
+                      onClicked: saveTool
                   )
                 ],
               ) //

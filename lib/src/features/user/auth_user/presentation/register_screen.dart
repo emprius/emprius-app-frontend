@@ -34,16 +34,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   late bool isActive = true;
   File? _avatar;
 
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
-    _cPasswordCtrl.dispose();
-    _invitationCtrl.dispose();
-    super.dispose();
-  }
-
   bool _isHidden = true;
 
   @override
@@ -182,9 +172,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         // todo(kon): implement error show
                         return;
                       }
-
-                      Navigator.pushNamed(
-                          context, userProfileScreenRoute);
+                      registerSuccess();
                     },
                   ),
                 ],
@@ -194,6 +182,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  /// Just go to user profile screen
+  void registerSuccess() {
+    Navigator.pushReplacementNamed(
+        context, userProfileScreenRoute);
   }
 
   Widget selectLocationMap() => Column(

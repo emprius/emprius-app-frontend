@@ -2,32 +2,27 @@ import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   bool _isHidden = true;
 
   @override
-  void dispose() {
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -69,32 +64,43 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: "Entra a l'app!",
                       onClicked: () {
                         if (!_formKey.currentState!.validate()) return;
-                        Navigator.pushNamed(context, searchMapScreenRoute);
-                      },
+                        // Todo(kon): after implement jwt this will be different, because we will need
+                        // to check if the token is invalid or expired. Now, authenticated, mean that user
+                        // credentials are retrieved from the storage so it can safely login without bugs
+                        else if (ref.read(userProvider.notifier).authState is! AUTHENTICATED) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
+                          );
+                          return;
+                        }
+                        Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+                      }
                     ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Align(
                     alignment: Alignment.center,
-                    child: RichText(
-                      text: TextSpan(
-                        text: "¿No estas registrada? ",
-                        style: const TextStyle(
-                          color: Colors.black26,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, registerScreenRoute);
+                      },
+                      child: RichText(
+                        text: const TextSpan(
+                          text: "¿No estas registrada? ",
+                          style: TextStyle(
+                            color: Colors.black26,
+                          ),
+                          children: [
+                            TextSpan(
+                                text: "Registra't",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                            ),
+                          ],
                         ),
-                        children: [
-                          TextSpan(
-                              text: "Registra't",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushNamed(
-                                      context, registerScreenRoute);
-                                }),
-                        ],
                       ),
                     ),
                   ),

@@ -13,6 +13,8 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/u
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../user/auth_user/data/user_provider.dart';
+
 class BookingDetailScreen extends ConsumerStatefulWidget {
   final BookingDetailArguments args;
 
@@ -111,7 +113,8 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                         : ButtonBar(
                             alignment: MainAxisAlignment.end,
                             children: [
-                              if (booking.bookingStatus == BookingStatus.ASKED)
+                              if (booking.bookingStatus == BookingStatus.ASKED
+                                  && booking.fromUserId != ref.read(userProvider).id)
                                 CustomTextButton(
                                   text: 'APROVA',
                                   onClicked: () async {

@@ -17,17 +17,15 @@ class BookingsRepository {
   ///String get path => "/bookings/petitions";
   ///Petitioned bookings FROM a user (incoming)
   Future<List<BookingModel>> getAllPetitions({
-  required int fromUserId,
-}) async {
-    return sampleBookings;
+    required int fromUserId,
+  }) async {
+    return samplePetitions;
   }
 
   ///String get path => "/bookings/requests";
   ///Requested bookings TO a user (outcoming)
-  Future<List<BookingModel>> getAllRequests({
-    required int toUserId,
-  }) async {
-    return sampleBookings;
+  Future<List<BookingModel>> getAllRequests() async {
+    return sampleRequests;
   }
 
 
@@ -38,16 +36,17 @@ class BookingsRepository {
     required int lastId
   }) async {
     var newBooking = booking.copyWith(bookingId: lastId);
-    sampleBookings.add(newBooking);
+    sampleRequests.add(newBooking); // not needed
     return booking.copyWith(bookingId: lastId);
   }
 
+  // todo(kon): not used for the moment
   ///String get path => "/booking/{bookingId}";
-  Future<BookingModel> fetchOne({
-    required int bookingId,
-  }) async {
-    return sampleBookings.elementAt(bookingId);
-  }
+  // Future<BookingModel> fetchOne({
+  //   required int bookingId,
+  // }) async {
+  //   return sampleBookings.elementAt(bookingId);
+  // }
 
 
   ///String post path => "/booking/{bookingId}";
@@ -55,17 +54,16 @@ class BookingsRepository {
     required BookingModel newBooking,
     required int bookingId,
   }) async {
-    sampleBookings = [...sampleBookings]
-      ..[sampleBookings.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
+    samplePetitions = [...samplePetitions]
+      ..[samplePetitions.indexWhere((booking) => booking.bookingId == newBooking.bookingId)] = newBooking;
     return newBooking.copyWith(bookingId: newBooking.bookingId);
   }
 
 
   ///String delete path => "/booking/{bookingId}";
-  Future<BookingModel> deleteBooking({
+  Future<void> deleteBooking({
     required int bookingId,
   }) async {
-    return sampleBookings.removeAt(bookingId);
+    samplePetitions.removeWhere((booking) => booking.bookingId! == bookingId);
   }
-
 }

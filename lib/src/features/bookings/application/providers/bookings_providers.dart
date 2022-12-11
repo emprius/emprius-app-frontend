@@ -37,17 +37,16 @@ final filteredBookingProvider = Provider<List<BookingModel>>((ref){
 
 ///Requested bookings TO a user (outcoming):
 final requestBookingsProvider = StateProvider<List<BookingModel>>((ref) {
-    var userId = ref.watch(userProvider.select((user) => user.id));
+    var userId = ref.watch(userProvider).id;
     var allBookings = ref.watch(filteredBookingProvider);
-    return allBookings.where((booking) => booking.toUserId == userId).toList();
+    return allBookings.where((booking) => booking.fromUserId == userId).toList();
 });
 
 ///Petitioned bookings FROM a user (incoming):
 final petitionBookingsProvider = StateProvider<List<BookingModel>>((ref) {
-  var userId = ref.watch(userProvider.select((user) => user.id));
+  var userId = ref.watch(userProvider).id;
   var allBookings = ref.watch(filteredBookingProvider);
-  print('');
-  return allBookings.where((booking) => booking.fromUserId == userId).toList();
+  return allBookings.where((booking) => booking.toUserId == userId).toList();
 });
 
 

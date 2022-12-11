@@ -37,15 +37,6 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   final _cPasswordCtrl = TextEditingController();
   final _customMapCtrl = EmpriusMapController();
 
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
-    _cPasswordCtrl.dispose();
-    super.dispose();
-  }
-
   bool _isHidden = true;
   late bool isActive;
 

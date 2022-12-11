@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,9 +16,9 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailCtrl = TextEditingController();
-  final _passwordCtrl = TextEditingController();
+  var _formKey = GlobalKey<FormState>();
+  var _emailCtrl = TextEditingController();
+  var _passwordCtrl = TextEditingController();
   bool _isHidden = true;
 
   @override
@@ -25,12 +26,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
     super.dispose();
-  }
-
-  void doLogin() {
-    if (!_formKey.currentState!.validate()) return;
-    // ref.read(userProvider.)
-    Navigator.pushReplacementNamed(context, userProfileScreenRoute);
   }
 
   @override
@@ -74,7 +69,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     // height: 40,
                     child: CustomTextButton(
                       text: "Entra a l'app!",
-                      onClicked: doLogin
+                      onClicked: () {
+                        if (!_formKey.currentState!.validate()) return;
+                        // Todo(kon): after implement jwt this will be different, because we will need
+                        // to check if the token is invalid or expired. Now, authenticated, mean that user
+                        // credentials are retrieved from the storage so it can safely login without bugs
+                        else if (ref.read(userProvider.notifier).authState is! AUTHENTICATED) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
+                          );
+                          return;
+                        }
+                        Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+                      }
                     ),
                 ),
                 Padding(

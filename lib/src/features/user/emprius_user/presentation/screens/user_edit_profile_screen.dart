@@ -68,7 +68,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
       child: Scaffold(
         appBar: UserAppbar("Editar perfil"),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.fromLTRB(40.0,20.0,40.0,10.0),
           physics: const BouncingScrollPhysics(),
           
           child: Shortcuts(

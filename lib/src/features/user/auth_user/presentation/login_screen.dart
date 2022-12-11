@@ -2,17 +2,19 @@ import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
@@ -25,9 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  void doLogin() {
+    if (!_formKey.currentState!.validate()) return;
+    // ref.read(userProvider.)
+    Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -67,10 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // height: 40,
                     child: CustomTextButton(
                       text: "Entra a l'app!",
-                      onClicked: () {
-                        if (!_formKey.currentState!.validate()) return;
-                        Navigator.pushNamed(context, searchMapScreenRoute);
-                      },
+                      onClicked: doLogin
                     ),
                 ),
                 Padding(

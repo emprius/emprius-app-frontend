@@ -182,9 +182,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         // todo(kon): implement error show
                         return;
                       }
-
-                      Navigator.pushNamed(
-                          context, userProfileScreenRoute);
+                      registerSuccess();
                     },
                   ),
                 ],
@@ -194,6 +192,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  /// Just go to user profile screen
+  void registerSuccess() {
+    Navigator.pushReplacementNamed(
+        context, userProfileScreenRoute);
   }
 
   Widget selectLocationMap() => Column(

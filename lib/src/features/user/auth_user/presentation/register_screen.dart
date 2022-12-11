@@ -34,16 +34,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   late bool isActive = true;
   File? _avatar;
 
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
-    _cPasswordCtrl.dispose();
-    _invitationCtrl.dispose();
-    super.dispose();
-  }
-
   bool _isHidden = true;
 
   @override

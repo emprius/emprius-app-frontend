@@ -60,14 +60,6 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   }
 
   @override
-  void dispose() {
-    _titleCtrl.dispose();
-    _descriptionCtrl.dispose();
-    _costCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: UserAppbar('Afegir eina'),

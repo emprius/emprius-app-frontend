@@ -88,24 +88,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Align(
                     alignment: Alignment.center,
-                    child: RichText(
-                      text: TextSpan(
-                        text: "¿No estas registrada? ",
-                        style: const TextStyle(
-                          color: Colors.black26,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, registerScreenRoute);
+                      },
+                      child: RichText(
+                        text: const TextSpan(
+                          text: "¿No estas registrada? ",
+                          style: TextStyle(
+                            color: Colors.black26,
+                          ),
+                          children: [
+                            TextSpan(
+                                text: "Registra't",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                            ),
+                          ],
                         ),
-                        children: [
-                          TextSpan(
-                              text: "Registra't",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushNamed(
-                                      context, registerScreenRoute);
-                                }),
-                        ],
                       ),
                     ),
                   ),

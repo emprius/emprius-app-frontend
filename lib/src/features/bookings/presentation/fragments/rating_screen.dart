@@ -5,7 +5,7 @@ import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/rating/application/rating_provider.dart';
 import 'package:empriusapp/src/features/rating/data/repositories/ratings_repository.dart';
 import 'package:empriusapp/src/features/rating/domain/rating_model.dart';
-import 'package:empriusapp/src/features/rating/presentation/widgets/rating_card.dart';
+import 'package:empriusapp/src/features/rating/presentation/widgets/rating_card_copy.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';

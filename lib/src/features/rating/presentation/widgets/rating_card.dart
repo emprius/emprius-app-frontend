@@ -24,41 +24,49 @@ class RatingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          ListTile(
-            title: ratingModel.ratingType == RatingType.USER_RATE
-                ? Text("Valoració d'usuari")
-                : Text("Valoració d'eina"),
-            subtitle: Text(
-              "${ratingModel.title!}",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-            ),
-            trailing: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (ratingModel.isPending == false)
-                  Icon(Icons.check_box_outlined, color: Colors.purple),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            alignment: Alignment.centerLeft,
-            child: Consumer(builder: (context, ref, _) {
-              var booking =
-                  ref.read(bookingByIdProvider(ratingModel.bookingId!));
-              return Flexible(
-                child: Text(
-                    "${getFormattedDate(booking.reservedDates!.start)} : ${getFormattedDate(booking.reservedDates!.end)} "),
-              );
-            }),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            alignment: Alignment.centerLeft,
-            child: ratingModel.isPending!
-                ? RatingBar.builder(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          /*ratingModel.ratingType == RatingType.USER_RATE
+            ? Text("Valoració d'usuari:")
+            : Text("Valoració d'eina:"),*/
+          children: [
+            ListTile(
+              isThreeLine: true,
+              onTap: () async {
+                await Navigator.pushNamed(context, bookingDetailScreenRoute,
+                    arguments: BookingDetailArguments(ratingModel.bookingId!));
+              },
+              leading: ratingModel.ratingType == RatingType.USER_RATE
+                  ? CircleAvatar(radius: 50,
+                  backgroundImage: AssetImage(ratingModel.thumbnail!)
+              ) : null,
+              title: Text(
+                "${ratingModel.title!}",
+                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+              ),
+              subtitle: Consumer(builder: (context, ref, _) {
+                var booking =
+                    ref.read(bookingByIdProvider(ratingModel.bookingId!));
+                return Text(
+                    "L'intercanvi es va fer del ${getFormattedDate(booking.reservedDates!.start)} al ${getFormattedDate(booking.reservedDates!.end)} ");
+              }),
+              trailing: ratingModel.ratingType == RatingType.TOOL_RATE
+                  ? Image(image: AssetImage(ratingModel.thumbnail!), width: 100.0,)
+                : null,
+              ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                16.0,
+                5.0,
+                16.0,
+                16.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ratingModel.isPending!
+                      ? RatingBar.builder(
                           initialRating: newRating,
                           minRating: 1,
                           itemCount: 5,
@@ -69,43 +77,38 @@ class RatingCard extends StatelessWidget {
                           updateOnDrag: true,
                           onRatingUpdate: (value) => newRating = value,
                         )
-                : RatingBarIndicator(
-                    rating: ratingModel.rating!,
-                    itemBuilder: (context, index) => const Icon(
-                      Icons.star,
-                      color: Colors.purple,
-                    ),
-                    itemSize: 25,
-                  ),
-          ),
-          ButtonBar(
-            children: [
-              TextButton(
-                child: const Text('Més informació'),
-                onPressed: () async {
-                  await Navigator.pushNamed(context, bookingDetailScreenRoute,
-                      arguments: BookingDetailArguments(ratingModel.bookingId!));
-                },
+                      : RatingBarIndicator(
+                          rating: ratingModel.rating!,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.purple,
+                          ),
+                          itemSize: 25,
+                        ),
+                  ratingModel.isPending!
+                      ? Consumer(builder: (context, ref, _) {
+                          //var ratings = ref.watch(allRatingsProvider);
+                          return CustomTextButton(
+                            // ref
+                            //     .read(allRatingsProvider.notifier)
+                            //     .doRating(ratingModel.copyWith(isPending: false));
+                            // Navigator.pop(context)},;
+                            text: 'VALORAR',
+                            onClicked: () {
+                              ref
+                                  .read(allRatingsProvider.notifier)
+                                  .doRating(ratingModel, newRating);
+                            },
+                          );
+                        })
+                      : Icon(Icons.check_box_outlined, color: Colors.purple,size: 30.0,),
+                ],
               ),
-              if(ratingModel.isPending!)
-              Consumer(builder: (context, ref, _) {
-                //var ratings = ref.watch(allRatingsProvider);
-                return CustomTextButton(
-                  // ref
-                  //     .read(allRatingsProvider.notifier)
-                  //     .doRating(ratingModel.copyWith(isPending: false));
-                  // Navigator.pop(context)},;
-                  text: 'VALORAR',
-                  onClicked: () {
-                    ref
-                        .read(allRatingsProvider.notifier)
-                        .doRating(ratingModel, newRating);
-                  },
-                );
-              }),
-            ],
-          )
-        ],),
+            ),
+          ],
+        ),
+      ),
+
     );
   }
 }

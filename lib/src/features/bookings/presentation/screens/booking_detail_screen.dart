@@ -34,7 +34,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
             appBar: UserAppbar("Reserva"),
             body: Card(
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

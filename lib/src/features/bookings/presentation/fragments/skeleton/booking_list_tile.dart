@@ -21,8 +21,6 @@ class BookingListTile extends ConsumerStatefulWidget {
 }
 
 class _BookingListTileState extends ConsumerState<BookingListTile> {
-
-
   void _deleteBooking(BookingModel booking) {
     ref.watch(allBookingsProvider.notifier).deleteBooking(booking);
   }
@@ -30,75 +28,80 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      isThreeLine: true,
       leading: Row(
-        mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Stack(
-            children: [
-              CircleAvatar(
+          children: [
+            widget.booking.fromUserId != ref.watch(userProvider).id
+                ? Icon(
+              Icons.arrow_circle_left_outlined,
+              color: Colors.purple,
+              size: 20,
+            )
+                : Icon(
+              Icons.outbound_outlined,
+              color: Colors.purple,
+              size: 20,
+            ),
+            CircleAvatar(
                 radius: 30,
-                  backgroundImage: AssetImage(widget.booking.userInfo!.avatar!)),
-            ],
-          ),
-          //VerticalDivider(width: 8),
-        ]),
-      title: Row(
-        children: [
-          Text(widget.tool.title),
-        ],
-      ),
+                backgroundImage:
+                    AssetImage(widget.booking.userInfo!.avatar!)),
+          ]),
+      title: Text(widget.tool.title,
+        style: TextStyle(fontSize: 18.0)
+        ,),
       subtitle: Row(
         children: [
           (widget.booking.bookingStatus).label as Widget,
-          Text(widget.booking.bookingStatus.displayStatus!),
+          Expanded(
+            child: Text("${widget.booking.bookingStatus.displayStatus!}\n${widget.booking.contact}",
+              overflow: TextOverflow.ellipsis),
+          ),
         ],
       ),
       onTap: () async {
-        await Navigator.pushNamed(
-            context, bookingDetailScreenRoute,
-            arguments:
-            BookingDetailArguments(widget.booking.bookingId!));
+        await Navigator.pushNamed(context, bookingDetailScreenRoute,
+            arguments: BookingDetailArguments(widget.booking.bookingId!));
       },
-      trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.booking.bookingStatus == BookingStatus.ASKED && ref.read(userProvider).id == widget.booking.fromUserId)
-              Row(
-                children: [
-                  PopupMenuButton(
-                    icon: Icon(Icons.edit, size: 20),
-                    onSelected: (value) {
-                      if (value == widget.booking) {
-                        Navigator.pushNamed(
-                            context, bookingEditScreenRoute,
-                            arguments: BookingDetailArguments(
-                                widget.booking.bookingId!));
-                      }
-                    },
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        value: widget.booking,
-                        child: Text("Modificar peticio"),
-                      ),
-                    ],
-                  ),
-                  PopupMenuButton(
-                    icon: Icon(Icons.delete, size: 20),
-                    onSelected: _deleteBooking,
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        value: widget.booking,
-                        child: Text("Anul.lar peticio?"),
-                      ),
-                    ],
+      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+        if (widget.booking.bookingStatus == BookingStatus.ASKED &&
+            ref.read(userProvider).id == widget.booking.fromUserId)
+          Row(
+            children: [
+              PopupMenuButton(
+                icon: Icon(Icons.edit, size: 20),
+                onSelected: (value) {
+                  if (value == widget.booking) {
+                    Navigator.pushNamed(context, bookingEditScreenRoute,
+                        arguments:
+                            BookingDetailArguments(widget.booking.bookingId!));
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: widget.booking,
+                    child: Text("Modificar peticio"),
                   ),
                 ],
               ),
-            Icon(Icons.navigate_next)
-            //if (booking.bookingStatus == BookingStatus.ALL)
-            //(booking.bookingStatus as BookingStatus).label as Widget,
-          ]),
+              PopupMenuButton(
+                icon: Icon(Icons.delete, size: 20),
+                onSelected: _deleteBooking,
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: widget.booking,
+                    child: Text("Anul.lar peticio?"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        Icon(Icons.navigate_next)
+        //if (booking.bookingStatus == BookingStatus.ALL)
+        //(booking.bookingStatus as BookingStatus).label as Widget,
+      ]),
     );
   }
 }

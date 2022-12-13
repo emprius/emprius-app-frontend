@@ -32,7 +32,7 @@ var samplePetitions = [
       toolId: 7, //burra autonoma
       fromUserId: 1,
       toUserId: 2,
-      contact: "Escriume al seguent mail",
+      contact: "Escriume al seguent mail xyz@xyz",
       comments:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       bookingStatus: BookingStatus.RETURNED,
@@ -49,7 +49,7 @@ var samplePetitions = [
       toolId: 8, //tractor
       fromUserId: 1,
       toUserId: 2,
-      contact: "Enviam un signal el meu usuari es",
+      contact: "Enviam un correu encriptat la meva clau publica es talyqual",
       comments:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
       bookingStatus: BookingStatus.ASKED,

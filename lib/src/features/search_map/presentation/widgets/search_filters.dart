@@ -12,8 +12,6 @@ class CurrentFilters{
   CurrentFilters();
   CurrentFilters.update(this.isAvailable, this.maybeFree, this.selectedCategories,
       this.maxCost);
-//TODO Implement availableFrom
-
 }
 
 class SearchFilters extends ConsumerStatefulWidget {
@@ -48,7 +46,6 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
     }
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +107,7 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                     child: TextField(
                       controller: _maxCostCtrl,
                       keyboardType: TextInputType.number,
-                    ),
-                  )
+                    ),)
                 ]),
             Wrap(
               spacing: 8,
@@ -137,7 +133,6 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
     );
   }
 
-
   Iterable<FilterChip> choiceChips() {
     return ToolCategory.values
         .map((ToolCategory category) {
@@ -151,11 +146,8 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
               } else {
                 _selectedCategories.removeWhere(
                         (selectedCategory) => selectedCategory == category);
-              }
-            },
-            );
-          }
-      );
+              }},);
+          });
     });
   }
 }

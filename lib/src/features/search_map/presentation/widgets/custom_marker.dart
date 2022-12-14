@@ -31,7 +31,6 @@ class CustomMarker extends Marker {
         builder: (ctx) => BaseMarker.userMarker());
   }
 
-
   factory CustomMarker.tapMarker(LatLng tapLocation){
     return CustomMarker(
         point: tapLocation,

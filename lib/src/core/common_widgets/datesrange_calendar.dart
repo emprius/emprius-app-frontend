@@ -56,19 +56,12 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
   }
 
 
-  // ///Checks if the list of DateTimeRanges in dateRanges contains a DateTimeRange in which the day lies:
-  // DateTimeRange? dayInRange(DateTime day) {
-  //   List<DateTimeRange> list = widget.dateRanges.where((element) => element.start.isBefore(day) && element.end.isAfter(day) || element.start.year == day.year && element.start.day == day.day  && element.start.month == day.month || element.end.year == day.year && element.end.day == day.day && element.end.month == day.month).toList();
-  //   return list.isNotEmpty ? list[0] : null;
-  // }
-  //dateRanges.getDayInRange();
-
   final rangeValidator = CalendarValidator();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(35.0),
+      padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
       child: TableCalendar(
         headerStyle: const HeaderStyle(
           formatButtonVisible: false,
@@ -115,7 +108,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                             end: isRangeEnd ? constraints.maxWidth * 0.5 : 0.0,
                           ),
                           height: (shorterSide - EdgeInsets.all(6.0).vertical) * 1.0,
-                          color: Colors.blueAccent,
                         ),
                       );
                       children.add(rangeHighlight);
@@ -128,7 +120,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                         duration: Duration(milliseconds: 250),
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6699FF),
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -140,7 +131,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                           duration: Duration(milliseconds: 250),
                           margin: const EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF6699FF),
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,

@@ -1,6 +1,9 @@
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
+import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
+import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+
 
 class Reservation {
   DateTime startDate;
@@ -41,6 +44,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
+  ///Checks if a day is between two days for UI display purposes:
   bool isInRange(DateTime day, DateTime start, DateTime end) {
     if (isSameDay(day, start) || isSameDay(day, end)) {
       return true;
@@ -51,12 +55,13 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
     return false;
   }
 
+
   final rangeValidator = CalendarValidator();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(35.0),
+      padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
       child: TableCalendar(
         headerStyle: const HeaderStyle(
           formatButtonVisible: false,
@@ -65,7 +70,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
         startingDayOfWeek: StartingDayOfWeek.monday,
         focusedDay: _focusedDay,
         firstDay: DateTime.now(),
-        lastDay: DateTime.now().add(const Duration(days:365)),
+        lastDay: DateTime.now().add(Duration(days:365)),
 
         /// Function deciding whether given day should be marked as selected:
         selectedDayPredicate: (day) =>
@@ -76,7 +81,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
         calendarBuilders: CalendarBuilders(
           /// Custom builder for day cells, with a priority over any other builder:
         prioritizedBuilder: (context, day, focusedMonth) {
+            //DateTimeRange? dateTimeRange = dayInRange(day);
             DateTimeRange? dateTimeRange = rangeValidator.getDayInRange(day, widget.dateRanges);
+
 
             ///If day is in any saved DateTimeRange (prior dayInRange) show a highlighted cell:
             if(dateTimeRange != null) {
@@ -100,8 +107,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                             start: isRangeStart ? constraints.maxWidth * 0.5 : 0.0,
                             end: isRangeEnd ? constraints.maxWidth * 0.5 : 0.0,
                           ),
-                          height: (shorterSide - const EdgeInsets.all(6.0).vertical) * 1.0,
-                          color: Colors.blueAccent,
+                          height: (shorterSide - EdgeInsets.all(6.0).vertical) * 1.0,
                         ),
                       );
                       children.add(rangeHighlight);
@@ -111,10 +117,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
                     if (isRangeStart) {
                       content = AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
+                        duration: Duration(milliseconds: 250),
                         margin: const EdgeInsets.all(6.0),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF6699FF),
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -125,8 +130,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                       content = AnimatedContainer(
                           duration: Duration(milliseconds: 250),
                           margin: const EdgeInsets.all(6.0),
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF6699FF),
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -135,9 +139,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                       );
                     } else if (isWithinRange) {
                       content = AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
+                          duration: Duration(milliseconds: 250),
                           margin: const EdgeInsets.all(6.0),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -151,8 +155,8 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
                     return Stack(
                       alignment: Alignment.bottomCenter,
-                      clipBehavior: Clip.hardEdge,
                       children: children,
+                      clipBehavior: Clip.hardEdge,
                     );
                   }
               );
@@ -160,6 +164,69 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
             return null;
           }
         ),
+
+        onDaySelected: (selDay, focDay) {
+          // if (!isSameDay(_selectedDay, selDay)) {
+          //   setState(() {
+          //     _selectedDay = _selectedDay;
+          //     _focusedDay = focDay;
+          //     // reservation.startDate = null; // Important to clean those
+          //     // reservation.endDate = null;
+          //     rangeSelectionMode =
+          //         RangeSelectionMode.toggledOff;
+          //   });
+          // }
+        },
+        onRangeSelected: (start, end, focDay) {
+          // setState(() {
+          //  // _selectedDay = null;
+          //   _focusedDay = focDay;
+          //   reservation.startDate = start!;
+          //   reservation.endDate = end!;
+          //
+          //   bool startDateInRange = false;
+          //   bool endDateInRange = false;
+          //
+          //   DateTimeRange? range = dayInRange(reservation.startDate);
+          //   if(range == null && reservation.endDate != null) {
+          //     range = dayInRange(reservation.endDate);
+          //     if(range != null)
+          //       endDateInRange = true;
+          //   } else if(range != null) {
+          //     startDateInRange = true;
+          //     if(reservation.endDate != null && dayInRange(reservation.endDate) != null)
+          //       endDateInRange = true;
+          //   }
+          //
+          //   //bool insertNewRange = true;
+          //
+          //   // if(startDateInRange) {
+          //   //   if(isInRange(reservation.startDate, range.start, range.end)) {
+          //   //     int index = dateRanges.indexOf(range);
+          //   //     if(!endDateInRange && reservation.endDate != null)
+          //   //       dateRanges[index] = DateTimeRange(start: reservation.startDate, end: reservation.endDate);
+          //   //     else
+          //   //       dateRanges[index] = DateTimeRange(start: reservation.startDate, end: range.end);
+          //   //     insertNewRange = false;
+          //   //   }
+          //   // }
+          //   //
+          //   // if(endDateInRange) {
+          //   //   if(isInRange(reservation.endDate, range.start, range.end)) {
+          //   //     print("enddate is not null and is in range");
+          //   //     int index = dateRanges.indexOf(range);
+          //   //     dateRanges[index] = DateTimeRange(start: reservation.startDate, end: reservation.endDate);
+          //   //     insertNewRange = false;
+          //   //   }
+          //   // }
+          //
+          //   // if(reservation.startDate != null && reservation.endDate != null && insertNewRange) {
+          //   //   dateRanges.add(
+          //   //       DateTimeRange(start: reservation.startDate, end: reservation.endDate));
+          //   // }
+          //
+          // });
+        },
 
         /// Called whenever currently visible calendar page is changed:
         onPageChanged: (focDay) {

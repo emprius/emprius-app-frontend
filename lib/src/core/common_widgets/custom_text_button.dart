@@ -20,7 +20,7 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData currentTheme = Theme.of(context);
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: padding,

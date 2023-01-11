@@ -47,7 +47,7 @@ class SingleImageSelector extends StatelessWidget {
                   }, icon: const Icon(Icons.camera),
                   tooltip: "Feste una foto",
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 IconButton(
                   iconSize: 40.0,
                   color: Colors.blueAccent,

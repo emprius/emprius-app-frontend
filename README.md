@@ -7,7 +7,7 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 <br>
 <p align="center">
-  <img src="/assets/extra/emprius_logo.png" style="width:100px;"/>
+  <img src="/assets/extra/emprius_logo.png" style="width:80px;"/>
 </p>
 <p align="center">
 
@@ -37,7 +37,7 @@ This app will be used by Emprius non-profit foundation aimed to share resources 
 A first mockup I designed in Figma to guide feature distribution of the MVP prototype.
 
 <p align="center">
-  <img src="/assets/extra/mockup.png">
+  <img src="/assets/extra/mockup.png" style="width:80px;">
 </p>
 
 <br>

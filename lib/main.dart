@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/core/services/storage/hive_storage_service.dart';
 import 'package:empriusapp/src/core/services/storage/storage_service.dart';
@@ -11,7 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // Hive-specific initialization
+    /// Hive-specific initialization
     await Hive.initFlutter();
     final StorageService initializedStorageService = HiveStorageService();
     await initializedStorageService.init();
@@ -28,7 +27,7 @@ Future main() async {
 }
 
 class MyApp extends ConsumerWidget {
-  //const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

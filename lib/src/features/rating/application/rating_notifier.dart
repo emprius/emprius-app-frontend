@@ -21,26 +21,4 @@ class AllRatingsNotifier extends StateNotifier<List<RatingModel>> {
       ..[state.indexWhere((rating) => rating.ratingId == newRating.ratingId)] =
           newRating;
   }
-
-  // Future<void> getRatingById({
-  //   required int ratingId,
-  // }) async {
-  //   await ratingsRepository.fetchOne(ratingId: ratingId);
-  // }
-  //
-  // Future<void> getToolRatings({
-  //   required int fromUserId,
-  // }) async {
-  //   var toolsToRate =
-  //       await ratingsRepository.getToolRatings(fromUserId: fromUserId);
-  //   state = {...state, ...toolsToRate}.toList();
-  // }
-  //
-  // Future<void> getUserRatings({
-  //   required int toUserId,
-  // }) async {
-  //   var usersToRate =
-  //       await ratingsRepository.getUserRatings(toUserId: toUserId);
-  //   state = {...state, ...usersToRate}.toList();
-  // }
 }

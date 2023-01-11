@@ -15,8 +15,6 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //var user = ref.watch(userProvider);
-    //final user = UserPreferences.getUser();
 
     return Scaffold(
       appBar: UserAppbar("Historial d'us"),

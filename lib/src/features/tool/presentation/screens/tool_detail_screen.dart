@@ -33,14 +33,14 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
             onPressed: () async{
               await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(widget.args.id));
             },
-            label: Text("Demana"),)
+            label: const Text("Demana"),)
           : null,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,10 +57,10 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 (tool.toolCategory as ToolCategory).label as Widget,
               ]),
               if(tool.images !=null)ToolCaroussel(tool.images!),
-              SizedBox(height: 20.0),
-              RatingStars(rating: 5),
+              const SizedBox(height: 20.0),
+              const RatingStars(rating: 5),
               Padding(
-                padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
                 child: Text(
                   tool.description,
                   textAlign: TextAlign.center,
@@ -69,7 +69,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Cost per dia: ", style: TextStyle(fontWeight: FontWeight.bold
+                  const Text("Cost per dia: ", style: TextStyle(fontWeight: FontWeight.bold
                   ),),
                   Text(tool.cost.toString()),
                 ],
@@ -77,21 +77,21 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Opcions de transport: ", style: TextStyle(fontWeight: FontWeight.bold
+                  Text("Opcions de transport: ", style: const TextStyle(fontWeight: FontWeight.bold
                   ),),
                   Text((tool.transportOptions as TransportOptions).displayName!),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Column(
                 children: [
-                  if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
-                  if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
+                  if(tool.maybeFree !=null && tool.maybeFree == true)const Text('Eina gratuita'),
+                  if(tool.askWithFee !=null && tool.askWithFee == true)const Text('Pots demanarla amb fiansa'),
                ],
               ),
 
               DatesRangeCalendar(dateRanges: tool.reservedDates),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
             ],
           ),
         ),

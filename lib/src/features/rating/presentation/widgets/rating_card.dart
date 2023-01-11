@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
-import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
@@ -27,9 +24,6 @@ class RatingCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          /*ratingModel.ratingType == RatingType.USER_RATE
-            ? Text("Valoració d'usuari:")
-            : Text("Valoració d'eina:"),*/
           children: [
             ListTile(
               isThreeLine: true,
@@ -42,7 +36,7 @@ class RatingCard extends StatelessWidget {
                   backgroundImage: AssetImage(ratingModel.thumbnail!)
               ) : null,
               title: Text(
-                "${ratingModel.title!}",
+                ratingModel.title!,
                 style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
               ),
               subtitle: Consumer(builder: (context, ref, _) {
@@ -89,10 +83,6 @@ class RatingCard extends StatelessWidget {
                       ? Consumer(builder: (context, ref, _) {
                           //var ratings = ref.watch(allRatingsProvider);
                           return CustomTextButton(
-                            // ref
-                            //     .read(allRatingsProvider.notifier)
-                            //     .doRating(ratingModel.copyWith(isPending: false));
-                            // Navigator.pop(context)},;
                             text: 'VALORAR',
                             onClicked: () {
                               ref
@@ -101,7 +91,7 @@ class RatingCard extends StatelessWidget {
                             },
                           );
                         })
-                      : Icon(Icons.check_box_outlined, color: Colors.purple,size: 30.0,),
+                      : const Icon(Icons.check_box_outlined, color: Colors.purple,size: 30.0,),
                 ],
               ),
             ),

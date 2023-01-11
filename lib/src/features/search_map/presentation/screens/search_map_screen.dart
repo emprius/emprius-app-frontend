@@ -39,15 +39,7 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
 
     return Scaffold(
       appBar: UserAppbar("Mapa d'Eines"),
-      drawer: UserDrawer(),
-      // floatingActionButton: CustomTextButton(
-      //     text: 'Filtres',
-      //     onClicked: () {
-      //         Navigator.pushNamed(context, toolDetailScreenRoute,
-      //             arguments: ToolDetailArguments(1));
-      //       // showModalBottomSheet(
-      //       //     context: context, builder: ((builder) => const SearchFilters()));
-      //     }),
+      drawer: const UserDrawer(),
       body: Stack(
         children: [
           EmpriusMap(

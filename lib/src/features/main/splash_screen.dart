@@ -17,7 +17,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
   }
 
   void checkAuthState() {
@@ -31,8 +30,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // This is needed to rebuild when the state user is updated and run
-    // checkAuthState again
     var user = ref.watch(userProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
 

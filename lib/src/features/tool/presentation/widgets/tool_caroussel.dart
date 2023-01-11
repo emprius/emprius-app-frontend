@@ -28,7 +28,6 @@ class _ToolCarousselState extends ConsumerState<ToolCaroussel> {
         // final toolImage = widget.images[index].contains('https://')
         //     ? NetworkImage(widget.images[index])
         //     : FileImage(File(widget.images[index]));
-
         return buildImage(widget.images[index], index);
       },
     );

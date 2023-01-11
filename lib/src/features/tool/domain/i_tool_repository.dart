@@ -2,7 +2,7 @@ import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 
 
-//INTERFACE, CONTRACT to be implemented:
+/// TODO to be implemented:
 
 abstract class IToolRepository {
   Future<List<ToolModel>> fetchAllByUser(UserModel user);

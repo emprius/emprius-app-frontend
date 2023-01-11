@@ -39,9 +39,9 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
     return Scaffold(
       appBar: UserAppbar("Editar eina"),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text("Desar canvis"),
+        label: const Text("Desar canvis"),
         onPressed: () async {
-          //TODO (m) check validate only one field
+          //TODO check validate only one field
           if (!_formKey.currentState!.validate()) {
             return;
           }
@@ -68,35 +68,23 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   onChanged: (value) {
                     tool = tool!.copyWith(title: value);
                   },
-
                   hintText: tool?.title,
                   controller: _titleCtrl,
                   validator: FormValidator.nameValidator,
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 CustomTextField(
                   onChanged: (value) => tool = tool!.copyWith(description: value),
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
                   controller: _descriptionCtrl,
-                  //validator: FormValidator.nameValidator,
-                  //TODO (m) check validate only one field
-                  // validator:  (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //   return null;
-                  //   }else {
-                  //     FormValidator.nameValidator;
-                  //   }
-                  //   },
-                  //autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: 5,
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      //height: 150,
+                    SizedBox(
                       width: 150,
                       child: CustomTextField(
                         controller: _costCtrl,
@@ -107,32 +95,30 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        child: Column(
-                          children: [
-                            CheckboxListTile(
-                                title: Text("Gratuita"),
-                                value: tool?.maybeFree,
-                                onChanged: (value) {
-                                  setState(() {
-                                    tool = tool?.copyWith(maybeFree: value);
-                                  });
-                                }),
-                            CheckboxListTile(
-                                title: Text("Amb fiansa"),
-                                value: tool?.askWithFee,
-                                onChanged: (value) {
-                                  setState(() {
-                                    tool = tool?.copyWith(askWithFee: value);
-                                  });
-                                })
-                          ],
-                        ),
+                      child: Column(
+                        children: [
+                          CheckboxListTile(
+                              title: Text("Gratuita"),
+                              value: tool?.maybeFree,
+                              onChanged: (value) {
+                                setState(() {
+                                  tool = tool?.copyWith(maybeFree: value);
+                                });
+                              }),
+                          CheckboxListTile(
+                              title: const Text("Amb fiansa"),
+                              value: tool?.askWithFee,
+                              onChanged: (value) {
+                                setState(() {
+                                  tool = tool?.copyWith(askWithFee: value);
+                                });
+                              })
+                        ],
                       ),
                     )
                   ],
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,10 +127,10 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                           height: 30.0,
                           child: (tool?.toolCategory as ToolCategory).label
                               as Widget),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       Column(
                         children: [
-                          Text("Cambiar categoria:"),
+                          const Text("Cambiar categoria:"),
                           DropdownButton<ToolCategory>(
                             value: tool?.toolCategory,
                             items: ToolCategory.values
@@ -167,12 +153,12 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         ],
                       ),
                     ]),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Opcions \nde transport:"),
-                      SizedBox(width: 25),
+                      const Text("Opcions \nde transport:"),
+                      const SizedBox(width: 25),
                       DropdownButton<TransportOptions>(
                         value: tool?.transportOptions,
                         items: TransportOptions.values
@@ -195,7 +181,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         },
                       ),
                     ]),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 const Divider(
                   height: 20,
                   indent: 20,

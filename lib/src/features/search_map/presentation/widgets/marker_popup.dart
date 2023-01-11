@@ -49,7 +49,7 @@ class _MarkerPopupState extends State<MarkerPopup> {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Container(
-            constraints: BoxConstraints(minWidth: 100, maxWidth: 200),
+            constraints: const BoxConstraints(minWidth: 100, maxWidth: 200),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -80,11 +80,11 @@ class _MarkerPopupState extends State<MarkerPopup> {
                       style: TextStyle(fontSize: 10.0),
                     ),
                 ),
-                Divider(),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(widget.description!,
-                          style: TextStyle(fontSize: 12.0),
+                          style: const TextStyle(fontSize: 12.0),
                         )
                 ),
               ],

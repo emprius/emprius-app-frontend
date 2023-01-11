@@ -14,7 +14,6 @@ import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_m
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -43,10 +42,6 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   void _setMarkers(LatLng newLatLng){
     _customMapCtrl.markers = [
       CustomMarker.tapMarker(newLatLng)
-      // Marker(
-      //   point: newLatLng,
-      //   builder: (ctx) =>  CustomMarker.tapMarker(tapLocation),
-      // ),
     ];
   }
 
@@ -180,16 +175,14 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                       //Unhandled Exception: Null check operator used on a null value
                       onClicked: () async {
                         if (!_formKey.currentState!.validate())
-                          //TODO if not selectedlocation doesnt navigate:
+                          //TODO if not selected location doesn't navigate:
                           //&& !_customMapCtrl.validate())
                         {
                           return;
                         }
-
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Canvis desats')),
                         );
-
                         await ref
                             .watch(userProvider.notifier)
                             .updateUser(
@@ -230,7 +223,6 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
             child: EmpriusMap(
               initialCenter: user.location,
                 empriusMapController: _customMapCtrl
-
             ),
           ),
         ],

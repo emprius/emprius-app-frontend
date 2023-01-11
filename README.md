@@ -7,14 +7,14 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 <br>
 <p align="center">
-  <img src="/assets/extra/emprius_logo.png" style="width:80px;"/>
+  <img src="/assets/extra/emprius_logo.png" style="width:50px;"/>
 </p>
 <p align="center">
 
 ## Table of contents
 
 - [Features](#features)
-- Mockup
+- [Mockup](#mockup)
 - [Deployment demo](#deploy-the-app-demo)
 - [Clone this repo](#clone-this-repository)
 - [Technologies used](#technologies-used)
@@ -36,11 +36,11 @@ This app will be used by Emprius non-profit foundation aimed to share resources 
 - There will be a graph displaying the activity of user in both senses.
 - A system of tokens will be implemented for exchanging the resources among the network.
 
-**Mockup**
+## Mockup
 A first mockup I designed in Figma to guide feature distribution of the MVP prototype.
 
 <p align="center">
-  <img src="/assets/extra/mockup.png" style="width:80px;">
+  <img src="/assets/extra/mockup.png" style="width:50px;">
 </p>
 
 <br>

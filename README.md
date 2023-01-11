@@ -14,11 +14,14 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 ## Table of contents
 
 - [Features](#features)
-- Requirements
-- Installation
-- Configuration
-- Troubleshooting & FAQ
-- Maintainers
+- Mockup
+- [Deployment demo](#deploy-the-app-demo)
+- [Clone this repo](#clone-this-repository)
+- [Technologies used](#technologies-used)
+- [Demo](#demo)
+- [Future work](#future-work)
+- [Resources](#resources)
+- [Aknowledgments](#aknowledgements)
 
 ## Features
 
@@ -43,7 +46,6 @@ A first mockup I designed in Figma to guide feature distribution of the MVP prot
 <br>
 
 ## Deploy the app demo
-
 Download the app.apk and install it on your mobile!
 LINK TO THE LAST RELEASE HERE
 
@@ -53,18 +55,12 @@ LINK TO THE LAST RELEASE HERE
 - Invitation can be anything at the moment
 
 ## Clone this repository
-
-Open Git Bash in your local machine, change the current working directory to the location where you want the cloned directory.
-
-**Via SSH**
-Type `git clone git@gitlab.com:emprius/emprius-app.git` and press enter.
-
-**Via HTTP**
-Type `git clone https://gitlab.com/emprius/emprius-app.git` and press enter.
+- Open the location where you want to clone the repository in terminal.
+- Type `git clone git@gitlab.com:emprius/emprius-app.git` and press enter.
 
 ### Get dependencies and run the project
 - Type `flutter pub get`
-- Activate developer options in your device and plug it in
+- Make sure you have debugging activated on your conected device
 - Select your device or emulator on your IDE and run or execute `flutter run`
 
 ## Technologies Used
@@ -72,17 +68,17 @@ Type `git clone https://gitlab.com/emprius/emprius-app.git` and press enter.
 **Languages and frameworks**
 - Dart
 - Flutter
+- Riverpod as state management library
 
 **Deployment and control system**
 - Git
 - Gitlab
 - CD/CI
-- GitHub
+- Github mirroring
 
 **Additional tools**
 - Figma
 - Leaflet.js
-- Riverpod provider
 - Swagger
 - Intellij
 
@@ -94,10 +90,12 @@ Here you will see a demo of the app
 
 - I will have first users check this MVP and gather their fedback to improve UX experience
 - Implement the next features
+- Remove the mocks and connect with the real backend
+- Implement interfaces for repositories
 - Build a beautiful theme
-- TEST
-- Refactor the code to make it more decoupled and scalable
-- Remove the mocks and connect with the real database
+- Unit, Widget and Integration tests
+- Refactor the code following DRY and better decoupled
+- Apply mediaQuery to make it responsive to screen sizes
 
 ## Resources
 

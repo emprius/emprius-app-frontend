@@ -7,7 +7,7 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 <br>
 <p align="center">
-  <img src="/src/assets/extra/emprius_logo.png" style="width:100px;"/>
+  <img src="/assets/extra/emprius_logo.png" style="width:100px;"/>
 </p>
 <p align="center">
 
@@ -37,7 +37,7 @@ This app will be used by Emprius non-profit foundation aimed to share resources 
 A first mockup I designed in Figma to guide feature distribution of the MVP prototype.
 
 <p align="center">
-  <img src="/src/assets/extra/mockup.png">
+  <img src="/assets/extra/mockup.png">
 </p>
 
 <br>
@@ -56,10 +56,10 @@ LINK TO THE LAST RELEASE HERE
 
 Open Git Bash in your local machine, change the current working directory to the location where you want the cloned directory.
 
-### Via SSH
+**Via SSH**
 Type `git clone git@gitlab.com:emprius/emprius-app.git` and press enter.
 
-### Via HTTP
+**Via HTTP**
 Type `git clone https://gitlab.com/emprius/emprius-app.git` and press enter.
 
 ### Get dependencies and run the project

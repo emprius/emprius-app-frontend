@@ -1,5 +1,3 @@
-import 'package:empriusapp/src/features/bookings/data/repositories/bookings_repository.dart';
-import 'package:empriusapp/src/features/rating/data/mocked/mocked_ratings_service.dart';
 import 'package:empriusapp/src/features/rating/data/repositories/ratings_repository.dart';
 import 'package:empriusapp/src/features/rating/domain/rating_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

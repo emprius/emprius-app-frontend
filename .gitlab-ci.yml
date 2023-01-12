@@ -13,7 +13,7 @@ build-android-apk:
   stage: build
   only:
     - develop
-    - master
+    - main
   script:
     - >
       docker build -t emprius:android_latest

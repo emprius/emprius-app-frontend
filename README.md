@@ -7,7 +7,7 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 <br>
 <p align="center">
-  <img src="/assets/extra/emprius_logo.png" style="width:50px;"/>
+  <img src="/assets/extra/emprius_logo.png" style="width:50%;"/>
 </p>
 <p align="center">
 
@@ -15,7 +15,7 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 - [Features](#features)
 - [Mockup](#mockup)
-- [Deployment demo](#deploy-the-app-demo)
+- [Deployment](#deploy-the-app-demo)
 - [Clone this repo](#clone-this-repository)
 - [Technologies used](#technologies-used)
 - [Demo](#demo)
@@ -40,7 +40,7 @@ This app will be used by Emprius non-profit foundation aimed to share resources 
 A first mockup I designed in Figma to guide feature distribution of the MVP prototype.
 
 <p align="center">
-  <img src="/assets/extra/mockup.png" style="width:50px;">
+  <img src="/assets/extra/mockup.png" style="width:70%;">
 </p>
 
 <br>
@@ -53,6 +53,7 @@ LINK TO THE LAST RELEASE HERE
 - Register the first time and remember your user
 - Password length is now set to 4 characters
 - Invitation can be anything at the moment
+- Check out your new user drawer to find tools or manage in and outcoming requests
 
 ## Clone this repository
 - Open the location where you want to clone the repository in terminal.
@@ -61,7 +62,7 @@ LINK TO THE LAST RELEASE HERE
 ### Get dependencies and run the project
 - Type `flutter pub get`
 - Make sure you have debugging activated on your conected device
-- Select your device or emulator on your IDE and run or execute `flutter run`
+- Select your device (or emulator) on your IDE and run or execute `flutter run`
 
 ## Technologies Used
 
@@ -94,8 +95,8 @@ Here you will see a demo of the app
 - Implement interfaces for repositories
 - Build a beautiful theme
 - Unit, Widget and Integration tests
-- Refactor the code following DRY and better decoupled
-- Apply mediaQuery to make it responsive to screen sizes
+- Refactor the code following DRY principle and have it better decoupled
+- Apply mediaQuery to make it responsive to different screen sizes
 
 ## Resources
 

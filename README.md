@@ -7,7 +7,7 @@ Departing from a list of functional requirements, I designed the layout for UX/U
 
 <br>
 <p align="center">
-  <img src="/assets/extra/emprius_logo.png" style="width:50%;"/>
+  <img src="/assets/extra/emprius_logo.png" style="width:30%"/>
 </p>
 <p align="center">
 

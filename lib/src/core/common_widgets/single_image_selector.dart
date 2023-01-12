@@ -58,7 +58,9 @@ class SingleImageSelector extends StatelessWidget {
                 )
               ],
             ),
-            _image != null ? Image.file(_image!) : const Text("Cap imatge seleccionada"),
+            _image != null
+                ? Image.file(_image!)
+                : const Text("Cap imatge seleccionada"),
           ],
         ),
       ),

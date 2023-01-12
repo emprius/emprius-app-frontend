@@ -140,7 +140,9 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                       obscureText: _isHidden,
                       suffixIcon: IconButton(
                         icon: Icon(
-                            _isHidden ? Icons.visibility : Icons.visibility_off),
+                            _isHidden
+                                ? Icons.visibility
+                                : Icons.visibility_off),
                         onPressed: () {
                           setState(() {
                             _isHidden = !_isHidden;

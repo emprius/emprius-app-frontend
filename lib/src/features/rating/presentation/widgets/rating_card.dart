@@ -98,7 +98,6 @@ class RatingCard extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

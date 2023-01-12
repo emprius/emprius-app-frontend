@@ -10,7 +10,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    /// Hive-specific initialization
     await Hive.initFlutter();
     final StorageService initializedStorageService = HiveStorageService();
     await initializedStorageService.init();

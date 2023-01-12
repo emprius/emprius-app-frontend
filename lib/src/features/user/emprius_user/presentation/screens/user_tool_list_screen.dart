@@ -7,7 +7,6 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/u
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class UserToolList extends ConsumerStatefulWidget {
   @override
   createState() => _UserToolListState();
@@ -16,7 +15,6 @@ class UserToolList extends ConsumerStatefulWidget {
 class _UserToolListState extends ConsumerState<UserToolList> {
   late bool isAvailable;
 
-
   void _deleteTool(ToolModel tool) {
     ref.watch(allToolsProvider.notifier).deleteTool(tool);
   }
@@ -24,13 +22,15 @@ class _UserToolListState extends ConsumerState<UserToolList> {
   @override
   void initState() {
     /// Fetch tools by userId
-    ref.read(allToolsProvider.notifier).getAllByUser(
-        userId: ref.read(userProvider).id);
+    ref
+        .read(allToolsProvider.notifier)
+        .getAllByUser(userId: ref.read(userProvider).id);
     super.initState();
   }
 
   Future<void> _refresh() async {
-    ref.watch(allToolsProvider.notifier)
+    ref
+        .watch(allToolsProvider.notifier)
         .getAllByUser(userId: ref.read(userProvider).id);
   }
 
@@ -51,18 +51,17 @@ class _UserToolListState extends ConsumerState<UserToolList> {
       body: tools.isEmpty
           ? Center(child: CircularProgressIndicator())
           : RefreshIndicator(
-            onRefresh: _refresh,
+              onRefresh: _refresh,
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text(('Disponibilitat:')),
-                        SizedBox(height: 45),
-                      ],
-                    ),
-                    ListView.builder(
+                child: Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(('Disponibilitat:')),
+                      SizedBox(height: 45),
+                    ],
+                  ),
+                  ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: tools.length,
@@ -82,55 +81,49 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                                     tool.copyWith(isAvailable: value));
                               },
                             ),
-                            trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  PopupMenuButton(
-                                    icon: Icon(Icons.edit),
-                                    itemBuilder: (context) =>
-                                    [
-                                      PopupMenuItem(
-                                        value: tool,
-                                        child: Text("Editar eina"),
-                                      ),
-                                    ],
-                                    onSelected: (value) {
-                                      if (value == tool) {
-                                        Navigator.pushNamed(
-                                            context, toolEditCardScreenRoute,
-                                            arguments: EditToolArguments(
-                                                tool.id!));
-                                      }
-                                    },
+                            trailing:
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                              PopupMenuButton(
+                                icon: Icon(Icons.edit),
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: tool,
+                                    child: Text("Editar eina"),
                                   ),
-                                  PopupMenuButton(
-                                    icon: Icon(Icons.delete),
-                                    onSelected: _deleteTool,
-                                    itemBuilder: (context) =>
-                                    [
-                                      PopupMenuItem(
-                                        value: tool,
-                                        child: Text("Esborrar de la llista?"),
-                                      ),
-                                    ],
+                                ],
+                                onSelected: (value) {
+                                  if (value == tool) {
+                                    Navigator.pushNamed(
+                                        context, toolEditCardScreenRoute,
+                                        arguments: EditToolArguments(tool.id!));
+                                  }
+                                },
+                              ),
+                              PopupMenuButton(
+                                icon: Icon(Icons.delete),
+                                onSelected: _deleteTool,
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: tool,
+                                    child: Text("Esborrar de la llista?"),
                                   ),
-                                ]),
+                                ],
+                              ),
+                            ]),
                             onTap: () {
-                              Navigator.pushNamed(context, toolDetailScreenRoute,
+                              Navigator.pushNamed(
+                                  context, toolDetailScreenRoute,
                                   arguments: ToolDetailArguments(tool.id!));
                             },
                           ),
-                          Divider(),
+                          const Divider(),
                         ],
                       );
                     },
                   ),
                 ]),
               ),
-           // ],
-          ),
-        //),
-     // ),
+            ),
     );
   }
 }

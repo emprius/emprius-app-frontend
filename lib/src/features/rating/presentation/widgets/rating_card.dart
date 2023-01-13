@@ -83,6 +83,7 @@ class RatingCard extends StatelessWidget {
                       ? Consumer(builder: (context, ref, _) {
                           //var ratings = ref.watch(allRatingsProvider);
                           return CustomTextButton(
+                            key: Key('valorar'),
                             text: 'VALORAR',
                             onClicked: () {
                               ref

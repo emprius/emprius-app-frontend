@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class SingleImageSelector extends StatelessWidget {
+class SingleImageSelector extends StatefulWidget {
   final Function(File?) callback;
   SingleImageSelector(this.callback, {Key? key}) : super(key: key);
 
+  @override
+  State<SingleImageSelector> createState() => _SingleImageSelectorState();
+}
+
+class _SingleImageSelectorState extends State<SingleImageSelector> {
   File? _image;
 
   Future pickImage(ImageSource source) async {
@@ -15,7 +20,7 @@ class SingleImageSelector extends StatelessWidget {
       if (image == null) return;
 
       final imageTemp = File(image.path);
-      callback(imageTemp);
+      widget.callback(imageTemp);
 
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');

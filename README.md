@@ -46,8 +46,7 @@ A first mockup I designed in Figma to guide feature distribution of the MVP prot
 <br>
 
 ## Deploy the app demo
-Download the app.apk and install it on your mobile!
-LINK TO THE LAST RELEASE HERE
+Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) from the pipeline, extract and install the **app.apk** on your Android device 
 
 ### Instructions for navigating the app demo
 - Register the first time and remember your user
@@ -70,12 +69,13 @@ LINK TO THE LAST RELEASE HERE
 - Dart
 - Flutter
 - Riverpod as state management library
+- Freezed annotations
+- JSON serialization
 
 **Deployment and control system**
 - Git
 - Gitlab
 - CD/CI
-- Github mirroring
 
 **Additional tools**
 - Figma
@@ -89,7 +89,7 @@ Here you will see a demo of the app
 
 ## Future Work
 
-- I will have first users check this MVP and gather their fedback to improve UX experience
+- I will have first users check this MVP and gather their feedback to improve UX experience
 - Implement the next features
 - Remove the mocks and connect with the real backend
 - Implement interfaces for repositories

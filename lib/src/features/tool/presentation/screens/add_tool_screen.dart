@@ -60,7 +60,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserAppbar('Afegir eina'),
+      appBar: UserAppbar(title: 'Afegir eina',),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
         physics: const BouncingScrollPhysics(),

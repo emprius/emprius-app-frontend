@@ -61,7 +61,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: UserAppbar("Editar perfil"),
+        appBar: UserAppbar(title: 'Editar perfil',),
         body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(40.0,20.0,40.0,10.0),
           physics: const BouncingScrollPhysics(),

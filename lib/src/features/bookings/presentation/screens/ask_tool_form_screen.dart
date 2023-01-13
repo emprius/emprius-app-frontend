@@ -55,7 +55,7 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
     final bookedRanges = tool.reservedDates;
 
     return Scaffold(
-      appBar: UserAppbar('Formulari contacte'),
+      appBar: UserAppbar(title: 'Formulari contacte',),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
 

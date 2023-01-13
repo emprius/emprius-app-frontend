@@ -47,7 +47,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     });
 
     return Scaffold(
-      appBar: UserAppbar("El meu perfil"),
+      appBar: UserAppbar(title: 'El meu perfil',),
       drawer: UserDrawer(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Editar perfil",

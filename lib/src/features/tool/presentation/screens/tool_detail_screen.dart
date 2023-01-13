@@ -27,7 +27,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
     final tool = ref.watch(toolByIdProvider(widget.args.id));
 
     return tool == null ? Container() :  Scaffold(
-      appBar: UserAppbar("Eina"),
+      appBar: UserAppbar(title: 'Eina',),
       floatingActionButton: ref.read(userProvider).id != tool.userId ?
           FloatingActionButton.extended(
             onPressed: () async{

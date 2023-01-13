@@ -37,7 +37,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserAppbar("Editar eina"),
+      appBar: UserAppbar(title: 'Editar eina',),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Desar canvis"),
         onPressed: () async {

@@ -31,7 +31,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
     final tool = ref.watch(toolByIdProvider(booking.toolId!));
 
     return Scaffold(
-            appBar: UserAppbar("Reserva"),
+            appBar: UserAppbar(title: 'Reserva',),
             body: Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

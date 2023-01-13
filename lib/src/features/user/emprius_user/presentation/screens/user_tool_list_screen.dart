@@ -39,7 +39,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
     final tools = ref.watch(authUserToolsProvider);
 
     return Scaffold(
-      appBar: UserAppbar("Les meves eines"),
+      appBar: UserAppbar(title: 'Les meves eines',),
       drawer: UserDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),

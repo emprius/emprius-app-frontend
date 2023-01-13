@@ -1,10 +1,9 @@
-import 'package:empriusapp/src/core/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
-  String title;
-  UserAppbar(this.title);
+  UserAppbar({required this.title});
 
+  final String title;
 
   @override
   Widget build(BuildContext context) {

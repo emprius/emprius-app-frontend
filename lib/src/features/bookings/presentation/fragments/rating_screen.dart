@@ -37,7 +37,7 @@ class _RatingScreenState extends ConsumerState<RatingScreen> {
     final ratings = ref.watch(allRatingsProvider);
 
     return Scaffold(
-      appBar: UserAppbar("Rating"),
+      appBar: UserAppbar(title: 'Rating',),
       drawer: UserDrawer(),
       body: ratings.isEmpty
       ? const Center(child: CircularProgressIndicator())

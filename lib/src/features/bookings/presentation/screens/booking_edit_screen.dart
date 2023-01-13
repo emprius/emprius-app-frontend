@@ -41,7 +41,7 @@ class _BookingEditScreenState extends ConsumerState<BookingEditScreen> {
      booking = ref.watch(bookingByIdProvider(widget.args.bookingId));
 
     return Scaffold(
-      appBar: UserAppbar('Canviar peticio'),
+      appBar: UserAppbar(title: 'Canviar peticio',),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           ScaffoldMessenger.of(context).showSnackBar(

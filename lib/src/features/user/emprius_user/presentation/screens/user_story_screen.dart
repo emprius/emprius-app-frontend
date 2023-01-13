@@ -17,7 +17,7 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: UserAppbar("Historial d'us"),
+      appBar: UserAppbar(title: "Historial d'us", ),
         drawer: UserDrawer(),
       body: Container(
         color: Colors.teal,

@@ -19,8 +19,8 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
     return Scaffold(
       appBar: UserAppbar(title: "Historial d'us", ),
         drawer: UserDrawer(),
-      body: Container(
-        color: Colors.teal,
+      body:Center(
+        child: Text('User activity graph'),
       )
     );
   }

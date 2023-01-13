@@ -53,37 +53,39 @@ class _BookingEditScreenState extends ConsumerState<BookingEditScreen> {
         },
         label: Text("Guardar canvis"),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        physics: const BouncingScrollPhysics(),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomTextField(
-                labelText: "Canviar forma i dades de contacte",
-                onChanged: (value){
-                  booking = booking!.copyWith(contact: value);
-                },
-                controller: _contactCtrl,
-                hintText: booking?.contact,
-              ),
-              SizedBox(height: 20.0),
-              CustomTextField(
-                controller: _commentsCtrl,
-                maxLines: 5,
-                labelText: "Pots afegir aqui comentaris adicionals",
-                hintText: booking?.comments,
-              ),
-              SizedBox(height: 20.0),
-              //DatePickerWidget("Canviar dia d'inici"),
-              //TODO (m): pass data from widget > endDate and startDate
-              Text('${date.year}/${date.month}/${date.day}'),
-              //DatePickerWidget("Canviar data de tornada"),
-              Text('${date.year}/${date.month}/${date.day}'),
-            ],
+      body: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomTextField(
+                  labelText: "Canviar forma i dades de contacte",
+                  onChanged: (value){
+                    booking = booking!.copyWith(contact: value);
+                  },
+                  controller: _contactCtrl,
+                  hintText: booking?.contact,
+                ),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                  controller: _commentsCtrl,
+                  maxLines: 5,
+                  labelText: "Pots afegir aqui comentaris adicionals",
+                  hintText: booking?.comments,
+                ),
+                const SizedBox(height: 20.0),
+                //TODO (m): pass data from widget > endDate and startDate
+                CustomTextField(
+                    labelText: 'Dia inici', hintText: '${date.year}/${date.month}/${date.day}'),
+                const SizedBox(height: 20.0),
+                CustomTextField(
+                    labelText: 'Dia de tornada', hintText: '${date.year}/${date.month}/${date.day}')
+              ],
+            ),
           ),
         ),
       ),

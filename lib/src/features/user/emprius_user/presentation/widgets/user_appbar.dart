@@ -2,9 +2,7 @@ import 'package:empriusapp/src/core/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
-  //const UserAppbar({Key? key}) : super(key: key);
   String title;
-  //bool goToMap = true;
   UserAppbar(this.title);
 
 

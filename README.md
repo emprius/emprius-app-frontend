@@ -85,16 +85,18 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 
 ## Demo
 
-Here you will see a demo of the app
+<div style="padding:75% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/789282344?h=78f4e31ad2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="readmedemo.mp4"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ## Future Work
 
 - I will have first users check this MVP and gather their feedback to improve UX experience
 - Implement the next features
 - Remove the mocks and connect with the real backend
+- Debugging
+- Refactor providers and investigate new Riverpod auto generator
 - Implement interfaces for repositories
 - Build a beautiful theme
-- Unit, Widget and Integration tests
+- Further coverage of Unit, Widget and Integration tests
 - Refactor the code following DRY principle and have it better decoupled
 - Apply mediaQuery to make it responsive to different screen sizes
 

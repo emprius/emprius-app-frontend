@@ -86,10 +86,10 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 ## Demo
 
 <figure class="video_container">
-  <iframe src="https://player.vimeo.com/video/789282344?h=78f4e31ad2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="true" title="readmedemo.mp4">
-  </figure>
-</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+  <video controls="true" allowfullscreen="true">
+  <source src="https://player.vimeo.com/video/789282344?h=78f4e31ad2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" type="video/mp4">
+  </video>
+</figure>
 
 ## Future Work
 

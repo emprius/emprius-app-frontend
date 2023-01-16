@@ -86,8 +86,7 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 ## Demo
 
 <p align="center">
-  <img src="/assets/extra/demo1.gif" width="60%"/> <img src="/assets/extra/demo2.gif" width="60%"/>
-</p>
+  <img src="/assets/extra/demo1.gif" width="400"/> <img src="/assets/extra/demo2.gif" width="400"/></p>
 
 ## Future Work
 

@@ -60,7 +60,7 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 
 ### Get dependencies and run the project
 - Type `flutter pub get`
-- Make sure you have debugging activated on your conected device
+- Make sure you have debugging activated on your connected device
 - Select your device (or emulator) on your IDE and run or execute `flutter run`
 
 ## Technologies Used
@@ -85,9 +85,9 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 
 ## Demo
 
-<figure class="video_container">
-  <iframe src="https://vimeo.com/789282344" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+<p align="center">
+  <img src="/assets/extra/demo1.gif" width="60%"/> <img src="/assets/extra/demo2.gif" width="60%"/>
+</p>
 
 ## Future Work
 
@@ -95,7 +95,7 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 - Implement the next features
 - Remove the mocks and connect with the real backend
 - Debugging
-- Refactor providers and investigate new Riverpod auto generator
+- Refactor providers and investigate new Riverpod provider auto generator
 - Implement interfaces for repositories
 - Build a beautiful theme
 - Further coverage of Unit, Widget and Integration tests

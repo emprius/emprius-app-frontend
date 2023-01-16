@@ -1,4 +1,4 @@
-a# Emprius app
+# Emprius app
 
 My first mobile app - learning Dart and Flutter from scratch!
 Departing from a list of functional requirements, I designed the layout for UX/UI and organized the project into Feature-first DDD architecture as frontend software engineer.
@@ -84,6 +84,8 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 - Intellij
 
 ## Demo
+
+**You maybe wait until demos are uploaded**
 
 <p align="center">
   <img src="/assets/extra/demo1.gif" width="400"/> <img src="/assets/extra/demo2.gif" width="400"/></p>

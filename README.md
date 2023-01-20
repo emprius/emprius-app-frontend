@@ -86,7 +86,10 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 ## Demo
 
 [Demo video](https://vimeo.com/manage/videos/789282344)
+'
 
+
+'
 
 ## Future Work
 

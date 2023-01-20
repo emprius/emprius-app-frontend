@@ -85,10 +85,8 @@ Download the [latest artifact](https://gitlab.com/emprius/emprius-app/-/jobs) fr
 
 ## Demo
 
-**You maybe wait until demos are uploaded**
+[Demo video](https://vimeo.com/manage/videos/789282344)
 
-<p align="center">
-  <img src="/assets/extra/demo1.gif" width="400"/> <img src="/assets/extra/demo2.gif" width="400"/></p>
 
 ## Future Work
 

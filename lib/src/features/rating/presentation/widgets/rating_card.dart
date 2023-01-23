@@ -72,16 +72,17 @@ class RatingCard extends StatelessWidget {
                           itemCount: 5,
                           itemSize: 25,
                           allowHalfRating: true,
-                          itemBuilder: (context, _) =>
-                              const Icon(Icons.star, color: Colors.amberAccent),
+                          itemBuilder: (context, _) => Icon(
+                                  Icons.star,
+                                  color: Theme.of(context).colorScheme.tertiary,),
                           updateOnDrag: true,
                           onRatingUpdate: (value) => newRating = value,
                         )
                       : RatingBarIndicator(
                           rating: ratingModel.rating!,
-                          itemBuilder: (context, index) => const Icon(
+                          itemBuilder: (context, index) => Icon(
                             Icons.star,
-                            color: Colors.purple,
+                            color: Theme.of(context).colorScheme.error,
                           ),
                           itemSize: 25,
                         ),
@@ -101,7 +102,10 @@ class RatingCard extends StatelessWidget {
                             },
                           );
                         })
-                      : Icon(Icons.check_box_outlined, color: Colors.purple,size: 30.0,),
+                      : Icon(
+                    Icons.check_box_outlined,
+                    color: Theme.of(context).colorScheme.error,
+                    size: 30.0,),
                 ],
               ),
             ),

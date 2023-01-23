@@ -27,6 +27,11 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
               Navigator.pushReplacementNamed(context, userProfileScreenRoute);
             },
             child: UserAccountsDrawerHeader(
+              /*decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/logos/logo.png"),
+                      fit: BoxFit.cover)
+              ),*/
                 accountName: Text(
                   user.name!,
                   style: const TextStyle(

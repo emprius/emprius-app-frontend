@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -33,7 +34,7 @@ class _RatingStarsState extends State<RatingStars> {
         itemCount: 5,
       itemBuilder: (context, index) => Icon(
         Icons.star,
-        color: Colors.amberAccent,
+        color: Theme.of(context).colorScheme.tertiary,
       ),
     );
 

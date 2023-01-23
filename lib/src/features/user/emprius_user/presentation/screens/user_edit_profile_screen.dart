@@ -114,7 +114,6 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           Switch(
                               value: isActive,
                               activeTrackColor: Colors.white10,
-                              activeColor: Colors.blue,
                               onChanged: (value) {
                                 setState(() {
                                   isActive = value;

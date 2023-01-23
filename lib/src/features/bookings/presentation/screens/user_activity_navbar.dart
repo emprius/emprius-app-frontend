@@ -43,23 +43,23 @@ class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setState(()=> currentIndex = index),
 
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey.shade600,
+        selectedItemColor: Color(0xFFB00020),
+        unselectedItemColor: Color(0xFFFCD8DF),
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
         showUnselectedLabels: false,
         currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.front_hand_rounded), label: "Demanades"),
+              icon: Icon(Icons.front_hand_rounded, color: Color(0xFFB00020)), label: "Demanades",),
           BottomNavigationBarItem(
-              icon: Icon(Icons.workspaces_sharp), label: "Prestades"),
+              icon: Icon(Icons.workspaces_sharp, color: Color(0xFFB00020)), label: "Prestades"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
+            icon: Icon(Icons.star, color: Color(0xFFB00020)),
             label: "Valoracions",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.lock_clock),
+            icon: Icon(Icons.lock_clock,color: Color(0xFFB00020)),
             label: "Custodiades",
           ),
         ],

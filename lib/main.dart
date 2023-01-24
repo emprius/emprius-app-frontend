@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/core/services/storage/hive_storage_service.dart';
 import 'package:empriusapp/src/core/services/storage/storage_service.dart';
 import 'package:empriusapp/src/core/services/storage/storage_service_provider.dart';
+import 'package:empriusapp/src/core/theme/app_theme.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,16 +29,16 @@ Future main() async {
 }
 
 class MyApp extends ConsumerWidget {
-  //const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     return MaterialApp(
+      title: 'Emprius app',
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: Routes.generateRoute,
+      initialRoute: splashScreenRoute,
       themeMode: ThemeMode.system,
-      // This theme was made for FlexColorScheme version 6.1.1. Make sure
-// you use same or higher version, but still same major version. If
-// you use a lower version, some properties may not be supported. In
-// that case you can also remove them after copying the theme to your app.
       theme: FlexThemeData.light(
         scheme: FlexScheme.verdunHemlock,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -47,8 +48,7 @@ class MyApp extends ConsumerWidget {
           blendOnColors: false,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // To use the playground font, add GoogleFonts package and uncomment
-        // fontFamily: GoogleFonts.notoSans().fontFamily,
+        textTheme: buildTextTheme(),
       ),
       darkTheme: FlexThemeData.dark(
         scheme: FlexScheme.verdunHemlock,
@@ -58,19 +58,44 @@ class MyApp extends ConsumerWidget {
           blendOnLevel: 20,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // To use the Playground font, add GoogleFonts package and uncomment
-        // fontFamily: GoogleFonts.notoSans().fontFamily,
+        textTheme: buildTextTheme(),
       ),
-// If you do not have a themeMode switch, uncomment this line
-// to let the device system mode control the theme mode:
-// themeMode: ThemeMode.system,
-
-      //theme: FlexColorScheme.light(scheme: FlexScheme.verdunHemlock).toTheme,
-        //darkTheme: FlexColorScheme.dark(scheme: FlexScheme.verdunHemlock).toTheme,
-        title: 'Emprius app',
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: Routes.generateRoute,
-        initialRoute: splashScreenRoute,
     );
   }
+
+  TextTheme buildTextTheme() {
+    return const TextTheme(
+        headline1: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 34,
+            ),
+        headline2: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 24,
+        ),
+        headline3: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 20,
+        ),
+        bodyText1: TextStyle(
+            fontFamily: "Roboto",
+            fontSize: 16,
+        ),
+        bodyText2: TextStyle(
+            fontFamily: "Roboto",
+            fontSize: 14,
+        ),
+        subtitle1: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 16,
+        ),
+        button: TextStyle(
+          fontFamily: "Roboto",
+          fontSize: 10,
+        ),
+      );
+  }
 }
+
+
+

@@ -45,13 +45,11 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
               size: 20,
             ),
             CircleAvatar(
-                radius: 30,
+                radius: 40,
                 backgroundImage:
                     AssetImage(widget.booking.userInfo!.avatar!)),
           ]),
-      title: Text(widget.tool.title,
-        style: TextStyle(fontSize: 18.0)
-        ,),
+      title: Text(widget.tool.title),
       subtitle: Row(
         children: [
           (widget.booking.bookingStatus).label as Widget,

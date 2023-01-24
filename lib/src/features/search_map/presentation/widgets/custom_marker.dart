@@ -40,7 +40,7 @@ class CustomMarker extends Marker {
 
 
 class BaseMarker extends StatelessWidget {
-  IconData _iconData = Icons.location_on_sharp;
+  IconData _iconData = Icons.location_on_outlined;
   final Color color;
 
   BaseMarker({Key? key, iconData, required this.color}) :  super(key: key){

@@ -54,7 +54,7 @@ class _EmpriusMapState extends State<EmpriusMap> {
         if(widget.mapValidator?.errorMsg?.isNotEmpty ?? false)
           Text(
             widget.mapValidator!.errorMsg!,
-            style: const TextStyle(color: Colors.red),
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
         Flexible(
           child: FlutterMap(

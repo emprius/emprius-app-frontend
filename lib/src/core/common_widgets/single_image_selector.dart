@@ -41,7 +41,6 @@ class SingleImageSelector extends StatelessWidget {
               children: [
                 IconButton(
                   iconSize: 40.0,
-                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.camera);
                   }, icon: const Icon(Icons.camera),
@@ -50,7 +49,6 @@ class SingleImageSelector extends StatelessWidget {
                 SizedBox(width: 10.0),
                 IconButton(
                   iconSize: 40.0,
-                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.gallery);
                   }, icon: const Icon(Icons.image),

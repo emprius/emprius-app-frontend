@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/helper/theme_controller.dart';
+import 'package:empriusapp/src/core/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -45,9 +45,8 @@ class UserProfileAvatar extends StatelessWidget {
         : FileImage(File(avatar));
 
     return CircleAvatar(
-      //radius: 40,
-      backgroundImage: image as ImageProvider,
-      backgroundColor: outerCircleColor,
+        radius: 40,
+        backgroundImage: image as ImageProvider,
     );
   }
 

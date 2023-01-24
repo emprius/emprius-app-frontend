@@ -37,7 +37,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) => checkAuthState());
 
     return const Scaffold(
-      backgroundColor: Colors.blue,
       body: Center(
         child: SpinKitCircle(
           color: Colors.white,

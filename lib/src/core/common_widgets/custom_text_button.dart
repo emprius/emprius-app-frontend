@@ -19,19 +19,16 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData currentTheme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          padding: padding,
-          primary: color ?? currentTheme.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: padding,
+        primary: color ?? currentTheme.primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
-        onPressed: onClicked,
-        child: Text(text),
       ),
+      onPressed: onClicked,
+      child: Text(text),
     );
   }
 }

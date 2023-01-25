@@ -49,7 +49,7 @@ class RatingCard extends StatelessWidget {
               }),
               trailing: ratingModel.ratingType == RatingType.TOOL_RATE
                   ? ClipRRect(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius: BorderRadius.circular(20.0),
                     child: Image(image: AssetImage(ratingModel.thumbnail!), width: 100.0,),
               )
                   : null,

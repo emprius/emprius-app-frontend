@@ -1,6 +1,6 @@
 import 'package:empriusapp/src/features/bookings/presentation/fragments/keepings_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/fragments/petitions_screen.dart';
-import 'package:empriusapp/src/features/bookings/presentation/fragments/rating_screen.dart';
+import 'package:empriusapp/src/features/rating/presentation/screens/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/fragments/requests_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_detail_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_edit_screen.dart';

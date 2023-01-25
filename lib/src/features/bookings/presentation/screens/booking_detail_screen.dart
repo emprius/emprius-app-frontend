@@ -1,23 +1,18 @@
-import 'dart:io';
-
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
-import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
-import 'package:empriusapp/src/core/common_widgets/status_label.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
+import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../user/auth_user/data/user_provider.dart';
 
 class BookingDetailScreen extends ConsumerStatefulWidget {
   final BookingDetailArguments args;
-
   const BookingDetailScreen(this.args, {Key? key}) : super(key: key);
 
   @override

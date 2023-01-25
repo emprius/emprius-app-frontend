@@ -1,9 +1,12 @@
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:flutter/material.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
-  UserAppbar({required this.title});
+  //const UserAppbar({Key? key}) : super(key: key);
+  String title;
+  //bool goToMap = true;
+  UserAppbar(this.title);
 
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +14,37 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       centerTitle: true,
       elevation: 20,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: <Color>[Color(0xFF606042), Color(0xFF3D6657), ]
+          )
+        ),
+      ),
+      // toolbarHeight: 70,
+      //leading: Icon(Icons.arrow_back, color: Colors.white),
+
+      // actions: [
+      //   Visibility(
+      //     //visible: goToMap,
+      //     child: IconButton(
+      //     color: Colors.white,
+      //       icon: const Icon(Icons.house),
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, searchMapScreenRoute);
+      //       },
+      //     ),
+      //   ),
+      //   // PopupMenuButton(
+      //   //     elevation: 30,
+      //   //     //shape: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: 10)),
+      //   //     icon: Icon(Icons.more_vert),
+      //   //     itemBuilder: (context) => [
+      //   //       const PopupMenuItem(value: 1, child: Text("les meves eines")),
+      //   //     ])
+      // ],
     );
   }
 

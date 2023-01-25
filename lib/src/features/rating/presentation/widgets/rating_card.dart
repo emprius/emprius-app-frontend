@@ -11,25 +11,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RatingCard extends StatelessWidget {
   final RatingModel ratingModel;
-
   RatingCard(this.ratingModel, {Key? key}) : super(key: key);
-
   var newRating = 0.0;
+  final double padding = 15;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
         side: BorderSide(
           color: Theme.of(context).colorScheme.primaryContainer,
-        )
-      ),
+        )),
       clipBehavior: Clip.antiAlias,
-      child: Padding(padding: const EdgeInsets.all(6.0),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: padding),
         child: Column(
-          /*ratingModel.ratingType == RatingType.USER_RATE
-            ? Text("Valoració d'usuari:")
-            : Text("Valoració d'eina:"),*/
           children: [
             ListTile(
               isThreeLine: true,
@@ -38,27 +35,27 @@ class RatingCard extends StatelessWidget {
                     arguments: BookingDetailArguments(ratingModel.bookingId!));
               },
               leading: ratingModel.ratingType == RatingType.USER_RATE
-                  ? CircleAvatar(radius: 50,
-                  backgroundImage: AssetImage(ratingModel.thumbnail!)
-              ) : null,
-              title: Text(
-                ratingModel.title!,
-                style:  Theme.of(context).textTheme.headline6,
+                  ? CircleAvatar(radius: 40,
+                  backgroundImage: AssetImage(ratingModel.thumbnail!))
+                  : null,
+              title: Text(ratingModel.title!,
+                style: Theme.of(context).textTheme.headline6,
               ),
               subtitle: Consumer(builder: (context, ref, _) {
-                var booking =
-                ref.read(bookingByIdProvider(ratingModel.bookingId!));
-                return Text(
-                    "L'intercanvi es va fer del ${getFormattedDate(booking.reservedDates!.start)} al ${getFormattedDate(booking.reservedDates!.end)}",
-                  style:  Theme.of(context).textTheme.bodyText2,
+                var booking = ref.read(bookingByIdProvider(ratingModel.bookingId!));
+                return Text("L'intercanvi es va fer del ${getFormattedDate(booking.reservedDates!.start)} al ${getFormattedDate(booking.reservedDates!.end)}",
+                  style: Theme.of(context).textTheme.bodyText2,
                 );
               }),
               trailing: ratingModel.ratingType == RatingType.TOOL_RATE
-                  ? Image(image: AssetImage(ratingModel.thumbnail!), width: 100.0,)
+                  ? ClipRRect(
+                    borderRadius: BorderRadius.circular(25.0),
+                    child: Image(image: AssetImage(ratingModel.thumbnail!), width: 100.0,),
+              )
                   : null,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 16.0,),
+              padding: EdgeInsets.symmetric(horizontal: padding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

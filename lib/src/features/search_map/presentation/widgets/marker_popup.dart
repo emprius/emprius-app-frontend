@@ -54,7 +54,7 @@ class _MarkerPopupState extends State<MarkerPopup> {
         child: InkWell(
           onTap: () => widget.onClick?.call(context),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: padding),
+            padding: const EdgeInsets.symmetric(vertical: padding, horizontal: padding),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -69,12 +69,12 @@ class _MarkerPopupState extends State<MarkerPopup> {
                     ),),
                   ),
                   title: Text(widget.title!),
-                  subtitle: Text(widget.description!),
+                  subtitle: Text(widget.description!, style: Theme.of(context).textTheme.caption),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: padding),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       RatingStars(rating: widget.rating!),
                      Padding(

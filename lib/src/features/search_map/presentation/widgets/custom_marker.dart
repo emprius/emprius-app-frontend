@@ -47,10 +47,10 @@ class BaseMarker extends StatelessWidget {
     if(iconData != null) _iconData = iconData;
   }
 
-  BaseMarker.availableTool() : color = const Color(0xFFE7E885);
+  BaseMarker.availableTool() : color = const Color(0xFF606042);
   // BaseMarker.availableTool({this.color = Colors.red});
 
-  BaseMarker.bookedTool() : color = const Color(0xFF606042);
+  BaseMarker.bookedTool() : color = const Color(0xFFB1384E);
 
   BaseMarker.userMarker() : color = const Color(0xFFFCD8DF);
 

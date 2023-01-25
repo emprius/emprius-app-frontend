@@ -52,10 +52,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                           _isLoading = false;
                         });
                       },
-                      icon: Icon(Icons.search))
-                    : const SpinKitCircle(
+                      icon: const Icon(Icons.search))
+                    : SpinKitCircle(
+                color: Theme.of(context).primaryColor,
                   size: 20.0,
-                  color: Colors.black54,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),

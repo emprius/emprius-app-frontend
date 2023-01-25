@@ -14,6 +14,15 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       centerTitle: true,
       elevation: 20,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: <Color>[Color(0xFF606042), Color(0xFF3D6657), ]
+          )
+        ),
+      ),
       // toolbarHeight: 70,
       //leading: Icon(Icons.arrow_back, color: Colors.white),
 

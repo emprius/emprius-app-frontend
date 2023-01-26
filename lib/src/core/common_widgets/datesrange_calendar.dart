@@ -4,7 +4,6 @@ import 'package:empriusapp/src/features/tool/data/repositories/tool_http_reposit
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
 class Reservation {
   DateTime startDate;
   DateTime endDate;
@@ -13,7 +12,6 @@ class Reservation {
 
 class DatesRangeCalendar extends StatefulWidget {
   final List<DateTimeRange> dateRanges;
-
   const DatesRangeCalendar({required this.dateRanges, Key? key}) : super(key: key);
 
   @override
@@ -60,9 +58,11 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+    return SizedBox(
+      width: 250,
+      height: 300,
       child: TableCalendar(
+        shouldFillViewport: true,
         headerStyle: const HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true
@@ -70,7 +70,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
         startingDayOfWeek: StartingDayOfWeek.monday,
         focusedDay: _focusedDay,
         firstDay: DateTime.now(),
-        lastDay: DateTime.now().add(Duration(days:365)),
+        lastDay: DateTime.now().add(const Duration(days:365)),
 
         /// Function deciding whether given day should be marked as selected:
         selectedDayPredicate: (day) =>
@@ -81,9 +81,7 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
         calendarBuilders: CalendarBuilders(
           /// Custom builder for day cells, with a priority over any other builder:
         prioritizedBuilder: (context, day, focusedMonth) {
-            //DateTimeRange? dateTimeRange = dayInRange(day);
-            DateTimeRange? dateTimeRange = rangeValidator.getDayInRange(day, widget.dateRanges);
-
+          DateTimeRange? dateTimeRange = rangeValidator.getDayInRange(day, widget.dateRanges);
 
             ///If day is in any saved DateTimeRange (prior dayInRange) show a highlighted cell:
             if(dateTimeRange != null) {
@@ -91,7 +89,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                   builder:  (context, constraints) {
                     final shorterSide = constraints.maxHeight > constraints.maxWidth
                      ? constraints.maxWidth : constraints.maxHeight;
-
                     final children = <Widget>[];
 
                     /// Logic to define start and end range:
@@ -100,14 +97,13 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                     final isWithinRange = isInRange(day, dateTimeRange.start, dateTimeRange.end);
 
                     if (isWithinRange) {
-                      ///Paint highlight UI:
                       Widget rangeHighlight = Center(
                         child: Container(
                           margin: EdgeInsetsDirectional.only(
                             start: isRangeStart ? constraints.maxWidth * 0.5 : 0.0,
                             end: isRangeEnd ? constraints.maxWidth * 0.5 : 0.0,
                           ),
-                          height: (shorterSide - EdgeInsets.all(6.0).vertical) * 1.0,
+                          height: (shorterSide - const EdgeInsets.all(6.0).vertical) * 1.0,
                         ),
                       );
                       children.add(rangeHighlight);
@@ -117,9 +113,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
                     if (isRangeStart) {
                       content = AnimatedContainer(
-                        duration: Duration(milliseconds: 250),
+                        duration: const Duration(milliseconds: 250),
                         margin: const EdgeInsets.all(6.0),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -128,9 +124,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                       );
                     } else if (isRangeEnd) {
                       content = AnimatedContainer(
-                          duration: Duration(milliseconds: 250),
+                          duration: const Duration(milliseconds: 250),
                           margin: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -139,9 +135,9 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
                       );
                     } else if (isWithinRange) {
                       content = AnimatedContainer(
-                          duration: Duration(milliseconds: 250),
+                          duration: const Duration(milliseconds: 250),
                           margin: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -155,11 +151,10 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
 
                     return Stack(
                       alignment: Alignment.bottomCenter,
-                      children: children,
                       clipBehavior: Clip.hardEdge,
+                      children: children,
                     );
-                  }
-              );
+                  });
             }
             return null;
           }
@@ -227,7 +222,6 @@ class _DatesRangeCalendarState extends State<DatesRangeCalendar> {
           //
           // });
         },
-
         /// Called whenever currently visible calendar page is changed:
         onPageChanged: (focDay) {
           _focusedDay = focDay;

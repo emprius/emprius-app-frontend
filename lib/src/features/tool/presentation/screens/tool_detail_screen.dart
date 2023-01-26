@@ -52,24 +52,20 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: padding),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: padding),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(tool.title, style: (Theme.of(context).textTheme.headline2),),
-                    ],),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RatingStars(rating: 5),
+                        Text(tool.title, style: (Theme.of(context).textTheme.headline2),),
                         (tool.toolCategory as ToolCategory).label as Widget,
+                    ],),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        RatingStars(rating: 5),
                       ],),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: padding),
-                      child: Text(tool.description),
-                    ),
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Text(tool.description)),
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: padding),
                         child: Row(
@@ -81,28 +77,47 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                               height: 30,
                               width: 30,
                               alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 5),
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 boxShadow: [
                                   BoxShadow(color: Theme.of(context).primaryColor.withOpacity(0.5))
                                 ]),
                               child: Text(tool.cost.toString()),
-                            )
+                            ),
+                            addHorizontalSpace(20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if(tool.maybeFree !=null && tool.maybeFree == true)
+                                  const Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        WidgetSpan(child: Icon(Icons.check)),
+                                        TextSpan(text: 'Eina gratuita')
+                                      ]
+                                    )
+                                  ),
+                                if(tool.askWithFee !=null && tool.askWithFee == true)
+                                  const Text.rich(
+                                      TextSpan(
+                                          children: [
+                                            WidgetSpan(child: Icon(Icons.check)),
+                                            TextSpan(text: 'Demanar amb fiansa')
+                                          ]
+                                      )
+                                  ),
+                              ],),
                           ],),),
                     Row(
                       children: [
-                        Text("Opcions de transport: ", style: TextStyle(fontWeight: FontWeight.bold
+                        const Text("Opcions de transport: ",
+                          style: TextStyle(fontWeight: FontWeight.bold
                         ),),
+                        addHorizontalSpace(10),
                         Text((tool.transportOptions as TransportOptions).displayName!),
                       ],),
-                    Row(
-                      children: [
-                        if(tool.maybeFree !=null && tool.maybeFree == true)
-                          Text('Eina gratuita'),
-                        if(tool.askWithFee !=null && tool.askWithFee == true)
-                          Text('Pots demanarla amb fiansa'),
-                      ],)
+
               ],),
           ),],
       ),

@@ -10,17 +10,17 @@ class ToolCarousel extends ConsumerStatefulWidget {
   const ToolCarousel(this.images, {Key? key}) : super(key: key);
 
   @override
-  createState() => _ToolCarousselState();
+  createState() => _ToolCarouselState();
 }
 
-class _ToolCarousselState extends ConsumerState<ToolCarousel> {
-
+class _ToolCarouselState extends ConsumerState<ToolCarousel> {
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
-          height: 200.0,
+        aspectRatio: 16 / 9,
+        height: 180.0,
         enlargeCenterPage: true,
       ),
       itemCount: widget.images.length,
@@ -28,28 +28,27 @@ class _ToolCarousselState extends ConsumerState<ToolCarousel> {
         // final toolImage = widget.images[index].contains('https://')
         //     ? NetworkImage(widget.images[index])
         //     : FileImage(File(widget.images[index]));
-
         return buildImage(widget.images[index], index);
+
       },
     );
   }
 
 }
-Widget buildImage(String imgPath, int index) {
 
+Widget buildImage(String imgPath, int index) {
   final toolImage = imgPath.contains('https://')
       ? NetworkImage(imgPath)
       : assetOrFileImage(imgPath);
-
   return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),
-      width: double.infinity,
+      //width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.black26,
         image: DecorationImage(
           fit: BoxFit.fill,
-            image: (toolImage as ImageProvider)
+            image: toolImage
+          )
         )
-      )
       );
 }

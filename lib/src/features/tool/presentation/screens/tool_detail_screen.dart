@@ -25,7 +25,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final tool = ref.watch(toolByIdProvider(widget.args.id));
-    const double padding = 24;
+    const double padding = 20;
 
     return tool == null
         ? Container()
@@ -49,7 +49,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                   : null
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding),
+                padding: const EdgeInsets.symmetric(horizontal: 34),
                 child: Column(
                   children: [
                     Row(
@@ -117,74 +117,15 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
                         addHorizontalSpace(10),
                         Text((tool.transportOptions as TransportOptions).displayName!),
                       ],),
-
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: padding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                            children:[DatesRangeCalendar(dateRanges: tool.reservedDates),
+                    ],),),
               ],),
           ),],
       ),
     );
   }
 }
-
-
-/*  child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-
-            SizedBox(height: 20.0),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 5.0, 5.0, 10.0),
-                child: Text(
-                  tool.title,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
-              (tool.toolCategory as ToolCategory).label as Widget,
-            ]),
-
-            if(tool.images !=null)ToolCaroussel(tool.images!),
-
-
-            SizedBox(height: 20.0),
-            RatingStars(rating: 5),
-            Padding(
-              padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
-              child: Text(
-                tool.description,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Cost per dia: ", style: TextStyle(fontWeight: FontWeight.bold
-                ),),
-                Text(tool.cost.toString()),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Opcions de transport: ", style: TextStyle(fontWeight: FontWeight.bold
-                ),),
-                Text((tool.transportOptions as TransportOptions).displayName!),
-              ],
-            ),
-            SizedBox(height: 20),
-            Column(
-              children: [
-                if(tool.maybeFree !=null && tool.maybeFree == true)Text('Eina gratuita'),
-                if(tool.askWithFee !=null && tool.askWithFee == true)Text('Pots demanarla amb fiansa'),
-             ],
-            ),
-
-            DatesRangeCalendar(dateRanges: tool.reservedDates),
-            SizedBox(height: 40),
-          ],
-          ),*/

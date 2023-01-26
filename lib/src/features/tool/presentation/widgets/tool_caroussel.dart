@@ -5,15 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 
 
-class ToolCaroussel extends ConsumerStatefulWidget {
+class ToolCarousel extends ConsumerStatefulWidget {
   final List<String> images;
-  const ToolCaroussel(this.images, {Key? key}) : super(key: key);
+  const ToolCarousel(this.images, {Key? key}) : super(key: key);
 
   @override
   createState() => _ToolCarousselState();
 }
 
-class _ToolCarousselState extends ConsumerState<ToolCaroussel> {
+class _ToolCarousselState extends ConsumerState<ToolCarousel> {
 
 
   @override

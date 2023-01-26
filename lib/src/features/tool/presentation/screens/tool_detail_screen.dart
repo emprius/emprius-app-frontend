@@ -45,7 +45,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: padding),
                   child: tool.images !=null
-                  ? ToolCaroussel(tool.images!)
+                  ? ToolCarousel(tool.images!)
                   : null
               ),
               Padding(

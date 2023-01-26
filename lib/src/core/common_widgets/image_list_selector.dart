@@ -47,7 +47,7 @@ class _ImageListSelectorState extends State<ImageListSelector> {
             onClicked: () { selectToolImages(); },
           ),
           if(toolImageList?.isNotEmpty ?? false)
-            ToolCaroussel(toolImageList!),
+            ToolCarousel(toolImageList!),
         ],
     );
   }

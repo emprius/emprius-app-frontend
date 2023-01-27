@@ -18,6 +18,7 @@ class _ToolCarouselState extends ConsumerState<ToolCarousel> {
     return CarouselSlider.builder(
       options: CarouselOptions(
         aspectRatio: 16 / 9,
+        viewportFraction: 0.8,
         height: 180.0,
         enlargeCenterPage: true,
       ),
@@ -44,7 +45,7 @@ Widget buildImage(String imgPath, int index) {
       decoration: BoxDecoration(
         color: Colors.black26,
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
             image: toolImage
           )
         )

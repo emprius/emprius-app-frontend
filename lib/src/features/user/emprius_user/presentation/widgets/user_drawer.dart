@@ -53,13 +53,6 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
               Navigator.pushReplacementNamed(context, searchMapScreenRoute);
             },
           ),
-          // ListTile(
-          //   leading: Icon(Icons.person),
-          //   title: Text("El meu perfil"),
-          //   onTap: (){
-          //     Navigator.pushReplacementNamed(context, userProfileScreenRoute);
-          //   },
-          // ),
           ListTile(
             leading: Icon(Icons.workspaces_sharp),
             title: Text("La meva activitat"),
@@ -74,15 +67,15 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
               Navigator.pushReplacementNamed(context, userStoryScreenRoute);
             },
           ),
-          Divider(
+          const Divider(
             height: 6,
             color: Colors.black,
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.settings),
             title: Text("Configuracio"),
           ),
-          ListTile(
+          const ListTile(
             leading: Icon(Icons.close),
             title: Text("Tancar sessio"),
           ),

@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -72,26 +73,25 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 20.0),
+              addVerticalSpace(20),
               CustomTextField(
                 controller: _titleCtrl,
                 validator: FormValidator.nameValidator,
                 labelText: "Titol de la eina",
               ), // Titol eina
-              SizedBox(height: 20.0),
+              addVerticalSpace(20),
               CustomTextField(
                 controller: _descriptionCtrl,
                 validator: FormValidator.nameValidator,
                 labelText: "Descripcio de la eina",
                 maxLines: 5,
               ), // Descripcio eina
-              SizedBox(height: 20.0),
+              addVerticalSpace(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    //height: 150,
-                    width: 150,
+                  SizedBox(
+                    width: 100,
                     child: CustomTextField(
                       controller: _costCtrl,
                       labelText: "Cost per dia",
@@ -99,32 +99,30 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          CheckboxListTile(
-                              title: Text("Gratuita"),
-                              value: _maybeFree,
-                              onChanged: (value) {
-                                setState(() {
-                                  _maybeFree = value as bool;
-                                });
-                              }),
-                          CheckboxListTile(
-                              title: Text("Amb fiansa"),
-                              value: _askWithFee,
-                              onChanged: (value) {
-                                setState(() {
-                                  _askWithFee = value as bool;
-                                });
-                              })
-                        ],
-                      ),
+                    child: Column(
+                      children: [
+                        CheckboxListTile(
+                            title: Text("Gratuita"),
+                            value: _maybeFree,
+                            onChanged: (value) {
+                              setState(() {
+                                _maybeFree = value as bool;
+                              });
+                            }),
+                        CheckboxListTile(
+                            title: Text("Amb fiansa"),
+                            value: _askWithFee,
+                            onChanged: (value) {
+                              setState(() {
+                                _askWithFee = value as bool;
+                              });
+                            })
+                      ],
                     ),
                   )
                 ],
               ),
-              SizedBox(height: 20.0),
+            addVerticalSpace(20),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text("Tria categoria:"),
                 SizedBox(height: 10.0),
@@ -169,17 +167,15 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   },
                 ),
               ]),
-              SizedBox(height: 5.0),
+             addVerticalSpace(8),
               Container(
                 //height: 200,
                 child: ImageListSelector(
                     callback: ((selectedImages) => _images = selectedImages)
                 ),
-
               ),
-
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
                     child: CustomTextButton(

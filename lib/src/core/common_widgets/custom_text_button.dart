@@ -13,7 +13,7 @@ class CustomTextButton extends StatelessWidget {
     required this.onClicked,
     this.color,
     this.borderRadius = 6,
-    this.padding  = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+    this.padding  = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
   }) : super(key: key);
 
   @override
@@ -21,6 +21,9 @@ class CustomTextButton extends StatelessWidget {
     ThemeData currentTheme = Theme.of(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        textStyle: TextStyle(fontSize: 12,),
+        //minimumSize: Size.zero,
+        //padding: EdgeInsets.zero,
         padding: padding,
         primary: color ?? currentTheme.primaryColor,
         shape: RoundedRectangleBorder(

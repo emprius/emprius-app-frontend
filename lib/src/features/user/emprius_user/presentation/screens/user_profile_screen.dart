@@ -95,7 +95,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               buildLocation(user),
               const SizedBox(height: 10.0),
               CustomTextButton(
-                  text: "Les meves eines",
+                  text: "LES MEVES EINES",
                   onClicked: () {
                     Navigator.pushNamed(context, userToolsScreenRoute);
                   }),

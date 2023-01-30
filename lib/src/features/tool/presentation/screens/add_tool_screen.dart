@@ -177,17 +177,15 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: CustomTextButton(
-                        text: "Altres caracteristiques",
-                        onClicked: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: ((builder) => ToolExtraProperties()));
-                        }),
-                  ),
                   CustomTextButton(
-                      text: "Guarda",
+                      text: "Altres caracteristiques",
+                      onClicked: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => ToolExtraProperties()));
+                      }),
+                  CustomTextButton(
+                      text: "GUARDA",
                       onClicked: saveTool
                   )
                 ],

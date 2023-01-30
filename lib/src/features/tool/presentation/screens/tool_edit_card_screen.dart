@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -36,10 +37,12 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const double padding = 8;
+
     return Scaffold(
       appBar: UserAppbar("Editar eina"),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text("Desar canvis"),
+        label: const Text("DESAR CANVIS"),
         onPressed: () async {
           //TODO (m) check validate only one field
           if (!_formKey.currentState!.validate()) {
@@ -56,7 +59,8 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
         physics: const BouncingScrollPhysics(),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
           child: Form(
             key: _formKey,
             child: Column(
@@ -91,7 +95,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   //autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: 5,
                 ),
-                SizedBox(height: 10.0),
+                addVerticalSpace(20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -132,17 +136,13 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                          height: 30.0,
-                          child: (tool?.toolCategory as ToolCategory).label
-                              as Widget),
-                      SizedBox(width: 25),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Cambiar categoria:"),
                           DropdownButton<ToolCategory>(
@@ -164,10 +164,14 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                               }
                             },
                           ),
-                        ],
-                      ),
+                        ],),
+                      addHorizontalSpace(20),
+                      SizedBox(
+                          height: 30.0,
+                          child: (tool?.toolCategory as ToolCategory).label
+                          as Widget),
                     ]),
-                SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -195,7 +199,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         },
                       ),
                     ]),
-                SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 const Divider(
                   height: 20,
                   indent: 20,
@@ -203,13 +207,16 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   color: Colors.black,
                 ),
                 if(tool?.images !=null)
-                  Column(
-                    children: [
-                      ImageListSelector(
-                        text: 'Cambiar fotografies',
-                        toolImageList: tool!.images,
-                        callback: ((selectedImages) => tool = tool!.copyWith(images: selectedImages))),
-                    ]
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                    child: Column(
+                      children: [
+                        ImageListSelector(
+                          text: 'Cambiar fotografies:',
+                          toolImageList: tool!.images,
+                          callback: ((selectedImages) => tool = tool!.copyWith(images: selectedImages))),
+                      ]
+                    ),
                   )
               ],
             ),

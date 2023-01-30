@@ -50,18 +50,20 @@ class _UserToolListState extends ConsumerState<UserToolList> {
         label: Text('Afegir eina'),
       ),
       body: tools.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
             onRefresh: _refresh,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(('Disponibilitat:')),
-                        SizedBox(height: 45),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text(('Disponibilitat:')),
+                        ],
+                      ),
                     ),
                     ListView.builder(
                     shrinkWrap: true,
@@ -77,7 +79,7 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                             leading: Switch(
                               value: tool.isAvailable,
                               activeTrackColor: Colors.white10,
-                              activeColor: Colors.blue,
+                              //activeColor: Colors.blue,
                               onChanged: (value) {
                                 ref.read(allToolsProvider.notifier).updateTool(
                                     tool.copyWith(isAvailable: value));

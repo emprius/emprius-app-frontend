@@ -1,5 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/rating/application/rating_provider.dart';
@@ -13,7 +14,7 @@ class RatingCard extends StatelessWidget {
   final RatingModel ratingModel;
   RatingCard(this.ratingModel, {Key? key}) : super(key: key);
   var newRating = 0.0;
-  final double padding = 15;
+  final double padding = 10.0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,9 @@ class RatingCard extends StatelessWidget {
         )),
       clipBehavior: Clip.antiAlias,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: padding),
+        padding: EdgeInsets.symmetric(vertical: padding, horizontal: padding),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
               isThreeLine: true,
@@ -49,7 +51,7 @@ class RatingCard extends StatelessWidget {
               }),
               trailing: ratingModel.ratingType == RatingType.TOOL_RATE
                   ? ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     child: Image(image: AssetImage(ratingModel.thumbnail!), width: 100.0,),
               )
                   : null,
@@ -57,7 +59,7 @@ class RatingCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: padding),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ratingModel.isPending!
                       ? RatingBar.builder(
@@ -79,6 +81,7 @@ class RatingCard extends StatelessWidget {
                           ),
                           itemSize: 25,
                       ),
+                  addHorizontalSpace(20),
                   ratingModel.isPending!
                       ? Consumer(builder: (context, ref, _) {
                           return CustomTextButton(

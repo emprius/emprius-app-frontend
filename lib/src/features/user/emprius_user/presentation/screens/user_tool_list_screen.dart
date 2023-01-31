@@ -76,15 +76,23 @@ class _UserToolListState extends ConsumerState<UserToolList> {
                           ListTile(
                             title: Text(tool.title),
                             subtitle: Text(tool.description),
-                            leading: Switch(
-                              value: tool.isAvailable,
-                              activeTrackColor: Colors.white10,
-                              //activeColor: Colors.blue,
-                              onChanged: (value) {
-                                ref.read(allToolsProvider.notifier).updateTool(
-                                    tool.copyWith(isAvailable: value));
-                              },
-                            ),
+                            leading: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Switch(
+                                value: tool.isAvailable,
+                                activeTrackColor: Colors.white10,
+                                //activeColor: Colors.blue,
+                                onChanged: (value) {
+                                  ref.read(allToolsProvider.notifier).updateTool(
+                                      tool.copyWith(isAvailable: value));
+                                },
+                              ),
+                                CircleAvatar(
+                                    radius: 20,
+                                    backgroundImage:
+                                    AssetImage(tool.images![0])),
+                            ]),
                             trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

@@ -67,9 +67,12 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
         onRefresh: widget.onRefresh,
         child: CustomScrollView(slivers: <Widget>[
           SliverAppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
             leadingWidth: 0.0,
             backgroundColor: Colors.transparent,
             title: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ToggleButtons(
                     color: Colors.black.withOpacity(0.60),

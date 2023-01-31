@@ -85,6 +85,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                         child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            addVerticalSpace(20),
                             const Text("Dates transaccio:",
                               style: TextStyle(fontWeight: FontWeight.bold),),
                             addVerticalSpace(10),

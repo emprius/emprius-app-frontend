@@ -3,8 +3,6 @@ import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/core/services/storage/hive_storage_service.dart';
 import 'package:empriusapp/src/core/services/storage/storage_service.dart';
 import 'package:empriusapp/src/core/services/storage/storage_service_provider.dart';
-import 'package:empriusapp/src/core/theme/app_theme.dart';
-import 'package:empriusapp/src/core/theme/size_config.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +29,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //SizeConfig().init(context);
 
     return MaterialApp(
       title: 'Emprius app',
@@ -73,8 +70,9 @@ class MyApp extends ConsumerWidget {
           fontFamily: "Montserrat",
           fontSize: 24,
         ),
-        headline3: TextStyle(
+        headline6: TextStyle(
           fontFamily: "Montserrat",
+          fontWeight: FontWeight.w400,
           fontSize: 20,
         ),
         bodyText1: TextStyle(
@@ -87,6 +85,7 @@ class MyApp extends ConsumerWidget {
         ),
         subtitle1: TextStyle(
           fontFamily: "Montserrat",
+          fontWeight: FontWeight.w400,
           fontSize: 16,
         ),
         button: TextStyle(

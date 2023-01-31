@@ -46,7 +46,7 @@ class _RatingScreenState extends ConsumerState<RatingScreen> {
             itemBuilder: (context, index) {
               final ratingModel = ratings[index];
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                padding: const EdgeInsets.symmetric(horizontal: padding),
                 child: RatingCard(ratingModel)
               );
             },

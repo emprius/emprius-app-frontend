@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,12 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Row(
+          children: [
+            Image(image: AssetImage('assets/logos/logo.png'), height: 30),
+            addHorizontalSpace(10),
+            Text(title),
+      ],),
       centerTitle: true,
       elevation: 20,
       flexibleSpace: Container(

@@ -1,5 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -45,10 +46,11 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       _setMarkers(user);
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });
+    const double padding = 10;
 
     return Scaffold(
-      appBar: UserAppbar(title: 'El meu perfil',),
-      drawer: UserDrawer(),
+      appBar: UserAppbar("El meu perfil"),
+      drawer: const UserDrawer(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Editar perfil",
         child: const Icon(Icons.edit),
@@ -59,47 +61,53 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: UserProfileAvatar(
-                    avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: UserProfileAvatar(
+                      avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+                    ),
                   ),
-                ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  buildName(user),
-                  const SizedBox(height: 6.0),
-                  RatingStars(rating: user.rating!),
-                  const SizedBox(height: 6.0),
-                  Text('EMPS: ${user.emps}'),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    buildName(user),
+                    addVerticalSpace(6.0),
+                    RatingStars(rating: user.rating!),
+                    addVerticalSpace(6.0),
+                    Text('EMPS: ${user.emps}', style: Theme.of(context).textTheme.bodyText2,),
+                  ]),
+                  addHorizontalSpace(6.0),
+                  Column(children: [
+                    Switch(
+                        value: user.isActive!,
+                        activeTrackColor: Colors.white10,
+                        activeColor: Colors.blue,
+                        onChanged: null,  // Deactivate the switch
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
+                  ]),
                 ]),
-                const SizedBox(width: 6.0),
-                Column(children: [
-                  Switch(
-                      value: user.isActive!,
-                      activeTrackColor: Colors.white10,
-                      activeColor: Colors.blue,
-                      onChanged: null,  // Deactivate the switch
-                  ),
-                  const SizedBox(height: 6.0),
-                  Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
-                ]),
-              ]),
-              const SizedBox(height: 10.0),
-              buildLocation(user),
-              const SizedBox(height: 10.0),
+              ),
+              addVerticalSpace(10.0),
               CustomTextButton(
                   text: "LES MEVES EINES",
                   onClicked: () {
                     Navigator.pushNamed(context, userToolsScreenRoute);
                   }),
-              const SizedBox(height: 10.0),
+              addVerticalSpace(10.0),
+              Divider(),
+              addVerticalSpace(10.0),
+              buildLocation(user),
+              addVerticalSpace(20.0),
               buildStatistics(user),
             ],
           ),
@@ -113,23 +121,21 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
         children: [
           Text(
             user.name!,
-            style: const TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+            style: Theme.of(context).textTheme.headline2,
             ),
-          ),
-          const SizedBox(height: 4),
+          addVerticalSpace(4.0),
           Text(
             user.email,
-            style: const TextStyle(color: Colors.grey),
+            style: Theme.of(context).textTheme.bodyText2,
           )
         ],
       );
 
   Widget buildLocation(UserModel user) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Localitzacio actual:'),
-          const SizedBox(height: 6.0),
+          Text('Localitzacio actual:', style: Theme.of(context).textTheme.bodyMedium,),
+          addVerticalSpace(6.0),
           Container(
             width: 280,
             height: 150,

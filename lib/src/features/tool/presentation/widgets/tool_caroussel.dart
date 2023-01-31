@@ -43,7 +43,8 @@ Widget buildImage(String imgPath, int index) {
       margin: const EdgeInsets.symmetric(horizontal: 12),
       //width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.black26,
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.black26,
         image: DecorationImage(
           fit: BoxFit.cover,
             image: toolImage

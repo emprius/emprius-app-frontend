@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
@@ -27,11 +28,19 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
               Navigator.pushReplacementNamed(context, userProfileScreenRoute);
             },
             child: UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
+                /*image: DecorationImage(
+                  alignment: Alignment.centerRight,
+                    image: AssetImage('assets/logos/logo.png'),
+                  fit: BoxFit.contain,
+                ),*/
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors: <Color>[Color(0xFF3D6657), Color(0xFFE7E885), ]
+                      colors: <Color>[
+                        Color(0xFF3D6657),
+                        Color(0xFFE7E885).withOpacity(0.8),
+                      ]
                   )
               ),
                 accountName: Text(

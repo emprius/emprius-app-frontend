@@ -31,6 +31,7 @@ class MarkerPopup extends StatefulWidget {
         image = tool.images![0],
         isAvailable = tool.isAvailable,
         rating = tool.rating {
+
     onClick = (BuildContext context) {
       Navigator.pushNamed(context, toolDetailScreenRoute,
           arguments: ToolDetailArguments(tool.id!));
@@ -45,14 +46,18 @@ class _MarkerPopupState extends State<MarkerPopup> {
 
   @override
   Widget build(BuildContext context) {
-    const double padding = 8;
+    const double padding = 4.0;
 
-    return Container(
-      width: 300,
+    return SizedBox(
+      width: 280,
       child: Card(
         elevation: 2.0,
         child: InkWell(
-          onTap: () => widget.onClick?.call(context),
+          onTap: (){
+            widget.isAvailable!
+                ? widget.onClick?.call(context)
+                : null;
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: padding, horizontal: padding),
             child: Column(
@@ -63,7 +68,7 @@ class _MarkerPopupState extends State<MarkerPopup> {
                   leading: SizedBox(
                     width: 90,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       child: Image(
                       image: assetOrFileImage(widget.image!),
                     ),),
@@ -72,16 +77,17 @@ class _MarkerPopupState extends State<MarkerPopup> {
                   subtitle: Text(widget.description!, style: Theme.of(context).textTheme.caption),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: padding),
+                  padding: const EdgeInsets.symmetric(vertical: padding, horizontal: padding),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RatingStars(rating: widget.rating!),
-                     Padding(
+                      addHorizontalSpace(2.0),
+                      Padding(
                        padding: const EdgeInsets.symmetric(horizontal: padding),
                        child: widget.isAvailable!
                          ? null
-                         : const Text("NO DISPONIBLE"),
+                         : Text("NO DISPONIBLE", style: TextStyle(color: Theme.of(context).colorScheme.error,)),
                      )
                     ],),
                 ),

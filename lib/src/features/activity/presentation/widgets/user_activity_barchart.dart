@@ -43,6 +43,8 @@ class ActivityBarchart extends StatelessWidget {
       ).toList(),
 
      titlesData: FlTitlesData(
+         rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+         topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
        //show: true,
        bottomTitles: AxisTitles(
          sideTitles: SideTitles(

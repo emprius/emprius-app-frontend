@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
+import 'package:empriusapp/src/features/activity/presentation/widgets/user_activity_barchart.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -77,7 +78,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     ),
                   ),
                   Column(
-                      crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     buildName(user),
                     addVerticalSpace(6.0),
                     RatingStars(rating: user.rating!),
@@ -103,11 +105,11 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                   onClicked: () {
                     Navigator.pushNamed(context, userToolsScreenRoute);
                   }),
-              addVerticalSpace(10.0),
+              addVerticalSpace(8.0),
               Divider(),
-              addVerticalSpace(10.0),
+              addVerticalSpace(8.0),
               buildLocation(user),
-              addVerticalSpace(20.0),
+              addVerticalSpace(8.0),
               buildStatistics(user),
             ],
           ),
@@ -135,7 +137,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Localitzacio actual:', style: Theme.of(context).textTheme.bodyMedium,),
-          addVerticalSpace(6.0),
+          addVerticalSpace(4.0),
           Container(
             width: 280,
             height: 150,
@@ -151,10 +153,12 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   Widget buildStatistics(UserModel user) => Column(
         children: [
+          Text('Resum activitat:', style: Theme.of(context).textTheme.bodyMedium,),
+          addVerticalSpace(4.0),
           Container(
-            child: Text('La meva activitat'),
+            child: ActivityBarchart(),
             width: 280,
-            height: 150,
+            height: 200,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black26),

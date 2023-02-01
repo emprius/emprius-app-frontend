@@ -152,6 +152,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       );
 
   Widget buildStatistics(UserModel user) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Resum activitat:', style: Theme.of(context).textTheme.bodyMedium,),
           addVerticalSpace(4.0),

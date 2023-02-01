@@ -11,7 +11,7 @@ import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_sc
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_edit_card_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/login_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/register_screen.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_story_screen.dart';
+import 'package:empriusapp/src/features/activity/presentation/screens/user_story_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_edit_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';

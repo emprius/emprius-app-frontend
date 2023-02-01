@@ -35,7 +35,7 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
                   ),
                   color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.only(right: 16.0, top: 16.0, bottom: 16.0),
                       child: ActivityBarchart())
               ),
             ),

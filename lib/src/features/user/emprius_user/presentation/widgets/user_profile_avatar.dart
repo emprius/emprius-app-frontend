@@ -1,10 +1,13 @@
+import 'package:empriusapp/src/core/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserProfileAvatar extends StatelessWidget {
   final String avatar;
   final bool showBadge;
-
+  Color? outerCircleColor;
   Color? innerCircleColor;
 
   final  IconData badgeIcon;
@@ -18,7 +21,9 @@ class UserProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final theme = ref.watch(themeProvider.notifier);
     innerCircleColor = Theme.of(context).colorScheme.primary;
+    outerCircleColor = Theme.of(context).colorScheme.primary;
 
     return Stack(
       fit: StackFit.expand,
@@ -40,9 +45,8 @@ class UserProfileAvatar extends StatelessWidget {
         : FileImage(File(avatar));
 
     return CircleAvatar(
-      radius: 40,
-      backgroundColor: Colors.transparent,
-      backgroundImage: image as ImageProvider,
+        radius: 40,
+        backgroundImage: image as ImageProvider,
     );
   }
 

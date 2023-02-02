@@ -24,50 +24,48 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          child: TextField(
-            controller: _searchTermCtrl,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                onPressed: (){
-                  showModalBottomSheet(
-                      context: context,
-                      builder: ((builder) =>
-                          SearchFilters(
-                            currentFilters: _currentFilters,
-                            callback: (CurrentFilters selectedFilters){
-                              _currentFilters = selectedFilters;
-                            },)));
-                }, icon: const Icon(Icons.tune),
-              ),
-              suffixIcon: !_isLoading
-                  ? IconButton(
-                  onPressed: () async{
-                    setState((){
-                      _isLoading = true;
-                        });
-                        await widget.searchCallback?.call(_searchTermCtrl.text, _currentFilters);
-                        setState((){
-                          _isLoading = false;
-                        });
-                      },
-                      icon: Icon(Icons.search))
-                    : const SpinKitCircle(
-                  size: 20.0,
-                  color: Colors.black54,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
-                ),
-                filled: true,
-                fillColor: Colors.white,
-                hintText: "Cerca eines",
+        TextField(
+          controller: _searchTermCtrl,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            prefixIcon: IconButton(
+              onPressed: (){
+                showModalBottomSheet(
+                    context: context,
+                    builder: ((builder) =>
+                        SearchFilters(
+                          currentFilters: _currentFilters,
+                          callback: (CurrentFilters selectedFilters){
+                            _currentFilters = selectedFilters;
+                          },)));
+              }, icon: const Icon(Icons.tune),
             ),
+            suffixIcon: !_isLoading
+                ? IconButton(
+                onPressed: () async{
+                  setState((){
+                    _isLoading = true;
+                      });
+                      await widget.searchCallback?.call(_searchTermCtrl.text, _currentFilters);
+                      setState((){
+                        _isLoading = false;
+                      });
+                    },
+                    icon: const Icon(Icons.search))
+                  : SpinKitCircle(
+              color: Theme.of(context).primaryColor,
+                size: 20.0,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
+              filled: true,
+              fillColor: Colors.white,
+              hintText: "Cerca eines",
           ),
         ),
       ],

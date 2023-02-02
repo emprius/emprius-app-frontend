@@ -1,6 +1,8 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/data/mocked/mocked_bookings_service.dart';
@@ -17,7 +19,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AskToolFormScreen extends ConsumerStatefulWidget {
   final ToolDetailArguments args;
-
   const AskToolFormScreen(this.args, {Key? key}) : super(key: key);
 
   @override
@@ -29,17 +30,10 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
   final _contactCtrl = TextEditingController();
   final _commentsCtrl = TextEditingController();
 
-  //final _startDateCtrl = TextEditingController();
-  //final _endDateCtrl = TextEditingController();
-
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   DateTimeRange? dateRange;
-  // DateTimeRange(start: DateTime.now(), end: DateTime.now());
-
-
   final rangeValidator = CalendarValidator();
-
 
   @override
   void initState() {
@@ -53,12 +47,12 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
     final end = dateRange?.end;
     final totalDays = dateRange?.duration;
     final bookedRanges = tool.reservedDates;
+    const double padding = 20;
 
     return Scaffold(
       appBar: UserAppbar(title: 'Formulari contacte',),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-
           await ref
               .read(allBookingsProvider.notifier)
               .createBooking(BookingModel(
@@ -78,63 +72,88 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Peticio enviada!')),
           );
-
           if (!mounted) return;
           Navigator.pop(context);
         },
-        label: Text("Envia"),
+        label: Text("ENVIA"),
       ),
+
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        physics: const BouncingScrollPhysics(),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Demana la eina : ${tool.title}'),
-              SizedBox(height: 20.0),
-              CustomTextField(
-                controller: _contactCtrl,
-                labelText: "Especifica forma i dades de contacte",
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/4.1,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: assetOrFileImage(tool.images![0]),
+                  opacity: 0.8,
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
+                )
               ),
-              SizedBox(height: 20.0),
-              CustomTextField(
-                controller: _commentsCtrl,
-                maxLines: 5,
-                labelText: "Pots afegir aqui comentaris adicionals",
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Demana la eina :',
+                    style: TextStyle(color: Theme.of(context).backgroundColor),),
+                    Text(
+                      tool.title,
+                      style: (Theme.of(context)
+                          .textTheme.headline1?.merge(TextStyle(color: Theme.of(context).backgroundColor))
+                      ),),
+                  ],),
               ),
-              SizedBox(height: 20.0),
-              Text("Selecciona les dades en que vols reservar:"),
-              SizedBox(height: 20.0),
-              Row(
+            ),
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: _contactCtrl,
+                      labelText: "Especifica forma i dades de contacte",
+                    ),
+                    addVerticalSpace(padding),
+                    CustomTextField(
+                      controller: _commentsCtrl,
+                      maxLines: 4,
+                      labelText: "Pots afegir aqui comentaris adicionals",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Text("Selecciona les dades en que vols reservar:", style: (Theme.of(context)
+                .textTheme.bodyLarge),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      child: start == null ? Icon(Icons.calendar_today) : Text('${start.day}/${start.month}/${start.year}'),
-                      onPressed: () => pickDateRange(bookedRanges),
-                    ),
+                  ElevatedButton(
+                    child: start == null
+                      ? const Icon(Icons.calendar_today)
+                      : Text('${start.day}/${start.month}/${start.year}'),
+                    onPressed: () => pickDateRange(bookedRanges),
                   ),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: ElevatedButton(
-                      child:  end == null ? Icon(Icons.calendar_today) : Text('${end.day}/${end.month}/${end.year}'),
-                      onPressed: () {
-                        pickDateRange(bookedRanges);
-                      },
-                    ),
+                  const Icon(Icons.arrow_forward),
+                  ElevatedButton(
+                    child:  end == null
+                      ? const Icon(Icons.calendar_today)
+                      : Text('${end.day}/${end.month}/${end.year}'),
+                    onPressed: () => pickDateRange(bookedRanges),
                   ),
-                ],
-              ),
-              SizedBox(height: 20),
-              if(totalDays !=null) Text("Dies en total: ${totalDays.inDays}"),
-            ],
-          ),
-        ),
+                ],),),
+            if(totalDays !=null) Text("Dies en total: ${totalDays.inDays}"),
+          ],),
       ),
     );
   }
@@ -148,17 +167,12 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
       lastDate: DateTime(2040),
     );
     if (reservationDates != null) {
-
       rangeValidator.isSelectedRangeInBookedRange(
           reservationDates, bookedRanges)
           ? rangeValidator.showRangeErrorDialog(context)
-
      : setState(() {
           dateRange = reservationDates;
         });
-
-
     }
   }
-
 }

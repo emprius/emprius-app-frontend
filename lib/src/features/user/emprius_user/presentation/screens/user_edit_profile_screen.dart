@@ -4,6 +4,7 @@ import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
 import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
@@ -42,6 +43,10 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   void _setMarkers(LatLng newLatLng){
     _customMapCtrl.markers = [
       CustomMarker.tapMarker(newLatLng)
+      // Marker(
+      //   point: newLatLng,
+      //   builder: (ctx) =>  CustomMarker.tapMarker(tapLocation),
+      // ),
     ];
   }
 
@@ -59,151 +64,152 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: UserAppbar(title: 'Editar perfil',),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(40.0,20.0,40.0,10.0),
-          physics: const BouncingScrollPhysics(),
-          
-          child: Shortcuts(
-            shortcuts: const <ShortcutActivator,Intent>{
-              SingleActivator(LogicalKeyboardKey.space): NextFocusIntent(),
-            },
-            child: FocusTraversalGroup(
-              child: Form(
-                autovalidateMode: AutovalidateMode.always,
-                onChanged: () {
-                  Form.of(primaryFocus!.context!)!.save();
-                },
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: ((builder) => SingleImageSelector((image) {
-                                      if (image != null) {
-                                        user = user.copyWith(avatar: image.path);
-                                        setState(() {});
-                                      }
-                                      Navigator.pop(context);
-                                    })));
-                          },
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: UserProfileAvatar(
-                              avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
-                              showBadge: true,
-                            ),
-                          ),
-                        ),
-                        Column(children: [
-                          Switch(
-                              value: isActive,
-                              activeTrackColor: Colors.white10,
-                              activeColor: Colors.blue,
-                              onChanged: (value) {
-                                setState(() {
-                                  isActive = value;
-                                });
-                              }),
-                          const SizedBox(height: 6.0),
-                          Text(isActive ? "Perfil actiu" : "Perfil inactiu"),
-                        ]),
-                      ],
+    const double padding = 20;
+
+    return Scaffold(
+      appBar: UserAppbar("Editar perfil"),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+        physics: const BouncingScrollPhysics(),
+        child: Shortcuts(
+          shortcuts: const <ShortcutActivator,Intent>{
+            SingleActivator(LogicalKeyboardKey.space): NextFocusIntent(),
+          },
+          child: FocusTraversalGroup(
+            child: Column(
+              children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: ((builder) => SingleImageSelector((image) {
+                          if (image != null) {
+                            user = user.copyWith(avatar: image.path);
+                            setState(() {});
+                          }
+                          Navigator.pop(context);
+                        })));
+                  },
+                  child: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: UserProfileAvatar(
+                      avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+                      showBadge: true,
                     ),
-                    const SizedBox(height: 20.0),
-                    CustomTextField(
-                      controller: _nameCtrl,
-                      validator: FormValidator.nameValidator,
-                      labelText: "Nom d'usuari",
-                    ),
-                    const SizedBox(height: 24),
-                    CustomTextField(
-                      controller: _emailCtrl,
-                      validator: FormValidator.emailValidator,
-                      labelText: "E-mail",
-                    ),
-                    const SizedBox(height: 20.0),
-                    CustomTextField(
-                      controller: _passwordCtrl,
-                      validator: FormValidator.optionalPasswordValidator,
-                      labelText: 'Mot de pas',
-                      obscureText: _isHidden,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                            _isHidden
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isHidden = !_isHidden;
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    CustomTextField(
-                      controller: _cPasswordCtrl,
-                      validator: (value) => FormValidator.confirmPasswordValidator(
-                        value,
-                        _passwordCtrl.text,
-                      ),
-                      labelText: 'Confirmar mot de pas',
-                      obscureText: _isHidden,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                            _isHidden ? Icons.visibility : Icons.visibility_off),
-                        onPressed: () {
-                          setState(() {
-                            _isHidden = !_isHidden;
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    selectLocationMap(user),
-                    const SizedBox(height: 24),
-                    CustomTextButton(
-                      text: 'Desar',
-                      //Unhandled Exception: Null check operator used on a null value
-                      onClicked: () async {
-                        if (!_formKey.currentState!.validate())
-                          //TODO if not selected location doesn't navigate:
-                          //&& !_customMapCtrl.validate())
-                        {
-                          return;
-                        }
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Canvis desats')),
-                        );
-                        await ref
-                            .watch(userProvider.notifier)
-                            .updateUser(
-                          user.copyWith(
-                            name: _nameCtrl.text,
-                            email: _emailCtrl.text,
-                            isActive: isActive,
-                            location: _customMapCtrl.selectedLocation!,
-                          ),
-                          _passwordCtrl.text,
-                        );
-                        if (!mounted) return;
-                        Navigator.of(context).pop();
-                      },
-                    ),
+                  ),
+                ),
+                  Column(children: [
+                  Switch(
+                      value: isActive,
+                      activeTrackColor: Colors.white10,
+                      onChanged: (value) {
+                        setState(() {
+                          isActive = value;
+                        });
+                      }),
+                  const SizedBox(height: 6.0),
+                  Text(isActive ? "Perfil actiu" : "Perfil inactiu"),
+                ]),
                   ],
+            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                child: Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  onChanged: () {
+                    Form.of(primaryFocus!.context!)!.save();
+                  },
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomTextField(
+                        controller: _nameCtrl,
+                        validator: FormValidator.nameValidator,
+                        labelText: "Nom d'usuari",
+                      ),
+                      addVerticalSpace(20),
+                      CustomTextField(
+                        controller: _emailCtrl,
+                        validator: FormValidator.emailValidator,
+                        labelText: "E-mail",
+                      ),
+                      addVerticalSpace(20),
+                      CustomTextField(
+                        controller: _passwordCtrl,
+                        validator: FormValidator.optionalPasswordValidator,
+                        labelText: 'Mot de pas',
+                        obscureText: _isHidden,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                              _isHidden ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isHidden = !_isHidden;
+                            });
+                          },
+                        ),
+                      ),
+                      addVerticalSpace(20),
+                      CustomTextField(
+                        controller: _cPasswordCtrl,
+                        validator: (value) => FormValidator.confirmPasswordValidator(
+                          value,
+                          _passwordCtrl.text,
+                        ),
+                        labelText: 'Confirmar mot de pas',
+                        obscureText: _isHidden,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                              _isHidden ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isHidden = !_isHidden;
+                            });
+                          },
+                        ),
+                      ),
+                      addVerticalSpace(20),
+                      selectLocationMap(user),
+                      addVerticalSpace(20),
+                      CustomTextButton(
+                        text: 'DESAR',
+                        //Unhandled Exception: Null check operator used on a null value
+                        onClicked: () async {
+                          if (!_formKey.currentState!.validate())
+                            //TODO if not selectedlocation doesnt navigate:
+                            //&& !_customMapCtrl.validate())
+                              {
+                            return;
+                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Canvis desats')),
+                          );
+
+                          await ref
+                              .watch(userProvider.notifier)
+                              .updateUser(
+                            user.copyWith(
+                              name: _nameCtrl.text,
+                              email: _emailCtrl.text,
+                              isActive: isActive,
+                              location: _customMapCtrl.selectedLocation!,
+                            ),
+                            _passwordCtrl.text,
+                          );
+                          if (!mounted) return;
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ]),
                 ),
               ),
-            ),
+              ]),
           ),
         ),
       ),
@@ -211,12 +217,13 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   }
 
   Widget selectLocationMap(UserModel user) => Column(
-        children: [
-          const Text('Cambiar localitzacio:'),
-          const SizedBox(height: 6.0),
-          Container(
-            width: 300,
-            height: 300,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text('Cambiar localitzacio:'),
+      addVerticalSpace(6.0),
+      Container(
+            width: 280,
+            height: 280,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black26),

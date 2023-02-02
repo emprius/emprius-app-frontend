@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/common_widgets/image_list_selector.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
@@ -36,12 +37,14 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const double padding = 8;
+
     return Scaffold(
-      appBar: UserAppbar(title: 'Editar eina',),
+      appBar: UserAppbar("Editar eina"),
       floatingActionButton: FloatingActionButton.extended(
-        label: const Text("Desar canvis"),
+        label: const Text("DESAR CANVIS"),
         onPressed: () async {
-          //TODO check validate only one field
+          //TODO (m) check validate only one field
           if (!_formKey.currentState!.validate()) {
             return;
           }
@@ -56,7 +59,8 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 30, 20, 10),
         physics: const BouncingScrollPhysics(),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
           child: Form(
             key: _formKey,
             child: Column(
@@ -68,23 +72,35 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   onChanged: (value) {
                     tool = tool!.copyWith(title: value);
                   },
+
                   hintText: tool?.title,
                   controller: _titleCtrl,
                   validator: FormValidator.nameValidator,
                 ),
-                const SizedBox(height: 20.0),
+                SizedBox(height: 20.0),
                 CustomTextField(
                   onChanged: (value) => tool = tool!.copyWith(description: value),
                   labelText: "Cambiar descripcio:",
                   hintText: tool?.description,
                   controller: _descriptionCtrl,
+                  //validator: FormValidator.nameValidator,
+                  //TODO (m) check validate only one field
+                  // validator:  (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //   return null;
+                  //   }else {
+                  //     FormValidator.nameValidator;
+                  //   }
+                  //   },
+                  //autovalidateMode: AutovalidateMode.onUserInteraction,
                   maxLines: 5,
                 ),
-                const SizedBox(height: 10.0),
+                addVerticalSpace(20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(
+                    Container(
+                      //height: 150,
                       width: 150,
                       child: CustomTextField(
                         controller: _costCtrl,
@@ -95,42 +111,40 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                       ),
                     ),
                     Expanded(
-                      child: Column(
-                        children: [
-                          CheckboxListTile(
-                              title: Text("Gratuita"),
-                              value: tool?.maybeFree,
-                              onChanged: (value) {
-                                setState(() {
-                                  tool = tool?.copyWith(maybeFree: value);
-                                });
-                              }),
-                          CheckboxListTile(
-                              title: const Text("Amb fiansa"),
-                              value: tool?.askWithFee,
-                              onChanged: (value) {
-                                setState(() {
-                                  tool = tool?.copyWith(askWithFee: value);
-                                });
-                              })
-                        ],
+                      child: Container(
+                        child: Column(
+                          children: [
+                            CheckboxListTile(
+                                title: Text("Gratuita"),
+                                value: tool?.maybeFree,
+                                onChanged: (value) {
+                                  setState(() {
+                                    tool = tool?.copyWith(maybeFree: value);
+                                  });
+                                }),
+                            CheckboxListTile(
+                                title: Text("Amb fiansa"),
+                                value: tool?.askWithFee,
+                                onChanged: (value) {
+                                  setState(() {
+                                    tool = tool?.copyWith(askWithFee: value);
+                                  });
+                                })
+                          ],
+                        ),
                       ),
                     )
                   ],
                 ),
-                const SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                          height: 30.0,
-                          child: (tool?.toolCategory as ToolCategory).label
-                              as Widget),
-                      const SizedBox(width: 25),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Cambiar categoria:"),
+                          Text("Cambiar categoria:"),
                           DropdownButton<ToolCategory>(
                             value: tool?.toolCategory,
                             items: ToolCategory.values
@@ -150,15 +164,19 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                               }
                             },
                           ),
-                        ],
-                      ),
+                        ],),
+                      addHorizontalSpace(20),
+                      SizedBox(
+                          height: 30.0,
+                          child: (tool?.toolCategory as ToolCategory).label
+                          as Widget),
                     ]),
-                const SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Opcions \nde transport:"),
-                      const SizedBox(width: 25),
+                      Text("Opcions \nde transport:"),
+                      SizedBox(width: 25),
                       DropdownButton<TransportOptions>(
                         value: tool?.transportOptions,
                         items: TransportOptions.values
@@ -181,7 +199,7 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                         },
                       ),
                     ]),
-                const SizedBox(height: 10.0),
+                addVerticalSpace(10),
                 const Divider(
                   height: 20,
                   indent: 20,
@@ -189,13 +207,16 @@ class _ToolEditCardScreenState extends ConsumerState<ToolEditCardScreen> {
                   color: Colors.black,
                 ),
                 if(tool?.images !=null)
-                  Column(
-                    children: [
-                      ImageListSelector(
-                        text: 'Cambiar fotografies',
-                        toolImageList: tool!.images,
-                        callback: ((selectedImages) => tool = tool!.copyWith(images: selectedImages))),
-                    ]
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                    child: Column(
+                      children: [
+                        ImageListSelector(
+                          text: 'Cambiar fotografies:',
+                          toolImageList: tool!.images,
+                          callback: ((selectedImages) => tool = tool!.copyWith(images: selectedImages))),
+                      ]
+                    ),
                   )
               ],
             ),

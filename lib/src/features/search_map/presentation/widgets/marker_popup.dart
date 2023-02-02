@@ -1,5 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
 import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class MarkerPopup extends StatefulWidget {
         image = tool.images![0],
         isAvailable = tool.isAvailable,
         rating = tool.rating {
+
     onClick = (BuildContext context) {
       Navigator.pushNamed(context, toolDetailScreenRoute,
           arguments: ToolDetailArguments(tool.id!));
@@ -41,57 +43,60 @@ class MarkerPopup extends StatefulWidget {
 }
 
 class _MarkerPopupState extends State<MarkerPopup> {
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        onTap: () => widget.onClick?.call(context),
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Container(
-            constraints: const BoxConstraints(minWidth: 100, maxWidth: 200),
+    const double padding = 4.0;
+
+    return SizedBox(
+      width: 280,
+      child: Card(
+        elevation: 2.0,
+        child: InkWell(
+          onTap: (){
+            widget.isAvailable!
+                ? widget.onClick?.call(context)
+                : null;
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: padding, horizontal: padding),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  width: 100.0,
-                  height: 80.0,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: assetOrFileImage(widget.image!),
-                          fit: BoxFit.cover)),
-                ),
-                RatingStars(rating: widget.rating!),
-                Text(
-                  widget.title!,
-                  overflow: TextOverflow.fade,
-                  softWrap: false,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.0,
+              children: [
+                ListTile(
+                  isThreeLine: true,
+                  leading: SizedBox(
+                    width: 90,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image(
+                      image: assetOrFileImage(widget.image!),
+                    ),),
                   ),
+                  title: Text(widget.title!),
+                  subtitle: Text(widget.description!, style: Theme.of(context).textTheme.caption),
                 ),
-                Padding(padding: const EdgeInsets.all(4.0),
-                    child: widget.isAvailable!
-                        ? null
-                        : const Text("NO DISPONIBLE",
-                      style: TextStyle(fontSize: 10.0),
-                    ),
-                ),
-                const Divider(),
                 Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text(widget.description!,
-                          style: const TextStyle(fontSize: 12.0),
-                        )
+                  padding: const EdgeInsets.symmetric(vertical: padding, horizontal: padding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RatingStars(rating: widget.rating!),
+                      addHorizontalSpace(2.0),
+                      Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: padding),
+                       child: widget.isAvailable!
+                         ? null
+                         : Text("NO DISPONIBLE", style: TextStyle(color: Theme.of(context).colorScheme.error,)),
+                     )
+                    ],),
                 ),
-              ],
-            ),
+              ],),
           ),
-        ),
+          ),
       ),
     );
   }
 }
+
+

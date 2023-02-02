@@ -1,6 +1,8 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
+import 'package:empriusapp/src/core/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/transport_options_enum.dart';
@@ -19,6 +21,7 @@ class AddToolScreen extends ConsumerStatefulWidget {
 }
 
 class _AddToolScreenState extends ConsumerState<AddToolScreen> {
+
   var _currentTransport = TransportOptions.NOT_NECESSARY;
   var _currentCategory = ToolCategory.VEHICLE;
   late bool _maybeFree = true;
@@ -60,7 +63,7 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserAppbar(title: 'Afegir eina',),
+      appBar: UserAppbar('Afegir eina'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
         physics: const BouncingScrollPhysics(),
@@ -70,26 +73,25 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(height: 20.0),
+              addVerticalSpace(20),
               CustomTextField(
                 controller: _titleCtrl,
                 validator: FormValidator.nameValidator,
                 labelText: "Titol de la eina",
               ), // Titol eina
-              const SizedBox(height: 20.0),
+              addVerticalSpace(20),
               CustomTextField(
                 controller: _descriptionCtrl,
                 validator: FormValidator.nameValidator,
                 labelText: "Descripcio de la eina",
                 maxLines: 5,
               ), // Descripcio eina
-              const SizedBox(height: 20.0),
+              addVerticalSpace(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    //height: 150,
-                    width: 150,
+                  SizedBox(
+                    width: 100,
                     child: CustomTextField(
                       controller: _costCtrl,
                       labelText: "Cost per dia",
@@ -120,10 +122,10 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 20.0),
+            addVerticalSpace(20),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text("Tria categoria:"),
-                const SizedBox(height: 10.0),
+                Text("Tria categoria:"),
+                SizedBox(height: 10.0),
                 DropdownButton<ToolCategory>(
                   value: _currentCategory,
                   items: ToolCategory.values
@@ -144,8 +146,8 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                 ),
               ]),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text("Opcions \nde transport:"),
-                const SizedBox(height: 10.0),
+                Text("Opcions \nde transport:"),
+                SizedBox(height: 10.0),
                 DropdownButton<TransportOptions>(
                   value: _currentTransport,
                   items: TransportOptions.values
@@ -165,28 +167,25 @@ class _AddToolScreenState extends ConsumerState<AddToolScreen> {
                   },
                 ),
               ]),
-              const SizedBox(height: 5.0),
+             addVerticalSpace(8),
               Container(
+                //height: 200,
                 child: ImageListSelector(
                     callback: ((selectedImages) => _images = selectedImages)
                 ),
-
               ),
-
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: CustomTextButton(
-                        text: "Altres caracteristiques",
-                        onClicked: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: ((builder) => ToolExtraProperties()));
-                        }),
-                  ),
                   CustomTextButton(
-                      text: "Guarda",
+                      text: "Altres caracteristiques",
+                      onClicked: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => ToolExtraProperties()));
+                      }),
+                  CustomTextButton(
+                      text: "GUARDA",
                       onClicked: saveTool
                   )
                 ],

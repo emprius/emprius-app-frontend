@@ -46,7 +46,6 @@ class _SingleImageSelectorState extends State<SingleImageSelector> {
               children: [
                 IconButton(
                   iconSize: 40.0,
-                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.camera);
                   }, icon: const Icon(Icons.camera),
@@ -55,7 +54,6 @@ class _SingleImageSelectorState extends State<SingleImageSelector> {
                 const SizedBox(width: 10.0),
                 IconButton(
                   iconSize: 40.0,
-                  color: Colors.blueAccent,
                   onPressed: () {
                     pickImage(ImageSource.gallery);
                   }, icon: const Icon(Icons.image),

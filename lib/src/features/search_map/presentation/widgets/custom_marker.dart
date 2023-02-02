@@ -40,21 +40,21 @@ class CustomMarker extends Marker {
 
 
 class BaseMarker extends StatelessWidget {
-  IconData _iconData = Icons.location_on_sharp;
+  IconData _iconData = Icons.location_on_outlined;
   final Color color;
 
   BaseMarker({Key? key, iconData, required this.color}) :  super(key: key){
     if(iconData != null) _iconData = iconData;
   }
 
-  BaseMarker.availableTool() : color = Colors.green;
+  BaseMarker.availableTool() : color = const Color(0xFF606042);
   // BaseMarker.availableTool({this.color = Colors.red});
 
-  BaseMarker.bookedTool() : color = Colors.black;
+  BaseMarker.bookedTool() : color = const Color(0xFFB1384E);
 
-  BaseMarker.userMarker() : color = Colors.blueAccent;
+  BaseMarker.userMarker() : color = const Color(0xFFFCD8DF);
 
-  BaseMarker.tapMarker() : color = Colors.purple;
+  BaseMarker.tapMarker() : color = const Color(0xFFB1384E);
 
   @override
   Widget build(BuildContext context) {

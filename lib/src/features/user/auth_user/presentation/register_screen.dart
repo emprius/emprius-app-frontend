@@ -141,7 +141,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       title: Text(isActive ? "Perfil actiu" : "Perfil inactiu"),
                       value: isActive,
                       activeTrackColor: Colors.white10,
-                      activeColor: Colors.blue,
                       onChanged: (value) {
                         setState(() {
                           isActive = value;

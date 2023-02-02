@@ -38,7 +38,7 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
     );
 
     return Scaffold(
-      appBar: UserAppbar(title: "Mapa d'Eines",),
+      appBar: UserAppbar("Mapa d'Eines"),
       drawer: const UserDrawer(),
       body: Stack(
         children: [

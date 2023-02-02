@@ -72,11 +72,13 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                 }),
             Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("Filtra per cost maxim:"),
-                  Expanded(
+                  SizedBox(
+                    width: 100,
+                    height: 40,
                     child: TextField(
                       controller: _maxCostCtrl,
                       keyboardType: TextInputType.number,

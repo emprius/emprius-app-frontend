@@ -8,7 +8,6 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget {
   //bool goToMap = true;
   UserAppbar(this.title);
 
-
   @override
   Widget build(BuildContext context) {
     return AppBar(

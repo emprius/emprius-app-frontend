@@ -15,7 +15,6 @@ class ActivityBarchart extends StatelessWidget {
       maxY: 20,
       minY: 0,
       groupsSpace: 12,
-
       barGroups: BarData.userActivityCount.map(
             (data) => BarChartGroupData(
               x: data.id,
@@ -41,8 +40,7 @@ class ActivityBarchart extends StatelessWidget {
               ),
               ],),
       ).toList(),
-
-     titlesData: FlTitlesData(
+      titlesData: FlTitlesData(
          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
        //show: true,
@@ -54,8 +52,27 @@ class ActivityBarchart extends StatelessWidget {
          )
        )
      ),
+      barTouchData: BarTouchData(
+        touchTooltipData: BarTouchTooltipData(
+          tooltipBgColor:  const Color(0xFFBFECD9).withOpacity(0.9),
+          tooltipPadding: EdgeInsets.all(4.0)
+        )
+      )
+    ),
+  );
+}
 
-      /*  gridData: FlGridData(
+
+Widget bottomTitleWidget(double id, TitleMeta title){
+  String text = BarData.userActivityCount
+      .firstWhere((element) => element.id == id.toInt())
+      .name;
+ return Text(text);
+}
+
+
+
+/*  gridData: FlGridData(
         checkToShowHorizontalLine: (value) => value % BarData.interval == 0,
         getDrawingHorizontalLine: (value) {
           if (value == 0) {
@@ -71,14 +88,3 @@ class ActivityBarchart extends StatelessWidget {
           }
         },
       ),*/
-    ),
-  );
-}
-
-
-Widget bottomTitleWidget(double id, TitleMeta title){
-  String text = BarData.userActivityCount
-      .firstWhere((element) => element.id == id.toInt())
-      .name;
- return Text(text);
-}

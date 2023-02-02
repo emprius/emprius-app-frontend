@@ -50,7 +50,7 @@ class _AskToolFormScreenState extends ConsumerState<AskToolFormScreen> {
     const double padding = 20;
 
     return Scaffold(
-      appBar: UserAppbar('Formulari contacte'),
+      appBar: UserAppbar(title: 'Formulari contacte',),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           await ref

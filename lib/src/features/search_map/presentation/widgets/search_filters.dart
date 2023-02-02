@@ -55,7 +55,7 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
       child: Column(
           children: [
             CheckboxListTile(
-                title: Text("Disponibles actualment"),
+                title: const Text("Disponibles actualment"),
                 value: _isAvailable,
                 onChanged: (value) {
                   setState(() {
@@ -63,40 +63,13 @@ class _SearchFiltersState extends ConsumerState<SearchFilters> {
                   });
                 }),
             CheckboxListTile(
-                title: Text("Disponibles sense cost"),
+                title: const Text("Disponibles sense cost"),
                 value: _maybeFree,
                 onChanged: (value) {
                   setState(() {
                     _maybeFree = value as bool;
                   });
                 }),
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text("Buscar per categoria:"),
-            //     SizedBox(width: 10.0),
-            //     DropdownButton<ToolCategory>(
-            //       value: _currentCategory,
-            //       items: ToolCategory.values
-            //           .map(
-            //             (ToolCategory category) =>
-            //             DropdownMenuItem<ToolCategory>(
-            //               value: category,
-            //               child: Text(category.displayName!),
-            //             ),
-            //       )
-            //           .toList(),
-            //       onChanged: (ToolCategory? value) {
-            //         if (value != null && _currentCategory != value) {
-            //           setState(() {
-            //             _currentCategory = value;
-            //           });
-            //         }
-            //       },
-            //     ),
-            //   ],
-            // ),
             Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

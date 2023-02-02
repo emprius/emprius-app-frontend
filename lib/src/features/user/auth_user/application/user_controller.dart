@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 
-// The public methods on this class will be what allow the UI to modify the state.
+/// The public methods on this class will be what allow the UI to modify the state.
 class UserController extends StateNotifier<UserModel> {
 
   AuthState authState = const AuthState.unset();

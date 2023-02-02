@@ -34,7 +34,7 @@ class _ToolExtraPropertiesState extends State<ToolExtraProperties> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-          Text("Distancia maxima"),
+          const Text("Distancia maxima"),
            DropdownButton(
               value: _currentDistance,
               items: maxDistance
@@ -59,7 +59,7 @@ class _ToolExtraPropertiesState extends State<ToolExtraProperties> {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-          Text("Rang de pes"),
+          const Text("Rang de pes"),
           DropdownButton(
 
             value: _currentWeight,
@@ -84,7 +84,7 @@ class _ToolExtraPropertiesState extends State<ToolExtraProperties> {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Temps maxim"),
+              const Text("Temps maxim"),
               DropdownButton(
 
                 value: _currentTime,

@@ -43,7 +43,7 @@ class CalendarValidator {
          return AlertDialog(
            actions: [
              TextButton(
-               child: Text(
+               child: const Text(
                    "Una o mes dates ja estan reservades!",
              style: TextStyle(color: Colors.redAccent)),
                onPressed: () { Navigator.of(context).pop(); },

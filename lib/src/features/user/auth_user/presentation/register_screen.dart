@@ -183,7 +183,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 
-  /// Just go to user profile screen
   void registerSuccess() {
     Navigator.pushReplacementNamed(
         context, userProfileScreenRoute);

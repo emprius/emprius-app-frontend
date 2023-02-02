@@ -1,3 +1,3 @@
-# emprius-app-frontend
+# Emprius app frontend
 
-emprius.cat APP frontend for sharing resources among communities (WORK IN PROGRESS)
+emprius.cat APP backend for sharing resources among communities (WORK IN PROGRESS)

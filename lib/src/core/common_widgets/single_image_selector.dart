@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class SingleImageSelector extends StatelessWidget {
+class SingleImageSelector extends StatefulWidget {
   final Function(File?) callback;
   SingleImageSelector(this.callback, {Key? key}) : super(key: key);
 
+  @override
+  State<SingleImageSelector> createState() => _SingleImageSelectorState();
+}
+
+class _SingleImageSelectorState extends State<SingleImageSelector> {
   File? _image;
 
   Future pickImage(ImageSource source) async {
@@ -15,7 +20,7 @@ class SingleImageSelector extends StatelessWidget {
       if (image == null) return;
 
       final imageTemp = File(image.path);
-      callback(imageTemp);
+      widget.callback(imageTemp);
 
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
@@ -46,7 +51,7 @@ class SingleImageSelector extends StatelessWidget {
                   }, icon: const Icon(Icons.camera),
                   tooltip: "Feste una foto",
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 IconButton(
                   iconSize: 40.0,
                   onPressed: () {
@@ -56,7 +61,9 @@ class SingleImageSelector extends StatelessWidget {
                 )
               ],
             ),
-            _image != null ? Image.file(_image!) : const Text("Cap imatge seleccionada"),
+            _image != null
+                ? Image.file(_image!)
+                : const Text("Cap imatge seleccionada"),
           ],
         ),
       ),

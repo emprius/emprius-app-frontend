@@ -2,8 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'dart:io';
-
 
 class ToolCarousel extends ConsumerStatefulWidget {
   final List<String> images;

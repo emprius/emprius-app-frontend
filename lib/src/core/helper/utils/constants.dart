@@ -1,6 +1,4 @@
 import 'package:latlong2/latlong.dart';
-import 'package:flutter/material.dart';
-
 
 var defaultMapCenter = LatLng(41.695384, 2.492793);
 var defaultAvatar = "https://image.pngaaa.com/291/5335291-middle.png";
@@ -36,5 +34,4 @@ class Constants{
 
   /// The error message for invalid invitation input.
   static const emptyLocationError = "Introdueix una localitzacio";
-
 }

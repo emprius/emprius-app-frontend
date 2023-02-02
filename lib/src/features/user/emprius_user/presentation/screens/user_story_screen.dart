@@ -15,14 +15,12 @@ class _UserStoryState extends ConsumerState<UserStoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //var user = ref.watch(userProvider);
-    //final user = UserPreferences.getUser();
 
     return Scaffold(
-      appBar: UserAppbar("Historial d'us"),
+      appBar: UserAppbar(title: "Historial d'us", ),
         drawer: UserDrawer(),
-      body: Container(
-        color: Colors.teal,
+      body:Center(
+        child: Text('User activity graph'),
       )
     );
   }

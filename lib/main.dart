@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/core/services/storage/hive_storage_service.dart';
-import 'package:empriusapp/src/core/services/storage/storage_service.dart';
-import 'package:empriusapp/src/core/services/storage/storage_service_provider.dart';
+import 'package:empriusapp/src/core/services/local_storage/hive_storage_service.dart';
+import 'package:empriusapp/src/core/services/local_storage/storage_service.dart';
+import 'package:empriusapp/src/core/services/local_storage/storage_service_provider.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

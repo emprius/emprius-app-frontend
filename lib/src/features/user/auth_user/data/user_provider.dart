@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/services/storage/storage_service_provider.dart';
+import 'package:empriusapp/src/core/services/local_storage/storage_service_provider.dart';
 import 'package:empriusapp/src/features/user/auth_user/application/user_controller.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_http_repository.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_storage_repository.dart';

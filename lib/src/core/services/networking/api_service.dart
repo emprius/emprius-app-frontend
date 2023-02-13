@@ -65,10 +65,8 @@ class APIService {
   }
 
   static final Map<Endpoint, String> _responseJsonKeys = {
-    Endpoint.cases: 'cases',
-    Endpoint.casesSuspected: 'data',
-    Endpoint.casesConfirmed: 'data',
-    Endpoint.deaths: 'data',
-    Endpoint.recovered: 'data',
+    Endpoint.users: 'users',
+    Endpoint.tools: 'tools',
+    Endpoint.bookings: 'bookings',
   };
 }

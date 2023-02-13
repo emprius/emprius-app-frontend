@@ -4,11 +4,9 @@ import 'package:flutter/foundation.dart';
 /// List all endpoints when querying our bse url:
 
 enum Endpoint {
-  cases,
-  casesSuspected,
-  casesConfirmed,
-  deaths,
-  recovered,
+  users,
+  tools,
+  bookings,
 }
 
 class API {
@@ -34,10 +32,8 @@ class API {
       );
 
   static final Map<Endpoint, String> _paths = {
-    Endpoint.cases: 'cases',
-    Endpoint.casesSuspected: 'casesSuspected',
-    Endpoint.casesConfirmed: 'casesConfirmed',
-    Endpoint.deaths: 'deaths',
-    Endpoint.recovered: 'recovered',
+    Endpoint.users: 'users',
+    Endpoint.tools: 'tools',
+    Endpoint.bookings: 'bookings',
   };
 }

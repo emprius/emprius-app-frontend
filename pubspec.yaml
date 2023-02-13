@@ -85,7 +85,12 @@ dependencies:
 
   # Chart design
   fl_chart: ^0.60.0
+
+  # For reading and writing simple key-value pairs.
   shared_preferences: ^2.0.17
+
+  # To store data in secure storage:
+  flutter_secure_storage: ^8.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:empriusapp/src/core/services/api.dart';
-import 'package:empriusapp/src/core/services/endpoint_data.dart';
+import 'package:empriusapp/src/core/services/networking/api.dart';
+import 'package:empriusapp/src/core/services/networking/endpoint_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 

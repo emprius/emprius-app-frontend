@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/services/api_keys.dart';
+import 'package:empriusapp/src/core/services/networking/api_keys.dart';
 import 'package:flutter/foundation.dart';
 
 /// List all endpoints when querying our bse url:

@@ -7,14 +7,17 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
+
     /// Hive-specific initialization
     await Hive.initFlutter();
     final StorageService initializedStorageService = HiveStorageService();
     await initializedStorageService.init();
+    //final sharedPreferences = await SharedPreferences.getInstance();
     runApp(
         ProviderScope(
             overrides: [
@@ -29,6 +32,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
 
     return MaterialApp(
       title: 'Emprius app',

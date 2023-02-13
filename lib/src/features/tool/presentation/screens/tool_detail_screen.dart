@@ -1,7 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/common_widgets/datesrange_calendar.dart';
 import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/tool/presentation/widgets/tool_caroussel.dart';

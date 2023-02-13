@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/core/services/local_storage/hive_storage_service.dart';
 import 'package:empriusapp/src/core/services/local_storage/storage_service.dart';
 import 'package:empriusapp/src/core/services/local_storage/storage_service_provider.dart';

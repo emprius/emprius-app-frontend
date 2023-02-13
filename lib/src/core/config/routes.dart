@@ -16,9 +16,9 @@ import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/u
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';
-import '../features/search_map/presentation/screens/search_map_screen.dart';
-import '../features/main/splash_screen.dart';
-import '../features/user/emprius_user/domain/user_model.dart';
+import '../../features/search_map/presentation/screens/search_map_screen.dart';
+import '../../features/main/splash_screen.dart';
+import '../../features/user/emprius_user/domain/user_model.dart';
 
 const String loginScreenRoute = "/login";
 const String searchMapScreenRoute = "/home";

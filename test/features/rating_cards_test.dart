@@ -10,7 +10,6 @@ import 'package:empriusapp/src/features/rating/presentation/widgets/rating_card.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 
 //final ratingProvider = StateProvider((ref)=>Icon(Icons.check_box_outlined));
 var ratingModel = sampleRatings[0];

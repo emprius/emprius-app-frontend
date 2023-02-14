@@ -45,8 +45,12 @@ class UserProfileAvatar extends StatelessWidget {
         : FileImage(File(avatar));
 
     return CircleAvatar(
-        radius: 40,
-        backgroundImage: image as ImageProvider,
+      radius: 42,
+      backgroundColor: outerCircleColor,
+      child: CircleAvatar(
+          radius: 40,
+          backgroundImage: image as ImageProvider,
+      ),
     );
   }
 

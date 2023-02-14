@@ -5,20 +5,20 @@ import 'package:empriusapp/src/features/bookings/presentation/fragments/requests
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_detail_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/booking_edit_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/user_activity_navbar.dart';
-import 'package:empriusapp/src/features/main/splash_screen.dart';
-import 'package:empriusapp/src/features/search_map/presentation/screens/search_map_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/add_tool_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/screens/ask_tool_form_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_screen.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_edit_card_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/login_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/presentation/register_screen.dart';
-import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_story_screen.dart';
+import 'package:empriusapp/src/features/activity/presentation/screens/user_story_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_edit_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_profile_screen.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/screens/user_tool_list_screen.dart';
 import 'package:flutter/material.dart';
+import '../features/search_map/presentation/screens/search_map_screen.dart';
+import '../features/main/splash_screen.dart';
+import '../features/user/emprius_user/domain/user_model.dart';
 
 const String loginScreenRoute = "/login";
 const String searchMapScreenRoute = "/home";
@@ -99,16 +99,19 @@ class Routes {
 
 class EditProfileArguments {
   UserModel user;
+
   EditProfileArguments(this.user);
 }
 
 class ToolDetailArguments {
   int id;
+
   ToolDetailArguments(this.id);
 }
 
 class EditToolArguments {
   int id;
+
   EditToolArguments(this.id);
 }
 

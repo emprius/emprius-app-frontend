@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
+import 'package:empriusapp/src/features/activity/presentation/widgets/user_activity_barchart.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
@@ -59,8 +60,9 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               arguments: EditProfileArguments(user));
         },
       ),
-      body: SingleChildScrollView(
-        child: Padding(
+      body: ListView(
+        children:
+        [Padding(
           padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,7 +79,8 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     ),
                   ),
                   Column(
-                      crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     buildName(user),
                     addVerticalSpace(6.0),
                     RatingStars(rating: user.rating!),
@@ -85,7 +88,12 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     Text('EMPS: ${user.emps}', style: Theme.of(context).textTheme.bodyText2,),
                   ]),
                   addHorizontalSpace(6.0),
-                  Column(children: [
+                  CustomTextButton(
+                      text: "LES MEVES EINES",
+                      onClicked: () {
+                        Navigator.pushNamed(context, userToolsScreenRoute);
+                      }),
+                /*  Column(children: [
                     Switch(
                         value: user.isActive!,
                         activeTrackColor: Colors.white10,
@@ -94,25 +102,19 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     ),
                     const SizedBox(height: 6.0),
                     Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
-                  ]),
+                  ]),*/
                 ]),
               ),
-              addVerticalSpace(10.0),
-              CustomTextButton(
-                  text: "LES MEVES EINES",
-                  onClicked: () {
-                    Navigator.pushNamed(context, userToolsScreenRoute);
-                  }),
-              addVerticalSpace(10.0),
+              addVerticalSpace(8.0),
               Divider(),
-              addVerticalSpace(10.0),
+              addVerticalSpace(8.0),
               buildLocation(user),
-              addVerticalSpace(20.0),
+              addVerticalSpace(8.0),
               buildStatistics(user),
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 
@@ -135,13 +137,13 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Localitzacio actual:', style: Theme.of(context).textTheme.bodyMedium,),
-          addVerticalSpace(6.0),
+          addVerticalSpace(4.0),
           Container(
-            width: 280,
+            width: 300,
             height: 150,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
+              border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
             ),
             child: EmpriusMap(empriusMapController: _customMapCtrl, isViewOnly: true, initialCenter: user.location,),
@@ -150,16 +152,27 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       );
 
   Widget buildStatistics(UserModel user) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text('Resum activitat:', style: Theme.of(context).textTheme.bodyMedium,),
+          addVerticalSpace(4.0),
           Container(
-            child: Text('La meva activitat'),
-            width: 280,
-            height: 150,
-            clipBehavior: Clip.hardEdge,
+            width: 300,
+            height: 200,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
+              border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
             ),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                      width: 500,
+                      height: 300,
+                      padding: const EdgeInsets.all(8),
+                      //clipBehavior: Clip.hardEdge,
+                      child: ActivityBarchart()
+                  )]),
           ),
         ],
       );

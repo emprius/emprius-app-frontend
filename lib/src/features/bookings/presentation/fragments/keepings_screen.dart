@@ -16,7 +16,7 @@ class _KeepingsScreenState extends ConsumerState<KeepingsScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: UserAppbar(title: 'Custodies',),
+      appBar: UserAppbar('Custodies'),
       drawer: UserDrawer(),
       body: Text("Mostrar eines custodiades"),
     );

@@ -61,7 +61,7 @@ class _BookingListSkeletonState extends ConsumerState<BookingListSkeleton> {
     var bookings = widget.bookings;
 
     return Scaffold(
-      appBar: UserAppbar(title: widget.appbarTitle,),
+      appBar: UserAppbar(widget.appbarTitle,),
       drawer: UserDrawer(),
       body: RefreshIndicator(
         onRefresh: widget.onRefresh,

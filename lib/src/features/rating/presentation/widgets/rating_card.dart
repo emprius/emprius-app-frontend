@@ -1,7 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
 import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/rating/application/rating_provider.dart';
 import 'package:empriusapp/src/features/rating/domain/rating_model.dart';

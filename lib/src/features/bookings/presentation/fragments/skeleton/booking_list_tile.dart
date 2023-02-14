@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';

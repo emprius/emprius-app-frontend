@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/tool/presentation/screens/tool_detail_screen.dart';

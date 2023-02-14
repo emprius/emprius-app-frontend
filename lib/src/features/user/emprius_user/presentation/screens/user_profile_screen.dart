@@ -10,7 +10,7 @@ import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_m
 import 'package:empriusapp/src/core/helper/utils/constants.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

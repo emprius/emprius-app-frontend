@@ -12,12 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-
-    /// Hive-specific initialization
+    // Hive-specific initialization
     await Hive.initFlutter();
     final StorageService initializedStorageService = HiveStorageService();
     await initializedStorageService.init();
-    //final sharedPreferences = await SharedPreferences.getInstance();
     runApp(
         ProviderScope(
             overrides: [
@@ -32,7 +30,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
 
     return MaterialApp(
       title: 'Emprius app',
@@ -63,7 +60,6 @@ class MyApp extends ConsumerWidget {
       ),
     );
   }
-
   TextTheme buildTextTheme() {
     return const TextTheme(
         headline1: TextStyle(

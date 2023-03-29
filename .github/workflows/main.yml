@@ -2,28 +2,42 @@ name: Main
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-      branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-    name: build-android-apk
-    stage: build
-    only:
-      - develop
-      - main
-    run:
-    - >
-      docker build -t emprius:android_latest
-      --build-arg flutter_version=$FLUTTER_VERSION
-      --file $CI_PROJECT_DIR/misc/android_gitlabci.Dockerfile
-      .
-    - >
-      docker cp
-      $(docker create --rm emprius:android_latest):/emprius-APK/
-      $CI_PROJECT_DIR/emprius-APK/
-  artifacts:
-    paths:
-      - emprius-APK/
+    name: Build APK
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          push: false
+          build-args: |
+            flutter_version=latest
+            build_flavor=production
+
+      - name: Build and Release APK
+        uses: docker://docker.pkg.github.com/your-username/your-repository:latest
+        env:
+          APK_OUTPUT_DIR: /emprius-APK/
+        with:
+          args: |
+            flutter packages upgrade &&
+            flutter build apk --release --flavor production
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyApp
+          path: ${{ env.APK_OUTPUT_DIR }}

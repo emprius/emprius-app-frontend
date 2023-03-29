@@ -32,31 +32,6 @@ class ApiEndpoint {
       case AuthEndpoint.FORGOT_PW_RESET_PASSWORD: return '$path/forgot/reset-password';
     }
   }
-
-  /// Enums for different endpoints collections:
-  ///
-  /// Returns the path for a user bookings [endpoint].
-  ///
-  /// Specify student connection [id] to get the path for a specific student connection.
-  static String userConnections(StudentConnectionEndpoint endpoint, {int? id}) {
-    const path = '/user-connections';
-    switch(endpoint){
-      case StudentConnectionEndpoint.BASE: return path;
-      case StudentConnectionEndpoint.REQUESTS: return '$path/bookings';
-      case StudentConnectionEndpoint.BY_ID: {
-        assert(id != null, 'userBookingsId is required for BY_ID endpoint');
-        return '$path/$id';
-      }
-    }
-  }
-
-  /// Returns the path for interests [endpoint].
-  static String interests(InterestEndpoint endpoint) {
-    const path = '/interests';
-    switch (endpoint) {
-      case InterestEndpoint.BASE: return path;
-    }
-  }
 }
 
 /// A collection of endpoints used for authentication purposes.

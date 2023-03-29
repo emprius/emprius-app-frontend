@@ -1,0 +1,29 @@
+name: CDCI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+      branches: [ "main" ]
+
+jobs:
+  build:
+    name: build-android-apk
+    stage: build
+    only:
+      - develop
+      - main
+    run:
+    - >
+      docker build -t emprius:android_latest
+      --build-arg flutter_version=$FLUTTER_VERSION
+      --file $CI_PROJECT_DIR/misc/android_gitlabci.Dockerfile
+      .
+    - >
+      docker cp
+      $(docker create --rm emprius:android_latest):/emprius-APK/
+      $CI_PROJECT_DIR/emprius-APK/
+  artifacts:
+    paths:
+      - emprius-APK/
+

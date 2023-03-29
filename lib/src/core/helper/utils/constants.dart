@@ -35,9 +35,6 @@ class Constants{
   /// The error message for invalid invitation input.
   static const emptyLocationError = "Introdueix una localitzacio";
 
-  /// A utility method to convert any instance to null
-  static T? toNull<T>(Object? _) => null;
-
   /// A utility method to remove nulls from int list
   static List<int>? removeNulls(List? list) {
     return list?.whereType<int>().toList();

@@ -1,4 +1,4 @@
-name: CDCI
+name: Main
 
 on:
   push:

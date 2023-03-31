@@ -28,7 +28,7 @@ jobs:
             build_flavor=production
 
       - name: Build and Release APK
-        uses: docker://docker.pkg.github.com/your-username/your-repository:latest
+        uses: docker://docker.pkg.github.com/emprius/emprius-app-frontend:latest
         env:
           APK_OUTPUT_DIR: /emprius-APK/
         with:

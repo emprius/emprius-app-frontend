@@ -52,7 +52,6 @@ class CustomException implements Exception {
   })  : statusCode = statusCode ?? 500,
         name = exceptionType.name;
 
-  /// A factory to convert Dio and other errors to our custom error:
   factory CustomException.fromDioException(Exception error) {
     try {
       if (error is DioError) {
@@ -63,7 +62,7 @@ class CustomException implements Exception {
               statusCode: error.response?.statusCode,
               message: 'Request cancelled prematurely',
             );
-          case DioErrorType.connectTimeout:
+          case DioErrorType.connectionTimeout:
             return CustomException(
               exceptionType: _ExceptionType.ConnectTimeoutException,
               statusCode: error.response?.statusCode,
@@ -81,9 +80,9 @@ class CustomException implements Exception {
               statusCode: error.response?.statusCode,
               message: 'Failed to receive',
             );
-          case DioErrorType.response:
-          case DioErrorType.other:
-            if (error.message.contains(_ExceptionType.SocketException.name)) {
+          case DioErrorType.badResponse:
+          case DioErrorType.unknown:
+            if (error.message?.contains(_ExceptionType.SocketException.name) ?? false) {
               return CustomException(
                 exceptionType: _ExceptionType.FetchDataException,
                 statusCode: error.response?.statusCode,
@@ -114,12 +113,11 @@ class CustomException implements Exception {
               statusCode: error.response?.statusCode,
             );
         }
-      } else {
-        return CustomException(
-          exceptionType: _ExceptionType.UnrecognizedException,
-          message: 'Error unrecognized',
-        );
       }
+      return CustomException(
+        exceptionType: _ExceptionType.UnrecognizedException,
+        message: 'Error unrecognized',
+      );
     } on FormatException catch (e) {
       return CustomException(
         exceptionType: _ExceptionType.FormatException,

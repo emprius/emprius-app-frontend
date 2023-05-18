@@ -37,7 +37,7 @@ dependencies:
   material_floating_search_bar: ^0.3.7
 
   # provider
-  flutter_riverpod: ^2.0.0-dev.9
+  flutter_riverpod: 2.0.0-dev.8
 
   # pick image
   image_picker: ^0.8.3

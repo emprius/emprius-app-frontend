@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:dio/dio.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/foundation.dart';
 
 // Helpers
@@ -11,6 +14,8 @@ import 'package:empriusapp/src/core/services/all_providers.dart';
 
 // Endpoints
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
+
+
 
 /// A class that holds intercepting logic for refreshing expired tokens. This
 /// is the last interceptor in the queue.

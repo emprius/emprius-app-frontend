@@ -2,20 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 // Exceptions
-import 'package:empriusapp/src/core/helper/utils/custom_exception.dart';
+import 'package:empriusapp/src/core/services/networking/custom_exception.dart';
 
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 // Services
 import 'dio_service.dart';
-import './api_interface.dart';
+import 'api_interface.dart';
 
 // Models
 import 'response_model.dart';
 
 
-/// A service class implementing methods for basic API requests.
+/// A service class implementing network requests as instance of [DioService].
 class ApiServiceDio implements ApiInterface {
   /// An instance of [DioService] for network requests
   late final DioService _dioService;

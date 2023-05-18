@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 

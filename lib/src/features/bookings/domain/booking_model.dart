@@ -1,5 +1,5 @@
 
-import 'package:empriusapp/src/core/helper/utils/date_utils.dart';
+import 'package:empriusapp/src/core/helper/constants/date_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';

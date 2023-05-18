@@ -1,6 +1,6 @@
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/constants.dart';
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/constants/constants.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 /// This class prevents us from dealing with a Map object of response
 /// which can lead to errors in case a key is mistyped.

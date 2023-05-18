@@ -1,5 +1,5 @@
 import 'package:latlong2/latlong.dart';
-import 'constants.dart';
+import 'constants/constants.dart';
 
 class FormValidator{
 

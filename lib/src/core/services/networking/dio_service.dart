@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:empriusapp/src/core/helper/utils/constants.dart';
 
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
-import 'package:empriusapp/src/core/services/networking/response_model.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 // Models
+import 'package:empriusapp/src/core/services/networking/response_model.dart';
+
 // Exceptions
+import 'package:empriusapp/src/core/services/networking/custom_exception.dart';
 
 /// A wrapper class around Dio package:
 class DioService {
@@ -21,10 +22,13 @@ class DioService {
   /// network requests.
   final CancelToken _cancelToken;
 
-  /// A public constructor to initialize these variables
-  /// and create a Dio service:
+  /// A public constructor to initialize those three variables
+  /// and create a Dio service initializing the underlying [Dio] client:
+  /// * [Dio Object]: To combine network functionality and make requests.
   ///
-  /// * [interceptors]: A List of Interceptors for attaching custom
+  /// * [CacheOptions]: Optional - Set decided cachin system.
+  ///
+  /// * [interceptors]: Optional - A List of Interceptors for attaching custom
   /// [Interceptor]s to the underlying [_dio] client/object that are used
   /// for purposes like logging, refreshing token and error handling.
   ///
@@ -55,7 +59,7 @@ class DioService {
     }
   }
 
-  /// The followig methods request to the [endpoint] and return the
+  /// The following methods request to the [endpoint] and return the
   /// **decoded** response.
   ///
   /// Any errors encountered during the request are caught and a custom
@@ -75,6 +79,22 @@ class DioService {
   /// [options] are special instructions that can be merged with the request,
   /// used to add headers, set custom timeouts, etc.
 
+
+  /// This method sends a `GET` request to the [endpoint], **decodes**
+  /// the response and returns a parsed [ResponseModel] with a body of type [R].
+  ///
+  /// Any errors encountered during the request are caught and a custom
+  /// [CustomException] is thrown.
+  ///
+  /// [queryParams] holds any query parameters for the request.
+  ///
+  /// [cancelToken] is used to cancel the request pre-maturely. If null,
+  /// the **default** [cancelToken] inside [DioService] is used.
+  ///
+  /// [cacheOptions] are special cache instructions that can merge and override
+  /// the [globalCacheOptions].
+  ///
+  /// [options] are special instructions that can be merged with the request.
   Future<ResponseModel<R>> get<R>({
     required String endpoint,
     JSON? queryParams,
@@ -94,6 +114,18 @@ class DioService {
     return ResponseModel<R>.fromJson(response.data!);
   }
 
+  /// This method sends a `POST` request to the [endpoint], **decodes**
+  /// the response and returns a parsed [ResponseModel] with a body of type [R].
+  ///
+  /// Any errors encountered during the request are caught and a custom
+  /// [CustomException] is thrown.
+  ///
+  /// The [data] contains body for the request.
+  ///
+  /// [cancelToken] is used to cancel the request pre-maturely. If null,
+  /// the **default** [cancelToken] inside [DioService] is used.
+  ///
+  /// [options] are special instructions that can be merged with the request.
   Future<ResponseModel<R>> post<R>({
     required String endpoint,
     JSON? data,
@@ -109,6 +141,18 @@ class DioService {
     return ResponseModel<R>.fromJson(response.data!);
   }
 
+  /// This method sends a `PATCH` request to the [endpoint], **decodes**
+  /// the response and returns a parsed [ResponseModel] with a body of type [R].
+  ///
+  /// Any errors encountered during the request are caught and a custom
+  /// [CustomException] is thrown.
+  ///
+  /// The [data] contains body for the request.
+  ///
+  /// [cancelToken] is used to cancel the request pre-maturely. If null,
+  /// the **default** [cancelToken] inside [DioService] is used.
+  ///
+  /// [options] are special instructions that can be merged with the request.
   Future<ResponseModel<R>> patch<R>({
     required String endpoint,
     JSON? data,
@@ -124,6 +168,18 @@ class DioService {
     return ResponseModel<R>.fromJson(response.data!);
   }
 
+  /// This method sends a `DELETE` request to the [endpoint], **decodes**
+  /// the response and returns a parsed [ResponseModel] with a body of type [R].
+  ///
+  /// Any errors encountered during the request are caught and a custom
+  /// [CustomException] is thrown.
+  ///
+  /// The [data] contains body for the request.
+  ///
+  /// [cancelToken] is used to cancel the request pre-maturely. If null,
+  /// the **default** [cancelToken] inside [DioService] is used.
+  ///
+  /// [options] are special instructions that can be merged with the request.
   Future<ResponseModel<R>> delete<R>({
     required String endpoint,
     JSON? data,

@@ -1,10 +1,10 @@
 import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
-import 'package:empriusapp/src/core/helper/utils/constants.dart';
-import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
-import 'package:empriusapp/src/core/helper/utils/map_validator.dart';
-import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
+import 'package:empriusapp/src/core/helper/constants/constants.dart';
+import 'package:empriusapp/src/core/helper/form_validator.dart';
+import 'package:empriusapp/src/core/helper/map_validator.dart';
+import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';

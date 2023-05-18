@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
+
 // Models
 import 'response_model.dart';
 

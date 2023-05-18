@@ -1,7 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
-import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
-import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
+import 'package:empriusapp/src/core/helper/form_validator.dart';
+import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';

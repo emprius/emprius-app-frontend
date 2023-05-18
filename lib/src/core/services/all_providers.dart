@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 import 'package:empriusapp/src/core/services/networking/api_service_dio.dart';
 import 'package:empriusapp/src/core/services/networking/dio_service.dart';
-import 'package:empriusapp/src/core/services/local_storage/key_value_storage_service.dart';
-import 'package:empriusapp/src/core/services/local_storage/path_provider_service.dart';
+import 'package:empriusapp/src/core/services/local/key_value_storage_service.dart';
+import 'package:empriusapp/src/core/services/local/path_provider_service.dart';
 
 // Interceptors
 import 'package:empriusapp/src/core/services/networking/interceptors/api_interceptor.dart';

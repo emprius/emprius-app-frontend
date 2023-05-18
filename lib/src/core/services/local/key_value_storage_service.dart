@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 // Models
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';

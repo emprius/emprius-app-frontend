@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:empriusapp/src/core/providers/all_providers.dart';
+import 'package:empriusapp/src/core/services/all_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 

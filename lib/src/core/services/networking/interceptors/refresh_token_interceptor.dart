@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Helpers
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 // Providers
-import 'package:empriusapp/src/core/providers/all_providers.dart';
+import 'package:empriusapp/src/core/services/all_providers.dart';
 //import '../../../features/auth/providers/auth_provider.dart';
 
 // Endpoints

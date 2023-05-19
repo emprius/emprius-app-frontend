@@ -62,7 +62,7 @@ class RefreshTokenInterceptor extends Interceptor {
           // Make new dio and lock old one
           final tokenDio = Dio()..options = _dio.options;
 
-          _dio.lock();
+          _dio.interceptors.errorLock.lock();
 
           // Get auth details for refresh token request
           final kVStorageService = _read(keyValueStorageServiceProvider);
@@ -153,8 +153,8 @@ class RefreshTokenInterceptor extends Interceptor {
 
       return null;
     } finally {
-      _dio
-        ..unlock()
+      _dio.interceptors
+        ..clear()
         ..clear();
     }
   }

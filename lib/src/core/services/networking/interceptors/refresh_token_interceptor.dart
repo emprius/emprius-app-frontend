@@ -19,7 +19,7 @@ import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 
 /// A class that holds intercepting logic for refreshing expired tokens. This
 /// is the last interceptor in the queue.
-class RefreshTokenInterceptor extends Interceptor {
+class RefreshTokenInterceptor extends QueuedInterceptor {
   /// An instance of [Dio] for network requests
   final Dio _dio;
   final Reader _read;
@@ -62,7 +62,7 @@ class RefreshTokenInterceptor extends Interceptor {
           // Make new dio and lock old one
           final tokenDio = Dio()..options = _dio.options;
 
-          _dio.interceptors.errorLock.lock();
+          // _dio.errorLock.lock();
 
           // Get auth details for refresh token request
           final kVStorageService = _read(keyValueStorageServiceProvider);
@@ -154,8 +154,7 @@ class RefreshTokenInterceptor extends Interceptor {
       return null;
     } finally {
       _dio.interceptors
-        ..clear()
-        ..clear();
+        .clear();
     }
   }
 }

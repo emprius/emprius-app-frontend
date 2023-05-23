@@ -14,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 ///
 /// Since this interceptor isn't responsible for error handling, if an exception
 /// occurs it is passed on the next [Interceptor] or to [Dio].
-class ApiInterceptor extends Interceptor {
+class ApiInterceptor extends QueuedInterceptor {
   late final Ref _ref;
 
   ApiInterceptor(this._ref) : super();

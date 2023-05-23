@@ -12,7 +12,7 @@ import '';
 ///
 /// ** This interceptor doesn't modify the request or response in any way. And
 /// only works in `debug` mode **
-class LoggingInterceptor extends Interceptor {
+class LoggingInterceptor extends QueuedInterceptor {
   /// This method intercepts an out-going request before it reaches the
   /// destination.
   ///

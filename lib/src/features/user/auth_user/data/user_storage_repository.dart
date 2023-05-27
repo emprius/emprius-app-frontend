@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:empriusapp/src/core/services/storage/storage_service.dart';
+import 'package:empriusapp/src/core/services/local/hive/storage_service.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 
 /// Repository class to wrap interactions related to the user and the storage

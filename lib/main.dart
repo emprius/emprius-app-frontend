@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'package:empriusapp/src/core/routes.dart';
-import 'package:empriusapp/src/core/services/storage/hive_storage_service.dart';
-import 'package:empriusapp/src/core/services/storage/storage_service.dart';
-import 'package:empriusapp/src/core/services/storage/storage_service_provider.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
+import 'package:empriusapp/src/core/services/local/hive/hive_storage_service.dart';
+import 'package:empriusapp/src/core/services/local/hive/storage_service.dart';
+import 'package:empriusapp/src/core/services/local/hive/storage_service_provider.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
   runZonedGuarded<Future<void>>(() async {

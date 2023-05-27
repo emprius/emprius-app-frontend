@@ -1,7 +1,7 @@
 
 
-import 'package:empriusapp/src/core/helper/utils/constants.dart';
-import 'package:empriusapp/src/core/helper/utils/form_validator.dart';
+import 'package:empriusapp/src/core/helper/constants/constants.dart';
+import 'package:empriusapp/src/core/helper/form_validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main(){

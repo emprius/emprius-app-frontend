@@ -1,7 +1,7 @@
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
-import 'package:empriusapp/src/core/helper/utils/asset_or_file_image.dart';
-import 'package:empriusapp/src/core/helper/utils/widget_spacing.dart';
-import 'package:empriusapp/src/core/routes.dart';
+import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
+import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:empriusapp/src/core/helper/utils/typedefs.dart';
+import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_model.freezed.dart';

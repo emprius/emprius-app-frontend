@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_info_model.dart';
 
@@ -33,18 +33,22 @@ mixin _$UserInfo {
 /// @nodoc
 abstract class $UserInfoCopyWith<$Res> {
   factory $UserInfoCopyWith(UserInfo value, $Res Function(UserInfo) then) =
-      _$UserInfoCopyWithImpl<$Res>;
+      _$UserInfoCopyWithImpl<$Res, UserInfo>;
+  @useResult
   $Res call({String? name, double? rating, String? avatar});
 }
 
 /// @nodoc
-class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
+class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
+    implements $UserInfoCopyWith<$Res> {
   _$UserInfoCopyWithImpl(this._value, this._then);
 
-  final UserInfo _value;
   // ignore: unused_field
-  final $Res Function(UserInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? name = freezed,
@@ -52,19 +56,19 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
     Object? avatar = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      rating: rating == freezed
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      avatar: avatar == freezed
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -74,19 +78,19 @@ abstract class _$$_UserInfoCopyWith<$Res> implements $UserInfoCopyWith<$Res> {
           _$_UserInfo value, $Res Function(_$_UserInfo) then) =
       __$$_UserInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? name, double? rating, String? avatar});
 }
 
 /// @nodoc
-class __$$_UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
+class __$$_UserInfoCopyWithImpl<$Res>
+    extends _$UserInfoCopyWithImpl<$Res, _$_UserInfo>
     implements _$$_UserInfoCopyWith<$Res> {
   __$$_UserInfoCopyWithImpl(
       _$_UserInfo _value, $Res Function(_$_UserInfo) _then)
-      : super(_value, (v) => _then(v as _$_UserInfo));
+      : super(_value, _then);
 
-  @override
-  _$_UserInfo get _value => super._value as _$_UserInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? name = freezed,
@@ -94,15 +98,15 @@ class __$$_UserInfoCopyWithImpl<$Res> extends _$UserInfoCopyWithImpl<$Res>
     Object? avatar = freezed,
   }) {
     return _then(_$_UserInfo(
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      rating: rating == freezed
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      avatar: avatar == freezed
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -135,21 +139,18 @@ class _$_UserInfo implements _UserInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserInfo &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.rating, rating) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(rating),
-      const DeepCollectionEquality().hash(avatar));
+  int get hashCode => Object.hash(runtimeType, name, rating, avatar);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserInfoCopyWith<_$_UserInfo> get copyWith =>
       __$$_UserInfoCopyWithImpl<_$_UserInfo>(this, _$identity);
 

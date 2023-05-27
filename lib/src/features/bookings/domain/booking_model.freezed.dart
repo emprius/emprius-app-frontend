@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'booking_model.dart';
 
@@ -44,7 +44,8 @@ mixin _$BookingModel {
 abstract class $BookingModelCopyWith<$Res> {
   factory $BookingModelCopyWith(
           BookingModel value, $Res Function(BookingModel) then) =
-      _$BookingModelCopyWithImpl<$Res>;
+      _$BookingModelCopyWithImpl<$Res, BookingModel>;
+  @useResult
   $Res call(
       {int? bookingId,
       int? toolId,
@@ -63,13 +64,16 @@ abstract class $BookingModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
+class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
+    implements $BookingModelCopyWith<$Res> {
   _$BookingModelCopyWithImpl(this._value, this._then);
 
-  final BookingModel _value;
   // ignore: unused_field
-  final $Res Function(BookingModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? bookingId = freezed,
@@ -81,70 +85,71 @@ class _$BookingModelCopyWithImpl<$Res> implements $BookingModelCopyWith<$Res> {
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? userInfo = freezed,
-    Object? contact = freezed,
-    Object? bookingStatus = freezed,
+    Object? contact = null,
+    Object? bookingStatus = null,
     Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
-      bookingId: bookingId == freezed
+      bookingId: freezed == bookingId
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toolId: toolId == freezed
+      toolId: freezed == toolId
           ? _value.toolId
           : toolId // ignore: cast_nullable_to_non_nullable
               as int?,
-      emps: emps == freezed
+      emps: freezed == emps
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
               as double?,
-      startDate: startDate == freezed
+      startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endDate: endDate == freezed
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      reservedDates: reservedDates == freezed
+      reservedDates: freezed == reservedDates
           ? _value.reservedDates
           : reservedDates // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      fromUserId: fromUserId == freezed
+      fromUserId: freezed == fromUserId
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toUserId: toUserId == freezed
+      toUserId: freezed == toUserId
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      userInfo: userInfo == freezed
+      userInfo: freezed == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as UserInfo?,
-      contact: contact == freezed
+      contact: null == contact
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
               as String,
-      bookingStatus: bookingStatus == freezed
+      bookingStatus: null == bookingStatus
           ? _value.bookingStatus
           : bookingStatus // ignore: cast_nullable_to_non_nullable
               as BookingStatus,
-      comments: comments == freezed
+      comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserInfoCopyWith<$Res>? get userInfo {
     if (_value.userInfo == null) {
       return null;
     }
 
     return $UserInfoCopyWith<$Res>(_value.userInfo!, (value) {
-      return _then(_value.copyWith(userInfo: value));
+      return _then(_value.copyWith(userInfo: value) as $Val);
     });
   }
 }
@@ -156,6 +161,7 @@ abstract class _$$_BookingModelCopyWith<$Res>
           _$_BookingModel value, $Res Function(_$_BookingModel) then) =
       __$$_BookingModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? bookingId,
       int? toolId,
@@ -176,15 +182,13 @@ abstract class _$$_BookingModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_BookingModelCopyWithImpl<$Res>
-    extends _$BookingModelCopyWithImpl<$Res>
+    extends _$BookingModelCopyWithImpl<$Res, _$_BookingModel>
     implements _$$_BookingModelCopyWith<$Res> {
   __$$_BookingModelCopyWithImpl(
       _$_BookingModel _value, $Res Function(_$_BookingModel) _then)
-      : super(_value, (v) => _then(v as _$_BookingModel));
+      : super(_value, _then);
 
-  @override
-  _$_BookingModel get _value => super._value as _$_BookingModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? bookingId = freezed,
@@ -196,56 +200,56 @@ class __$$_BookingModelCopyWithImpl<$Res>
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? userInfo = freezed,
-    Object? contact = freezed,
-    Object? bookingStatus = freezed,
+    Object? contact = null,
+    Object? bookingStatus = null,
     Object? comments = freezed,
   }) {
     return _then(_$_BookingModel(
-      bookingId: bookingId == freezed
+      bookingId: freezed == bookingId
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toolId: toolId == freezed
+      toolId: freezed == toolId
           ? _value.toolId
           : toolId // ignore: cast_nullable_to_non_nullable
               as int?,
-      emps: emps == freezed
+      emps: freezed == emps
           ? _value.emps
           : emps // ignore: cast_nullable_to_non_nullable
               as double?,
-      startDate: startDate == freezed
+      startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endDate: endDate == freezed
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      reservedDates: reservedDates == freezed
+      reservedDates: freezed == reservedDates
           ? _value.reservedDates
           : reservedDates // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
-      fromUserId: fromUserId == freezed
+      fromUserId: freezed == fromUserId
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toUserId: toUserId == freezed
+      toUserId: freezed == toUserId
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      userInfo: userInfo == freezed
+      userInfo: freezed == userInfo
           ? _value.userInfo
           : userInfo // ignore: cast_nullable_to_non_nullable
               as UserInfo?,
-      contact: contact == freezed
+      contact: null == contact
           ? _value.contact
           : contact // ignore: cast_nullable_to_non_nullable
               as String,
-      bookingStatus: bookingStatus == freezed
+      bookingStatus: null == bookingStatus
           ? _value.bookingStatus
           : bookingStatus // ignore: cast_nullable_to_non_nullable
               as BookingStatus,
-      comments: comments == freezed
+      comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -309,42 +313,48 @@ class _$_BookingModel implements _BookingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BookingModel &&
-            const DeepCollectionEquality().equals(other.bookingId, bookingId) &&
-            const DeepCollectionEquality().equals(other.toolId, toolId) &&
-            const DeepCollectionEquality().equals(other.emps, emps) &&
-            const DeepCollectionEquality().equals(other.startDate, startDate) &&
-            const DeepCollectionEquality().equals(other.endDate, endDate) &&
-            const DeepCollectionEquality()
-                .equals(other.reservedDates, reservedDates) &&
-            const DeepCollectionEquality()
-                .equals(other.fromUserId, fromUserId) &&
-            const DeepCollectionEquality().equals(other.toUserId, toUserId) &&
-            const DeepCollectionEquality().equals(other.userInfo, userInfo) &&
-            const DeepCollectionEquality().equals(other.contact, contact) &&
-            const DeepCollectionEquality()
-                .equals(other.bookingStatus, bookingStatus) &&
-            const DeepCollectionEquality().equals(other.comments, comments));
+            (identical(other.bookingId, bookingId) ||
+                other.bookingId == bookingId) &&
+            (identical(other.toolId, toolId) || other.toolId == toolId) &&
+            (identical(other.emps, emps) || other.emps == emps) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.reservedDates, reservedDates) ||
+                other.reservedDates == reservedDates) &&
+            (identical(other.fromUserId, fromUserId) ||
+                other.fromUserId == fromUserId) &&
+            (identical(other.toUserId, toUserId) ||
+                other.toUserId == toUserId) &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.contact, contact) || other.contact == contact) &&
+            (identical(other.bookingStatus, bookingStatus) ||
+                other.bookingStatus == bookingStatus) &&
+            (identical(other.comments, comments) ||
+                other.comments == comments));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(bookingId),
-      const DeepCollectionEquality().hash(toolId),
-      const DeepCollectionEquality().hash(emps),
-      const DeepCollectionEquality().hash(startDate),
-      const DeepCollectionEquality().hash(endDate),
-      const DeepCollectionEquality().hash(reservedDates),
-      const DeepCollectionEquality().hash(fromUserId),
-      const DeepCollectionEquality().hash(toUserId),
-      const DeepCollectionEquality().hash(userInfo),
-      const DeepCollectionEquality().hash(contact),
-      const DeepCollectionEquality().hash(bookingStatus),
-      const DeepCollectionEquality().hash(comments));
+      bookingId,
+      toolId,
+      emps,
+      startDate,
+      endDate,
+      reservedDates,
+      fromUserId,
+      toUserId,
+      userInfo,
+      contact,
+      bookingStatus,
+      comments);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BookingModelCopyWith<_$_BookingModel> get copyWith =>
       __$$_BookingModelCopyWithImpl<_$_BookingModel>(this, _$identity);
 

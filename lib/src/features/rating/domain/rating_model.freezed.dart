@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'rating_model.dart';
 
@@ -21,7 +21,7 @@ RatingModel _$RatingModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RatingModel {
   int? get ratingId => throw _privateConstructorUsedError;
-  bool? get isPending => throw _privateConstructorUsedError;
+  bool get isPending => throw _privateConstructorUsedError;
   int? get fromUserId => throw _privateConstructorUsedError;
   int? get toUserId => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
@@ -43,10 +43,11 @@ mixin _$RatingModel {
 abstract class $RatingModelCopyWith<$Res> {
   factory $RatingModelCopyWith(
           RatingModel value, $Res Function(RatingModel) then) =
-      _$RatingModelCopyWithImpl<$Res>;
+      _$RatingModelCopyWithImpl<$Res, RatingModel>;
+  @useResult
   $Res call(
       {int? ratingId,
-      bool? isPending,
+      bool isPending,
       int? fromUserId,
       int? toUserId,
       String? thumbnail,
@@ -59,17 +60,20 @@ abstract class $RatingModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RatingModelCopyWithImpl<$Res> implements $RatingModelCopyWith<$Res> {
+class _$RatingModelCopyWithImpl<$Res, $Val extends RatingModel>
+    implements $RatingModelCopyWith<$Res> {
   _$RatingModelCopyWithImpl(this._value, this._then);
 
-  final RatingModel _value;
   // ignore: unused_field
-  final $Res Function(RatingModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? ratingId = freezed,
-    Object? isPending = freezed,
+    Object? isPending = null,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? thumbnail = freezed,
@@ -77,50 +81,50 @@ class _$RatingModelCopyWithImpl<$Res> implements $RatingModelCopyWith<$Res> {
     Object? rating = freezed,
     Object? bookingId = freezed,
     Object? ratingType = freezed,
-    Object? bookingReservedDates = freezed,
+    Object? bookingReservedDates = null,
   }) {
     return _then(_value.copyWith(
-      ratingId: ratingId == freezed
+      ratingId: freezed == ratingId
           ? _value.ratingId
           : ratingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isPending: isPending == freezed
+      isPending: null == isPending
           ? _value.isPending
           : isPending // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fromUserId: fromUserId == freezed
+              as bool,
+      fromUserId: freezed == fromUserId
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toUserId: toUserId == freezed
+      toUserId: freezed == toUserId
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      thumbnail: thumbnail == freezed
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      rating: rating == freezed
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      bookingId: bookingId == freezed
+      bookingId: freezed == bookingId
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      ratingType: ratingType == freezed
+      ratingType: freezed == ratingType
           ? _value.ratingType
           : ratingType // ignore: cast_nullable_to_non_nullable
               as RatingType?,
-      bookingReservedDates: bookingReservedDates == freezed
+      bookingReservedDates: null == bookingReservedDates
           ? _value.bookingReservedDates
           : bookingReservedDates // ignore: cast_nullable_to_non_nullable
               as List<DateTimeRange>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -131,9 +135,10 @@ abstract class _$$_RatingModelCopyWith<$Res>
           _$_RatingModel value, $Res Function(_$_RatingModel) then) =
       __$$_RatingModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? ratingId,
-      bool? isPending,
+      bool isPending,
       int? fromUserId,
       int? toUserId,
       String? thumbnail,
@@ -146,19 +151,18 @@ abstract class _$$_RatingModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
+class __$$_RatingModelCopyWithImpl<$Res>
+    extends _$RatingModelCopyWithImpl<$Res, _$_RatingModel>
     implements _$$_RatingModelCopyWith<$Res> {
   __$$_RatingModelCopyWithImpl(
       _$_RatingModel _value, $Res Function(_$_RatingModel) _then)
-      : super(_value, (v) => _then(v as _$_RatingModel));
+      : super(_value, _then);
 
-  @override
-  _$_RatingModel get _value => super._value as _$_RatingModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? ratingId = freezed,
-    Object? isPending = freezed,
+    Object? isPending = null,
     Object? fromUserId = freezed,
     Object? toUserId = freezed,
     Object? thumbnail = freezed,
@@ -166,46 +170,46 @@ class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
     Object? rating = freezed,
     Object? bookingId = freezed,
     Object? ratingType = freezed,
-    Object? bookingReservedDates = freezed,
+    Object? bookingReservedDates = null,
   }) {
     return _then(_$_RatingModel(
-      ratingId: ratingId == freezed
+      ratingId: freezed == ratingId
           ? _value.ratingId
           : ratingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isPending: isPending == freezed
+      isPending: null == isPending
           ? _value.isPending
           : isPending // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fromUserId: fromUserId == freezed
+              as bool,
+      fromUserId: freezed == fromUserId
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      toUserId: toUserId == freezed
+      toUserId: freezed == toUserId
           ? _value.toUserId
           : toUserId // ignore: cast_nullable_to_non_nullable
               as int?,
-      thumbnail: thumbnail == freezed
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      rating: rating == freezed
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      bookingId: bookingId == freezed
+      bookingId: freezed == bookingId
           ? _value.bookingId
           : bookingId // ignore: cast_nullable_to_non_nullable
               as int?,
-      ratingType: ratingType == freezed
+      ratingType: freezed == ratingType
           ? _value.ratingType
           : ratingType // ignore: cast_nullable_to_non_nullable
               as RatingType?,
-      bookingReservedDates: bookingReservedDates == freezed
+      bookingReservedDates: null == bookingReservedDates
           ? _value._bookingReservedDates
           : bookingReservedDates // ignore: cast_nullable_to_non_nullable
               as List<DateTimeRange>,
@@ -218,7 +222,7 @@ class __$$_RatingModelCopyWithImpl<$Res> extends _$RatingModelCopyWithImpl<$Res>
 class _$_RatingModel implements _RatingModel {
   const _$_RatingModel(
       {this.ratingId,
-      this.isPending,
+      this.isPending = true,
       this.fromUserId,
       this.toUserId,
       this.thumbnail,
@@ -236,7 +240,8 @@ class _$_RatingModel implements _RatingModel {
   @override
   final int? ratingId;
   @override
-  final bool? isPending;
+  @JsonKey()
+  final bool isPending;
   @override
   final int? fromUserId;
   @override
@@ -256,6 +261,8 @@ class _$_RatingModel implements _RatingModel {
   @JsonKey()
   @TimestampListOrNullConverter()
   List<DateTimeRange> get bookingReservedDates {
+    if (_bookingReservedDates is EqualUnmodifiableListView)
+      return _bookingReservedDates;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bookingReservedDates);
   }
@@ -270,17 +277,22 @@ class _$_RatingModel implements _RatingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RatingModel &&
-            const DeepCollectionEquality().equals(other.ratingId, ratingId) &&
-            const DeepCollectionEquality().equals(other.isPending, isPending) &&
-            const DeepCollectionEquality()
-                .equals(other.fromUserId, fromUserId) &&
-            const DeepCollectionEquality().equals(other.toUserId, toUserId) &&
-            const DeepCollectionEquality().equals(other.thumbnail, thumbnail) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.rating, rating) &&
-            const DeepCollectionEquality().equals(other.bookingId, bookingId) &&
-            const DeepCollectionEquality()
-                .equals(other.ratingType, ratingType) &&
+            (identical(other.ratingId, ratingId) ||
+                other.ratingId == ratingId) &&
+            (identical(other.isPending, isPending) ||
+                other.isPending == isPending) &&
+            (identical(other.fromUserId, fromUserId) ||
+                other.fromUserId == fromUserId) &&
+            (identical(other.toUserId, toUserId) ||
+                other.toUserId == toUserId) &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.bookingId, bookingId) ||
+                other.bookingId == bookingId) &&
+            (identical(other.ratingType, ratingType) ||
+                other.ratingType == ratingType) &&
             const DeepCollectionEquality()
                 .equals(other._bookingReservedDates, _bookingReservedDates));
   }
@@ -289,19 +301,20 @@ class _$_RatingModel implements _RatingModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(ratingId),
-      const DeepCollectionEquality().hash(isPending),
-      const DeepCollectionEquality().hash(fromUserId),
-      const DeepCollectionEquality().hash(toUserId),
-      const DeepCollectionEquality().hash(thumbnail),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(rating),
-      const DeepCollectionEquality().hash(bookingId),
-      const DeepCollectionEquality().hash(ratingType),
+      ratingId,
+      isPending,
+      fromUserId,
+      toUserId,
+      thumbnail,
+      title,
+      rating,
+      bookingId,
+      ratingType,
       const DeepCollectionEquality().hash(_bookingReservedDates));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RatingModelCopyWith<_$_RatingModel> get copyWith =>
       __$$_RatingModelCopyWithImpl<_$_RatingModel>(this, _$identity);
 
@@ -316,7 +329,7 @@ class _$_RatingModel implements _RatingModel {
 abstract class _RatingModel implements RatingModel {
   const factory _RatingModel(
       {final int? ratingId,
-      final bool? isPending,
+      final bool isPending,
       final int? fromUserId,
       final int? toUserId,
       final String? thumbnail,
@@ -333,7 +346,7 @@ abstract class _RatingModel implements RatingModel {
   @override
   int? get ratingId;
   @override
-  bool? get isPending;
+  bool get isPending;
   @override
   int? get fromUserId;
   @override

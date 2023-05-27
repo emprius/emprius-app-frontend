@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'auth_state.dart';
 
@@ -27,11 +27,11 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,11 +55,11 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,16 +77,18 @@ mixin _$AuthState {
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res>;
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
 }
 
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
   _$AuthStateCopyWithImpl(this._value, this._then);
 
-  final AuthState _value;
   // ignore: unused_field
-  final $Res Function(AuthState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -98,14 +100,11 @@ abstract class _$$UNAUTHENTICATEDCopyWith<$Res> {
 
 /// @nodoc
 class __$$UNAUTHENTICATEDCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$UNAUTHENTICATED>
     implements _$$UNAUTHENTICATEDCopyWith<$Res> {
   __$$UNAUTHENTICATEDCopyWithImpl(
       _$UNAUTHENTICATED _value, $Res Function(_$UNAUTHENTICATED) _then)
-      : super(_value, (v) => _then(v as _$UNAUTHENTICATED));
-
-  @override
-  _$UNAUTHENTICATED get _value => super._value as _$UNAUTHENTICATED;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -142,11 +141,11 @@ class _$UNAUTHENTICATED implements UNAUTHENTICATED {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) {
     return unauthenticated?.call();
   }
@@ -182,11 +181,11 @@ class _$UNAUTHENTICATED implements UNAUTHENTICATED {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) {
     return unauthenticated?.call(this);
   }
@@ -220,14 +219,12 @@ abstract class _$$AUTHENTICATINGCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$AUTHENTICATINGCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$AUTHENTICATINGCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AUTHENTICATING>
     implements _$$AUTHENTICATINGCopyWith<$Res> {
   __$$AUTHENTICATINGCopyWithImpl(
       _$AUTHENTICATING _value, $Res Function(_$AUTHENTICATING) _then)
-      : super(_value, (v) => _then(v as _$AUTHENTICATING));
-
-  @override
-  _$AUTHENTICATING get _value => super._value as _$AUTHENTICATING;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -264,11 +261,11 @@ class _$AUTHENTICATING implements AUTHENTICATING {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) {
     return authenticating?.call();
   }
@@ -304,11 +301,11 @@ class _$AUTHENTICATING implements AUTHENTICATING {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) {
     return authenticating?.call(this);
   }
@@ -339,25 +336,25 @@ abstract class _$$AUTHENTICATEDCopyWith<$Res> {
   factory _$$AUTHENTICATEDCopyWith(
           _$AUTHENTICATED value, $Res Function(_$AUTHENTICATED) then) =
       __$$AUTHENTICATEDCopyWithImpl<$Res>;
+  @useResult
   $Res call({String fullName});
 }
 
 /// @nodoc
-class __$$AUTHENTICATEDCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$AUTHENTICATEDCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AUTHENTICATED>
     implements _$$AUTHENTICATEDCopyWith<$Res> {
   __$$AUTHENTICATEDCopyWithImpl(
       _$AUTHENTICATED _value, $Res Function(_$AUTHENTICATED) _then)
-      : super(_value, (v) => _then(v as _$AUTHENTICATED));
+      : super(_value, _then);
 
-  @override
-  _$AUTHENTICATED get _value => super._value as _$AUTHENTICATED;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fullName = freezed,
+    Object? fullName = null,
   }) {
     return _then(_$AUTHENTICATED(
-      fullName: fullName == freezed
+      fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -383,15 +380,16 @@ class _$AUTHENTICATED implements AUTHENTICATED {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AUTHENTICATED &&
-            const DeepCollectionEquality().equals(other.fullName, fullName));
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(fullName));
+  int get hashCode => Object.hash(runtimeType, fullName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AUTHENTICATEDCopyWith<_$AUTHENTICATED> get copyWith =>
       __$$AUTHENTICATEDCopyWithImpl<_$AUTHENTICATED>(this, _$identity);
 
@@ -410,11 +408,11 @@ class _$AUTHENTICATED implements AUTHENTICATED {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) {
     return authenticated?.call(fullName);
   }
@@ -450,11 +448,11 @@ class _$AUTHENTICATED implements AUTHENTICATED {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) {
     return authenticated?.call(this);
   }
@@ -490,24 +488,24 @@ abstract class AUTHENTICATED implements AuthState {
 abstract class _$$FAILEDCopyWith<$Res> {
   factory _$$FAILEDCopyWith(_$FAILED value, $Res Function(_$FAILED) then) =
       __$$FAILEDCopyWithImpl<$Res>;
+  @useResult
   $Res call({String reason});
 }
 
 /// @nodoc
-class __$$FAILEDCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$FAILEDCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$FAILED>
     implements _$$FAILEDCopyWith<$Res> {
   __$$FAILEDCopyWithImpl(_$FAILED _value, $Res Function(_$FAILED) _then)
-      : super(_value, (v) => _then(v as _$FAILED));
+      : super(_value, _then);
 
-  @override
-  _$FAILED get _value => super._value as _$FAILED;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reason = freezed,
+    Object? reason = null,
   }) {
     return _then(_$FAILED(
-      reason: reason == freezed
+      reason: null == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
               as String,
@@ -533,15 +531,15 @@ class _$FAILED implements FAILED {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FAILED &&
-            const DeepCollectionEquality().equals(other.reason, reason));
+            (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(reason));
+  int get hashCode => Object.hash(runtimeType, reason);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$FAILEDCopyWith<_$FAILED> get copyWith =>
       __$$FAILEDCopyWithImpl<_$FAILED>(this, _$identity);
 
@@ -560,11 +558,11 @@ class _$FAILED implements FAILED {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) {
     return failed?.call(reason);
   }
@@ -600,11 +598,11 @@ class _$FAILED implements FAILED {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) {
     return failed?.call(this);
   }
@@ -642,13 +640,10 @@ abstract class _$$UNSETCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UNSETCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$UNSETCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res, _$UNSET>
     implements _$$UNSETCopyWith<$Res> {
   __$$UNSETCopyWithImpl(_$UNSET _value, $Res Function(_$UNSET) _then)
-      : super(_value, (v) => _then(v as _$UNSET));
-
-  @override
-  _$UNSET get _value => super._value as _$UNSET;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -685,11 +680,11 @@ class _$UNSET implements UNSET {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function()? authenticating,
-    TResult Function(String fullName)? authenticated,
-    TResult Function(String reason)? failed,
-    TResult Function()? unset,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? authenticating,
+    TResult? Function(String fullName)? authenticated,
+    TResult? Function(String reason)? failed,
+    TResult? Function()? unset,
   }) {
     return unset?.call();
   }
@@ -725,11 +720,11 @@ class _$UNSET implements UNSET {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UNAUTHENTICATED value)? unauthenticated,
-    TResult Function(AUTHENTICATING value)? authenticating,
-    TResult Function(AUTHENTICATED value)? authenticated,
-    TResult Function(FAILED value)? failed,
-    TResult Function(UNSET value)? unset,
+    TResult? Function(UNAUTHENTICATED value)? unauthenticated,
+    TResult? Function(AUTHENTICATING value)? authenticating,
+    TResult? Function(AUTHENTICATED value)? authenticated,
+    TResult? Function(FAILED value)? failed,
+    TResult? Function(UNSET value)? unset,
   }) {
     return unset?.call(this);
   }

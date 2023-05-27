@@ -9,7 +9,7 @@ part of 'rating_model.dart';
 _$_RatingModel _$$_RatingModelFromJson(Map<String, dynamic> json) =>
     _$_RatingModel(
       ratingId: json['ratingId'] as int?,
-      isPending: json['isPending'] as bool?,
+      isPending: json['isPending'] as bool? ?? true,
       fromUserId: json['fromUserId'] as int?,
       toUserId: json['toUserId'] as int?,
       thumbnail: json['thumbnail'] as String?,

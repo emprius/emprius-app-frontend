@@ -4,6 +4,7 @@ import 'package:empriusapp/src/features/bookings/presentation/fragments/petition
 import 'package:empriusapp/src/features/rating/presentation/screens/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/fragments/requests_screen.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +27,7 @@ class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
 
   @override
   void initState() {
-    var userId =  ref.read(userProvider).id;
+    var userId =  ref.read(currentUserProvider).id;
     ref.read(allBookingsProvider.notifier).getAllUserPetitions(userId: userId);
     ref.read(allBookingsProvider.notifier).getAllUserRequests(userId: userId);
     super.initState();

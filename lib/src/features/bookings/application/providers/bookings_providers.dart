@@ -3,6 +3,7 @@ import 'package:empriusapp/src/features/bookings/data/repositories/bookings_repo
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
@@ -37,14 +38,14 @@ final filteredBookingProvider = Provider<List<BookingModel>>((ref){
 
 ///Requested bookings TO a user (outcoming):
 final requestBookingsProvider = StateProvider<List<BookingModel>>((ref) {
-    var userId = ref.watch(userProvider).id;
+    var userId = ref.watch(currentUserProvider).id;
     var allBookings = ref.watch(filteredBookingProvider);
     return allBookings.where((booking) => booking.fromUserId == userId).toList();
 });
 
 ///Petitioned bookings FROM a user (incoming):
 final petitionBookingsProvider = StateProvider<List<BookingModel>>((ref) {
-  var userId = ref.watch(userProvider).id;
+  var userId = ref.watch(currentUserProvider).id;
   var allBookings = ref.watch(filteredBookingProvider);
   return allBookings.where((booking) => booking.toUserId == userId).toList();
 });

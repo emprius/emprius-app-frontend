@@ -9,6 +9,7 @@ import 'package:empriusapp/src/features/search_map/application/controllers/empri
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
@@ -54,7 +55,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   @override
   void initState() {
     user = widget.args.user;
-    _setMarkers( ref.read(userProvider.notifier).state.location!);
+    _setMarkers( ref.read(currentUserProvider.notifier).state.location!);
     _nameCtrl.text = user.name!;
     _emailCtrl.text = user.email;
     isActive = user.isActive!;
@@ -192,7 +193,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           );
 
                           await ref
-                              .watch(userProvider.notifier)
+                              .watch(currentUserProvider.notifier)
                               .updateUser(
                             user.copyWith(
                               name: _nameCtrl.text,

@@ -157,7 +157,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         const SnackBar(content: Text('Usuari creat')),
                       );
 
-                      await ref.watch(userProvider.notifier).register(
+                      await ref.watch(currentUserProvider.notifier).register(
                           name: _nameCtrl.text,
                           email: _emailCtrl.text,
                           location: _customMapCtrl.selectedLocation!,
@@ -167,7 +167,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           avatar:  _avatar?.path ?? ""
                       );
 
-                      if (ref.watch(userProvider.notifier).authState is FAILED) {
+                      if (ref.watch(currentUserProvider.notifier).authState is FAILED) {
                         // todo(kon): implement error show
                         return;
                       }

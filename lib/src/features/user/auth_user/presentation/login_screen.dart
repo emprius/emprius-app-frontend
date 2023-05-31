@@ -66,7 +66,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         // Todo(kon): after implement jwt this will be different, because we will need
                         // to check if the token is invalid or expired. Now, authenticated, mean that user
                         // credentials are retrieved from the storage so it can safely login without bugs
-                        else if (ref.read(userProvider.notifier).authState is! AUTHENTICATED) {
+                        else if (ref.read(currentUserProvider.notifier).authState is! AUTHENTICATED) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
                           );

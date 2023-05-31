@@ -6,6 +6,7 @@ import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +34,7 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            widget.booking.fromUserId != ref.watch(userProvider).id
+            widget.booking.fromUserId != ref.watch(currentUserProvider).id
                 ? Icon(
               Icons.arrow_circle_left_outlined,
               color: Theme.of(context).colorScheme.error,
@@ -65,7 +66,7 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
       },
       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
         if (widget.booking.bookingStatus == BookingStatus.ASKED &&
-            ref.read(userProvider).id == widget.booking.fromUserId)
+            ref.read(currentUserProvider).id == widget.booking.fromUserId)
           Row(
             children: [
               PopupMenuButton(

@@ -9,6 +9,7 @@ import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enu
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
 import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -145,7 +146,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     if (booking.bookingStatus == BookingStatus.ASKED
-                        && booking.fromUserId != ref.read(userProvider).id)
+                        && booking.fromUserId != ref.read(currentUserProvider).id)
                       CustomTextButton(
                         text: 'APROVA',
                         onClicked: () async {

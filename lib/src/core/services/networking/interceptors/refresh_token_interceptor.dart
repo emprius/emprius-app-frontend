@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:dio/dio.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/foundation.dart';
 
@@ -10,7 +10,6 @@ import 'package:empriusapp/src/core/helper/typedefs.dart';
 
 // Providers
 import 'package:empriusapp/src/core/services/all_providers.dart';
-//import '../../../features/auth/providers/auth_provider.dart';
 
 // Endpoints
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
@@ -66,7 +65,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
 
           // Get auth details for refresh token request
           final kVStorageService = _read(keyValueStorageServiceProvider);
-          final currentUser = _read(userProvider);
+          final currentUser = _read(currentUserProvider);
           final data = {
             'erp': currentUser!.name,
             'password': await kVStorageService.getAuthPassword(),

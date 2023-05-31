@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
 import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
 import 'package:empriusapp/src/features/activity/presentation/widgets/user_activity_barchart.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
@@ -35,14 +36,14 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   void initState() {
-    _setMarkers(ref.read(userProvider.notifier).state);
+    _setMarkers(ref.read(currentUserProvider.notifier).state);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var user = ref.watch(userProvider);
-    ref.listen<LatLng>(userProvider.select(
+    var user = ref.watch(currentUserProvider);
+    ref.listen<LatLng>(currentUserProvider.select(
             (user) => user.location!), (LatLng? previous, LatLng next) {
       _setMarkers(user);
       _customMapCtrl.flutterMapController?.move(next, 15.0);

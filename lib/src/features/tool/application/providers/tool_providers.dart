@@ -1,7 +1,7 @@
 import 'package:empriusapp/src/features/tool/application/notifiers/all_tools_notifier.dart';
 import 'package:empriusapp/src/features/tool/data/repositories/tool_http_repository.dart';
 import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
@@ -22,9 +22,8 @@ final allToolsProvider = StateNotifierProvider<AllToolsNotifier, List<ToolModel>
 
 
 final authUserToolsProvider = StateProvider<List<ToolModel>>((ref) {
-  var userId = ref.watch(userProvider.select((user) => user.id));
+  var userId = ref.watch(currentUserProvider.select((user) => user.id));
   return  ref.watch(toolsByUserProvider(userId));
-
 });
 
 

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:empriusapp/src/core/helper/constants/constants.dart';
 import 'package:empriusapp/src/core/helper/form_validator.dart';
@@ -153,25 +154,36 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           !_mapValidator.validate()) {
                         return;
                       }
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Usuari creat')),
+
+                      ref.read(authProvider.notifier).register(
+                            name: _nameCtrl.text,
+                            email: _emailCtrl.text,
+                            location: _customMapCtrl.selectedLocation!,
+                            isActive: isActive,
+                            password: _passwordCtrl.text,
+                            invite: _invitationCtrl.text,
+                            avatar:  _avatar?.path ?? ""
                       );
 
-                      await ref.watch(currentUserProvider.notifier).register(
-                          name: _nameCtrl.text,
-                          email: _emailCtrl.text,
-                          location: _customMapCtrl.selectedLocation!,
-                          isActive: isActive,
-                          password: _passwordCtrl.text,
-                          invite: _invitationCtrl.text,
-                          avatar:  _avatar?.path ?? ""
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(content: Text('Usuari creat')),
+                      // );
 
-                      if (ref.watch(currentUserProvider.notifier).authState is FAILED) {
-                        // todo(kon): implement error show
-                        return;
-                      }
-                      registerSuccess();
+                      // await ref.watch(currentUserProvider.notifier).register(
+                      //     name: _nameCtrl.text,
+                      //     email: _emailCtrl.text,
+                      //     location: _customMapCtrl.selectedLocation!,
+                      //     isActive: isActive,
+                      //     password: _passwordCtrl.text,
+                      //     invite: _invitationCtrl.text,
+                      //     avatar:  _avatar?.path ?? ""
+                      // );
+                      //
+                      // if (ref.watch(currentUserProvider.notifier).authState is FAILED) {
+                      //   // todo(kon): implement error show
+                      //   return;
+                      // }
+                      // registerSuccess();
                     },
                   ),
                 ],
@@ -183,10 +195,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 
-  void registerSuccess() {
-    Navigator.pushReplacementNamed(
-        context, userProfileScreenRoute);
-  }
+  // void registerSuccess() {
+  //   Navigator.pushReplacementNamed(
+  //       context, userProfileScreenRoute);
+  // }
 
   Widget selectLocationMap() => Column(
         children: [

@@ -7,6 +7,7 @@ import 'package:empriusapp/src/features/user/auth_user/data/auth_repository.dart
 import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 
 final currentUserProvider = StateProvider<UserModel>((ref) => UserModel.initial());
 
@@ -57,9 +58,13 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   }
 
   Future<void> register({
-    required UserModel userData,
+    required String name,
+    required String email,
+    required LatLng location,
+    required bool isActive,
     required String password,
-    required String invite
+    required String invite,
+    String? avatar,
   }) async {
     state = const FutureState.loading();
 
@@ -88,6 +93,14 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     // ).toJson();
     // data['password'] = password;
 
+      final userData = UserModel(
+        name: name ,
+        email: email ,
+        location: location ,
+        isActive: isActive ,
+        avatar: avatar,
+      );
+
     final data = userData.toJson();
     data['password'] = password;
     data['invite'] = invite;
@@ -110,12 +123,12 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   }
 
   Future<void> login({
-    required String erp,
+    required String email,
     required String password,
   }) async {
     state = const FutureState.loading();
 
-    final data = {'erp': erp, 'password': password};
+    final data = {'email': email, 'password': password};
 
     state = await FutureState.makeGuardedRequest(() async {
       final student = await _authRepository.sendLoginData(

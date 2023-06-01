@@ -2,8 +2,8 @@ import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/helper/form_validator.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
-import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
+import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
+import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,6 +22,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    void onData(bool? isAuthenticated) {
+      if (isAuthenticated != null && isAuthenticated) {
+        Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+        // erpController.clear();
+        // passwordController.clear();
+        // AppRouter.popUntilRoot();
+      }
+    }
+
+    ref.listen<FutureState<bool?>>(
+      authProvider,
+          (_, authState) => authState.whenOrNull(
+        data: onData,
+        failed: (reason) => ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
+        )
+      ),
+    );
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -58,21 +78,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                 ),
                 SizedBox(
-                    // height: 40,
                     child: CustomTextButton(
                       text: "Entra a l'app!",
                       onClicked: () {
-                        if (!_formKey.currentState!.validate()) return;
-                        // Todo(kon): after implement jwt this will be different, because we will need
-                        // to check if the token is invalid or expired. Now, authenticated, mean that user
-                        // credentials are retrieved from the storage so it can safely login without bugs
-                        else if (ref.read(currentUserProvider.notifier).authState is! AUTHENTICATED) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
+                        if (_formKey.currentState!.validate()) {
+                          ref.read(authProvider.notifier).login(
+                            password: _passwordCtrl.text,
+                            email: _emailCtrl.text
                           );
-                          return;
                         }
-                        Navigator.pushReplacementNamed(context, userProfileScreenRoute);
+                        // else if (ref.read(currentUserProvider.notifier).authState is !AUTHENTICATED) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(content: Text('Usuari o contrassenya incorrectes')),
+                        //   );
+                        //   return;
+                        // }
+                        // Navigator.pushReplacementNamed(context, userProfileScreenRoute);
                       }
                     ),
                 ),

@@ -11,6 +11,7 @@ import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
+import 'package:empriusapp/src/features/user/emprius_user/presentation/providers/profile_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
@@ -192,17 +193,27 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                             const SnackBar(content: Text('Canvis desats')),
                           );
 
-                          await ref
-                              .watch(currentUserProvider.notifier)
-                              .updateUser(
-                            user.copyWith(
-                              name: _nameCtrl.text,
-                              email: _emailCtrl.text,
-                              isActive: isActive,
-                              location: _customMapCtrl.selectedLocation!,
-                            ),
-                            _passwordCtrl.text,
+                          await ref.read(profileProvider.notifier).updateUserProfile(
+                                user.copyWith(
+                                  name: _nameCtrl.text,
+                                  email: _emailCtrl.text,
+                                  isActive: isActive,
+                                  location: _customMapCtrl.selectedLocation!,
+                                ),
+                                _passwordCtrl.text,
                           );
+
+                          // await ref
+                          //     .watch(currentUserProvider.notifier)
+                          //     .updateUser(
+                          //   user.copyWith(
+                          //     name: _nameCtrl.text,
+                          //     email: _emailCtrl.text,
+                          //     isActive: isActive,
+                          //     location: _customMapCtrl.selectedLocation!,
+                          //   ),
+                          //   _passwordCtrl.text,
+                          // );
                           if (!mounted) return;
                           Navigator.of(context).pop();
                         },

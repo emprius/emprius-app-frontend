@@ -27,7 +27,7 @@ class _UserActivityNavbarState extends ConsumerState<UserActivityNavbar> {
 
   @override
   void initState() {
-    var userId =  ref.read(currentUserProvider).id;
+    var userId =  ref.read(currentUserProvider)!.id;
     ref.read(allBookingsProvider.notifier).getAllUserPetitions(userId: userId);
     ref.read(allBookingsProvider.notifier).getAllUserRequests(userId: userId);
     super.initState();

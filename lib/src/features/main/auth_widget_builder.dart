@@ -12,8 +12,8 @@ class AuthWidgetBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
     return authState.maybeWhen(
-      data: (_) => const LoginScreen(),
-      orElse: () => const UserProfileScreen(),
+      data: (_) => const UserProfileScreen(),
+      orElse: () => const LoginScreen(),
     );
   }
 }

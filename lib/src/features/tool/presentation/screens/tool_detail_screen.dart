@@ -33,7 +33,7 @@ class _ToolDetailScreenState extends ConsumerState<ToolDetailScreen> {
         :  Scaffold(
           appBar: UserAppbar("Eina"),
           backgroundColor: Theme.of(context).backgroundColor,
-          floatingActionButton: ref.read(currentUserProvider).id != tool.userId
+          floatingActionButton: ref.read(currentUserProvider)!.id != tool.userId
           ? FloatingActionButton.extended(
             onPressed: () async{
               await Navigator.pushNamed(context, toolAskFormScreenRoute, arguments: ToolDetailArguments(widget.args.id));

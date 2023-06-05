@@ -27,13 +27,13 @@ class _UserToolListState extends ConsumerState<UserToolList> {
   void initState() {
     /// Fetch tools by userId
     ref.read(allToolsProvider.notifier).getAllByUser(
-        userId: ref.read(currentUserProvider).id);
+        userId: ref.read(currentUserProvider)!.id);
     super.initState();
   }
 
   Future<void> _refresh() async {
     ref.watch(allToolsProvider.notifier)
-        .getAllByUser(userId: ref.read(currentUserProvider).id);
+        .getAllByUser(userId: ref.read(currentUserProvider)!.id);
   }
 
   @override

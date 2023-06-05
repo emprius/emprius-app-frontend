@@ -34,7 +34,7 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            widget.booking.fromUserId != ref.watch(currentUserProvider).id
+            widget.booking.fromUserId != ref.watch(currentUserProvider)!.id
                 ? Icon(
               Icons.arrow_circle_left_outlined,
               color: Theme.of(context).colorScheme.error,
@@ -66,7 +66,7 @@ class _BookingListTileState extends ConsumerState<BookingListTile> {
       },
       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
         if (widget.booking.bookingStatus == BookingStatus.ASKED &&
-            ref.read(currentUserProvider).id == widget.booking.fromUserId)
+            ref.read(currentUserProvider)!.id == widget.booking.fromUserId)
           Row(
             children: [
               PopupMenuButton(

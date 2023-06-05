@@ -1,7 +1,7 @@
 import 'package:latlong2/latlong.dart';
 
 var defaultMapCenter = LatLng(41.695384, 2.492793);
-var defaultAvatar = "https://image.pngaaa.com/291/5335291-middle.png";
+var defaultAvatar = "assets/avatars/fallback.png";
 
 class Constants{
   const Constants._();

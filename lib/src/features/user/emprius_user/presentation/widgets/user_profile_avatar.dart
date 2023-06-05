@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
 import 'package:empriusapp/src/core/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -42,7 +43,7 @@ class UserProfileAvatar extends StatelessWidget {
   Widget buildImage() {
     final image = avatar.contains('https://')
     ? NetworkImage(avatar)
-        : FileImage(File(avatar));
+        : assetOrFileImage(avatar);
 
     return CircleAvatar(
       radius: 42,

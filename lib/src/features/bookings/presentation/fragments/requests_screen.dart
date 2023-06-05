@@ -16,7 +16,7 @@ class _RequestsScreenState extends ConsumerState<RequestsScreen> {
 
   Future _refresh() async {
       ref.watch(allBookingsProvider.notifier)
-          .getAllUserRequests(userId: ref.read(currentUserProvider).id);
+          .getAllUserRequests(userId: ref.read(currentUserProvider)!.id);
     }
 
   @override

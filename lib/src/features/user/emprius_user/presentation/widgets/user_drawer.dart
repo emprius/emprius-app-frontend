@@ -19,7 +19,7 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    var user = ref.watch(currentUserProvider);
+    var user = ref.watch(currentUserProvider)!;
 
     return Drawer(
       child: ListView(

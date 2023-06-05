@@ -44,7 +44,7 @@ class _SearchMapScreenState extends ConsumerState<SearchMapScreen> {
       body: Stack(
         children: [
           EmpriusMap(
-            initialCenter: user.location,
+            initialCenter: user!.location,
             isViewOnly: true,
             empriusMapController: controller,
           ),

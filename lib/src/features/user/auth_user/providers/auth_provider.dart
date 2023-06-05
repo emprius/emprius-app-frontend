@@ -4,12 +4,11 @@ import 'package:empriusapp/src/core/services/all_providers.dart';
 import 'package:empriusapp/src/core/services/local/key_value_storage_service.dart';
 import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/auth_repository.dart';
-import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
-final currentUserProvider = StateProvider<UserModel>((ref) => UserModel.initial());
+final currentUserProvider = StateProvider<UserModel?>((ref) => null);
 
 final authProvider = StateNotifierProvider<AuthProvider, FutureState<bool?>>(
   (ref) {

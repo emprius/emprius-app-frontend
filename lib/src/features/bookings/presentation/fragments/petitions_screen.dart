@@ -15,7 +15,7 @@ class _PetitionsScreenState extends ConsumerState<PetitionsScreen> {
 
   Future _refresh() async {
     ref.watch(allBookingsProvider.notifier)
-        .getAllUserPetitions(userId: ref.read(currentUserProvider).id);
+        .getAllUserPetitions(userId: ref.read(currentUserProvider)!.id);
   }
 
 

@@ -56,7 +56,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
   @override
   void initState() {
     user = widget.args.user;
-    _setMarkers( ref.read(currentUserProvider.notifier).state.location!);
+    _setMarkers(ref.read(currentUserProvider.notifier).state!.location!);
     _nameCtrl.text = user.name!;
     _emailCtrl.text = user.email;
     isActive = user.isActive!;

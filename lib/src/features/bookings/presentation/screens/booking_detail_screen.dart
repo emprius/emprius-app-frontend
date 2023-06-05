@@ -146,7 +146,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     if (booking.bookingStatus == BookingStatus.ASKED
-                        && booking.fromUserId != ref.read(currentUserProvider).id)
+                        && booking.fromUserId != ref.read(currentUserProvider)!.id)
                       CustomTextButton(
                         text: 'APROVA',
                         onClicked: () async {

@@ -18,11 +18,6 @@ class UserModel with _$UserModel{
     @Default(10) int? emps,
   }) = _UserModel;
 
-  /// Dummy factory to initialize a UserModel with default data. 
-  factory UserModel.initial() =>
-    const UserModel(
-        email: "email", name: 'name', isActive: false,
-    );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

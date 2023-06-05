@@ -36,15 +36,16 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   void initState() {
-    _setMarkers(ref.read(currentUserProvider.notifier).state);
+    var kk = ref.read(currentUserProvider.notifier).state;
+    _setMarkers(ref.read(currentUserProvider.notifier).state!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var user = ref.watch(currentUserProvider);
+    var user = ref.watch(currentUserProvider)!;
     ref.listen<LatLng>(currentUserProvider.select(
-            (user) => user.location!), (LatLng? previous, LatLng next) {
+            (user) => user!.location!), (LatLng? previous, LatLng next) {
       _setMarkers(user);
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });

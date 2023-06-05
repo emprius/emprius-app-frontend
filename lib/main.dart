@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:empriusapp/src/core/app_bootstrapper.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/core/services/local/hive/hive_storage_service.dart';
 import 'package:empriusapp/src/core/services/local/hive/storage_service.dart';
@@ -6,23 +7,15 @@ import 'package:empriusapp/src/core/services/local/hive/storage_service_provider
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // Hive-specific initialization
-    await Hive.initFlutter();
-    final StorageService initializedStorageService = HiveStorageService();
-    await initializedStorageService.init();
-    runApp(
-        ProviderScope(
-            overrides: [
-              storageServiceProvider.overrideWithValue(initializedStorageService),
-            ],
-            child: MyApp()
-        ));
+    await AppBootstrapper.init(
+      mainAppWidget: MyApp(),
+      runApp: runApp,
+    );
+
   }, (e, _) => throw e);
 }
 

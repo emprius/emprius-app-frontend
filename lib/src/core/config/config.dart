@@ -18,6 +18,6 @@ class Config {
   /// ```
   static const baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: 'localhost:3333',
+    defaultValue: 'http://localhost:3333',
   );
 }

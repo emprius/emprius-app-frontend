@@ -11,20 +11,22 @@ import 'package:empriusapp/src/core/helper/typedefs.dart';
 /// One to represent the response and contains a generic data type
 /// that we pass at each request level:
 class ResponseModel<T> {
-  final _ResponseHeadersModel headers;
+  // final _ResponseHeadersModel headers;
   final T body;
 
   const ResponseModel({
-    required this.headers,
+    // todo(kon): implement header models
+    // required this.headers,
     required this.body,
   });
 
   factory ResponseModel.fromJson(JSON json) {
     return ResponseModel(
-      headers: _ResponseHeadersModel.fromJson(
-        json['headers'] as JSON,
-      ),
-      body: json['body'] as T,
+      // headers: _ResponseHeadersModel.fromJson(
+      //   json['headers'] as JSON,
+      // ),
+      // body: json['body'] as T,
+      body: json as T,
     );
   }
 }

@@ -89,27 +89,32 @@ class CustomException implements Exception {
                 message: 'No internet connectivity',
               );
             }
-            if (error.response?.data['headers']['code'] == null) {
-              return CustomException(
-                exceptionType: _ExceptionType.UnrecognizedException,
-                statusCode: error.response?.statusCode,
-                message: error.response?.statusMessage ?? 'Unknown',
-              );
-            }
-            final name = error.response?.data['headers']['code'] as String;
-            final message =
-            error.response?.data['headers']['message'] as String;
-            if (name == _ExceptionType.TokenExpiredException.name) {
-              return CustomException(
-                exceptionType: _ExceptionType.TokenExpiredException,
-                code: name,
-                statusCode: error.response?.statusCode,
-                message: message,
-              );
-            }
+            // todo(kon): implement headers
+            // if (error.response?.data['headers']['code'] == null) {
+            //   return CustomException(
+            //     exceptionType: _ExceptionType.UnrecognizedException,
+            //     statusCode: error.response?.statusCode,
+            //     message: error.response?.statusMessage ?? 'Unknown',
+            //   );
+            // }
+            // final name = error.response?.data['headers']['code'] as String;
+            // final message =
+            // error.response?.data['headers']['message'] as String;
+            // todo(kon): implement token expired exception
+            // if (name == _ExceptionType.TokenExpiredException.name) {
+            //   return CustomException(
+            //     exceptionType: _ExceptionType.TokenExpiredException,
+            //     code: name,
+            //     statusCode: error.response?.statusCode,
+            //     message: message,
+            //   );
+            // }
+            // todo(kon): implement this
             return CustomException(
-              message: message,
-              code: name,
+              message: "Unhandled exception",
+              // message: message,
+              code: "todo",
+              // code: name,
               statusCode: error.response?.statusCode,
             );
         }

@@ -41,7 +41,11 @@ class UsersRepository {
     return _apiService.updateData<String>(
       endpoint: ApiEndpoint.profile(ProfileEndpoint.BASE),
       data: data,
-      converter: (response) => response.headers.message,
+      // converter: (response) => response.headers.message,
+      converter: (response) {
+        print("todo(kon): implement response headers");
+        return "todo";
+      },
     );
   }
 }

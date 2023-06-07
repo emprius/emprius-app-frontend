@@ -113,7 +113,7 @@ class CustomException implements Exception {
             return CustomException(
               message: "Unhandled exception",
               // message: message,
-              code: "todo",
+              code: error.message,
               // code: name,
               statusCode: error.response?.statusCode,
             );

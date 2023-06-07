@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
+import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:empriusapp/src/core/helper/constants/constants.dart';
@@ -39,6 +40,28 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    void onData(bool? isAuthenticated) {
+      if (isAuthenticated != null && isAuthenticated) {
+        // passwordController.clear();
+        // cPasswordController.clear();
+        // AppRouter.popUntilRoot();
+        Navigator.pushReplacementNamed(
+            context, userProfileScreenRoute);
+
+      }
+    }
+
+    ref.listen<FutureState<bool?>>(
+      authProvider,
+          (_, authState) => authState.whenOrNull(
+          data: onData,
+          failed: (reason) => ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Error en el procés de registre')),
+          )
+      ),
+    );
+
     return SafeArea(
       child: Scaffold(
         body: Center(

@@ -22,6 +22,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 mixin _$UserModel {
   String? get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  @LatLngConverter()
   LatLng? get location => throw _privateConstructorUsedError;
   bool? get isActive => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $UserModelCopyWith<$Res> {
   $Res call(
       {String? name,
       int id,
-      LatLng? location,
+      @LatLngConverter() LatLng? location,
       bool? isActive,
       String email,
       String? avatar,
@@ -120,7 +121,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   $Res call(
       {String? name,
       int id,
-      LatLng? location,
+      @LatLngConverter() LatLng? location,
       bool? isActive,
       String email,
       String? avatar,
@@ -191,7 +192,7 @@ class _$_UserModel implements _UserModel {
   const _$_UserModel(
       {required this.name,
       this.id = -1,
-      this.location,
+      @LatLngConverter() this.location,
       required this.isActive,
       required this.email,
       this.avatar,
@@ -207,6 +208,7 @@ class _$_UserModel implements _UserModel {
   @JsonKey()
   final int id;
   @override
+  @LatLngConverter()
   final LatLng? location;
   @override
   final bool? isActive;
@@ -266,7 +268,7 @@ abstract class _UserModel implements UserModel {
   const factory _UserModel(
       {required final String? name,
       final int id,
-      final LatLng? location,
+      @LatLngConverter() final LatLng? location,
       required final bool? isActive,
       required final String email,
       final String? avatar,
@@ -281,6 +283,7 @@ abstract class _UserModel implements UserModel {
   @override
   int get id;
   @override
+  @LatLngConverter()
   LatLng? get location;
   @override
   bool? get isActive;

@@ -1,6 +1,7 @@
 import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:empriusapp/src/core/shared/domain/lat_lng_converter.dart';
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
@@ -10,7 +11,7 @@ class UserModel with _$UserModel{
   const factory UserModel({
     required String? name,
     @Default(-1) UserID id,
-    LatLng? location,
+    @LatLngConverter() LatLng? location,
     required bool? isActive,
     required String email,
     String? avatar,

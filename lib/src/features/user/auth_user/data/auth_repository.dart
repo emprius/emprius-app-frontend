@@ -16,17 +16,17 @@ class AuthRepository {
 
   AuthRepository({required ApiServiceDio apiService}) : _apiService = apiService;
 
-  Future<UserModel> sendLoginData({
+  Future<bool> sendLoginData({
     required JSON data,
     required void Function(String newToken) updateTokenCallback,
   }) async {
-    return _apiService.setData<UserModel>(
+    return _apiService.setData<bool>(
       endpoint: ApiEndpoint.auth(AuthEndpoint.LOGIN),
       data: data,
       requiresAuthToken: false,
       converter: (response) {
         updateTokenCallback(response.body['token'] as String);
-        return UserModel.fromJson(response.body);
+        return true;
       },
     );
   }

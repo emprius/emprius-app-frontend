@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:empriusapp/src/core/services/networking/custom_exception.dart';
 import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
-import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
+import 'package:empriusapp/src/features/user/emprius_user/data/users_repository.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/data/users_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final profileProvider =

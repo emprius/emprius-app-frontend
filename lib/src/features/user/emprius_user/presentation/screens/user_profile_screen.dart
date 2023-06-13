@@ -36,7 +36,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
 
   @override
   void initState() {
-    var kk = ref.read(currentUserProvider.notifier).state;
     _setMarkers(ref.read(currentUserProvider.notifier).state!);
     super.initState();
   }

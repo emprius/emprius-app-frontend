@@ -76,7 +76,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     height: 100,
                     width: 100,
                     child: UserProfileAvatar(
-                      avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+                      avatar: user.avatar?.isEmpty ?? true ? defaultAvatar : user.avatar!,
                     ),
                   ),
                   Column(

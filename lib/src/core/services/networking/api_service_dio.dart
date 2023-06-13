@@ -278,7 +278,7 @@ class ApiServiceDio implements ApiInterface {
 
     try {
       // Entire map of response
-      response = await _dioService.patch<JSON>(
+      response = await _dioService.post<JSON>(
         endpoint: endpoint,
         data: data,
         options: Options(

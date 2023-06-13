@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:empriusapp/src/core/services/all_providers.dart';
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 import 'package:empriusapp/src/core/services/networking/api_service_dio.dart';
+import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final usersRepositoryProvider = Provider<UsersRepository>(
@@ -28,12 +29,19 @@ class UsersRepository {
   //   );
   // }
   //
-  // Future<StudentModel> fetchOne({required String erp}) async {
-  //   return _apiService.getDocumentData<StudentModel>(
+  // Future<UserModel> fetchOne({required String erp}) async {
+  //   return _apiService.getDocumentData<UserModel>(
   //     endpoint: ApiEndpoint.students(StudentEndpoint.BY_ERP, erp: erp),
-  //     converter: StudentModel.fromJson,
+  //     converter: UserModel.fromJson,
   //   );
   // }
+
+  Future<UserModel> getAuthUserProfile() async {
+    return _apiService.getDocumentData<UserModel>(
+      endpoint: ApiEndpoint.profile(ProfileEndpoint.BASE),
+      converter: UserModel.fromJson
+    );
+  }
 
   Future<String> update({
     required JSON data,

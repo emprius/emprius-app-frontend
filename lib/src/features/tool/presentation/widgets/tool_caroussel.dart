@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
+import 'package:empriusapp/src/core/helper/constants/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

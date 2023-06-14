@@ -85,6 +85,7 @@ dependencies:
 
   # To store data in secure storage:
   flutter_secure_storage: ^5.0.2
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

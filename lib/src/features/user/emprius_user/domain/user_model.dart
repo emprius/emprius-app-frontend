@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/helper/constants/constants.dart';
 import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 import 'package:latlong2/latlong.dart';
@@ -26,5 +27,5 @@ class UserModel with _$UserModel{
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
-  String get avatar => avatarHash?.isNotEmpty ?? false ? ApiEndpoint.baseUrl + ApiEndpoint.images(ImagesEndpoint.GET, hash: avatarHash) : "";
+  String get avatar => avatarHash ?? defaultAvatar;
 }

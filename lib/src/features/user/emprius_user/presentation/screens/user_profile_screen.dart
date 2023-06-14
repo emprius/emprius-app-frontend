@@ -49,6 +49,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });
     const double padding = 10;
+
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),
       drawer: const UserDrawer(),

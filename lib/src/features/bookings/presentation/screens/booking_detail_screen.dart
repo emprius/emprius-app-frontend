@@ -1,6 +1,6 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
-import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
+import 'package:empriusapp/src/core/helper/constants/images_utils.dart';
 import 'package:empriusapp/src/core/helper/constants/date_utils.dart';
 import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
 import 'package:empriusapp/src/core/config/routes.dart';

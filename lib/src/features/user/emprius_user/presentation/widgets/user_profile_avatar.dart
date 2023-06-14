@@ -1,9 +1,13 @@
-import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:empriusapp/src/features/images/widgets/EmpriusImage.dart';
+import 'package:empriusapp/src/core/helper/constants/images_utils.dart';
 import 'package:empriusapp/src/core/helper/constants/constants.dart';
-import 'package:empriusapp/src/core/theme/theme_controller.dart';
+import 'package:empriusapp/src/core/services/all_providers.dart';
+import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,9 +20,9 @@ class CurrentUserAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider)!;
+    final avatarHash = ref.watch(currentUserProvider.select((value) => value?.avatarHash));
     return UserProfileAvatar(
-      avatar: user.avatar?.isEmpty ?? true ? defaultAvatar : user.avatar!,
+      avatar: avatarHash ?? "",
       showBadge: showBadge,
     );
   }
@@ -54,31 +58,39 @@ class UserProfileAvatar extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 4,
-            child: buildEditIcon(),
+            child: buildBadgeIcon(),
           ),
       ],
     );
   }
 
   Widget buildImage() {
-    final image = avatar.contains(RegExp(r"^(http|https)"))
-        ? NetworkImage(avatar) // todo(kon): use CachedNetworkImage package (check UniPal repo on how they do it)
-        : assetOrFileImage(avatar);
-
-    return CircleAvatar(
-      radius: 42,
-      backgroundColor: outerCircleColor,
-      child: CircleAvatar(
-        radius: 40,
-        backgroundImage: image as ImageProvider,
-      ),
-    );
+    return isEmpriusImage(avatar) ? EmpriusImage(
+      hash: avatar ,
+      errorWidget: defaultAvatarImage(),
+      placeholder: defaultAvatarImage(),
+      imageBuilder: (image) => buildAvatarCircles(
+          Image.memory(base64Decode(image.content)).image
+      )
+    )
+        : buildAvatarCircles(assetOrFileImage(avatar));
   }
 
-  Widget buildEditIcon() => buildCircle( // External circle
+  Widget defaultAvatarImage() => buildAvatarCircles(assetOrFileImage(defaultAvatar));
+
+  Widget buildAvatarCircles (ImageProvider image) => CircleAvatar(
+    radius: 42,
+    backgroundColor: outerCircleColor,
+    child: CircleAvatar(
+      radius: 40,
+      backgroundImage: image,
+    ),
+  );
+
+  Widget buildBadgeIcon() => buildBadgeCircle( // External circle
     all: 3,
     color: Colors.white,
-    child: buildCircle( // Internal circle
+    child: buildBadgeCircle( // Internal circle
       color: innerCircleColor,
       all: 8,
       child: Icon(
@@ -89,7 +101,7 @@ class UserProfileAvatar extends StatelessWidget {
     ),
   );
 
-  Widget buildCircle({
+  Widget buildBadgeCircle({
     required Widget child,
     required double all,
     required color ,

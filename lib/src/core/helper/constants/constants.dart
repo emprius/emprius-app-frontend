@@ -2,6 +2,7 @@ import 'package:latlong2/latlong.dart';
 
 var defaultMapCenter = LatLng(41.695384, 2.492793);
 var defaultAvatar = "assets/avatars/fallback.png";
+var fallbackImage = "assets/avatars/fallback.png";
 
 class Constants{
   const Constants._();

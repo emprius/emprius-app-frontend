@@ -61,8 +61,8 @@ class UserProfileAvatar extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = avatar.contains('https://')
-        ? NetworkImage(avatar)
+    final image = avatar.contains(RegExp(r"^(http|https)"))
+        ? NetworkImage(avatar) // todo(kon): use CachedNetworkImage package (check UniPal repo on how they do it)
         : assetOrFileImage(avatar);
 
     return CircleAvatar(

@@ -1,4 +1,5 @@
 import 'package:empriusapp/src/core/helper/typedefs.dart';
+import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:empriusapp/src/core/shared/domain/lat_lng_converter.dart';
@@ -7,18 +8,23 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel{
+  // Added constructor in order to have custom getters
+  const UserModel._();
 
   const factory UserModel({
-    required String? name,
     @Default(-1) UserID id,
-    @LatLngConverter() LatLng? location,
-    required bool? isActive,
+    required String? name,
     required String email,
-    String? avatar,
-    @Default(3.0) double? rating,
-    @Default(10) int? emps,
+    String? community,
+    int? tokens,
+    required bool? active,
+    double? rating,
+    String? avatarHash,
+    @LatLngConverter() LatLng? location,
   }) = _UserModel;
 
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+
+  String get avatar => avatarHash?.isNotEmpty ?? false ? ApiEndpoint.baseUrl + ApiEndpoint.images(ImagesEndpoint.GET, hash: avatarHash) : "";
 }

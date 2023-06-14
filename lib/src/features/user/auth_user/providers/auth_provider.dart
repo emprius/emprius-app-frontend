@@ -111,8 +111,8 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
       name: kk ,
       email: "$kk@botika.cat" ,
       location: location ,
-      isActive: isActive ,
-      avatar: avatar,
+      active: isActive ,
+      // avatar: avatar,
     );
 
     final data = userData.toJson();

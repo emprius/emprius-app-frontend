@@ -20,15 +20,16 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String? get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String? get community => throw _privateConstructorUsedError;
+  int? get tokens => throw _privateConstructorUsedError;
+  bool? get active => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
+  String? get avatarHash => throw _privateConstructorUsedError;
   @LatLngConverter()
   LatLng? get location => throw _privateConstructorUsedError;
-  bool? get isActive => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get avatar => throw _privateConstructorUsedError;
-  double? get rating => throw _privateConstructorUsedError;
-  int? get emps => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,14 +43,15 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String? name,
-      int id,
-      @LatLngConverter() LatLng? location,
-      bool? isActive,
+      {int id,
+      String? name,
       String email,
-      String? avatar,
+      String? community,
+      int? tokens,
+      bool? active,
       double? rating,
-      int? emps});
+      String? avatarHash,
+      @LatLngConverter() LatLng? location});
 }
 
 /// @nodoc
@@ -65,48 +67,53 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
     Object? id = null,
-    Object? location = freezed,
-    Object? isActive = freezed,
+    Object? name = freezed,
     Object? email = null,
-    Object? avatar = freezed,
+    Object? community = freezed,
+    Object? tokens = freezed,
+    Object? active = freezed,
     Object? rating = freezed,
-    Object? emps = freezed,
+    Object? avatarHash = freezed,
+    Object? location = freezed,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as LatLng?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      community: freezed == community
+          ? _value.community
+          : community // ignore: cast_nullable_to_non_nullable
               as String?,
+      tokens: freezed == tokens
+          ? _value.tokens
+          : tokens // ignore: cast_nullable_to_non_nullable
+              as int?,
+      active: freezed == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      emps: freezed == emps
-          ? _value.emps
-          : emps // ignore: cast_nullable_to_non_nullable
-              as int?,
+      avatarHash: freezed == avatarHash
+          ? _value.avatarHash
+          : avatarHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ) as $Val);
   }
 }
@@ -119,14 +126,15 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? name,
-      int id,
-      @LatLngConverter() LatLng? location,
-      bool? isActive,
+      {int id,
+      String? name,
       String email,
-      String? avatar,
+      String? community,
+      int? tokens,
+      bool? active,
       double? rating,
-      int? emps});
+      String? avatarHash,
+      @LatLngConverter() LatLng? location});
 }
 
 /// @nodoc
@@ -140,92 +148,99 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
     Object? id = null,
-    Object? location = freezed,
-    Object? isActive = freezed,
+    Object? name = freezed,
     Object? email = null,
-    Object? avatar = freezed,
+    Object? community = freezed,
+    Object? tokens = freezed,
+    Object? active = freezed,
     Object? rating = freezed,
-    Object? emps = freezed,
+    Object? avatarHash = freezed,
+    Object? location = freezed,
   }) {
     return _then(_$_UserModel(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as LatLng?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
+      community: freezed == community
+          ? _value.community
+          : community // ignore: cast_nullable_to_non_nullable
               as String?,
+      tokens: freezed == tokens
+          ? _value.tokens
+          : tokens // ignore: cast_nullable_to_non_nullable
+              as int?,
+      active: freezed == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
-      emps: freezed == emps
-          ? _value.emps
-          : emps // ignore: cast_nullable_to_non_nullable
-              as int?,
+      avatarHash: freezed == avatarHash
+          ? _value.avatarHash
+          : avatarHash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserModel implements _UserModel {
+class _$_UserModel extends _UserModel {
   const _$_UserModel(
-      {required this.name,
-      this.id = -1,
-      @LatLngConverter() this.location,
-      required this.isActive,
+      {this.id = -1,
+      required this.name,
       required this.email,
-      this.avatar,
-      this.rating = 3.0,
-      this.emps = 10});
+      this.community,
+      this.tokens,
+      required this.active,
+      this.rating,
+      this.avatarHash,
+      @LatLngConverter() this.location})
+      : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
-  final String? name;
-  @override
   @JsonKey()
   final int id;
   @override
-  @LatLngConverter()
-  final LatLng? location;
-  @override
-  final bool? isActive;
+  final String? name;
   @override
   final String email;
   @override
-  final String? avatar;
+  final String? community;
   @override
-  @JsonKey()
+  final int? tokens;
+  @override
+  final bool? active;
+  @override
   final double? rating;
   @override
-  @JsonKey()
-  final int? emps;
+  final String? avatarHash;
+  @override
+  @LatLngConverter()
+  final LatLng? location;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, id: $id, location: $location, isActive: $isActive, email: $email, avatar: $avatar, rating: $rating, emps: $emps)';
+    return 'UserModel(id: $id, name: $name, email: $email, community: $community, tokens: $tokens, active: $active, rating: $rating, avatarHash: $avatarHash, location: $location)';
   }
 
   @override
@@ -233,22 +248,24 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.community, community) ||
+                other.community == community) &&
+            (identical(other.tokens, tokens) || other.tokens == tokens) &&
+            (identical(other.active, active) || other.active == active) &&
             (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.emps, emps) || other.emps == emps));
+            (identical(other.avatarHash, avatarHash) ||
+                other.avatarHash == avatarHash) &&
+            (identical(other.location, location) ||
+                other.location == location));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, id, location, isActive, email, avatar, rating, emps);
+  int get hashCode => Object.hash(runtimeType, id, name, email, community,
+      tokens, active, rating, avatarHash, location);
 
   @JsonKey(ignore: true)
   @override
@@ -264,37 +281,41 @@ class _$_UserModel implements _UserModel {
   }
 }
 
-abstract class _UserModel implements UserModel {
+abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required final String? name,
-      final int id,
-      @LatLngConverter() final LatLng? location,
-      required final bool? isActive,
+      {final int id,
+      required final String? name,
       required final String email,
-      final String? avatar,
+      final String? community,
+      final int? tokens,
+      required final bool? active,
       final double? rating,
-      final int? emps}) = _$_UserModel;
+      final String? avatarHash,
+      @LatLngConverter() final LatLng? location}) = _$_UserModel;
+  const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  String? get name;
-  @override
   int get id;
   @override
-  @LatLngConverter()
-  LatLng? get location;
-  @override
-  bool? get isActive;
+  String? get name;
   @override
   String get email;
   @override
-  String? get avatar;
+  String? get community;
+  @override
+  int? get tokens;
+  @override
+  bool? get active;
   @override
   double? get rating;
   @override
-  int? get emps;
+  String? get avatarHash;
+  @override
+  @LatLngConverter()
+  LatLng? get location;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

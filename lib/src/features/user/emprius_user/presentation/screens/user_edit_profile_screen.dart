@@ -58,7 +58,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
     _setMarkers(ref.read(currentUserProvider.notifier).state!.location!);
     _nameCtrl.text = user.name!;
     _emailCtrl.text = user.email;
-    isActive = user.isActive!;
+    isActive = user.active!;
     _customMapCtrl.selectedLocation = user.location;
     super.initState();
   }
@@ -88,7 +88,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                         context: context,
                         builder: ((builder) => SingleImageSelector((image) {
                           if (image != null) {
-                            user = user.copyWith(avatar: image.path);
+                            // user = user.copyWith(avatar: image.path); // todo(kon): implement avatar upload
                             setState(() {});
                           }
                           Navigator.pop(context);
@@ -195,7 +195,7 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                                 user.copyWith(
                                   name: _nameCtrl.text,
                                   email: _emailCtrl.text,
-                                  isActive: isActive,
+                                  active: isActive,
                                   location: _customMapCtrl.selectedLocation!,
                                 ),
                                 _passwordCtrl.text,

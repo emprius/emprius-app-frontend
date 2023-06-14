@@ -1,7 +1,4 @@
-import 'package:empriusapp/src/core/helper/constants/asset_or_file_image.dart';
-import 'package:empriusapp/src/core/helper/constants/constants.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,9 +48,7 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
                   fontWeight: FontWeight.bold,
                 ),),
                 accountEmail: Text(user.email),
-              currentAccountPicture: UserProfileAvatar(
-                avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
-              ),
+              currentAccountPicture: const CurrentUserAvatar()
             ),
           ),
           ListTile(

@@ -94,11 +94,10 @@ class _UserEditProfileScreenState extends ConsumerState<UserEditProfileScreen> {
                           Navigator.pop(context);
                         })));
                   },
-                  child: SizedBox(
+                  child: const SizedBox(
                     height: 100,
                     width: 100,
-                    child: UserProfileAvatar(
-                      avatar: user.avatar!.isEmpty ? defaultAvatar : user.avatar!,
+                    child: CurrentUserAvatar(
                       showBadge: true,
                     ),
                   ),

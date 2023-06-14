@@ -72,12 +72,10 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                     width: 100,
-                    child: UserProfileAvatar(
-                      avatar: user.avatar?.isEmpty ?? true ? defaultAvatar : user.avatar!,
-                    ),
+                    child: CurrentUserAvatar()
                   ),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -49,7 +49,6 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
       _customMapCtrl.flutterMapController?.move(next, 15.0);
     });
     const double padding = 10;
-
     return Scaffold(
       appBar: UserAppbar("El meu perfil"),
       drawer: const UserDrawer(),
@@ -84,7 +83,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     addVerticalSpace(6.0),
                     RatingStars(rating: user.rating!),
                     addVerticalSpace(6.0),
-                    Text('EMPS: ${user.emps}', style: Theme.of(context).textTheme.bodyText2,),
+                    Text('EMPS: ${user.tokens}', style: Theme.of(context).textTheme.bodyText2,),
                   ]),
                   addHorizontalSpace(6.0),
                   CustomTextButton(

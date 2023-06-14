@@ -31,7 +31,14 @@ class ApiEndpoint {
   static String profile(ProfileEndpoint endpoint) {
     const path = '/profile';
     switch (endpoint) {
-      case ProfileEndpoint.BASE: return '$path';
+      case ProfileEndpoint.BASE: return path;
+    }
+  }
+
+  static String images(ImagesEndpoint endpoint, {String? hash}) {
+    const path = '/images';
+    switch (endpoint) {
+      case ImagesEndpoint.GET: return '$path/$hash';
     }
   }
 
@@ -76,6 +83,11 @@ enum AuthEndpoint {
 enum ProfileEndpoint {
   BASE,
 }
+
+enum ImagesEndpoint {
+  GET,
+}
+
 
 /// A collection of endpoints used for students.
 // enum StudentEndpoint {

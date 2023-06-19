@@ -100,15 +100,15 @@ class CustomException implements Exception {
             // final name = error.response?.data['headers']['code'] as String;
             // final message =
             // error.response?.data['headers']['message'] as String;
-            // todo(kon): implement token expired exception
             // if (name == _ExceptionType.TokenExpiredException.name) {
-            //   return CustomException(
-            //     exceptionType: _ExceptionType.TokenExpiredException,
-            //     code: name,
-            //     statusCode: error.response?.statusCode,
-            //     message: message,
-            //   );
-            // }
+            if (error.response?.statusCode == 401) {
+              return CustomException(
+                exceptionType: _ExceptionType.TokenExpiredException,
+                code: error.message,
+                statusCode: error.response?.statusCode,
+                message: error.response?.data,
+              );
+            }
             // todo(kon): implement this
             return CustomException(
               message: "Unhandled exception",

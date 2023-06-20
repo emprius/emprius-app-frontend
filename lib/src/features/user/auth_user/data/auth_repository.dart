@@ -31,17 +31,18 @@ class AuthRepository {
     );
   }
 
-  Future<UserModel> sendRegisterData({
+  Future<bool> sendRegisterData({
     required JSON data,
     required void Function(String newToken) updateTokenCallback,
   }) async {
-    return _apiService.setData<UserModel>(
+    return _apiService.setData<bool>(
       endpoint: ApiEndpoint.auth(AuthEndpoint.REGISTER),
       data: data,
       requiresAuthToken: false,
       converter: (response) {
-        updateTokenCallback(response.body['token'] as String);
-        return UserModel.fromJson(data);
+        // updateTokenCallback(response.body['token'] as String);
+        // return UserModel.fromJson(data);
+        return true;
       },
     );
   }

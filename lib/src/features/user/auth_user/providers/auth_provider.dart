@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:empriusapp/src/core/services/all_providers.dart';
 import 'package:empriusapp/src/core/services/local/key_value_storage_service.dart';
 import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
+import 'package:empriusapp/src/features/images/helpers/utils.dart';
 import 'package:empriusapp/src/features/user/auth_user/data/auth_repository.dart';
 import 'package:empriusapp/src/features/user/emprius_user/data/users_repository.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
@@ -68,73 +71,71 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     required bool isActive,
     required String password,
     required String invite,
-    String? avatar,
+    File? avatar,
   }) async {
     state = const FutureState.loading();
 
-    // final registerFormProv = _ref.read(
-    //   registerFormProvider.notifier,
-    // );
-    // final personalData = registerFormProv.savedPersonalDetails!;
-    // final uniData = registerFormProv.savedUniversityDetails!;
-
-    // final data = StudentModel(
-    //   erp: personalData.erp,
-    //   firstName: personalData.firstName,
-    //   lastName: personalData.lastName,
-    //   gender: personalData.gender,
-    //   uniEmail: personalData.uniEmail,
-    //   contact: personalData.contact.startsWith('0')
-    //       ? '+92${personalData.contact.substring(1)}'
-    //       : personalData.contact,
-    //   birthday: personalData.birthday,
-    //   profilePictureUrl:
-    //       'https://firebasestorage.googleapis.com/v0/b/unipal-frontend.appspot.com/o/default-avatar.png?alt=media&token=0d2f3f8d-b179-4803-a21f-e745b3568120',
-    //   graduationYear: uniData.gradYear,
-    //   programId: uniData.program.programId,
-    //   campusId: uniData.campus.campusId,
-    //   isActive: true,
-    // ).toJson();
-    // data['password'] = password;
-
-    // final userData = UserModel(
-    //   name: name ,
-    //   email: email ,
-    //   location: location ,
-    //   isActive: isActive ,
-    //   avatar: avatar,
-    // );
-
-    final kk = "pep11111111";
-
     final userData = UserModel(
-      name: kk ,
-      email: "$kk@botika.cat" ,
+      name: name ,
+      email: email ,
       location: location ,
       active: isActive ,
-      // avatar: avatar,
     );
 
     final data = userData.toJson();
-    // data['password'] = password;
-    data['password'] = kk;
-    data['invitationToken'] = "1234";
+    data['password'] = password;
+    data['invitationToken'] = invite;
+    data['community'] = "dummy";
+
+    // if(avatar != null) {
+    //   data['avatar'] = imageToBase64(avatar);
+    // }
 
     state = await FutureState.makeGuardedRequest(() async {
-      final student = await _authRepository.sendRegisterData(
+      final registerSuccess = await _authRepository.sendRegisterData(
         data: data,
         updateTokenCallback: _cacheAuthToken,
       );
 
+      // Do login to retrieve jwt and cache user data
+      if( registerSuccess ) {
+        final loginSuccess = await _doLogin(email: email, password: password);
+        return loginSuccess && registerSuccess;
+      }
+
+      return false;
+    });
+  }
+
+  /// Util function to do login and get the profile info
+  ///
+  /// It do login and also retrieve user information. Used after register and on
+  /// login process.
+  Future<bool> _doLogin({
+    required String email,
+    required String password,
+  }) async {
+    final data = {'email': email, 'password': password};
+
+    final loginSuccess = await _authRepository.sendLoginData(
+      data: data,
+      updateTokenCallback: _cacheAuthToken,
+    );
+
+    if (loginSuccess) {
+      final profile = await _userRepository.getAuthUserProfile();
       // Update current user in memory
-      _ref.read(currentUserProvider.notifier).state = student;
+      _ref
+          .read(currentUserProvider.notifier)
+          .state = profile;
 
       // Save authentication details in cache
-      cacheAuthProfile(student);
+      cacheAuthProfile(profile);
       _cacheAuthPassword(password);
 
       return true;
-    });
+    }
+    return false;
   }
 
   Future<void> login({
@@ -143,31 +144,14 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   }) async {
     state = const FutureState.loading();
 
-    final data = {'email': email, 'password': password};
-
     state = await FutureState.makeGuardedRequest(() async {
-      final loginSuccess = await _authRepository.sendLoginData(
-        data: data,
-        updateTokenCallback: _cacheAuthToken,
-      );
-
-      if (loginSuccess) {
-        final profile = await _userRepository.getAuthUserProfile();
-        // Update current user in memory
-        _ref.read(currentUserProvider.notifier).state = profile;
-
-        // Save authentication details in cache
-        cacheAuthProfile(profile);
-        _cacheAuthPassword(password);
-
-        return true;
-      }
+      return _doLogin(email: email, password: password);
     });
   }
 
   void logout() {
-    _keyValueStorageService.resetKeys();
     state = const FutureState.idle();
+    _keyValueStorageService.resetKeys();
     _ref.invalidate(currentUserProvider);
   }
 }

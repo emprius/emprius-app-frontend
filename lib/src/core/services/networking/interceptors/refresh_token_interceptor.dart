@@ -54,12 +54,12 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
       ErrorInterceptorHandler handler,
       ) async {
     if (dioError.response != null) {
-      // todo(kon): implement headers
-      // if (dioError.response!.data != null) {
-      //   final headers = dioError.response!.data['headers'] as JSON;
-      //
-      //  // Check error type to be token expired error
-        // final code = headers['code'] as String;
+      // todo(kon): implement backend token expired error
+      if (dioError.response!.data != null) {
+        // final headers = dioError.response!.data['header'] as JSON;
+
+       // Check error type to be token expired error
+       //  final code = headers['code'] as String;
         if (dioError.response?.statusCode == TokenExpiredException) {
           // Make new dio and lock old one
           final tokenDio = Dio()..options = _dio.options;
@@ -98,7 +98,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
           );
           return handler.resolve(response);
         }
-      // }
+      }
     }
 
     // if not token expired error, forward it to try catch in dio_service
@@ -127,17 +127,14 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
       debugPrint('\tStatus code:${response.statusCode}');
       debugPrint('\tResponse: ${response.data}');
 
-      // todo(kon): implement headers
       // Check new token success
-      // final success = response.data?['headers']['error'] == 0;
-      final success = response.statusCode == 200;
+      final success = response.statusCode == 200 && response.data?['header']['success'];
 
       if (success) {
         debugPrint('<-- END REFRESH');
-        return response.data?['token'] as String; // todo(kon): implement headers
+        return response.data?['data']['token'] as String;
       } else {
-        // throw Exception(response.data?['headers']['message']); // todo(kon): implement headers
-        throw Exception("Token not found on refresh token action");
+        throw Exception(response.data?['header']['message']);
       }
     } on Exception catch (ex) {
       // only caught here for logging

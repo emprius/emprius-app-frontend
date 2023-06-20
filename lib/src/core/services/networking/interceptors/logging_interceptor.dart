@@ -134,12 +134,11 @@ class LoggingInterceptor extends QueuedInterceptor {
     if (dioError.response != null) {
       debugPrint('\tStatus code: ${dioError.response!.statusCode}');
       if (dioError.response!.data != null) {
-        // todo(kon): implement response headers
-        // final headers =
-        // dioError.response!.data['headers'] as JSON; //API Dependant
+        final headers =
+          dioError.response!.data['header'] as JSON; //API Dependant
         final message = dioError.response?.data as String; //API Dependant
-        // final code = headers['code'] as String; //API Dependant
-        // debugPrint('\tException: $code');
+        final errMessage = headers['message'] as String; //API Dependant
+        debugPrint('\tException: $errMessage');
         debugPrint('\tMessage: $message');
         // if (headers.containsKey('data')) {
         //   //API Dependant

@@ -85,9 +85,7 @@ class ApiInterceptor extends QueuedInterceptor {
       Response response,
       ResponseInterceptorHandler handler,
       ) {
-    // todo(kon)" implement response headers
-    // final success = response.data['headers']['error'] == 0;
-    final success = response.statusCode == 200;
+    final success = response.statusCode == 200 && response.data['header']['success'];
     if (success) return handler.next(response);
 
     //Reject all error codes from server except 402 and 200 OK

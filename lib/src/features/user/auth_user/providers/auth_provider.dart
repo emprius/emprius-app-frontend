@@ -87,9 +87,9 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     data['invitationToken'] = invite;
     data['community'] = "dummy";
 
-    // if(avatar != null) {
-    //   data['avatar'] = imageToBase64(avatar);
-    // }
+    if(avatar != null) {
+      data['avatar'] = imageToBase64(avatar);
+    }
 
     state = await FutureState.makeGuardedRequest(() async {
       final registerSuccess = await _authRepository.sendRegisterData(
@@ -99,30 +99,19 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
 
       // Do login to retrieve jwt and cache user data
       if( registerSuccess ) {
-        final loginSuccess = await _doLogin(email: email, password: password);
-        return loginSuccess && registerSuccess;
+        final userProfile = await _getAuthUserProfile();
+        if(userProfile) _cacheAuthPassword(password);
+        return userProfile && registerSuccess;
       }
 
       return false;
     });
   }
 
-  /// Util function to do login and get the profile info
+  /// Util function to get user profile
   ///
-  /// It do login and also retrieve user information. Used after register and on
-  /// login process.
-  Future<bool> _doLogin({
-    required String email,
-    required String password,
-  }) async {
-    final data = {'email': email, 'password': password};
-
-    final loginSuccess = await _authRepository.sendLoginData(
-      data: data,
-      updateTokenCallback: _cacheAuthToken,
-    );
-
-    if (loginSuccess) {
+  /// Is used after register or after login
+  Future<bool> _getAuthUserProfile() async {
       final profile = await _userRepository.getAuthUserProfile();
       // Update current user in memory
       _ref
@@ -131,11 +120,8 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
 
       // Save authentication details in cache
       cacheAuthProfile(profile);
-      _cacheAuthPassword(password);
 
       return true;
-    }
-    return false;
   }
 
   Future<void> login({
@@ -145,7 +131,18 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     state = const FutureState.loading();
 
     state = await FutureState.makeGuardedRequest(() async {
-      return _doLogin(email: email, password: password);
+      final data = {'email': email, 'password': password};
+
+      final loginSuccess = await _authRepository.sendLoginData(
+        data: data,
+        updateTokenCallback: _cacheAuthToken,
+      );
+
+      if (loginSuccess) {
+        final userProfile = await _getAuthUserProfile();
+        if(userProfile) _cacheAuthPassword(password);
+        return userProfile && loginSuccess;
+      }
     });
   }
 

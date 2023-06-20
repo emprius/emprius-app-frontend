@@ -40,8 +40,7 @@ class AuthRepository {
       data: data,
       requiresAuthToken: false,
       converter: (response) {
-        // updateTokenCallback(response.body['token'] as String);
-        // return UserModel.fromJson(data);
+        updateTokenCallback(response.body['token'] as String);
         return true;
       },
     );

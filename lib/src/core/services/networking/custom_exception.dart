@@ -89,17 +89,18 @@ class CustomException implements Exception {
                 message: 'No internet connectivity',
               );
             }
-            // todo(kon): implement headers
-            // if (error.response?.data['headers']['code'] == null) {
-            //   return CustomException(
-            //     exceptionType: _ExceptionType.UnrecognizedException,
-            //     statusCode: error.response?.statusCode,
-            //     message: error.response?.statusMessage ?? 'Unknown',
-            //   );
-            // }
-            // final name = error.response?.data['headers']['code'] as String;
-            // final message =
-            // error.response?.data['headers']['message'] as String;
+
+            if (error.response?.data['header']['message'] == null) {
+              return CustomException(
+                exceptionType: _ExceptionType.UnrecognizedException,
+                statusCode: error.response?.statusCode,
+                message: error.response?.statusMessage ?? 'Unknown',
+              );
+            }
+            // final name = error.response?.data['header']['code'] as String;
+            final message =
+            error.response?.data['header']['message'] as String;
+
             // if (name == _ExceptionType.TokenExpiredException.name) {
             if (error.response?.statusCode == 401) {
               return CustomException(

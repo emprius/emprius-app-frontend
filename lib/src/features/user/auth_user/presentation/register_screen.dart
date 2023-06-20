@@ -3,6 +3,7 @@ import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
+import 'package:empriusapp/src/features/images/helpers/utils.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:empriusapp/src/core/helper/constants/constants.dart';
@@ -34,7 +35,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _customMapCtrl =  EmpriusMapController();
 
   late bool isActive = true;
-  File? _avatar;
+  File? _avatarFile;
 
   bool _isHidden = true;
 
@@ -81,15 +82,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           labelText: "Nom d'usuari",
                         ),
                       ),
+                      // todo(kon): use a separated widget for this that wrap gesture detector with modal bottom sheet and user profile avatar
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
                             context: context,
                             builder: ((builder) => SingleImageSelector((image) {
-                                  _avatar = image;
-                                  setState((){});
-                                  Navigator.pop(context);
-                                })),
+                              _avatarFile = image;
+                              setState(() {});
+                              Navigator.pop(context);
+                            })),
                           );
                         },
                         child: SizedBox(
@@ -98,8 +100,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           child: UserProfileAvatar(
                             showBadge: true,
                             badgeIcon: Icons.camera_alt,
-                            avatar: defaultAvatar,
-                            //avatar: _avatar == null ? defaultAvatar : _avatar!.path,
+                            // avatar: defaultAvatar,
+                            avatar: _avatarFile == null ? defaultAvatar : _avatarFile!.path,
                           ),
                         ),
                       ),
@@ -129,13 +131,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 20.0),
+                  // Todo(kon): move this to a separated widget or named constructor to DRY
                   CustomTextField(
                     controller: _cPasswordCtrl,
                     validator: (value) =>
                         FormValidator.confirmPasswordValidator(
-                      value,
-                      _passwordCtrl.text,
-                    ),
+                          value,
+                          _passwordCtrl.text,
+                        ),
                     labelText: 'Confirmar mot de pas',
                     obscureText: _isHidden,
                     suffixIcon: IconButton(
@@ -179,13 +182,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       }
 
                       ref.read(authProvider.notifier).register(
-                            name: _nameCtrl.text,
-                            email: _emailCtrl.text,
-                            location: _customMapCtrl.selectedLocation!,
-                            isActive: isActive,
-                            password: _passwordCtrl.text,
-                            invite: _invitationCtrl.text,
-                            avatar:  _avatar?.path ?? ""
+                          name: _nameCtrl.text,
+                          email: _emailCtrl.text,
+                          location: _customMapCtrl.selectedLocation!,
+                          isActive: isActive,
+                          password: _passwordCtrl.text,
+                          invite: _invitationCtrl.text,
+                          avatar:  _avatarFile
                       );
 
                       // ScaffoldMessenger.of(context).showSnackBar(
@@ -224,21 +227,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   // }
 
   Widget selectLocationMap() => Column(
-        children: [
-          const Text('Localitzacio actual:'),
-          const SizedBox(height: 6.0),
-          Container(
-            width: 300,
-            height: 300,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black26),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: EmpriusMap(
-              empriusMapController: _customMapCtrl,
-            ),
-          ),
-        ],
-      );
+    children: [
+      const Text('Localitzacio actual:'),
+      const SizedBox(height: 6.0),
+      Container(
+        width: 300,
+        height: 300,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: EmpriusMap(
+          empriusMapController: _customMapCtrl,
+        ),
+      ),
+    ],
+  );
 }

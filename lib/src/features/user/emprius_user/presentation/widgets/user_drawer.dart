@@ -80,9 +80,10 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
             leading: Icon(Icons.settings),
             title: Text("Configuracio"),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.close),
             title: Text("Tancar sessio"),
+            onTap: ref.read(authProvider.notifier).logout,
           ),
         ],
       ),

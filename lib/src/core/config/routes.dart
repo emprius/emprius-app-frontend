@@ -39,6 +39,7 @@ const String toolAskFormScreenRoute = "/ask-tool-form";
 const String bookingDetailScreenRoute = "/booking-detail";
 const String bookingEditScreenRoute = "/booking-edit";
 const String splashScreenRoute = "/splash";
+const String initialRoute = splashScreenRoute;
 
 class Routes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {

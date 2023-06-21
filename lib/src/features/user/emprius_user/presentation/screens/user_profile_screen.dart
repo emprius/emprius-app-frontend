@@ -43,10 +43,12 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(currentUserProvider)!;
-    ref.listen<LatLng>(currentUserProvider.select(
-            (user) => user!.location!), (LatLng? previous, LatLng next) {
-      _setMarkers(user);
-      _customMapCtrl.flutterMapController?.move(next, 15.0);
+    ref.listen<LatLng?>(currentUserProvider.select(
+            (user) => user == null? null : user!.location!), (LatLng? previous, LatLng? next) {
+      if(next != null) {
+        _setMarkers(user);
+        _customMapCtrl.flutterMapController?.move(next, 15.0);
+      }
     });
     const double padding = 10;
 

@@ -83,7 +83,13 @@ class _UserDrawerState extends ConsumerState<UserDrawer> {
           ListTile(
             leading: Icon(Icons.close),
             title: Text("Tancar sessio"),
-            onTap: ref.read(authProvider.notifier).logout,
+            onTap: () {
+              // todo(kon): use better navigation: use pop until and let the widgets move you until profile screen
+              Navigator.pushReplacementNamed(context, initialRoute);
+              ref
+                  .read(authProvider.notifier)
+                  .logout();
+            },
           ),
         ],
       ),

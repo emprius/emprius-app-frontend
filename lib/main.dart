@@ -28,7 +28,7 @@ class MyApp extends ConsumerWidget {
       title: 'Emprius app',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: splashScreenRoute,
+      initialRoute: initialRoute,
       themeMode: ThemeMode.system,
       theme: FlexThemeData.light(
         scheme: FlexScheme.verdunHemlock,

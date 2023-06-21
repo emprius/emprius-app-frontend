@@ -147,8 +147,8 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   }
 
   void logout() {
-    state = const FutureState.idle();
     _keyValueStorageService.resetKeys();
+    state = const FutureState.idle();
     _ref.invalidate(currentUserProvider);
   }
 }

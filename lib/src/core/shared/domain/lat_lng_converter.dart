@@ -9,7 +9,7 @@ class LatLngConverter implements JsonConverter<LatLng, JSON> {
 
   @override
   LatLng fromJson(JSON latLng) {
-    return LatLng(((latLng["latitude"] as int) / e).toDouble(), ((latLng["latitude"] as int) / e).toDouble());
+    return LatLng(((latLng["latitude"] as int) / e).toDouble(), ((latLng["longitude"] as int) / e).toDouble());
   }
 
   @override

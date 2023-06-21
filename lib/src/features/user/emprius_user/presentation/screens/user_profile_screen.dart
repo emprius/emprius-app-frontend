@@ -8,9 +8,7 @@ import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
-import 'package:empriusapp/src/core/helper/constants/constants.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';

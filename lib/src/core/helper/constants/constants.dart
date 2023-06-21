@@ -10,6 +10,9 @@ class Constants{
   /// The error message for invalid name input.
   static const invalidNameError = "Aquest camp es requerit";
 
+  /// Short value password
+  static const shortError = "Camp minim de {n}";
+
   /// The regular expression for validating emails.
   static RegExp emailRegex = RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z\.]+\.(com|pk)+",

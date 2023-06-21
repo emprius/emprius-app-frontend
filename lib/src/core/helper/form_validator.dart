@@ -4,8 +4,12 @@ import 'constants/constants.dart';
 class FormValidator{
 
   static String? nameValidator(String? value) {
+    const minLength = 3;
     if (value == null || value.isEmpty) {
       return Constants.invalidNameError;
+    }
+    else if (value.length < minLength) {
+      return Constants.shortError.replaceAll("{n}", minLength.toString());
     }
     return null;
   }
@@ -14,9 +18,9 @@ class FormValidator{
     if(value == null || value.isEmpty)  {
       return Constants.emptyEmailInputError;
     }
-    // else if (!Constants.emailRegex.hasMatch(value)) {
-    //   return Constants.invalidEmailError;
-    // }
+    else if (!Constants.emailRegex.hasMatch(value)) {
+      return Constants.invalidEmailError;
+    }
     return null;
   }
 

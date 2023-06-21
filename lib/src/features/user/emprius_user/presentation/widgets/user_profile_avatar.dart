@@ -65,13 +65,15 @@ class UserProfileAvatar extends StatelessWidget {
   }
 
   Widget buildImage() {
-    return isEmpriusImage(avatar) ? EmpriusImage(
-      hash: avatar ,
-      errorWidget: defaultAvatarImage(),
-      placeholder: defaultAvatarImage(),
-      imageBuilder: (image) => buildAvatarCircles(
-          Image.memory(base64Decode(image.content)).image
-      )
+    return avatar.isEmpty ? defaultAvatarImage()
+        : isEmpriusImage(avatar)
+        ? EmpriusImage(
+          hash: avatar ,
+          errorWidget: defaultAvatarImage(),
+          placeholder: defaultAvatarImage(),
+          imageBuilder: (image) => buildAvatarCircles(
+            Image.memory(base64Decode(image.content)).image
+        )
     )
         : buildAvatarCircles(assetOrFileImage(avatar));
   }

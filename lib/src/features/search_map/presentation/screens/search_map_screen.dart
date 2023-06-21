@@ -3,7 +3,6 @@ import 'package:empriusapp/src/features/search_map/application/controllers/empri
 import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_search_bar.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/search_filters.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';

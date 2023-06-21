@@ -7,8 +7,6 @@ import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/bookings/application/providers/bookings_providers.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
-import 'package:empriusapp/src/features/tool/domain/enums/tool_category_enum.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';

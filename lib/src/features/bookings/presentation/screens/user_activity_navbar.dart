@@ -3,9 +3,7 @@ import 'package:empriusapp/src/features/bookings/presentation/fragments/keepings
 import 'package:empriusapp/src/features/bookings/presentation/fragments/petitions_screen.dart';
 import 'package:empriusapp/src/features/rating/presentation/screens/rating_screen.dart';
 import 'package:empriusapp/src/features/bookings/presentation/fragments/requests_screen.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
-import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

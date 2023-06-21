@@ -9,10 +9,7 @@ import 'package:empriusapp/src/features/bookings/data/mocked/mocked_bookings_ser
 import 'package:empriusapp/src/features/bookings/domain/booking_model.dart';
 import 'package:empriusapp/src/features/bookings/domain/enums/booking_status_enum.dart';
 import 'package:empriusapp/src/features/bookings/domain/user_info/user_info_model.dart';
-import 'package:empriusapp/src/features/bookings/presentation/widgets/date_picker_widget.dart';
 import 'package:empriusapp/src/features/tool/application/providers/tool_providers.dart';
-import 'package:empriusapp/src/features/tool/domain/tool_model.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

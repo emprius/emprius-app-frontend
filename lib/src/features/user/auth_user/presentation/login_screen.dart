@@ -25,6 +25,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     void onData(bool? isAuthenticated) {
       if (isAuthenticated != null && isAuthenticated) {
+        // todo(kon): use better navigation: use pop until and let the widgets move you until profile screen
         Navigator.pushReplacementNamed(context, userProfileScreenRoute);
         // erpController.clear();
         // passwordController.clear();

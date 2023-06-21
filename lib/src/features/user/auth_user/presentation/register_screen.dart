@@ -3,7 +3,6 @@ import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
 import 'package:empriusapp/src/core/shared/states/future_state.codegen.dart';
-import 'package:empriusapp/src/features/images/helpers/utils.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:empriusapp/src/core/helper/constants/constants.dart';
@@ -11,9 +10,7 @@ import 'package:empriusapp/src/core/helper/form_validator.dart';
 import 'package:empriusapp/src/core/helper/map_validator.dart';
 import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
-import 'package:empriusapp/src/features/user/auth_user/data/user_provider.dart';
 import 'package:empriusapp/src/core/config/routes.dart';
-import 'package:empriusapp/src/features/user/auth_user/domain/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

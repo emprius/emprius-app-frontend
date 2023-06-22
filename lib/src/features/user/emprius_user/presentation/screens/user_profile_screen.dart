@@ -1,20 +1,19 @@
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/rating_stars.dart';
+import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/core/helper/constants/widget_spacing.dart';
 import 'package:empriusapp/src/features/activity/presentation/widgets/user_activity_barchart.dart';
+import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
+import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
 import 'package:empriusapp/src/features/search_map/presentation/widgets/emprius_map.dart';
 import 'package:empriusapp/src/features/user/auth_user/providers/auth_provider.dart';
 import 'package:empriusapp/src/features/user/emprius_user/domain/user_model.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_appbar.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_drawer.dart';
-import 'package:empriusapp/src/features/search_map/presentation/widgets/custom_marker.dart';
-import 'package:empriusapp/src/features/search_map/application/controllers/emprius_map_controller.dart';
-import 'package:empriusapp/src/core/config/routes.dart';
 import 'package:empriusapp/src/features/user/emprius_user/presentation/widgets/user_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-
 
 class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
@@ -26,10 +25,8 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 class _UserProfileState extends ConsumerState<UserProfileScreen> {
   final _customMapCtrl = EmpriusMapController();
 
-  void _setMarkers(UserModel user){
-    _customMapCtrl.markers = [
-      CustomMarker.fromUserModel(user)
-    ];
+  void _setMarkers(UserModel user) {
+    _customMapCtrl.markers = [CustomMarker.fromUserModel(user)];
   }
 
   @override
@@ -41,9 +38,11 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(currentUserProvider)!;
-    ref.listen<LatLng?>(currentUserProvider.select(
-            (user) => user == null? null : user!.location!), (LatLng? previous, LatLng? next) {
-      if(next != null) {
+    ref.listen<LatLng?>(
+        currentUserProvider
+            .select((user) => user == null ? null : user!.location!),
+        (LatLng? previous, LatLng? next) {
+      if (next != null) {
         _setMarkers(user);
         _customMapCtrl.flutterMapController?.move(next, 15.0);
       }
@@ -61,38 +60,45 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               arguments: EditProfileArguments(user));
         },
       ),
-      body: ListView(
-        children:
-        [Padding(
-          padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+      body: ListView(children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: padding, vertical: padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding, vertical: padding),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                  const SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: CurrentUserAvatar()
-                  ),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    buildName(user),
-                    addVerticalSpace(6.0),
-                    RatingStars(rating: user.rating!),
-                    addVerticalSpace(6.0),
-                    Text('EMPS: ${user.tokens}', style: Theme.of(context).textTheme.bodyText2,),
-                  ]),
-                  addHorizontalSpace(6.0),
-                  CustomTextButton(
-                      text: "LES MEVES EINES",
-                      onClicked: () {
-                        Navigator.pushNamed(context, userToolsScreenRoute);
-                      }),
-                /*  Column(children: [
+                padding: const EdgeInsets.symmetric(
+                    horizontal: padding, vertical: padding),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const SizedBox(
+                          height: 100, width: 100, child: CurrentUserAvatar()),
+                      addHorizontalSpace(6.0),
+                      Flexible(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              buildName(user),
+                              addVerticalSpace(6.0),
+                              RatingStars(rating: user.rating!),
+                              addVerticalSpace(6.0),
+                              Text(
+                                'EMPS: ${user.tokens}',
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
+                            ]),
+                      ),
+                      addHorizontalSpace(6.0),
+                      CustomTextButton(
+                          text: "LES MEVES EINES",
+                          onClicked: () {
+                            Navigator.pushNamed(context, userToolsScreenRoute);
+                          }),
+                      /*  Column(children: [
                     Switch(
                         value: user.isActive!,
                         activeTrackColor: Colors.white10,
@@ -102,7 +108,7 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
                     const SizedBox(height: 6.0),
                     Text(user.isActive! ? "Perfil actiu" : "Perfil inactiu"),
                   ]),*/
-                ]),
+                    ]),
               ),
               addVerticalSpace(8.0),
               Divider(),
@@ -123,19 +129,23 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
           Text(
             user.name!,
             style: Theme.of(context).textTheme.headline2,
-            ),
+          ),
           addVerticalSpace(4.0),
           Text(
             user.email,
             style: Theme.of(context).textTheme.bodyText2,
+            overflow: TextOverflow.ellipsis,
           )
         ],
       );
 
   Widget buildLocation(UserModel user) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Localitzacio actual:', style: Theme.of(context).textTheme.bodyMedium,),
+          Text(
+            'Localitzacio actual:',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           addVerticalSpace(4.0),
           Container(
             width: 300,
@@ -145,15 +155,22 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: EmpriusMap(empriusMapController: _customMapCtrl, isViewOnly: true, initialCenter: user.location,),
+            child: EmpriusMap(
+              empriusMapController: _customMapCtrl,
+              isViewOnly: true,
+              initialCenter: user.location,
+            ),
           ),
         ],
       );
 
   Widget buildStatistics(UserModel user) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Resum activitat:', style: Theme.of(context).textTheme.bodyMedium,),
+          Text(
+            'Resum activitat:',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           addVerticalSpace(4.0),
           Container(
             width: 300,
@@ -162,16 +179,14 @@ class _UserProfileState extends ConsumerState<UserProfileScreen> {
               border: Border.all(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                      width: 500,
-                      height: 300,
-                      padding: const EdgeInsets.all(8),
-                      //clipBehavior: Clip.hardEdge,
-                      child: ActivityBarchart()
-                  )]),
+            child: ListView(scrollDirection: Axis.horizontal, children: [
+              Container(
+                  width: 500,
+                  height: 300,
+                  padding: const EdgeInsets.all(8),
+                  //clipBehavior: Clip.hardEdge,
+                  child: ActivityBarchart())
+            ]),
           ),
         ],
       );

@@ -16,7 +16,7 @@ class _SingleImageSelectorState extends State<SingleImageSelector> {
 
   Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
+      final image = await ImagePicker().pickImage(source: source, imageQuality: 60);
       if (image == null) return;
 
       final imageTemp = File(image.path);
@@ -47,7 +47,7 @@ class _SingleImageSelectorState extends State<SingleImageSelector> {
                 IconButton(
                   iconSize: 40.0,
                   onPressed: () {
-                    pickImage(ImageSource.camera);
+                    pickImage(ImageSource.camera, );
                   }, icon: const Icon(Icons.camera),
                   tooltip: "Feste una foto",
                 ),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:empriusapp/src/core/common_widgets/custom_circular_loader.dart';
 import 'package:empriusapp/src/core/common_widgets/single_image_selector.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_text_button.dart';
 import 'package:empriusapp/src/core/common_widgets/custom_textfield.dart';
@@ -41,9 +42,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     void onData(bool? isAuthenticated) {
       if (isAuthenticated != null && isAuthenticated) {
-        // passwordController.clear();
-        // cPasswordController.clear();
-        // AppRouter.popUntilRoot();
         Navigator.pushReplacementNamed(
             context, userProfileScreenRoute);
 
@@ -59,7 +57,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           )
       ),
     );
-
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -170,44 +167,36 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           isActive = value;
                         });
                       }),
-                  CustomTextButton(
-                    text: 'Finalitza registre',
-                    onClicked: () async {
-                      if (!_formKey.currentState!.validate() &&
-                          !_mapValidator.validate()) {
-                        return;
-                      }
-
-                      ref.read(authProvider.notifier).register(
-                          name: _nameCtrl.text,
-                          email: _emailCtrl.text,
-                          location: _customMapCtrl.selectedLocation!,
-                          isActive: isActive,
-                          password: _passwordCtrl.text,
-                          invite: _invitationCtrl.text,
-                          avatar:  _avatarFile
+                  Consumer(
+                    builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                      final authState = ref.watch(authProvider);
+                      // print("AAAAAAAAaaa" + authState);
+                      return authState.maybeWhen(
+                        loading: () => CustomCircularLoader(
+                          // color: Colors.white,
+                        ),
+                        // failed: (s) => Text("failed"),
+                        orElse: () => child!,
                       );
-
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   const SnackBar(content: Text('Usuari creat')),
-                      // );
-
-                      // await ref.watch(currentUserProvider.notifier).register(
-                      //     name: _nameCtrl.text,
-                      //     email: _emailCtrl.text,
-                      //     location: _customMapCtrl.selectedLocation!,
-                      //     isActive: isActive,
-                      //     password: _passwordCtrl.text,
-                      //     invite: _invitationCtrl.text,
-                      //     avatar:  _avatar?.path ?? ""
-                      // );
-                      //
-                      // if (ref.watch(currentUserProvider.notifier).authState is FAILED) {
-                      //   // todo(kon): implement error show
-                      //   return;
-                      // }
-                      // registerSuccess();
                     },
+                    child: CustomTextButton(
+                      text: 'Finalitza registre',
+                      onClicked: () async {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+
+                        ref.read(authProvider.notifier).register(
+                            name: _nameCtrl.text,
+                            email: _emailCtrl.text,
+                            location: _customMapCtrl.selectedLocation,
+                            isActive: isActive,
+                            password: _passwordCtrl.text,
+                            invite: _invitationCtrl.text,
+                            avatar:  _avatarFile
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -22,6 +22,8 @@ class FutureState<T> with _$FutureState<T> {
       return FutureState.data(data: result);
     } on CustomException catch (ex) {
       return FutureState.failed(reason: errorMessage ?? ex.message);
+    } catch (e) {
+      return FutureState.failed(reason: e.toString());
     }
   }
 }

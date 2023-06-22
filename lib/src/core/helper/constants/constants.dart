@@ -1,4 +1,5 @@
 import 'package:latlong2/latlong.dart';
+import 'package:flutter/material.dart';
 
 var defaultMapCenter = LatLng(41.695384, 2.492793);
 var defaultAvatar = "assets/avatars/fallback.png";
@@ -50,4 +51,20 @@ class Constants{
   /// A utility method to convert 0/1 to false/true
   static bool boolFromInt(int i) => i == 1;
 
+}
+
+/// A utility class that holds all the timings used throughout
+/// the entire app by things such as animations, tickers etc.
+///
+/// This class has no constructor and all variables are `static`.
+@immutable
+class Durations {
+  const Durations._();
+
+  static const fastest = Duration(milliseconds: 150);
+  static const fast = Duration(milliseconds: 250);
+  static const normal = Duration(milliseconds: 300);
+  static const medium = Duration(milliseconds: 500);
+  static const slow = Duration(milliseconds: 700);
+  static const slower = Duration(milliseconds: 1000);
 }

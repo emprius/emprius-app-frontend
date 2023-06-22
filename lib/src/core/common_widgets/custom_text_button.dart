@@ -1,3 +1,4 @@
+import 'package:empriusapp/src/core/common_widgets/custom_circular_loader.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -6,6 +7,7 @@ class CustomTextButton extends StatelessWidget {
   final Color? color;
   final EdgeInsetsGeometry padding;
   final double borderRadius;
+  /// Shows the circular progres indicator if loading
 
   const CustomTextButton({
     Key? key,

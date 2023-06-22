@@ -67,7 +67,7 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   Future<void> register({
     required String name,
     required String email,
-    required LatLng location,
+    LatLng? location,
     required bool isActive,
     required String password,
     required String invite,
@@ -103,8 +103,6 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
         if(userProfile) _cacheAuthPassword(password);
         return userProfile && registerSuccess;
       }
-
-      return false;
     });
   }
 

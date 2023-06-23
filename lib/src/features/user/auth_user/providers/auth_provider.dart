@@ -13,7 +13,7 @@ import 'package:latlong2/latlong.dart';
 final currentUserProvider = StateProvider<UserModel?>((ref) => null);
 
 final authProvider = StateNotifierProvider<AuthProvider, FutureState<bool?>>(
-      (ref) {
+  (ref) {
     final _authRepository = ref.watch(authRepositoryProvider);
     final _keyValueStorageService = ref.watch(keyValueStorageServiceProvider);
     final _userRepository = ref.watch(usersRepositoryProvider);
@@ -34,11 +34,11 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   final Ref _ref;
 
   AuthProvider(
-      this._ref, {
-        required AuthRepository authRepository,
-        required KeyValueStorageService keyValueStorageService,
-        required UsersRepository userRepository,
-      })  : _authRepository = authRepository,
+    this._ref, {
+    required AuthRepository authRepository,
+    required KeyValueStorageService keyValueStorageService,
+    required UsersRepository userRepository,
+  })  : _authRepository = authRepository,
         _keyValueStorageService = keyValueStorageService,
         _userRepository = userRepository,
         super(const FutureState.idle());
@@ -56,7 +56,7 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     _keyValueStorageService.setAuthUser(user);
   }
 
-  void _cacheAuthPassword(String password) {
+  void cacheAuthPassword(String password) {
     _keyValueStorageService.setAuthPassword(password);
   }
 
@@ -76,10 +76,10 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     state = const FutureState.loading();
 
     final userData = UserModel(
-      name: name ,
-      email: email ,
-      location: location ,
-      active: isActive ,
+      name: name,
+      email: email,
+      location: location,
+      active: isActive,
     );
 
     final data = userData.toJson();
@@ -87,7 +87,7 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
     data['invitationToken'] = invite;
     data['community'] = "dummy";
 
-    if(avatar != null) {
+    if (avatar != null) {
       data['avatar'] = imageToBase64(avatar);
     }
 
@@ -98,9 +98,9 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
       );
 
       // Do login to retrieve jwt and cache user data
-      if( registerSuccess ) {
+      if (registerSuccess) {
         final userProfile = await _getAuthUserProfile();
-        if(userProfile) _cacheAuthPassword(password);
+        if (userProfile) cacheAuthPassword(password);
         return userProfile && registerSuccess;
       }
     });
@@ -110,16 +110,14 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
   ///
   /// Is used after register or after login
   Future<bool> _getAuthUserProfile() async {
-      final profile = await _userRepository.getAuthUserProfile();
-      // Update current user in memory
-      _ref
-          .read(currentUserProvider.notifier)
-          .state = profile;
+    final profile = await _userRepository.getAuthUserProfile();
+    // Update current user in memory
+    _ref.read(currentUserProvider.notifier).state = profile;
 
-      // Save authentication details in cache
-      cacheAuthProfile(profile);
+    // Save authentication details in cache
+    cacheAuthProfile(profile);
 
-      return true;
+    return true;
   }
 
   Future<void> login({
@@ -138,7 +136,7 @@ class AuthProvider extends StateNotifier<FutureState<bool?>> {
 
       if (loginSuccess) {
         final userProfile = await _getAuthUserProfile();
-        if(userProfile) _cacheAuthPassword(password);
+        if (userProfile) cacheAuthPassword(password);
         return userProfile && loginSuccess;
       }
     });

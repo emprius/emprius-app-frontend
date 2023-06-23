@@ -74,7 +74,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           labelText: "Nom d'usuari",
                         ),
                       ),
-                      // todo(kon): use a separated widget for this that wrap gesture detector with modal bottom sheet and user profile avatar
+                      // todo(kon): DRY avatar selector: use a separated widget for this that wrap gesture detector with modal bottom sheet and user profile avatar
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
@@ -192,33 +192,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           avatar: _avatarFile);
                     },
                   ),
-                  // Consumer(
-                  //   builder:
-                  //       (BuildContext context, WidgetRef ref, Widget? child) {
-                  //     final authState = ref.watch(authProvider);
-                  //     return authState.maybeWhen(
-                  //       loading: () => CustomCircularLoader(),
-                  //       orElse: () => child!,
-                  //     );
-                  //   },
-                  //   child: CustomTextButton(
-                  //     text: 'Finalitza registre',
-                  //     onClicked: () async {
-                  //       if (!_formKey.currentState!.validate()) {
-                  //         return;
-                  //       }
-                  //
-                  //       ref.read(authProvider.notifier).register(
-                  //           name: _nameCtrl.text,
-                  //           email: _emailCtrl.text,
-                  //           location: _customMapCtrl.selectedLocation,
-                  //           isActive: isActive,
-                  //           password: _passwordCtrl.text,
-                  //           invite: _invitationCtrl.text,
-                  //           avatar: _avatarFile);
-                  //     },
-                  //   ),
-                  // ),
                 ],
               ),
             ),

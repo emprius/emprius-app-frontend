@@ -12,7 +12,8 @@ class CustomTextButton extends StatelessWidget {
   ///
   /// Util to use the maybeWhen when the button interacts with a FutureState
   /// provider
-  final Widget Function(BuildContext, WidgetRef, Widget?)? builder;
+  final Widget Function(BuildContext context, WidgetRef ref, Widget? child)?
+      builder;
 
   const CustomTextButton({
     Key? key,

@@ -1,4 +1,3 @@
-
 import 'package:empriusapp/src/core/helper/typedefs.dart';
 import 'package:empriusapp/src/core/services/all_providers.dart';
 import 'package:empriusapp/src/core/services/networking/api_endpoint.dart';
@@ -38,22 +37,17 @@ class UsersRepository {
 
   Future<UserModel> getAuthUserProfile() async {
     return _apiService.getDocumentData<UserModel>(
-      endpoint: ApiEndpoint.profile(ProfileEndpoint.BASE),
-      converter: UserModel.fromJson
-    );
+        endpoint: ApiEndpoint.profile(ProfileEndpoint.BASE),
+        converter: UserModel.fromJson);
   }
 
-  Future<String> update({
+  Future<UserModel> update({
     required JSON data,
   }) async {
-    return _apiService.updateData<String>(
+    return _apiService.updateData<UserModel>(
       endpoint: ApiEndpoint.profile(ProfileEndpoint.BASE),
       data: data,
-      // converter: (response) => response.headers.message,
-      converter: (response) {
-        print("todo(kon): implement response headers");
-        return "todo";
-      },
+      converter: (response) => UserModel.fromJson(response.body),
     );
   }
 }
